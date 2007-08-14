@@ -37,6 +37,7 @@ Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
+  config.active_record.observers = :user_observer
 
   # Make Active Record use UTC-base instead of local time
   # config.active_record.default_timezone = :utc
@@ -58,3 +59,13 @@ end
 # Mime::Type.register "application/x-mobile", :mobile
 
 # Include your application configuration below
+
+ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.smtp_settings = {
+  :address => "mail.bn23hosting.com",
+  :port => 25,
+  :domain => "digitalblueprint.co.uk",
+  :authentication => :login,
+  :user_name => "dev@digitalblueprint.co.uk",
+  :password => "smegsmeg23"
+}

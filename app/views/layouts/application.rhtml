@@ -6,6 +6,11 @@
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<%= stylesheet_link_tag "default" %>
+	<!-- [if lte IE 7]>
+		<style type="text/css" media="all">
+			@import "/stylesheets/fieldset-styling-ie.css";
+		</style>
+	<![endif]-->
 	<%= javascript_include_tag :defaults %>
 </head>
 <body>
@@ -32,19 +37,27 @@
 		<li><a href="#"><b>Contact</b></a></li>
 	</ul>
 	<ul class="right">
-		<li><a href="#"><b>Login</b></a></li>
-		<li><a href="#"><b>Register</b></a></li>
+	<% if logged_in? -%>
+		<li><a href="#"><b>Your Hub</b></a></li>
+		<%= nav_link 'Logout', logout_url %>
+	<% else -%>
+		<%= nav_link 'Login', login_url %>
+		<%= nav_link 'Register', signup_url %>
+	<% end -%>
 	</ul>
 </div>
 <div id="page">
+	<% if flash[:notice] -%>
+    <div id="flash" class="notice"><%= flash[:notice] %></div>
+    <% end -%>
+	<% if flash[:error] -%>
+    <div id="flash" class="error"><%= flash[:error] %></div>
+    <% end -%>
 	<div id="content">
 		<div id="feature" class="box-orange">
-			<h2 class="section"><b>Feature Article</b></h2>
-			<div class="content"> <img src="images/img12.jpg" alt="" width="160" height="160" class="right" />
-				<h1>Welcome to Our Website!</h1>
-				<p class="byline"><small>By John Doe</small></p>
-				<p>Aenean odio quam, dictum nec, consequat ut, accumsan pellentesque, magna. Nulla sed nibh eu eros tristique euismod. Cras sodales massa vel sapien. Nullam imperdiet, neque ut feugiat fermentum, mauris diam viverra eros, ut sagittis orci massa mollis nisi. Suspendisse rutrum pharetra urna. In metus. Integer sed nibh. Suspendisse pulvinar. Morbi sit amet elit.</p>
-				<p><a href="#"><strong>Explore your Interim Management Resource&hellip;</strong></a></p>
+			<h2 class="section"><b><%= @title %></b></h2>
+			<div class="content">
+				<%= yield %>
 			</div>
 		</div>
 		<div class="two-cols">

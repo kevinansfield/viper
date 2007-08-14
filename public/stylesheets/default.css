@@ -96,6 +96,88 @@ img.right {
 	width: 250px;
 }
 
+/* Flash */
+
+#flash {
+	width: 80%;
+	margin: 10px auto;
+	padding: 5px;
+	font-weight: bold;
+	text-align: center;
+}
+#flash.error {
+	background-color: #DD0000;
+	color: #FFF;
+}
+#flash.notice {
+	background-color: #00DD00;
+	color: #FFF;
+}
+
+/* Error Explanations */
+
+.errorExplanation {
+	background-color: #FFDDDD;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+
+/* Forms */
+
+.form fieldset {
+	float: left;
+	clear: left;
+	width: 100%;
+	margin: 0 0 1.5em 0;
+	padding: 0;
+	border: 1px solid #BFBAB0;
+	background-color: #F2EFE9;
+	background-image: url(/images/fieldset_gradient.jpg);
+	background-repeat: repeat-x;
+}
+.form legend {
+	margin-left: 1em;
+	padding: 0;
+	color: #000000;
+	font-weight: bold;
+}
+.form fieldset ol {
+	padding: 1em 1em 0 1em;
+	list-style: none;
+}
+.form fieldset li {
+	float: left;
+	clear: left;
+	width: 100%;
+	padding-bottom: 1em;
+}
+.form fieldset.submit {
+	float: none;
+	width: auto;
+	border-style: none;
+	padding-left: 12em;
+	background-color: transparent;
+}
+.form label {
+	position: relative;
+	float: left;
+	width: 10em;
+	margin-right: 1em;
+}
+.form label em {
+	position: absolute;
+	left: 10em;
+	top: 0;
+}
+.form .text {
+	border: 1px solid #ABADB3;
+	padding: 2px;
+}
+.fieldWithErrors input {
+	background-color: #FFDDDD;
+	border: 1px solid #ABADB3;
+}
+
 /* Boxes */
 
 .box-orange {

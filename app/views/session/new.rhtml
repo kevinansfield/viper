@@ -1,0 +1,28 @@
+<% @title = "Login" -%>
+
+<p>Use the form below to login into your personalised Viper account.</p>
+
+<% form_tag session_path, :class => 'form' do -%>
+<fieldset>
+	<legend>User Login</legend>
+	<ol>
+		<li>
+			<label for="login">Username:</label>
+			<%= text_field_tag 'login', @login, :class => 'text' %>
+		</li>
+		<li>
+			<label for="password">Password:</label>
+			<%= password_field_tag 'password', '', :class => 'text' %>
+		</li>
+		<li>
+			<label for="remember_me">Remember me:</label>
+			<%= check_box_tag 'remember_me', @remember_me, :class => 'checkbox' %>
+		</li>
+	</ol>
+</fieldset>
+<fieldset class="submit">
+	<%= submit_tag 'Log in', :class => 'submit' %>
+</fieldset>
+<% end -%>
+
+<p>Not a member yet? <%= link_to 'Register now!', signup_url %> It's quick, easy and free.</p>
