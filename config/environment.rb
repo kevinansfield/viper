@@ -60,6 +60,9 @@ end
 
 # Include your application configuration below
 
+# Hostname, used in mailouts etc.
+HOST = 'http://localhost:3009'
+
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
   :address => "mail.bn23hosting.com",

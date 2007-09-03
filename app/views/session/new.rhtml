@@ -19,6 +19,7 @@
 			<%= check_box_tag 'remember_me', @remember_me, :class => 'checkbox' %>
 		</li>
 	</ol>
+	<p class="small">Forgot your password? Don't worry, <%= link_to 'click here', forgot_password_url %> to be emailed a new one</p>
 </fieldset>
 <fieldset class="submit">
 	<%= submit_tag 'Log in', :class => 'submit' %>

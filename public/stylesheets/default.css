@@ -3,7 +3,7 @@
 	padding: 0;
 }
 
-body, th, td {
+body {
 	background: #FFFFFF url(/images/img01.gif) repeat-x;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 13px;
@@ -61,6 +61,20 @@ a:hover, a:active {
 
 a:visited {
 	color: #666666;
+}
+
+.small {
+	font-size: 80%;
+}
+.small th, .small td {
+	font-size: 100%;
+}
+.center {
+	text-align: center;
+}
+
+hr {
+	margin-bottom: 10px;
 }
 
 img {
@@ -141,6 +155,10 @@ img.right {
 	color: #000000;
 	font-weight: bold;
 }
+.form fieldset p {
+	padding: 1em 1em 0 1em;
+	margin: 0;
+}
 .form fieldset ol {
 	padding: 1em 1em 0 1em;
 	list-style: none;
@@ -180,6 +198,18 @@ img.right {
 
 /* Boxes */
 
+.section {
+	position: relative;
+}
+.section a {
+	text-decoration: none;
+}
+.section .edit-link {
+	position: absolute;
+	right: 0;
+	margin-right: 10px;
+}
+
 .box-orange {
 	background: url(/images/img09.gif) repeat-x;
 }
@@ -187,6 +217,9 @@ img.right {
 .box-orange .section {
 	background: url(/images/img11.gif) no-repeat right top;
 	font-size: 100%;
+	color: #FFFFFF;
+}
+.box-orange .section a {
 	color: #FFFFFF;
 }
 
@@ -198,7 +231,7 @@ img.right {
 }
 
 .box-orange .content {
-	padding: 20px;
+	padding: 10px;
 }
 
 .box-blue {
@@ -210,6 +243,9 @@ img.right {
 	font-size: 100%;
 	color: #FFFFFF;
 }
+.box-blue .section a {
+	color: #FFFFFF;
+}
 
 .box-blue .section b {
 	display: block;
@@ -219,7 +255,7 @@ img.right {
 }
 
 .box-blue .content {
-	padding: 20px;
+	padding: 10px;
 }
 
 .box-pink {
@@ -231,6 +267,9 @@ img.right {
 	font-size: 100%;
 	color: #FFFFFF;
 }
+.box-pink .section a {
+	color: #FFFFFF;
+}
 
 .box-pink .section b {
 	display: block;
@@ -240,7 +279,7 @@ img.right {
 }
 
 .box-pink .content {
-	padding: 20px;
+	padding: 10px;
 }
 
 /* Header */

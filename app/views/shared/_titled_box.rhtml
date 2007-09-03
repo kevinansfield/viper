@@ -1,0 +1,7 @@
+<div class="box-<%= color %> <%= css_class %>">
+	<h2 class="section"><b>
+		<%= title %>
+		<% if defined? edit_link %><span class="edit-link"><%= edit_link %></span><% end %>
+	</b></h2>
+	<div class="content <%= content_css_class if defined? content_css_class %>"><%= body %></div>
+</div>

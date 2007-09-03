@@ -30,7 +30,7 @@
 </div>
 <div id="menu">
 	<ul>
-		<li class="active"><a href="#"><b>Home</b></a></li>
+		<%= nav_link 'Home', :controller => 'site' %>
 		<li><a href="#"><b>Jobs</b></a></li>
 		<li><a href="#"><b>Articles</b></a></li>
 		<li><a href="#"><b>Forums</b></a></li>
@@ -38,7 +38,7 @@
 	</ul>
 	<ul class="right">
 	<% if logged_in? -%>
-		<li><a href="#"><b>Your Hub</b></a></li>
+		<%= nav_link 'Your Hub', hub_url %>
 		<%= nav_link 'Logout', logout_url %>
 	<% else -%>
 		<%= nav_link 'Login', login_url %>
@@ -61,16 +61,11 @@
 			</div>
 		</div>
 		<div class="two-cols">
-			<div class="box-blue col-one">
-				<h2 class="section"><b>Featured Job</b></h2>
-				<div class="content">
+			<% titled_box 'Featured Job', 'blue', :css_class => 'col-one' do %>
 					<p>Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum. Dolor dictum integer nisl risus, sagittis convallis, rutrum id, congue, and nibh lorem ipsum dolor sit amet.</p>
 					<p> Augue praesent a lacus at urna congue rutrum. Dolor dictum integer nisl risus. <a href="#">Read more&hellip;</a></p>
-				</div>
-			</div>
-			<div class="box-pink col-two">
-				<h2 class="section"><b>Latest Articles</b></h2>
-				<div class="content">
+			<% end %>
+			<% titled_box 'Latest Articles', 'pink', :css_class => 'col-two' do %>
 					<ul class="list">
 						<li><a href="#">Ut semper vestibulum est</a></li>
 						<li><a href="#">Vestibulum luctus venenatis</a></li>
@@ -84,61 +79,15 @@
 						<li><a href="#">Aenean elementum facilisis</a></li>
 						<li><a href="#">Sed quis odio sagittis leo</a></li>
 					</ul>
-				</div>
-			</div>
+			<% end %>
 		</div>
 	</div>
 	<div id="sidebar" class="two-cols">
 		<div class="col-one">
-			<div class="box-blue">
-				<h2 class="section"><b>Latest Jobs</b></h2>
-				<div class="content">
-					<ul>
-						<li>
-							<h3><a href="#">Pede vel arcu</a></h3>
-							<ul>
-								<li><a href="#">Aliquet pretium</a></li>
-								<li><a href="#">Pellentesque qui</a></li>
-								<li><a href="#">Integer sit amet</a></li>
-								<li><a href="#">Elit non gravida</a></li>
-								<li><a href="#">Blandit </a><a href="#">lorem ipsum</a></li>
-								<li><a href="#">Dolor sit amet</a></li>
-							</ul>
-						</li>
-						<li>
-							<h3><a href="#">Adipiscing elit</a></h3>
-							<ul>
-								<li><a href="#">Nec erat sit amet</a></li>
-								<li><a href="#">Pellentesque congue</a></li>
-								<li><a href="#">Cras vitae metus</a></li>
-								<li><a href="#">Risus pellentesque</a></li>
-								<li><a href="#">Maecenas vitae orci</a></li>
-								<li><a href="#">Vitae tellus feugiat</a></li>
-								<li><a href="#">Etiam ac tortor eu</a></li>
-							</ul>
-						</li>
-						<li>
-							<h3><a href="#">Metus euismod</a></h3>
-							<ul>
-								<li><a href="#">Duis non ante in</a></li>
-								<li><a href="#">Commodo euismod</a></li>
-								<li><a href="#">Nec erat sit amet</a></li>
-								<li><a href="#">Pellentesque congue</a></li>
-								<li><a href="#">Risus pellentesque</a></li>
-								<li><a href="#">Maecenas vitae orci</a></li>
-								<li><a href="#">Vitae tellus eleifend</a></li>
-								<li><a href="#">Etiam ac tortor eu</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
+			<%= render :partial => "#{controller.sidebar_one}" %>
 		</div>
 		<div class="col-two">
-			<div class="box-pink">
-				<h2 class="section"><b>Sponsors</b></h2>
-				<div class="content"><a href="#"><img src="images/img20.jpg" alt="" width="160" height="600" /></a></div>
-			</div>
+			<%= render :partial => "#{controller.sidebar_two}" %>
 		</div>
 	</div>
 	<div style="clear: both;">&nbsp;</div>

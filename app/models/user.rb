@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   validates_length_of       :password, :within => 4..40, :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?
   validates_length_of       :login,    :within => 3..40
-  validates_length_of       :email,    :within => 3..100
+  validates_length_of       :email,    :within => 6..100
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   
   validates_format_of       :login,
@@ -19,9 +19,23 @@ class User < ActiveRecord::Base
   validates_format_of       :email,
                             :with => /^[A-Z0-9._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i,
                             :message => "must be a valid email address"
+                            
+  validates_length_of       :new_email, 
+                            :within => 6..100, 
+                            :if => :new_email_entered?
+  validates_format_of       :new_email,
+                            :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/,
+                            :if => :new_email_entered?
                       
   before_save :encrypt_password
   before_create :make_activation_code 
+  
+  # Assures that updated email addresses do not conflict with existing emails
+  def validate
+    if User.find_by_email(new_email)
+      errors.add(new_email, "is already being used")
+    end
+  end
   
   # Activates the user in the database.
   def activate
@@ -84,6 +98,45 @@ class User < ActiveRecord::Base
     self.remember_token            = nil
     save(false)
   end
+  
+  def change_email_address(new_email_address)
+    @change_email  = true
+    self.new_email = new_email_address
+    self.make_email_activation_code
+  end
+  
+  def activate_new_email
+    @activated_email = true
+    update_attributes(:email=> self.new_email, :new_email => nil, :email_activation_code => nil)
+  end
+  
+  def recently_changed_email?
+    @change_email
+  end
+  
+  def forgot_password
+    @forgotten_password = true
+    self.make_password_reset_code
+  end
+  
+  def reset_password
+    # First update the password_reset_code before setting the 
+    # reset_password flag to avoid duplicate email notifications.
+    update_attributes(:password_reset_code => nil)
+    @reset_password = true
+  end
+  
+  def recently_reset_password?
+    @reset_password
+  end
+  
+  def recently_forgot_password?
+    @forgotten_password
+  end
+  
+  def self.find_for_forgot(email)
+    find :first, :conditions => ['email = ? and activation_code IS NULL', email]
+  end
 
   protected
     # before filter 
@@ -99,5 +152,17 @@ class User < ActiveRecord::Base
     
     def make_activation_code
       self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
-    end 
+    end
+    
+    def make_email_activation_code
+      self.email_activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+    end
+    
+    def new_email_entered?
+      !self.new_email.blank?
+    end
+    
+    def make_password_reset_code
+      self.password_reset_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+    end
 end

@@ -18,4 +18,42 @@ module ApplicationHelper
     url = options.is_a?(String) ? options : self.url_for(options, *parameters_for_method_reference)
     "<li#{current}><a href=\"#{url}\"#{tag_options}><b>#{name || url}</b></a></li>"
   end
+  
+  def limit_text(text, length = 18)
+    if text.length < length
+      text
+    else
+      "#{text[0,length]}&hellip;"
+    end
+  end
+  
+  # Create as many of these as you like, each should call a different partial 
+  # 1. Render 'shared/sidebar_box' partial with the given options and block content
+  def titled_box(title, color, options = {}, &block)
+    block_to_partial('shared/titled_box', options.merge(:title => title, :color => color), &block)
+  end
+   
+  # Sample helper #2
+  #def un_rounded_box(title, options = {}, &block)
+  #  block_to_partial('shared/un_rounded_box', options.merge(:title => title), &block)
+  #end
+  
+  def sidebar_one_helper
+    "#{controller.sidebar_one}"
+  end
+  
+  def sidebar_two_helper
+    "#{controller.sidebar_two}"
+  end
+  
+  private
+  
+  # Only need this helper once, it will provide an interface to convert a block into a partial.
+  # 1. Capture is a Rails helper which will 'capture' the output of a block into a variable
+  # 2. Merge the 'body' variable into our options hash
+  # 3. Render the partial with the given options hash. Just like calling the partial directly.
+  def block_to_partial(partial_name, options = {}, &block)
+    options.merge!(:body => capture(&block))
+    concat(render(:partial => partial_name, :locals => options), block.binding)
+  end
 end
