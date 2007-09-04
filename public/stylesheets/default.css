@@ -448,6 +448,30 @@ img.right {
 	width: 200px;
 }
 
+/* Sub Navigation */
+#sub-nav {
+	background: #FFFFFF url(/images/img01.gif) repeat-x;
+	height: 30px;
+	margin: 0;
+	padding: 8px 0 0 0;
+}
+#sub-nav p {
+	display: block;
+	text-align: center;
+	color: #999999;
+	margin: 0;
+	padding: 0;
+}
+#sub-nav a {
+	font-weight: bold;
+	text-decoration: none;
+	color: #777777;
+}
+#sub-nav a:hover {
+	text-decoration: underline;
+	color: #666666;
+}
+
 /* Footer */
 
 #footer {
