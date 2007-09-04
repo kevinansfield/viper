@@ -4,8 +4,9 @@
 
 <p>Required fields are marked with <em><img src="/images/required_star.gif" alt="required" /></em></p>
 
-<%= error_messages_for :user %>
-<% form_for :user, :url => { :action => 'change_email' }, :html => { :class => 'form' } do |f| %>
+<% unless @email_changed -%>
+<%= error_messages_for :user if @changing_email %>
+<% form_for :user, @user, :url => change_email_user_path, :html => { :method => :put, :class => 'form' } do |f| %>
 <fieldset>
 	<legend>Change E-Mail Address - Step 1 of 3</legend>
 	<ol>
@@ -18,8 +19,59 @@
 	</ol>
 </fieldset>
 <fieldset class="submit">
-	<%= submit_tag 'Update', :class => 'submit' %>
+	<%= submit_tag 'Change Email', :class => 'submit' %>
 </fieldset>
+<% end %>
+<% else -%>
+<form class="form">
+<fieldset>
+	<legend>Change E-Mail Address - Step 2 of 3</legend>
+	<p>
+		Thanks. An email has been sent to the address provided 
+    	(<%= self.current_user.new_email %>).
+	</p>
+	<p>
+	    Please follow the instructions contained within the 
+	    email to complete this process.
+	</p>
+	<p>
+		<%= link_to "Back to your hub", hub_url %><br /><br />
+	</p>
+</fieldset>
+</form>
+<% end -%>
+
+<% unless @password_changed -%>
+<%= error_messages_for :user if @changing_password %>
+<% form_for :user, @user, :url => change_password_user_path, :html => { :method => :put, :class => 'form' } do |f| %>
+<fieldset>
+	<legend>Change Password</legend>
+	<ol>
+		<li>
+			<label for="current_password">
+				Current Password: <em><img src="/images/required_star.gif" alt="required" /></em>
+			</label>
+			<%= password_field :current_password, nil, :class => 'text' %>
+		</li>
+		<li>
+			<label for="password">
+				New Password: <em><img src="/images/required_star.gif" alt="required" /></em>
+			</label>
+			<%= f.password_field :password, :class => 'text' %>
+		</li>
+		<li>
+			<label for="password_confirmation">
+				Confirm New Password: <em><img src="/images/required_star.gif" alt="required" /></em>
+			</label>
+			<%= f.password_field :password_confirmation, :class => 'text' %>
+		</li>
+	</ol>
+</fieldset>
+<fieldset class="submit">
+	<%= submit_tag 'Change Password', :class => 'submit' %>
+</fieldset>
+<% end %>
+<% else -%>
 <% end -%>
 
 <p>All your information is treated as private and confidential, please read our <a href="#">privacy policy</a>.</p>

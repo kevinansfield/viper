@@ -14,15 +14,15 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '', :controller => "site"
 
   # User resources
-  map.resources :users, :members => { :change_email => :change_email }
+  map.resources :users, :member => { :change_email => :put, :change_password => :put }
   map.resource  :session
   
   # User named routes
   map.activate  'user/activate/:activation_code', :controller => 'users', :action => 'activate'
-  map.signup    '/signup',    :controller => 'users',   :action => 'new'
-  map.hub       '/user/hub',  :controller => 'users',   :action => 'hub'
-  map.login     '/login',     :controller => 'session', :action => 'new'
-  map.logout    '/logout',    :controller => 'session', :action => 'destroy'
+  map.signup    'user/signup',    :controller => 'users',   :action => 'new'
+  map.login     'user/login',     :controller => 'session', :action => 'new'
+  map.hub       'user/hub',       :controller => 'users',   :action => 'hub'
+  map.logout    'user/logout',    :controller => 'session', :action => 'destroy'
   map.activate_new_email  'user/activate_new_email/:email_activation_code', :controller => 'users', :action => 'activate_new_email'
   map.forgot_password     'user/forgot_password', :controller => 'users', :action => 'forgot_password'
   map.reset_password      'user/reset_password/:id', :controller => 'users', :action => 'reset_password'
