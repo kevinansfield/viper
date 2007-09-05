@@ -1,5 +1,7 @@
 class BioController < ApplicationController
   
+  before_filter :require_login, :protect_controller
+  
   # GET /user/1/bio;edit
   def edit
     @user = User.find(params[:user_id])
@@ -22,6 +24,17 @@ class BioController < ApplicationController
         format.html { render :action => "edit" }
         format.xml  { render :xml => @bio.errors.to_xml }
       end
+    end
+  end
+  
+  private
+  
+  def protect_bio
+    @user = User.find(params[:user_id])
+    unless @user == current_user
+      flash[:error] = "That isn't your bio!"
+      redirect_to hub_url
+      return false
     end
   end
 end

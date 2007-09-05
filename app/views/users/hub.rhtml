@@ -13,7 +13,11 @@
 </p>
 <% end %>
 
-<% titled_box 'Friends',
-			  'orange' do %>
-<h2>Friends:</h2>
+<% titled_box 'Friends', 'orange' do %>
+<h3>Friends:</h3>
+<% end %>
+
+<% titled_box 'Your Blog', 'pink',
+			  :edit_link => '<a href="#">(view blog)</a> <a href="#">(manage)</a>' do %>
+<h3>Your Blog:</h3>
 <% end %>

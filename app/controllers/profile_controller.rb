@@ -1,4 +1,6 @@
 class ProfileController < ApplicationController
+  
+  before_filter :require_login, :protect_profile
 
   # GET /user/1/profile;edit
   def edit
@@ -22,6 +24,17 @@ class ProfileController < ApplicationController
         format.html { render :action => "edit" }
         format.xml  { render :xml => @profile.errors.to_xml }
       end
+    end
+  end
+  
+  private
+  
+  def protect_profile
+    @user = User.find(params[:user_id])
+    unless @user == current_user
+      flash[:error] = "That isn't your profile!"
+      redirect_to hub_url
+      return false
     end
   end
 

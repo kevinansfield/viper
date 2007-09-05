@@ -17,7 +17,7 @@
 	</ol>
 </fieldset>
 <fieldset class="submit">
-    <%= submit_tag "Update" %>
+    <%= submit_tag "Update" %> | <%= link_to 'Cancel', hub_url %>
 </fieldset>
 <fieldset>
 	<legend>Edit Bio - Other Information</legend>
@@ -49,9 +49,7 @@
 	</ol>
 </fieldset>
 <fieldset class="submit">
-    <%= submit_tag "Update" %>
+    <%= submit_tag "Update" %> | <%= link_to 'Cancel', hub_url %>
 </fieldset>
 <% end %>
-
-<%= link_to 'Back', hub_path %>
 <% end %>

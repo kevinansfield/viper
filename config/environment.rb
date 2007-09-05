@@ -63,6 +63,10 @@ end
 # Hostname, used in mailouts etc.
 HOST = 'http://localhost:3009'
 
+# Database max limits
+DB_STRING_MAX_LENGTH = 255
+DB_TEXT_MAX_LENGTH = 65000
+
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
   :address => "mail.bn23hosting.com",

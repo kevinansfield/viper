@@ -1,5 +1,7 @@
 class AvatarController < ApplicationController
   
+  before_filter :login_required, :protect_avatar
+  
   def edit
     @user = User.find(params[:user_id])
     @avatar = @user.avatar || Avatar.new
@@ -14,6 +16,17 @@ class AvatarController < ApplicationController
       redirect_to hub_url
     else
       render :action => :edit
+    end
+  end
+  
+  private
+  
+  def protect_avatar
+    @user = User.find(params[:user_id])
+    unless @user == current_user
+      flash[:error] = "That isn't your avatar!"
+      redirect_to hub_url
+      return false
     end
   end
   
