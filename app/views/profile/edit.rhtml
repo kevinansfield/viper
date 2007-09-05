@@ -32,6 +32,10 @@ and provide more useful help when dealing with location based questions.</p>
 			<%= f.radio_button :gender, "Male"   %> Male
 			<%= f.radio_button  :gender, "Female" %> Female
 		</li>
+		<li>
+			<label for="profile_occupation">Occupation:</label>
+			<%= f.text_field :occupation, :class => 'text' %>
+		</li>
 	</ol>
 </fieldset>
 <fieldset>

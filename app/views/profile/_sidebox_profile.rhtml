@@ -16,8 +16,20 @@
 		<td><%= limit_text @user.profile.gender %></td>
 	</tr>
 	<tr>
-		<td><b>Location:</b></td>
-		<td><%= limit_text @user.profile.location %></td>
+		<td><b>Occupation:</b></td>
+		<td><%= limit_text @user.profile.occupation %></td>
+	</tr>
+	<tr>
+		<td><b>City:</b></td>
+		<td><%= limit_text @user.profile.city %></td>
+	</tr>
+	<tr>
+		<td><b>County:</b></td>
+		<td><%= limit_text @user.profile.county %></td>
+	</tr>
+	<tr>
+		<td><b>Post Code:</b></td>
+		<td><%= limit_text @user.profile.post_code %></td>
 	</tr>
 </table>
 <% end %>

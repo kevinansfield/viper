@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     @user = current_user
     @user.profile ||= Profile.new
     @user.avatar ||= nil
+    @user.bio ||= Bio.new
   end
 
   # render new.rhtml

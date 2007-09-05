@@ -5,8 +5,8 @@ class Profile < ActiveRecord::Base
   before_validation_on_create :geocode_address
   before_validation_on_update :geocode_address
   
-  ALL_FIELDS = %w(first_name last_name gender birthdate city county post_code)
-  STRING_FIELDS = %w(first_name last_name county post_code)
+  ALL_FIELDS = %w(first_name last_name gender birthdate occupation city county post_code)
+  STRING_FIELDS = %w(first_name last_name occupation county post_code)
   VALID_GENDERS = ["Male", "Female"]
   START_YEAR = 1900
   VALID_DATES = DateTime.new(START_YEAR)..DateTime.now
@@ -46,12 +46,6 @@ class Profile < ActiveRecord::Base
   def age
     return if birthdate.nil?
     today = Date.today
-#    if today.month >= birthdate.month and today.day >= birthdate.day
-#      # Birthday has happened already this year.
-#      today.year - birthdate.year
-#    else
-#      today.year - birthdate.year - 1
-#    end
     (today.year - birthdate.year) + ((today.month - birthdate.month) + ((today.day - birthdate.day) < 0 ? -1 : 0) < 0 ? -1 : 0)
   end
   

@@ -1,0 +1,57 @@
+<% @title = "Edit Bio" -%>
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
+<p>Use the following form to update your bio information that is displayed on your public profile.</p>
+
+<%= error_messages_for :bio %>
+
+<% form_for(:bio, :url => bio_path(@user), :html => { :method => :put, :class => 'form' }) do |f| %>
+<fieldset>
+	<legend>Edit Bio - Basic Details</legend>
+	<ol>
+		<li>
+			<label for="bio_about">About Me:</label>
+			<%= f.text_area :about, :class => 'text' %>
+		</li>
+	</ol>
+</fieldset>
+<fieldset class="submit">
+    <%= submit_tag "Update" %>
+</fieldset>
+<fieldset>
+	<legend>Edit Bio - Other Information</legend>
+	<ol>
+		<li>
+			<label for="bio_interests">Interests:</label>
+			<%= f.text_area :interests, :class => 'text' %>
+		</li>
+		<li>
+			<label for="bio_music">Music:</label>
+			<%= f.text_area :music, :class => 'text' %>
+		</li>
+		<li>
+			<label for="bio_films">Films:</label>
+			<%= f.text_area :films, :class => 'text' %>
+		</li>
+		<li>
+			<label for="bio_television">Television:</label>
+			<%= f.text_area :television, :class => 'text' %>
+		</li>
+		<li>
+			<label for="bio_books">Books/Magazines:</label>
+			<%= f.text_area :books, :class => 'text' %>
+		</li>
+		<li>
+			<label for="bio_heroes">Heroes:</label>
+			<%= f.text_area :heroes, :class => 'text' %>
+		</li>
+	</ol>
+</fieldset>
+<fieldset class="submit">
+    <%= submit_tag "Update" %>
+</fieldset>
+<% end %>
+
+<%= link_to 'Back', hub_path %>
+<% end %>

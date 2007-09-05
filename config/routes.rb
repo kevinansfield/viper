@@ -18,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :member => { :change_email => :put, :change_password => :put } do |user|
     user.resource :profile
     user.resource :avatar
+    user.resource :bio
   end
   map.resource  :session
   

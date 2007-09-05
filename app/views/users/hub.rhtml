@@ -4,20 +4,16 @@
 			  'orange',
 			  :edit_link => "<a href=\"#\">(view profile)</a>",
 			  :box_id => 'feature' do %>
-			  
-<h1>Welcome back <%= @user.profile.full_name || @user.login %></h1>
+<h1>Welcome back <%= @user.profile.first_name || @user.login %></h1>
 
-<hr />
+<p>
+	<b>My Bio:</b>
+	<%= @user.bio.about || link_to('Write a bit about yourself in your bio.', edit_bio_path(@user)) %>
+	<%= link_to('(edit)', edit_bio_path(@user)) if @user.bio.about %>
+</p>
+<% end %>
 
-<p><b>Profile URL: </b><a href="#"><%= HOST %>/profile/<%= @user.login %></a></p>
-
-<hr />
-
-<h2>My Bio:</h2>
-<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec fermentum justo sit amet sem. Donec vel mi. Quisque vestibulum nibh sed pede. Praesent nec libero. Nam est metus, scelerisque non, viverra ut, tempus sit amet, magna. Vivamus ac metus nec lorem molestie tincidunt. Donec aliquam, enim vitae luctus ultricies, neque nisl vestibulum diam, sed tempor dolor sapien congue lorem.</p>
-
-<hr />
-
+<% titled_box 'Friends',
+			  'orange' do %>
 <h2>Friends:</h2>
-
 <% end %>
