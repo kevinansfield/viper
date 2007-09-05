@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_filter :login_required, :only => [:hub, :edit, :change_email]
+  before_filter :login_required, :only => [:hub, :edit, :change_email, :change_password]
   
   # Display users list/search
   def index
@@ -10,6 +10,9 @@ class UsersController < ApplicationController
   # Display the user's hub
   def hub
     self.sidebar_one = 'sidebar_hub'
+    @user = current_user
+    @user.profile ||= Profile.new
+    @user.avatar ||= nil
   end
 
   # render new.rhtml

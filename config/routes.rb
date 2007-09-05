@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+
   # The priority is based upon order of creation: first created -> highest priority.
   
   # Sample of regular route:
@@ -14,7 +15,10 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '', :controller => "site"
 
   # User resources
-  map.resources :users, :member => { :change_email => :put, :change_password => :put }
+  map.resources :users, :member => { :change_email => :put, :change_password => :put } do |user|
+    user.resource :profile
+    user.resource :avatar
+  end
   map.resource  :session
   
   # User named routes

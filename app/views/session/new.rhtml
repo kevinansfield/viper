@@ -1,5 +1,7 @@
 <% @title = "Login" -%>
-
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
 <p>Use the form below to login into your personalised Viper account.</p>
 
 <% form_tag session_path, :class => 'form' do -%>
@@ -27,3 +29,4 @@
 <% end -%>
 
 <p>Not a member yet? <%= link_to 'Register now!', signup_url %> It's quick, easy and free.</p>
+<% end %>

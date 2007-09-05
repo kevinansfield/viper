@@ -54,12 +54,7 @@
     <div id="flash" class="error"><%= flash[:error] %></div>
     <% end -%>
 	<div id="content">
-		<div id="feature" class="box-orange">
-			<h2 class="section"><b><%= @title %></b></h2>
-			<div class="content">
-				<%= yield %>
-			</div>
-		</div>
+		<%= yield %>
 		<div class="two-cols">
 			<% titled_box 'Featured Job', 'blue', :css_class => 'col-one' do %>
 					<p>Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum. Dolor dictum integer nisl risus, sagittis convallis, rutrum id, congue, and nibh lorem ipsum dolor sit amet.</p>

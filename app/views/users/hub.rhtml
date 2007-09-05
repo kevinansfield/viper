@@ -1,9 +1,15 @@
 <% @title = "Your Hub" -%>
-<h1>Welcome back <%= current_user.login %></h1>
+
+<% titled_box @title,
+			  'orange',
+			  :edit_link => "<a href=\"#\">(view profile)</a>",
+			  :box_id => 'feature' do %>
+			  
+<h1>Welcome back <%= @user.profile.full_name || @user.login %></h1>
 
 <hr />
 
-<p><b>Profile URL: </b><a href="#">http://www.viper.com/profile/<%= current_user.login %></a></p>
+<p><b>Profile URL: </b><a href="#"><%= HOST %>/profile/<%= @user.login %></a></p>
 
 <hr />
 
@@ -13,3 +19,5 @@
 <hr />
 
 <h2>Friends:</h2>
+
+<% end %>

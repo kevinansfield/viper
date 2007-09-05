@@ -20,10 +20,13 @@ module ApplicationHelper
   end
   
   def limit_text(text, length = 18)
-    if text.length < length
-      text
-    else
-      "#{text[0,length]}&hellip;"
+    unless text.blank?
+      text = text.to_s
+      if text.length < length
+        text
+      else
+        "#{text[0,length]}&hellip;"
+      end
     end
   end
   
