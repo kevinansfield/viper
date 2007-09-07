@@ -46,6 +46,10 @@ ul li {
 	padding-left: 10px;
 	background: url(/images/img16.gif) no-repeat 0px 10px;
 }
+.small ul li {
+	padding-left: 10px;
+	background: url(/images/img16.gif) no-repeat 0px 7px;
+}
 
 a:link {
 	color: #3490F8;
@@ -490,4 +494,55 @@ img.right {
 	margin: 0;
 	text-align: center;
 	font-size: 85%;
+}
+
+/* Pagination */
+
+.pagination {
+	padding: 3px;
+	margin: 3px;
+}
+.pagination a {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #aaaadd;
+	text-decoration: none;
+	color: #000099;
+}
+.pagination a:hover, .pagination a:active {
+	border: 1px solid #000099;
+	color: #000;
+}
+.pagination span.current {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #000099;
+	font-weight: bold;
+	background-color: #000099;
+	color: #FFF;
+}
+.pagination span.disabled {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #eee;
+	color: #ddd;
+}
+
+/* Blog Styles */
+
+.post {
+  display: block;
+  margin-bottom: 1.5em;
+}
+.post_title {
+  font-weight: bold;
+}
+.post_body {
+  padding: 1em;
+}
+.post_creation_date, .post_modification_date {
+  text-align: right;
+}
+.post_actions {
+  float: right;
 }

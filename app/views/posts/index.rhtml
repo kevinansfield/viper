@@ -1,0 +1,11 @@
+<% @title = 'Manage Blog Posts' -%>
+
+<% titled_box @title,
+			  'pink',
+			  :box_id => 'feature' do %>
+
+<p><%= link_to 'New post', new_post_path %> <%= "| " + will_paginate(@posts) if @posts.length > Post.per_page %></p>
+
+<%= render :partial => "post", :collection => @posts %>
+
+<% end %>

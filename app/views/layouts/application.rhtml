@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title><%= @title %> - Viper Interim Management</title>
+	<title><%= @title %> - PARTY: Your social community starts here</title>
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<%= stylesheet_link_tag "default" %>
@@ -16,8 +16,8 @@
 <body>
 <div id="header">
 	<div id="logo">
-		<h1><a href="/">VIPER</a></h1>
-		<h2><a href="/">Your Interim Management Resource</a></h2>
+		<h1><a href="/">PARTY</a></h1>
+		<h2><a href="/">Your social community starts here</a></h2>
 	</div>
 	<div id="search">
 		<form method="get" action="">
@@ -31,9 +31,9 @@
 <div id="menu">
 	<ul>
 		<%= nav_link 'Home', :controller => 'site' %>
-		<li><a href="#"><b>Jobs</b></a></li>
+		<li><a href="#"><b>News</b></a></li>
 		<li><a href="#"><b>Articles</b></a></li>
-		<li><a href="#"><b>Forums</b></a></li>
+		<li><a href="#"><b>Blogs</b></a></li>
 		<li><a href="#"><b>Community</b></a></li>
 		<li><a href="#"><b>Contact</b></a></li>
 	</ul>
@@ -57,7 +57,7 @@
 	<div id="content">
 		<%= yield %>
 		<div class="two-cols">
-			<% titled_box 'Featured Job', 'blue', :css_class => 'col-one' do %>
+			<% titled_box 'Featured Blog', 'blue', :css_class => 'col-one' do %>
 					<p>Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum. Dolor dictum integer nisl risus, sagittis convallis, rutrum id, congue, and nibh lorem ipsum dolor sit amet.</p>
 					<p> Augue praesent a lacus at urna congue rutrum. Dolor dictum integer nisl risus. <a href="#">Read more&hellip;</a></p>
 			<% end %>
@@ -93,9 +93,9 @@
 		<a href="/">Home</a> :: 
 		<a href="#">About</a> :: 
 		<a href="#">News</a> :: 
+		<a href="#">Articles</a> ::
+		<a href="#">Blogs</a> ::
 		<a href="#">Community</a> :: 
-		<a href="#">Jobs</a> :: 
-		<a href="#">Forums</a> :: 
 		<a href="#">Contact Us</a>
 	</p>
 </div>

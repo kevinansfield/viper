@@ -1,0 +1,10 @@
+<% @title = @post.title -%>
+
+<% titled_box @title,
+			  'pink',
+			  :box_id => 'feature' do %>
+			  
+<h2> <%= link_to 'Your Blog Posts', posts_path %>: <%= @post.title %></h2>
+<%= render :partial => "post" %>
+
+<% end %>

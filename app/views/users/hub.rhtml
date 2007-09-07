@@ -4,20 +4,28 @@
 			  'orange',
 			  :edit_link => "<a href=\"#\">(view profile)</a>",
 			  :box_id => 'feature' do %>
-<h1>Welcome back <%= @user.profile.first_name || @user.login %></h1>
-
-<p>
-	<b>My Bio:</b>
-	<%= @user.bio.about || link_to('Write a bit about yourself in your bio.', edit_bio_path(@user)) %>
-	<%= link_to('(edit)', edit_bio_path(@user)) if @user.bio.about %>
-</p>
+	<h1>Welcome back <%= @user.profile.first_name || @user.login %></h1>
+	
+	<p>
+		<b>My Bio:</b>
+		<%= @user.bio.about || link_to('Write a bit about yourself in your bio.', edit_bio_path(@user)) %>
+		<%= link_to('(edit)', edit_bio_path(@user)) if @user.bio.about %>
+	</p>
 <% end %>
-
+	
 <% titled_box 'Friends', 'orange' do %>
-<h3>Friends:</h3>
+	<h3>Friends:</h3>
 <% end %>
-
+	
 <% titled_box 'Your Blog', 'pink',
-			  :edit_link => '<a href="#">(view blog)</a> <a href="#">(manage)</a>' do %>
-<h3>Your Blog:</h3>
+			  :edit_link => "<a href=\"#\">(view blog)</a> #{ link_to '(manage)', posts_path(@user.blog) }" do %>
+	<h3>Latest Posts:</h3>
+	<% unless @user.blog.posts.length > 0 -%>
+		<p>You don't have any blog posts yet! <%= link_to 'Why not add one now?', new_post_path(@user.blog) %></p>
+	<% else -%>
+		<%= will_paginate @posts %>
+		<%= render :partial => "posts/post", :collection => @posts %>
+		<%= will_paginate @posts %>
+	<% end -%>
+
 <% end %>

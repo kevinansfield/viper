@@ -1,0 +1,18 @@
+<div class="post">
+  <div class="post_title">
+    <%= sanitize post.title %>
+	  <span style="float:right">
+	  <%= link_to_unless_current 'Show', post_path(post.blog, post) %> |
+	  <%= link_to_unless_current 'Edit', edit_post_path(post.blog, post) %> |
+	  <%= link_to 'Destroy', post_path(post.blog, post),
+	              :confirm => 'Are you sure?', :method => :delete %>
+	  </span>
+  </div>
+  <div class="post_body"><%= sanitize post.body %></div>
+  <div class="post_creation_date">
+    Posted <%= time_ago_in_words post.created_at %> ago
+    <% if post.updated_at != post.created_at %>
+      <br /> Modified <%= time_ago_in_words post.updated_at %> ago
+    <% end %>
+  </div>
+</div>

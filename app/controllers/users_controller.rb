@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   
   before_filter :login_required, :only => [:hub, :edit, :change_email, :change_password]
+  before_filter :protect_user, :only => [:edit, :change_email, :change_password]
   
   # Display users list/search
   def index
@@ -14,6 +15,8 @@ class UsersController < ApplicationController
     @user.profile ||= Profile.new
     @user.avatar ||= nil
     @user.bio ||= Bio.new
+    @user.blog ||= Blog.new
+    @posts = @user.blog.posts.paginate :page => params[:page]
   end
 
   # render new.rhtml
@@ -124,6 +127,17 @@ class UsersController < ApplicationController
     logger.error "Invalid Reset Code entered" 
     flash[:error] = "Sorry - That is an invalid password reset code. Please check your code and try again. (Perhaps your email client inserted a carriage return?)" 
     redirect_back_or_default(hub_url)
+  end
+  
+  private
+  
+  def protect_user
+    @user = User.find(params[:id])
+    unless @user == current_user
+      flash[:error] = "That isn't your user!"
+      redirect_to hub_url
+      return false
+    end    
   end
 
 end

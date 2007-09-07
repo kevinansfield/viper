@@ -31,6 +31,11 @@ ActionController::Routing::Routes.draw do |map|
   map.activate_new_email  'user/activate_new_email/:email_activation_code', :controller => 'users', :action => 'activate_new_email'
   map.forgot_password     'user/forgot_password', :controller => 'users', :action => 'forgot_password'
   map.reset_password      'user/reset_password/:id', :controller => 'users', :action => 'reset_password'
+  
+  # Blog resources
+  map.resources :blogs do |blog|
+    blog.resources :posts
+  end
 
   # Allow downloading Web Service WSDL as a file with an extension
   # instead of a file named 'wsdl'

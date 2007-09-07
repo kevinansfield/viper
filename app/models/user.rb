@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_one :profile
   has_one :avatar
   has_one :bio
+  has_one :blog
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password
