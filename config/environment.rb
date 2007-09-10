@@ -60,8 +60,10 @@ end
 
 # Include your application configuration below
 
-# Hostname, used in mailouts etc.
+# Hostname, Sitename, etc. used in mailouts and page titles
 HOST = 'http://localhost:3009'
+SITENAME = 'Viper'
+TAGLINE = 'Your Social Community Starts Here'
 
 # Database max limits
 DB_STRING_MAX_LENGTH = 255
