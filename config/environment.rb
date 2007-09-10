@@ -75,6 +75,10 @@ SIDEBAR_TWO = "layouts/sidebar_two"
 
 VIPER_EMAIL = "dev@digitalblueprint.co.uk"
 
+ExceptionNotifier.exception_recipients = [ 'kevin.ansfield@gmail.com' ]
+ExceptionNotifier.sender_address = 'dev@digitalblueprint.co.uk'
+ExceptionNotifier.email_prefix = "[VIPER SITE ERROR] "
+
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
   :address => "mail.bn23hosting.com",
