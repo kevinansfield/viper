@@ -67,6 +67,10 @@ HOST = 'http://localhost:3009'
 DB_STRING_MAX_LENGTH = 255
 DB_TEXT_MAX_LENGTH = 65000
 
+# Sidebar defaults
+SIDEBAR_ONE = "layouts/sidebar_one"
+SIDEBAR_TWO = "layouts/sidebar_two"
+
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
   :address => "mail.bn23hosting.com",
