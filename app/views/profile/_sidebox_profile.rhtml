@@ -1,6 +1,6 @@
 <% titled_box 	'Profile',
 				'orange',
-				:edit_link => link_to('(edit)', edit_profile_path(@user)),
+				:edit_link => display_edit_link(@user, link_to('(edit)', edit_profile_path(@user))),
 				:content_css_class => 'small' do %>
 <table>
 	<tr>

@@ -49,6 +49,10 @@ module ApplicationHelper
     "#{controller.sidebar_two}"
   end
   
+  def display_edit_link(user, link)
+    user == current_user ? link : nil
+  end
+
   private
   
   # Only need this helper once, it will provide an interface to convert a block into a partial.

@@ -1,6 +1,6 @@
 <% titled_box 'Avatar',
 			  'orange',
-			  :edit_link => link_to('(edit)', edit_avatar_path(@user)) do %>
+			  :edit_link => display_edit_link(@user, link_to('(edit)', edit_avatar_path(@user))) do %>
 
 	<% unless @user.avatar.nil? -%>
 		<div style="text-align: center"><%= image_tag @user.avatar.public_filename(:small) %></div>
