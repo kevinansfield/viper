@@ -2,9 +2,10 @@
 
 <% titled_box @title,
 			  'pink',
+			  :edit_link => link_to('(New Post)', new_post_path),
 			  :box_id => 'feature' do %>
 
-<p><%= link_to 'New post', new_post_path %> <%= "| " + will_paginate(@posts) if @posts.length > Post.per_page %></p>
+<p><%= will_paginate(@posts) if @posts.length > Post.per_page %></p>
 
 <%= render :partial => "post", :collection => @posts %>
 

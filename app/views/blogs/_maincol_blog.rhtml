@@ -1,0 +1,13 @@
+<% titled_box 'Your Blog', 'pink',
+			  :css_class => 'col-one',
+			  :edit_link => "#{ link_to '(manage)', posts_path(@user.blog) }" do %>
+	<h3>Latest Posts:</h3>
+	<% unless @user.blog.posts.length > 0 -%>
+		<p>You don't have any blog posts yet! <%= link_to 'Why not add one now?', new_post_path(@user.blog) %></p>
+	<% else -%>
+		<%= will_paginate @posts %>
+		<%= render :partial => "posts/post_listing", :locals => {:posts => @posts} %>
+		<%= will_paginate @posts %>
+	<% end -%>
+
+<% end %>

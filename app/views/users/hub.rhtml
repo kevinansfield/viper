@@ -16,16 +16,3 @@
 <% titled_box 'Friends', 'orange' do %>
 	<h3>Friends:</h3>
 <% end %>
-	
-<% titled_box 'Your Blog', 'pink',
-			  :edit_link => "<a href=\"#\">(view blog)</a> #{ link_to '(manage)', posts_path(@user.blog) }" do %>
-	<h3>Latest Posts:</h3>
-	<% unless @user.blog.posts.length > 0 -%>
-		<p>You don't have any blog posts yet! <%= link_to 'Why not add one now?', new_post_path(@user.blog) %></p>
-	<% else -%>
-		<%= will_paginate @posts %>
-		<%= render :partial => "posts/post", :collection => @posts %>
-		<%= will_paginate @posts %>
-	<% end -%>
-
-<% end %>

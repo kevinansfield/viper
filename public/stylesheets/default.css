@@ -533,16 +533,29 @@ img.right {
 .post {
   display: block;
   margin-bottom: 1.5em;
+  background-color: #EEEEEE;
 }
 .post_title {
+  position: relative;
+  background-color: #DDDDDD;
   font-weight: bold;
+  padding: 5px;
 }
 .post_body {
   padding: 1em;
 }
-.post_creation_date, .post_modification_date {
+.post_footer_text {
   text-align: right;
+  font-style: italic;
+  padding: 5px;
 }
+.post_footer_text p {
+  margin: 0;
+  padding: 0;
+}
+
 .post_actions {
-  float: right;
+  position: absolute;
+  top: 8px;
+  right: 10px;
 }

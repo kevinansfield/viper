@@ -11,6 +11,8 @@ class UsersController < ApplicationController
   # Display the user's hub
   def hub
     self.sidebar_one = 'sidebar_hub'
+    self.maincol_one = 'blogs/maincol_blog'
+    self.maincol_two = 'maincol_inbox'
     @user = current_user
     @user.setup_for_display!
     @posts = @user.blog.posts.paginate :page => params[:page]
