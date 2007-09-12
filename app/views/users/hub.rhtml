@@ -2,7 +2,7 @@
 
 <% titled_box @title,
 			  'orange',
-			  :edit_link => "<a href=\"#\">(view profile)</a>",
+			  :edit_link => link_to('(view profile)', user_path(@user)),
 			  :box_id => 'feature' do %>
 	<h1>Welcome back <%= @user.profile.first_name || @user.login %></h1>
 	

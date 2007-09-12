@@ -142,6 +142,13 @@ class User < ActiveRecord::Base
   def self.find_for_forgot(email)
     find :first, :conditions => ['email = ? and activation_code IS NULL', email]
   end
+  
+  def setup_for_display!
+    self.profile ||= Profile.new
+    self.avatar ||= nil
+    self.bio ||= Bio.new
+    self.blog ||= Blog.new
+  end
 
   protected
     # before filter 

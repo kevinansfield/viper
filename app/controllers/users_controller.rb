@@ -12,11 +12,18 @@ class UsersController < ApplicationController
   def hub
     self.sidebar_one = 'sidebar_hub'
     @user = current_user
-    @user.profile ||= Profile.new
-    @user.avatar ||= nil
-    @user.bio ||= Bio.new
-    @user.blog ||= Blog.new
+    @user.setup_for_display!
     @posts = @user.blog.posts.paginate :page => params[:page]
+  end
+  
+  # Display the user's public profile
+  def show
+    self.sidebar_one = 'sidebar_show'
+    @user = User.find(params[:id])
+    @user.setup_for_display!
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = "Sorry, that user does not exist!"
+    redirect_to '/'
   end
 
   # render new.rhtml
