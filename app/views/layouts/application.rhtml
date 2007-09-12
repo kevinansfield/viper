@@ -57,25 +57,8 @@
 	<div id="content">
 		<%= yield %>
 		<div class="two-cols">
-			<% titled_box 'Featured Blog', 'blue', :css_class => 'col-one' do %>
-					<p>Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum. Dolor dictum integer nisl risus, sagittis convallis, rutrum id, congue, and nibh lorem ipsum dolor sit amet.</p>
-					<p> Augue praesent a lacus at urna congue rutrum. Dolor dictum integer nisl risus. <a href="#">Read more&hellip;</a></p>
-			<% end %>
-			<% titled_box 'Latest Articles', 'pink', :css_class => 'col-two' do %>
-					<ul class="list">
-						<li><a href="#">Ut semper vestibulum est</a></li>
-						<li><a href="#">Vestibulum luctus venenatis</a></li>
-						<li><a href="#">Integer rutrum nisl in mi</a></li>
-						<li><a href="#">Vestibulum luctus venenatis</a></li>
-						<li><a href="#">Etiam malesuada rutrum enim</a></li>
-						<li><a href="#">Aenean elementum facilisis</a></li>
-						<li><a href="#">Ut tincidunt elit vitae augue</a></li>
-						<li><a href="#">Integer rutrum nisl in mi</a></li>
-						<li><a href="#">Etiam malesuada rutrum enim</a></li>
-						<li><a href="#">Aenean elementum facilisis</a></li>
-						<li><a href="#">Sed quis odio sagittis leo</a></li>
-					</ul>
-			<% end %>
+			<%= render :partial => "#{controller.maincol_one}" %>
+			<%= render :partial => "#{controller.maincol_two}" %>
 		</div>
 	</div>
 	<div id="sidebar" class="two-cols">

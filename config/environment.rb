@@ -69,7 +69,9 @@ TAGLINE = 'Your Social Community Starts Here'
 DB_STRING_MAX_LENGTH = 255
 DB_TEXT_MAX_LENGTH = 65000
 
-# Sidebar defaults
+# Partial defaults
+MAINCOL_ONE = "layouts/maincol_one"
+MAINCOL_TWO = "layouts/maincol_two"
 SIDEBAR_ONE = "layouts/sidebar_one"
 SIDEBAR_TWO = "layouts/sidebar_two"
 
