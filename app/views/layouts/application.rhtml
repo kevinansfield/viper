@@ -57,16 +57,16 @@
 	<div id="content">
 		<%= yield %>
 		<div class="two-cols">
-			<%= render :partial => "#{controller.maincol_one}" %>
-			<%= render :partial => "#{controller.maincol_two}" %>
+			<%= render :partial => "#{controller.maincol_one}" unless controller.maincol_one.nil? %>
+			<%= render :partial => "#{controller.maincol_two}" unless controller.maincol_two.nil? %>
 		</div>
 	</div>
 	<div id="sidebar" class="two-cols">
 		<div class="col-one">
-			<%= render :partial => "#{controller.sidebar_one}" %>
+			<%= render :partial => "#{controller.sidebar_one}" unless controller.sidebar_one.nil? %>
 		</div>
 		<div class="col-two">
-			<%= render :partial => "#{controller.sidebar_two}" %>
+			<%= render :partial => "#{controller.sidebar_two}" unless controller.sidebar_two.nil? %>
 		</div>
 	</div>
 	<div style="clear: both;">&nbsp;</div>
