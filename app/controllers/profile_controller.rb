@@ -1,6 +1,6 @@
 class ProfileController < ApplicationController
   
-  before_filter :require_login, :protect_profile
+  before_filter :login_required, :protect_profile
 
   # GET /user/1/profile;edit
   def edit
