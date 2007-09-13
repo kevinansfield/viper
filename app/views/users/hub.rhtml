@@ -4,12 +4,12 @@
 			  'orange',
 			  :edit_link => link_to('(view profile)', user_path(@user)),
 			  :box_id => 'feature' do %>
-	<h1>Welcome back <%= @user.profile.first_name || @user.login %></h1>
+	<h1>Welcome back <%= fallback_if_blank @user.profile.first_name, @user.login %></h1>
 	
 	<p>
 		<b>My Bio:</b>
-		<%= @user.bio.about || link_to('Write a bit about yourself in your bio.', edit_bio_path(@user)) %>
-		<%= link_to('(edit)', edit_bio_path(@user)) if @user.bio.about %>
+		<%= fallback_if_blank @user.bio.about, link_to('Write a bit about yourself in your bio.', edit_bio_path(@user)) %>
+		<%= link_to('(edit)', edit_bio_path(@user)) if !@user.bio.about.blank? %>
 	</p>
 <% end %>
 	

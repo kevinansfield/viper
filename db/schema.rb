@@ -40,13 +40,13 @@ ActiveRecord::Schema.define(:version => 10) do
 
   create_table "profiles", :force => true do |t|
     t.column "user_id",    :integer, :default => 0,  :null => false
-    t.column "first_name", :string,  :default => ""
-    t.column "last_name",  :string,  :default => ""
+    t.column "first_name", :string
+    t.column "last_name",  :string
     t.column "gender",     :string
     t.column "birthdate",  :date
-    t.column "city",       :string,  :default => ""
-    t.column "county",     :string,  :default => ""
-    t.column "post_code",  :string,  :default => ""
+    t.column "city",       :string
+    t.column "county",     :string
+    t.column "post_code",  :string
     t.column "lat",        :float
     t.column "lng",        :float
     t.column "occupation", :string,  :default => ""

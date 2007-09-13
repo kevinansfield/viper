@@ -3,16 +3,16 @@
 <% titled_box @title,
 			  'orange',
 			  :box_id => 'feature' do %>
-	<h1><%= @user.profile.first_name || @user.login %>'s Profile</h1>
+	<h1><%= fallback_if_blank @user.profile.first_name, @user.login %>'s Profile</h1>
 	
 	<p>
 		<b>About Me:</b>
-		<%= @user.bio.about || "(This user has not yet written their short bio.)" %>
+		<%= fallback_if_blank @user.bio.about, "(This user has not yet written their short bio.)" %>
 	</p>
 <% end %>
 
 <% titled_box "Friends", 'orange' do %>
-	<h3><%= @user.profile.first_name || @user.login %>'s Friends:</h3>
+	<h3><%= fallback_if_blank @user.profile.first_name, @user.login %>'s Friends:</h3>
 <% end %>
 
 <% unless @user.blog.posts.length < 1 %>

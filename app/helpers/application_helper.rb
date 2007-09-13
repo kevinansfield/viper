@@ -30,6 +30,10 @@ module ApplicationHelper
     end
   end
   
+  def fallback_if_blank(chosen, fallback)
+    chosen.blank? ? fallback : chosen    
+  end
+  
   # Create as many of these as you like, each should call a different partial 
   # 1. Render 'shared/sidebar_box' partial with the given options and block content
   def titled_box(title, color, options = {}, &block)
