@@ -41,7 +41,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @blog.posts << @post
         flash[:notice] = 'Post was successfully created.'
-        format.html { redirect_to post_url(@post) }
+        format.html { redirect_to post_url(@post.blog, @post) }
         format.xml  { head :created, :location => post_url(:id => @post) }
       else
         format.html { render :action => "new" }
