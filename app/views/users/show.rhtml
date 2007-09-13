@@ -14,3 +14,10 @@
 <% titled_box "Friends", 'orange' do %>
 	<h3><%= @user.profile.first_name || @user.login %>'s Friends:</h3>
 <% end %>
+
+<% unless @user.blog.posts.length < 1 %>
+	<% titled_box "Blog", 'pink' do %>
+		<p><%= will_paginate(@posts) if @posts.length > Post.per_page %></p>
+		<%= render :partial => "posts/post", :collection => @posts %>
+	<% end %>
+<% end %>

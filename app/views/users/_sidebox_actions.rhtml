@@ -1,6 +1,10 @@
 <% titled_box 	'Actions', 'blue' do %>
-<ul>
-	<li>Send a message</li>
-	<li>Add to Friends</li>
-</ul>
+	<% if @user != current_user -%>
+	<ul>
+		<li>Send a message</li>
+		<li>Add to Friends</li>
+	</ul>
+	<% else -%>
+	<p>This is your own profile!</p>
+	<% end -%>
 <% end %>

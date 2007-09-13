@@ -1,12 +1,14 @@
 <div class="post">
   <div class="post_title">
-    <h2><%= sanitize post.title %></h2>
+    <h2><%= link_to_unless_current sanitize(post.title), post_path(post.blog, post) %></h2>
+	<% if post.blog.user == current_user %>
 	<div class="post_actions">
 	  <%= link_to_unless_current 'Show', post_path(post.blog, post) %> |
 	  <%= link_to_unless_current 'Edit', edit_post_path(post.blog, post) %> |
 	  <%= link_to 'Delete', post_path(post.blog, post),
 	              :confirm => 'Are you sure?', :method => :delete %>
 	</div>
+	<% end %>
   </div>
   <div class="post_body"><%= sanitize post.body %></div>
   <div class="post_footer_text">

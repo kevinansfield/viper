@@ -21,8 +21,11 @@ class UsersController < ApplicationController
   # Display the user's public profile
   def show
     self.sidebar_one = 'sidebar_show'
+    self.maincol_one = nil
+    self.maincol_two = nil
     @user = User.find(params[:id])
     @user.setup_for_display!
+    @posts = @user.blog.posts.paginate :page => params[:page]
   rescue ActiveRecord::RecordNotFound
     flash[:error] = "Sorry, that user does not exist!"
     redirect_to '/'
