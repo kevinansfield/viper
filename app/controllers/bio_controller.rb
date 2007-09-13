@@ -1,6 +1,6 @@
 class BioController < ApplicationController
   
-  before_filter :require_login, :protect_controller
+  before_filter :login_required, :protect_bio
   
   # GET /user/1/bio;edit
   def edit
