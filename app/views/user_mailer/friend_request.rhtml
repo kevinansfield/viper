@@ -1,0 +1,11 @@
+Hello <%= fallback_if_blank @friend.profile.first_name, @friend.login %>,
+
+You have a new <%= SITENAME %> friend request from <%= @user.profile.full_name || @user.login %>.
+
+View <%= fallback_if_blank @user.profile.first_name, @user.login %>'s profile:
+<%= "#{HOST}#{@user_url}" %>
+
+Accept:  <%= @accept_url %>
+Decline: <%= @decline_url %>
+
+-- The <%= SITENAME %> team

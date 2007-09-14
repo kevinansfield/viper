@@ -1,0 +1,5 @@
+module FriendshipHelper
+  
+  
+  
+end

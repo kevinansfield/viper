@@ -1,0 +1,77 @@
+<% titled_box 'Friends', 'orange' do %>
+	<% unless @user.friends.empty? -%>
+	<h3><%= pluralize(@user.friends.count, "#{SITENAME} friend") %>:</h3>
+
+	<div class="friends">
+		<div class="friends-listing">
+		<% @user.friends.each do |friend| -%>
+			<div class="friend">
+				<%= link_to image_tag(friend.avatar.public_filename(:thumb)), user_path(friend) %>
+				<div class="friend-name"><%= link_to "#{friend.profile.full_name || friend.login}", user_path(friend) %>
+				<% if @user == current_user -%>
+					<span class="friend-actions">
+						<%= link_to image_tag("icons/delete.png", :alt => 'Delete', :title => 'Delete'),
+									{ :controller => "friendship", :action => "delete", :id => friend },
+									:confirm => "Really delete friendship with #{friend.profile.full_name || login}?" %>
+					</span>
+				<% end -%>
+				</div>
+			</div>
+		<% end -%>
+		</div>
+	</div>
+	<br clear="all" />
+	<% end -%>
+	
+	<% unless @user.requested_friends.empty? -%>
+	<h3><%= pluralize(@user.friends.count, "New friend requests") %>:</h3>
+
+	<div class="friends">
+		<div class="friends-listing">
+		<% @user.requested_friends.each do |requester| -%>
+			<div class="friend">
+				<%= link_to image_tag(friend.avatar.public_filename(:thumb)), user_path(requester) %>
+				<div class="friend-name"><%= link_to "#{friend.profile.full_name || friend.login}", user_path(requester) %>
+					<% if @user == current_user -%>
+					<span class="friend-actions">
+						<%= link_to image_tag("icons/accept.png", :alt => 'Accept', :title => 'Accept'),
+									{ :controller => "friendship", :action => "accept", :id => requester } %>
+						/
+						<%= link_to image_tag("icons/delete.png", :alt => 'Decline', :title => 'Decline'),
+									{ :controller => "friendship", :action => "decline", :id => friend },
+									:confirm => "Really decline friendship with #{friend.profile.full_name || login}?" %>
+					</span>
+					<% end -%>
+				</div>
+			</div>
+		<% end -%>
+		</div>
+	</div>
+	<br clear="all" />
+	<% end -%>
+	
+	<% unless @user.pending_friends.empty? or @user != current_user -%>
+	<h3><%= pluralize(@user.pending_friends.count, "Pending #{SITENAME} friend") %>:</h3>
+	
+	<div class="friends">
+		<div class="friends-listing">
+		<% @user.pending_friends.each do |friend| -%>
+			<div class="friend">
+				<%= link_to image_tag(friend.avatar.public_filename(:thumb)), user_path(friend) %>
+				<div class="friend-name"><%= link_to "#{friend.profile.full_name || friend.login}", user_path(friend) %>
+					<% if @user == current_user -%>
+					<span class="friend-actions">
+						<%= link_to image_tag("icons/delete.png", :alt => 'Cancel Request', :title => 'Cancel Request'),
+									{ :controller => "friendship", :action => "cancel", :id => friend },
+									:confirm => "Really cancel friendship request with #{friend.profile.full_name || friend.login}?" %>
+					</span>
+					<% end -%>
+				</div>
+			</div>
+		<% end -%>
+		</div>
+	</div>
+	<br clear="all" />
+	<% end -%>
+	
+<% end %>

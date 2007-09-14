@@ -1,4 +1,9 @@
 <% titled_box 'Inbox', 'blue',
 			  :css_class => 'col-two' do %>
-	<p>Coming soon</p>
+	<ul>
+		<li>0 New Messages</li>	  
+	<% unless @user.requested_friends.empty? %>
+		<li><%= pluralize(@user.requested_friends.count, "New friend requests") %></li>
+	<% end %>
+	</ul>
 <% end %>

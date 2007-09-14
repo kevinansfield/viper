@@ -559,3 +559,25 @@ img.right {
   top: 8px;
   right: 10px;
 }
+
+/* Friend Styles */
+
+.friends {
+	margin-top: 5px;
+}
+.friend {
+	display: block;
+	float: left;
+	width: 100px;
+	border: 1px solid #DDDDDD;
+	padding: 2px;
+}
+.friend-name {
+	font-weight: bold;
+	position: relative;
+}
+.friend-actions {
+	position: absolute;
+	top: 0;
+	right: 0;
+}

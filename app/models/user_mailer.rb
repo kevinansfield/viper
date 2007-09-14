@@ -1,4 +1,7 @@
 class UserMailer < ActionMailer::Base
+  
+  helper :application
+  
   def signup_notification(user)
     setup_email(user)
     @subject    += 'Please activate your new account'
@@ -29,6 +32,13 @@ class UserMailer < ActionMailer::Base
   def reset_password(user)
     setup_email(user)
     @subject    += 'Your password has been reset'
+  end
+  
+  def friend_request(mail)
+    setup_email(mail[:user])
+    @subject     = "New friend request at #{SITENAME}"
+    @recipients  = mail[:friend].email
+    @body        = mail
   end
   
   protected

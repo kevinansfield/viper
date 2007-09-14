@@ -56,6 +56,20 @@ module ApplicationHelper
   def display_edit_link(user, link)
     user == current_user ? link : nil
   end
+  
+  # Return an appropriate friendship status message
+  def friendship_status(user, friend)
+    friendship = Friendship.find_by_user_id_and_friend_id(user, friend)
+    return "#{fallback_if_blank friend.profile.first_name, friend.login} is not your friend (yet)." if friendship.nil?
+    case friendship.status
+      when 'requested'
+        "#{fallback_if_blank friend.profile.first_name, friend.login} would like to be your friend."
+      when 'pending'
+        return "You have requested friendship from #{fallback_if_blank friend.profile.first_name, friend.login}"
+      when 'accepted'
+        return "#{fallback_if_blank friend.profile.first_name, friend.login} is your friend."
+    end
+  end
 
   private
   

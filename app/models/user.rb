@@ -5,6 +5,21 @@ class User < ActiveRecord::Base
   has_one :bio
   has_one :blog
   
+  has_many :friendships
+  has_many :friends,
+           :through => :friendships,
+           :conditions => "status = 'accepted'"
+           
+  has_many :requested_friends,
+           :through => :friendships,
+           :source => :friend,
+           :conditions => "status = 'requested'"
+           
+  has_many :pending_friends,
+           :through => :friendships,
+           :source => :friend,
+           :conditions => "status = 'pending'"
+  
   # Virtual attribute for the unencrypted password
   attr_accessor :password
 

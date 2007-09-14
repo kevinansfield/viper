@@ -1,10 +1,16 @@
-<% titled_box 	'Actions', 'blue' do %>
-	<% if @user != current_user -%>
-	<ul>
-		<li>Send a message</li>
-		<li>Add to Friends</li>
-	</ul>
-	<% else -%>
-	<p>This is your own profile!</p>
-	<% end -%>
-<% end %>
+<% if logged_in? and @user != current_user -%>
+	<% titled_box 	'Actions', 'blue' do %>
+		<ul>
+			<li>Send a message</li>
+			<li>
+				<%= friendship_status(@logged_in_user, @user) %>
+				<% unless Friendship.exists?(current_user, @user) -%>
+					<br />
+					<%= link_to "Add to friends",
+								{ :controller => "friendship", :action => "create", :id => @user },
+								:confirm => "Send friend request to #{fallback_if_blank @user.profile.full_name, @user.login}" %>
+				<% end -%>
+			</li>
+		</ul>
+	<% end %>
+<% end -%>
