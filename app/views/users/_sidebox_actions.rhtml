@@ -8,7 +8,7 @@
 					<br />
 					<%= link_to "Add to friends",
 								{ :controller => "friendship", :action => "create", :id => @user },
-								:confirm => "Send friend request to #{fallback_if_blank @user.profile.full_name, @user.login}" %>
+								:confirm => "Send friend request to #{@user.full_name}" %>
 				<% end -%>
 			</li>
 		</ul>

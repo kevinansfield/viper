@@ -164,6 +164,18 @@ class User < ActiveRecord::Base
     self.bio ||= Bio.new
     self.blog ||= Blog.new
   end
+  
+  def full_name
+    self.profile.full_name || self.login
+  end
+  
+  def first_name
+    self.profile.first_name || self.login
+  end
+  
+  def last_name
+    self.profile.last_name || nil
+  end
 
   protected
     # before filter 

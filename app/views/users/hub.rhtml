@@ -4,7 +4,7 @@
 			  'orange',
 			  :edit_link => link_to('(view profile)', user_path(@user)),
 			  :box_id => 'feature' do %>
-	<h1>Welcome back <%= fallback_if_blank @user.profile.first_name, @user.login %></h1>
+	<h1>Welcome back <%= @user.first_name %></h1>
 	
 	<p>
 		<b>My Bio:</b>

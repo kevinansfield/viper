@@ -1,9 +1,9 @@
-<% @title = "Profile for #{@user.profile.full_name || @user.login}" -%>
+<% @title = "Profile for #{@user.full_name}" -%>
 
 <% titled_box @title,
 			  'orange',
 			  :box_id => 'feature' do %>
-	<h1><%= fallback_if_blank @user.profile.first_name, @user.login %>'s Profile</h1>
+	<h1><%= @user.first_name %>'s Profile</h1>
 	
 	<p>
 		<b>About Me:</b>
@@ -12,7 +12,7 @@
 <% end %>
 
 <% titled_box "Friends", 'orange' do %>
-	<h3><%= fallback_if_blank @user.profile.first_name, @user.login %>'s Friends:</h3>
+	<h3><%= @user.first_name %>'s Friends:</h3>
 <% end %>
 
 <% unless @user.blog.posts.length < 1 %>

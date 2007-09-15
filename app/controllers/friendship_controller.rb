@@ -18,9 +18,9 @@ class FriendshipController < ApplicationController
   def accept
     if current_user.requested_friends.include? @friend
       Friendship.accept(current_user, @friend)
-      flash[:notice] = "Friendship with #{@friend.profile.full_name || @friend.login}"
+      flash[:notice] = "Friendship with #{@friend.full_name}"
     else
-      flash[:error] = "No friendship request from #{@friend.profile.full_name || @friend.login}"
+      flash[:error] = "No friendship request from #{@friend.full_name}"
     end
     redirect_to hub_url
   end
@@ -28,9 +28,9 @@ class FriendshipController < ApplicationController
   def decline
     if current_user.requested_friends.include? @friend
       Friendship.breakup(current_user, @friend)
-      flash[:notice] = "Friendship with #{@friend.profile.full_name || @friend.login}"
+      flash[:notice] = "Friendship with #{@friend.full_name}"
     else
-      flash[:error] = "No friendship request from #{@friend.profile.full_name || @friend.login}"
+      flash[:error] = "No friendship request from #{@friend.full_name}"
     end
     redirect_to hub_url
   end
@@ -40,7 +40,7 @@ class FriendshipController < ApplicationController
       Friendship.breakup(current_user, @friend)
       flash[:notice] = "Friendship request cancelled"
     else
-      flash[:error] = "No friendship request for #{@friend.profile.full_name || @friend.login}"
+      flash[:error] = "No friendship request for #{@friend.full_name}"
     end
     redirect_to hub_url
   end
@@ -48,9 +48,9 @@ class FriendshipController < ApplicationController
   def delete
     if current_user.friends.include? @friend
       Friendship.breakup(current_user, @friend)
-      flash[:notice] = "Friendship with #{@friend.profile.full_name || @friend.login} ended!"
+      flash[:notice] = "Friendship with #{@friend.full_name} ended!"
     else
-      flash[:error] = "You aren't friends with #{@friend.profile.full_name || @friend.login}"
+      flash[:error] = "You aren't friends with #{@friend.full_name}"
     end
   end
   
