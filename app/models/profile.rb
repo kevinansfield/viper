@@ -1,5 +1,6 @@
 class Profile < ActiveRecord::Base
   belongs_to :user
+  acts_as_ferret
   
   acts_as_mappable
   before_validation_on_create :geocode_address

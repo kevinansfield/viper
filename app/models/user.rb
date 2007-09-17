@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
            :through => :friendships,
            :source => :friend,
            :conditions => "status = 'pending'"
+           
+  acts_as_ferret :fields => ['login', 'email']
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password

@@ -15,6 +15,10 @@
 </fieldset>
 </form>
 
+<% if @initial.nil? -%>
+	<%= render :partial => "search_form" %>
+<% end -%>
+<%= render :partial => "result_summary" %>
 <%= render :partial => "user_table" %>
 
 <% end %>

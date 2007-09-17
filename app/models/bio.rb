@@ -1,5 +1,6 @@
 class Bio < ActiveRecord::Base
   belongs_to :user
+  acts_as_ferret
   
   QUESTIONS = %w(about interests music films television books heroes)
   
