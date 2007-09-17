@@ -32,7 +32,7 @@ class CommunityController < ApplicationController
         @users.concat(hits.collect { |hit| hit.user }).uniq!
         # Sort by last name (requires a spec for each user).
         @users = @users.sort_by { |user| user.last_name }
-        @users = @users.collect { |user| user unless user.activated_at.nil? }
+        @users = @users.collect { |user| user unless user.activated_at.nil? }.compact
       rescue Ferret::QueryParser::QueryParseException
         @invalid = true
       end
