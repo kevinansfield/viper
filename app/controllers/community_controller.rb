@@ -31,8 +31,8 @@ class CommunityController < ApplicationController
         hits = profiles + bios
         @users.concat(hits.collect { |hit| hit.user }).uniq!
         # Sort by last name (requires a spec for each user).
-        @users.each { |user| user.profile ||= Profile.new }
         @users = @users.sort_by { |user| user.last_name }
+        @users = @users.collect { |user| user unless user.activated_at.nil? }
       rescue Ferret::QueryParser::QueryParseException
         @invalid = true
       end
