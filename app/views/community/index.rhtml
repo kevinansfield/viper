@@ -1,0 +1,20 @@
+<% @title = "Community Index" -%>
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
+
+<form class="form">
+<fieldset>
+  <legend>Alphabetical Index</legend>
+  <p class="letters">
+  <% @letters.each do |letter| %>
+    <% letter_class = (letter == @initial) ? "letter_current" : "letter" %>
+    <%= link_to letter, { :action => "index", :id => letter }, :class => letter_class %>
+  <% end %>
+  </p>
+</fieldset>
+</form>
+
+<%= render :partial => "user_table" %>
+
+<% end %>

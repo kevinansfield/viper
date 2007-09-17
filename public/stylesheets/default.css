@@ -111,6 +111,11 @@ img.right {
 	width: 250px;
 }
 
+.clearfix:after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0;}
+.clearfix{display:inline-block;}
+html[xmlns] .clearfix{display:block;}
+* html .clearfix{height:1%;}
+
 /* Flash */
 
 #flash {
@@ -580,4 +585,85 @@ img.right {
 	position: absolute;
 	top: 0;
 	right: 0;
+}
+
+/* Community Styles */
+
+.letters, .form fieldset p  {
+	text-align: center;
+	padding-top: 0.5em;
+	margin-bottom: 4px;
+}
+
+a, a#visited {
+  text-decoration: none;
+}
+
+.letter, .letter_current {
+  width: 1em;
+  text-align: center;
+  background: #fff;
+  padding: 2px 2px 1px 2px;
+}
+
+.letter:hover {
+  background: #fe4;
+}
+
+.letter_current {
+  font-weight: bold;
+}
+
+.result {
+	clear: both;
+	position: relative;
+	border: 1px solid #DDDDDD;
+	margin-bottom: 5px;
+	font-size: 10px;
+}
+.result .image {
+	float: left;
+	padding: 5px;
+}
+.result .image img {
+	display: block;
+}
+.result .actions {
+	position: absolute;
+	top: 0;
+	right: 5px;
+}
+.result .actions li {
+	padding-left: 10px;
+	background: url(/images/img16.gif) no-repeat 0px 6px;
+}
+.result .info {
+  float: left;
+  padding: 5px 0 0 0;
+}
+.result .info dl,
+.result .info dt,
+.result .info dd {
+  margin: 0px;
+  padding: 0px;
+}
+.result .info dl { line-height: 15px }
+.result .info dt {
+    color: gray;
+    clear: both;
+    float: left;
+    padding: 0px;
+    width: 70px;
+}
+.result .info dd {
+    float: left;
+    display: inline;
+    padding: 0px;
+    color: #333;
+    width: 210px;
+}
+.result .info dd.result_name {
+      font-size: 13px;
+      line-height: 13px;
+      font-weight: bold;
 }
