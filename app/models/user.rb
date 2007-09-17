@@ -174,12 +174,12 @@ class User < ActiveRecord::Base
   
   def first_name
     self.profile ||= Profile.new
-    self.profile.first_name || self.login
+    self.profile.first_name.blank? ? self.login : self.profile.first_name
   end
   
   def last_name
     self.profile ||= Profile.new
-    self.profile.last_name || nil
+    self.profile.last_name.blank? ? self.login : self.profile.last_name
   end
 
   protected
