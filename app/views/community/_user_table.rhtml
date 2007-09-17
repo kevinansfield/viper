@@ -2,7 +2,9 @@
 <% @users.each do |user| -%>
 <div class="result clearfix">
 	<div class="image">
-		<span><%= link_to image_tag(user.avatar.public_filename(:thumb)), user_path(user) %></span>
+		<span>
+			<% unless user.avatar.nil? %><%= link_to image_tag(user.avatar.public_filename(:thumb)), user_path(user) %><% end %>
+		</span>
 	</div>
 	<div class="info">
 		<dl class="clearfix">
