@@ -168,14 +168,17 @@ class User < ActiveRecord::Base
   end
   
   def full_name
+    self.profile ||= Profile.new
     self.profile.full_name || self.login
   end
   
   def first_name
+    self.profile ||= Profile.new
     self.profile.first_name || self.login
   end
   
   def last_name
+    self.profile ||= Profile.new
     self.profile.last_name || nil
   end
 
