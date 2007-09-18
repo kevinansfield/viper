@@ -1,8 +1,8 @@
 <% unless @user.bio[sidebox_bio_section].blank? -%>
-<% titled_box 	sidebox_bio_section.humanize,
-				'orange',
-				:edit_link => display_edit_link(@user, link_to('(edit)', edit_bio_path(@user))),
-				:content_css_class => 'small' do %>
-<%= sanitize @user.bio[sidebox_bio_section] %>
-<% end %>
+	<% titled_box 	sidebox_bio_section.humanize,
+					'orange',
+					:edit_link => display_edit_link(@user, link_to('(edit)', edit_bio_path(@user))),
+					:content_css_class => 'small' do %>
+		<%= textilize @user.bio[sidebox_bio_section] %>
+	<% end %>
 <% end -%>
