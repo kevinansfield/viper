@@ -14,7 +14,9 @@ class CommunityController < ApplicationController
   end
 
   def browse
-    
+    return if params[:commit].nil?
+    profiles = Profile.find_by_asl(params)
+    @users = profiles.collect { |profile| profile.user }
   end
 
   def search   
