@@ -30,7 +30,7 @@
 		<div class="friends-listing">
 		<% @user.requested_friends.each do |requester| -%>
 			<div class="friend">
-				<% unless friend.avatar.nil? %><%= link_to image_tag(requester.avatar.public_filename(:thumb)), user_path(requester) %><% end %>
+				<% unless requester.avatar.nil? %><%= link_to image_tag(requester.avatar.public_filename(:thumb)), user_path(requester) %><% end %>
 				<div class="friend-name"><%= link_to "#{requester.full_name}", user_path(requester) %>
 					<% if @user == current_user -%>
 					<span class="friend-actions">
