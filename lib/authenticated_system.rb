@@ -64,6 +64,7 @@ module AuthenticatedSystem
       respond_to do |accepts|
         accepts.html do
           store_location
+          flash[:error] = "Sorry, you need to be logged in to do that!"
           redirect_to login_url
         end
         accepts.xml do
