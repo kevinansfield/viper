@@ -23,7 +23,7 @@
 	<br clear="all" />
 	<% end -%>
 	
-	<% unless @user.requested_friends.empty? -%>
+	<% unless @user.requested_friends.empty? && @user == current_user -%>
 	<h3><%= pluralize(@user.friends.count, "New friend requests") %>:</h3>
 
 	<div class="friends">
@@ -50,7 +50,7 @@
 	<br clear="all" />
 	<% end -%>
 	
-	<% unless @user.pending_friends.empty? or @user != current_user -%>
+	<% unless @user.pending_friends.empty? && @user == current_user -%>
 	<h3><%= pluralize(@user.pending_friends.count, "Pending #{SITENAME} friend") %>:</h3>
 	
 	<div class="friends">
