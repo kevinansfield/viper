@@ -80,7 +80,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user.save!
-    self.current_user = @user
+    # uncomment below if user should be automatically logged in
+    #self.current_user = @user
     redirect_back_or_default('/')
     flash[:notice] = "Thanks for signing up! Please check your e-mail to activate your account."
   rescue ActiveRecord::RecordInvalid
