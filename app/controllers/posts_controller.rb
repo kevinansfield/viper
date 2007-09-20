@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_filter :login_required, :protect_blog, :except => [:show]
+  before_filter :login_required, :protect_blog, :except => [:index, :show]
   
   # GET /posts
   # GET /posts.xml
