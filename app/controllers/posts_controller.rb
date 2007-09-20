@@ -89,7 +89,7 @@ class PostsController < ApplicationController
   def protect_blog
     @user == current_user
     unless @blog.user == current_user
-      flash[:notice] = "That isn't your blog!"
+      flash[:error] = "That isn't your blog!"
       redirect_to hub_url
       return false
     end    
