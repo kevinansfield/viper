@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_filter :find_blog
   before_filter :login_required, :protect_blog, :except => [:index, :show]
   
   # GET /posts
@@ -81,9 +82,12 @@ class PostsController < ApplicationController
   
   private
   
+  def find_blog
+    @blog = Blog.find(params[:blog_id])
+  end
+  
   def protect_blog
     @user == current_user
-    @blog = Blog.find(params[:blog_id])
     unless @blog.user == current_user
       flash[:notice] = "That isn't your blog!"
       redirect_to hub_url
