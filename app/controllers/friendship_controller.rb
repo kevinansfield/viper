@@ -18,7 +18,7 @@ class FriendshipController < ApplicationController
   def accept
     if current_user.requested_friends.include? @friend
       Friendship.accept(current_user, @friend)
-      flash[:notice] = "Friendship with #{@friend.full_name}"
+      flash[:notice] = "Friendship accepted with #{@friend.full_name}"
     else
       flash[:error] = "No friendship request from #{@friend.full_name}"
     end
@@ -28,7 +28,7 @@ class FriendshipController < ApplicationController
   def decline
     if current_user.requested_friends.include? @friend
       Friendship.breakup(current_user, @friend)
-      flash[:notice] = "Friendship with #{@friend.full_name}"
+      flash[:notice] = "Friendship declined with #{@friend.full_name}"
     else
       flash[:error] = "No friendship request from #{@friend.full_name}"
     end
