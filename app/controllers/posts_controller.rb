@@ -38,9 +38,10 @@ class PostsController < ApplicationController
   # POST /posts.xml
   def create
     @post = Post.new(params[:post])
+    @post.blog = @blog
 
     respond_to do |format|
-      if @blog.posts << @post
+      if @post.duplicate? or @blog.posts << @post
         flash[:notice] = 'Post was successfully created.'
         format.html { redirect_to post_url(@post.blog, @post) }
         format.xml  { head :created, :location => post_url(:id => @post) }
