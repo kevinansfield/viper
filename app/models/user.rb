@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_one :avatar
   has_one :bio
   has_one :blog
+  has_many :comments, :order => 'created_at', :dependent => :destroy
   
   has_many :friendships
   has_many :friends,

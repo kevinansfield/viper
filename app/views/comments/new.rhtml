@@ -5,6 +5,9 @@
 			  :box_id => 'feature' do %>
 			  
 <h2> <%= link_to "#{@post.blog.user.first_name}'s Blog Posts", posts_path %>: <%= @post.title %></h2>
-<%= render :partial => "post" %>
+
+<%= render :partial => "posts/post" %>
+<%= render :partial => "comment", :collection => @post.comments %>
+<%= render :partial => "new" %>
 
 <% end %>

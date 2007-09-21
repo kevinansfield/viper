@@ -17,4 +17,18 @@
       <p>Modified <%= time_ago_in_words post.updated_at %> ago</p>
     <% end %>
   </div>
+  
+  <div id="comments_for_post_<%= post.id %>">
+    <%= render :partial => "comments/comment", :collection => post.comments %>
+  </div>
+  <% if logged_in? %>
+  <div id="add_comment_link_for_post_<%= post.id %>">
+    <%= link_to_remote "Add a comment",
+                       {  :url => new_comment_path(post.blog, post),
+                          :method => :get },
+					   :href => new_comment_path(post.blog, post) %>
+  </div>
+  <div id="new_comment_form_for_post_<%= post.id %>">
+  </div>
+  <% end %>
 </div>

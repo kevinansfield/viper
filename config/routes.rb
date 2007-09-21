@@ -34,7 +34,9 @@ ActionController::Routing::Routes.draw do |map|
   
   # Blog resources
   map.resources :blogs do |blog|
-    blog.resources :posts
+    blog.resources :posts do |post|
+      post.resources :comments
+    end
   end
 
   # Allow downloading Web Service WSDL as a file with an extension

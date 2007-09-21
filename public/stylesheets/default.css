@@ -667,3 +667,15 @@ a, a#visited {
       line-height: 13px;
       font-weight: bold;
 }
+
+/* Comment Styles */
+
+.comment  {
+  min-height: 90px;
+}
+
+.thumbnail {
+  display: block;
+  float: left;
+  margin-right: 1em;
+}
