@@ -1,6 +1,6 @@
 class CommunityController < ApplicationController
   
-  before_filter :setup_maincols
+  before_filter :setup_maincols, :setup_sidebars
 
   def index
     @letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")
@@ -46,5 +46,9 @@ class CommunityController < ApplicationController
   def setup_maincols
     self.maincol_one = nil
     self.maincol_two = nil
+  end
+  
+  def setup_sidebars
+    self.sidebar_one = 'community/sidebar'
   end
 end

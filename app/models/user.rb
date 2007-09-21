@@ -182,6 +182,10 @@ class User < ActiveRecord::Base
     self.profile ||= Profile.new
     self.profile.last_name.blank? ? self.login : self.profile.last_name
   end
+  
+  def self.find_latest(number = 5)
+    find :all, :conditions => ['activation_code IS NULL'], :limit => number, :order => 'created_at DESC'
+  end
 
   protected
     # before filter 
