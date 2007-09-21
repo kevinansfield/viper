@@ -20,4 +20,8 @@ class Post < ActiveRecord::Base
     self.id = post.id unless post.nil?
     not post.nil?
   end
+  
+  def self.find_latest(number = 5)
+    find :all, :limit => number, :order => 'created_at DESC'
+  end
 end

@@ -1,0 +1,10 @@
+<% posts = @blog.posts.find_latest -%>
+<% unless posts.length < 1 -%>
+<% titled_box "#{@blog.user.first_name}'s Recent Blogs", 'blue' do %>
+	<ul>
+	<% posts.each do |post| %>
+		<li><%= link_to post.title, post_path(post.blog, post) %></li>
+	<% end %>
+	</ul>
+<% end %>
+<% end -%>

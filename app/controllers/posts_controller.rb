@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.xml
   def index
+    self.sidebar_one = 'posts/sidebar_blog'
     @posts = @blog.posts.paginate :page => params[:page]
 
     respond_to do |format|
@@ -16,6 +17,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.xml
   def show
+    self.sidebar_one = 'posts/sidebar_blog'
     @post = Post.find(params[:id])
 
     respond_to do |format|
