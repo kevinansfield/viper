@@ -3,7 +3,7 @@
 		<ul>
 			<li>Send a message</li>
 			<li>
-				<%= friendship_status(@logged_in_user, @user) %>
+				<%= friendship_status(current_user, @user) %>
 				<% unless Friendship.exists?(current_user, @user) -%>
 					<br />
 					<%= link_to "Add to friends",
