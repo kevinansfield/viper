@@ -14,9 +14,9 @@
 		</dl>
 	</div>
 	<ul class="actions">
-		<% if logged_in? %><li><a href="#">Send Message</a></li><% end %>
+		<% if logged_in? && current_user != user %><li><a href="#">Send Message</a></li><% end %>
 		<li><%= link_to 'View Profile', user_path(user) %></li>
-		<% if logged_in? %><li><%= link_to "Add to friends",
+		<% if logged_in? && current_user != user %><li><%= link_to "Add to friends",
 						{ :controller => "friendship", :action => "create", :id => user },
 						:confirm => "Send friend request to #{user.full_name}" %></li><% end %>
 	</ul>

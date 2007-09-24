@@ -3,16 +3,20 @@ class FriendshipController < ApplicationController
   
   # Send a friend request
   def create
-    Friendship.request(current_user, @friend)
-    UserMailer.deliver_friend_request(
-      :user => current_user,
-      :friend => @friend,
-      :user_url => user_path(current_user),
-      :accept_url =>  url_for(:action => "accept",  :id => current_user),
-      :decline_url => url_for(:action => "decline", :id => current_user)
-    )
-    flash[:notice] = "Friend request sent"
-    redirect_to user_path(@friend)
+    unless current_user == @friend
+      Friendship.request(current_user, @friend)
+      UserMailer.deliver_friend_request(
+        :user => current_user,
+        :friend => @friend,
+        :user_url => user_path(current_user),
+        :accept_url =>  url_for(:action => "accept",  :id => current_user),
+        :decline_url => url_for(:action => "decline", :id => current_user)
+      )
+      flash[:notice] = "Friend request sent"
+      redirect_to user_path(@friend)
+    else
+      flash[:error] = "You can't add yourself as a friend!"
+      redirect_to user_path(@friend)
   end
   
   def accept
