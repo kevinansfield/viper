@@ -43,6 +43,7 @@ Rails::Initializer.run do |config|
   config.active_record.default_timezone = :utc
   
   # See Rails::Configuration for more options
+  config.action_mailer.delivery_method = :smtp
 end
 
 # Add new inflection rules using the following format 
@@ -82,7 +83,6 @@ ExceptionNotifier.exception_recipients = [ 'kevin.ansfield@gmail.com' ]
 ExceptionNotifier.sender_address = 'dev@digitalblueprint.co.uk'
 ExceptionNotifier.email_prefix = "[VIPER SITE ERROR] "
 
-ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
   :address => "mail.bn23hosting.com",
   :port => 25,
