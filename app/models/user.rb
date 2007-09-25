@@ -1,10 +1,13 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
-  has_one :profile
-  has_one :avatar
-  has_one :bio
-  has_one :blog
+  has_one  :profile
+  has_one  :avatar
+  has_one  :bio
+  
+  has_one  :blog
   has_many :comments, :order => 'created_at', :dependent => :destroy
+  
+  has_many :news
   
   has_many :friendships
   has_many :friends,
@@ -52,6 +55,10 @@ class User < ActiveRecord::Base
                       
   before_save :encrypt_password
   before_create :make_activation_code 
+  
+  def admin?
+    self.activated? && self.admin
+  end
   
   # Assures that updated email addresses do not conflict with existing emails
   def validate
@@ -185,6 +192,10 @@ class User < ActiveRecord::Base
   
   def self.find_latest(number = 5)
     find :all, :conditions => ['activation_code IS NULL'], :limit => number, :order => 'created_at DESC'
+  end
+  
+  def self.find_all_for_news_delivery
+    find :all
   end
 
   protected

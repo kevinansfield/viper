@@ -1,0 +1,32 @@
+<% @title = "Add News Entry" -%>
+
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
+
+	<%= error_messages_for :news %>
+
+	<% form_for(:news, :url => news_path, :html => { :class => 'form' }) do |f| %>
+		<fieldset>
+			<legend><%= @title %></legend>
+			<ol>
+				<li>
+					<label for="news_title">Title:</label>
+				    <%= f.text_field :title, :class => 'text' %>
+				</li>
+				<li>
+					<label for="news_body">Body:</label>
+					<%= f.text_area :body, :class => 'text' %>
+				</li>
+				<li>
+					<label for="send_as_email">Email to users?</label>
+					<%= check_box_tag :send_as_email, 'true' %>
+				</li>
+			</ol>
+		</fieldset>
+		<fieldset class="submit">
+			<%= submit_tag "Create" %> | <%= link_to 'Cancel', news_path %>
+		</fieldset>
+	<% end %>
+	
+<% end %>

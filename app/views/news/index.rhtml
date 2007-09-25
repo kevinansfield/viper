@@ -1,0 +1,14 @@
+<% @title = 'News' -%>
+
+<% titled_box @title,
+			  'orange',
+			  :edit_link => link_to_if_admin('(Add News Story)', new_news_item_path),
+			  :box_id => 'feature' do %>
+
+<% unless @news.length < 1 -%>
+<%= render :partial => "news_item", :collection => @news %>
+<% else -%>
+<p>Sorry, there are no news items at the moment, why don't you check back soon?</p>
+<% end -%>
+
+<% end %>

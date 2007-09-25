@@ -51,7 +51,7 @@ ul li {
 	background: url(/images/img16.gif) no-repeat 0px 7px;
 }
 
-a:link {
+a:link, a:visited {
 	color: #3490F8;
 }
 
@@ -59,11 +59,11 @@ a:hover, a:active {
 	text-decoration: none;
 	color: #F89934;
 }
-
+/*
 a:visited {
 	color: #666666;
 }
-
+*/
 .small {
 	font-size: 80%;
 }

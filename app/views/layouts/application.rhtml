@@ -31,7 +31,7 @@
 <div id="menu">
 	<ul>
 		<%= nav_link 'Home', :controller => 'site' %>
-		<li><a href="#"><b>News</b></a></li>
+		<%= nav_link 'News', :controller => 'news' %>
 		<li><a href="#"><b>Articles</b></a></li>
 		<li><a href="#"><b>Blogs</b></a></li>
 		<%= nav_link 'Community', {:controller => 'community', :action => 'index', :id => nil } %>

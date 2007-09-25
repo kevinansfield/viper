@@ -1,4 +1,4 @@
-class UserMailer < ActionMailer::Base
+class UserMailer < ActionMailer::ARMailer
   
   helper :application
   

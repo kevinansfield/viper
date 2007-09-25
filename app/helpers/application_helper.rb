@@ -1,6 +1,13 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   
+  # Only outputs the link if current_user is an admin
+  def link_to_if_admin(text, link)
+    if logged_in?
+      link_to(text, link) if current_user.admin?
+    end
+  end
+  
   # Generates html for top nav links, including active page styling
   def nav_link(name, options = {}, html_options = nil, *parameters_for_method_reference)
     if html_options

@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 12) do
+ActiveRecord::Schema.define(:version => 15) do
 
   create_table "avatars", :force => true do |t|
     t.column "user_id",      :integer
@@ -37,12 +37,28 @@ ActiveRecord::Schema.define(:version => 12) do
     t.column "created_at", :datetime
   end
 
+  create_table "emails", :force => true do |t|
+    t.column "from",              :string
+    t.column "to",                :string
+    t.column "last_send_attempt", :integer,  :default => 0
+    t.column "mail",              :text
+    t.column "created_on",        :datetime
+  end
+
   create_table "friendships", :force => true do |t|
     t.column "user_id",     :integer
     t.column "friend_id",   :integer
     t.column "status",      :string
     t.column "created_at",  :datetime
     t.column "accepted_at", :datetime
+  end
+
+  create_table "news", :force => true do |t|
+    t.column "user_id",    :integer
+    t.column "title",      :string
+    t.column "body",       :text
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
   end
 
   create_table "posts", :force => true do |t|
@@ -90,6 +106,7 @@ ActiveRecord::Schema.define(:version => 12) do
     t.column "new_email",                 :string
     t.column "email_activation_code",     :string,   :limit => 40
     t.column "password_reset_code",       :string,   :limit => 40
+    t.column "admin",                     :boolean,                :default => false
   end
 
 end

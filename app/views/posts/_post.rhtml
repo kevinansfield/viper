@@ -10,7 +10,7 @@
 	</div>
 	<% end %>
   </div>
-  <div class="post_body"><%= sanitize post.body %></div>
+  <div class="post_body"><%= post.body %></div>
   <div class="post_footer_text">
     <p>Posted <%= time_ago_in_words post.created_at %> ago</p>
     <% if post.updated_at != post.created_at %>
