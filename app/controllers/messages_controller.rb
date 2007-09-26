@@ -23,6 +23,7 @@ class MessagesController < ApplicationController
   
   def reply
     @old_message = @message
+    @old_message.textiled = false
     @message = Message.new
     @message.receiver_id = @old_message.sender_id
     @message.subject = "RE: #{@old_message.subject}"
@@ -30,7 +31,7 @@ class MessagesController < ApplicationController
     @message.body = ""
     @message.body += "\r\n\r\n\r\n--------------------"
     @message.body += "\r\nReceived from #{@old_message.sender.full_name} at #{@old_message.created_at}"
-    @message.body += "\r\n\r\n#{@old_message.body_source}"
+    @message.body += "\r\n\r\n#{@old_message.body}"
     render :action => 'new'
   end
   
