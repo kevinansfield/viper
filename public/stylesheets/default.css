@@ -671,6 +671,7 @@ a, a#visited {
 /* Comment Styles */
 
 .comment  {
+  clear: left;
   min-height: 90px;
 }
 

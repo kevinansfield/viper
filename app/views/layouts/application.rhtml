@@ -75,10 +75,10 @@
 	<p>
 		<a href="/">Home</a> :: 
 		<a href="#">About</a> :: 
-		<a href="#">News</a> :: 
+		<%= link_to 'News', news_url %> :: 
 		<a href="#">Articles</a> ::
 		<a href="#">Blogs</a> ::
-		<a href="#">Community</a> :: 
+		<%= link_to 'Community', :controller => 'community', :action => 'index', :id => nil %> :: 
 		<a href="#">Contact Us</a>
 	</p>
 </div>
