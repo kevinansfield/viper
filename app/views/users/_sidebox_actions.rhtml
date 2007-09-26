@@ -1,7 +1,7 @@
 <% if logged_in? and @user != current_user -%>
 	<% titled_box 	'Actions', 'blue' do %>
 		<ul>
-			<li>Send a message</li>
+			<li><%= link_to 'Send a message', new_message_path(@user) %></li>
 			<li>
 				<%= friendship_status(current_user, @user) %>
 				<% unless Friendship.exists?(current_user, @user) -%>

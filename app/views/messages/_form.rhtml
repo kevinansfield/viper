@@ -1,0 +1,14 @@
+<fieldset>
+    <legend>Send Message</legend>
+    <%= f.hidden_field :receiver_id %>
+    <ol>
+    	<li>
+        	<label for="message_subject">Subject</label><br/>
+        	<%= f.text_field :subject, :class => 'text' %>
+    	</li>
+		<li>
+			<label for="message[body]">Message</label><br/>
+        	<%= text_area_tag "message[body]", @message.body, :class => 'text' %>
+		</li>
+    </ol>
+</fieldset>

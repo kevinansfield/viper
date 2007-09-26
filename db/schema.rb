@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 15) do
+ActiveRecord::Schema.define(:version => 16) do
 
   create_table "avatars", :force => true do |t|
     t.column "user_id",      :integer
@@ -52,6 +52,22 @@ ActiveRecord::Schema.define(:version => 15) do
     t.column "created_at",  :datetime
     t.column "accepted_at", :datetime
   end
+
+  create_table "messages", :force => true do |t|
+    t.column "sender_id",        :integer,                  :null => false
+    t.column "receiver_id",      :integer,                  :null => false
+    t.column "subject",          :string,   :default => "", :null => false
+    t.column "body",             :text
+    t.column "created_at",       :datetime
+    t.column "read_at",          :datetime
+    t.column "sender_deleted",   :boolean
+    t.column "receiver_deleted", :boolean
+    t.column "sender_purged",    :boolean
+    t.column "receiver_purged",  :boolean
+  end
+
+  add_index "messages", ["sender_id"], :name => "index_messages_on_sender_id"
+  add_index "messages", ["receiver_id"], :name => "index_messages_on_receiver_id"
 
   create_table "news", :force => true do |t|
     t.column "user_id",    :integer

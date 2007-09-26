@@ -1,0 +1,13 @@
+<% @title = "Message from #{@message.sender.full_name}" -%>
+<% titled_box @title,
+			  'blue',
+			  :box_id => 'feature' do %>
+		
+		<h3><%= @message.subject %></h3>
+		<%= @message.body %>
+			  
+		<p>
+			<% unless current_user == @message.sender %><%= link_to 'Reply', reply_message_path(current_user, @message) %> | <% end %>
+			<%= link_to 'Back', messages_path(@user) %>
+		</p>
+<% end %>

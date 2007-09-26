@@ -5,9 +5,7 @@ class UserMailer < ActionMailer::ARMailer
   def signup_notification(user)
     setup_email(user)
     @subject    += 'Please activate your new account'
-  
     @body[:url]  = "#{HOST}/user/activate/#{user.activation_code}"
-  
   end
   
   def activation(user)
@@ -39,6 +37,13 @@ class UserMailer < ActionMailer::ARMailer
     @subject     = "New friend request at #{SITENAME}"
     @recipients  = mail[:friend].email
     @body        = mail
+  end
+  
+  def message_notification(message)
+    setup_email(message.receiver)
+    @subject       = "New message from #{message.sender.first_name} at #{SITENAME}"
+    @body[:sender] = message.sender
+    @body[:url]    = "#{HOST}#{message_path(message.receiver, message)}"
   end
   
   protected

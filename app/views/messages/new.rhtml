@@ -1,0 +1,13 @@
+<% @title = 'Send Message' -%>
+<% titled_box "#{@title} to #{@user.first_name}",
+			  'blue',
+			  :box_id => 'feature' do %>
+
+	<% form_for :message, @message, :url => messages_path(@user), :html => { :class => 'form' } do |f| %>
+		<%= render :partial => 'form', :locals => {:f => f} %>
+		<fieldset class="submit">
+			<%= submit_tag 'Send' %> | <%= link_to 'Cancel', messages_path(current_user) %>
+		</fieldset>
+	<% end %>
+
+<% end %>

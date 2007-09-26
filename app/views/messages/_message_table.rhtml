@@ -1,0 +1,7 @@
+	<ul>
+		<% for message in @messages -%>
+		<% subject = message.read? ? message.subject : "<b>#{message.subject}</b>" %>
+		<li><%= link_to subject, message_path(@user, message) %> from <%= link_to message.sender.full_name, user_path(message.sender) %></li>
+		<% end -%>
+	</ul>
+	<%= will_paginate @messages %>

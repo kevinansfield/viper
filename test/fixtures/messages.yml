@@ -1,0 +1,7 @@
+first_row:
+    id: 1
+    sender_id: 1
+    receiver_id: 2
+    subject: 'test'
+    body: 'test body'
+    created_at: <%= 1.day.ago %>

@@ -10,19 +10,14 @@ class User < ActiveRecord::Base
   has_many :news
   
   has_many :friendships
-  has_many :friends,
-           :through => :friendships,
-           :conditions => "status = 'accepted'"
+  has_many :friends,            :through => :friendships, :conditions => "status = 'accepted'"
+  has_many :requested_friends,  :through => :friendships, :source => :friend, :conditions => "status = 'requested'"
+  has_many :pending_friends,    :through => :friendships, :source => :friend, :conditions => "status = 'pending'"
            
-  has_many :requested_friends,
-           :through => :friendships,
-           :source => :friend,
-           :conditions => "status = 'requested'"
-           
-  has_many :pending_friends,
-           :through => :friendships,
-           :source => :friend,
-           :conditions => "status = 'pending'"
+  has_many :messages_as_sender,   :foreign_key => 'sender_id',    :class_name => 'Message', :order => 'created_at DESC'
+  has_many :messages_as_receiver, :foreign_key => 'receiver_id',  :class_name => 'Message', :order => 'created_at DESC'
+  has_many :unread_messages,      :foreign_key => 'receiver_id',  :class_name => 'Message', :conditions => 'read_at IS NULL', :order => 'created_at DESC'
+  has_many :read_messages,        :foreign_key => 'receiver_id',  :class_name => 'Message', :conditions => 'read_at IS NOT NULL', :order => 'created_at DESC'
            
   acts_as_ferret :fields => ['login', 'email']
   
@@ -196,6 +191,52 @@ class User < ActiveRecord::Base
   
   def self.find_all_for_news_delivery
     find :all
+  end
+  
+  # Alias for all received messages
+  def received_messages
+    self.messages_as_receiver
+  end
+  
+  # Alias for all sent messages
+  def sent_messages
+    self.messages_as_sender
+  end
+  
+  # Alias for unread messages
+  def new_messages
+    self.unread_messages
+  end
+
+  # Alias for read messages
+  def old_messages
+    self.read_messages
+  end
+
+  # Accepts a message object and flags the message as deleted by sender
+  def delete_from_sent(message)
+    if message.sender_id == self.id
+      message.update_attribute :sender_deleted, true
+      return true
+    else
+      return false
+    end
+  end
+
+  # Accepts a message object and flags the message as deleted by the sender
+  def delete_from_received(message)
+    if message.receiver_id == self.id
+      message.update_attribute :receiver_deleted, true
+      return true
+    else
+      return false
+    end
+  end
+
+  # Accepts a user object as the receiver, and a message
+  # and creates a message relationship joining the two users
+  def send_message(receiver, message)
+    Message.create!(:sender => self, :receiver => receiver, :subject => message.subject, :body => message.body)
   end
 
   protected
