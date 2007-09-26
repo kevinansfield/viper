@@ -17,6 +17,7 @@ class FriendshipController < ApplicationController
     else
       flash[:error] = "You can't add yourself as a friend!"
       redirect_to user_path(@friend)
+    end
   end
   
   def accept
