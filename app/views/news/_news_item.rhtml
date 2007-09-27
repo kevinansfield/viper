@@ -1,7 +1,7 @@
 <div class="post">
   <div class="post_title">
     <h2><%= link_to_unless_current sanitize(news_item.title), news_item_url(news_item) %></h2>
-	<% if current_user.admin? %>
+	<% if logged_in? && current_user.admin? %>
 	<div class="post_actions">
 	  <%= link_to_unless_current 'Show', news_item_url(news_item) %> |
 	  <%= link_to_unless_current 'Edit', edit_news_item_path(news_item) %> |
