@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   def index
     self.sidebar_one = 'posts/sidebar_blog'
     @posts = @blog.posts.paginate :page => params[:page]
+    @user = @blog.user
 
     respond_to do |format|
       format.html # index.rhtml
@@ -19,6 +20,7 @@ class PostsController < ApplicationController
   def show
     self.sidebar_one = 'posts/sidebar_blog'
     @post = Post.find(params[:id])
+    @user = @blog.user
 
     respond_to do |format|
       format.html # show.rhtml
