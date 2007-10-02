@@ -33,9 +33,9 @@
 		<%= nav_link 'Home', :controller => 'site' %>
 		<%= nav_link 'News', :controller => 'news' %>
 		<li><a href="#"><b>Articles</b></a></li>
-		<li><a href="#"><b>Blogs</b></a></li>
-		<%= nav_link 'Community', {:controller => 'community', :action => 'index', :id => nil } %>
-		<li><a href="#"><b>Contact</b></a></li>
+		<%= nav_link 'Blogs', :controller => 'blogs' %>
+		<%= nav_link 'Community', { :controller => 'community', :action => 'index', :id => nil } %>
+		<%= nav_link 'Contact', { :controller => 'site', :action => 'contact' } %>
 	</ul>
 	<ul class="right">
 	<% if logged_in? -%>
@@ -74,12 +74,12 @@
 <div id="sub-nav">
 	<p>
 		<a href="/">Home</a> :: 
-		<a href="#">About</a> :: 
+		<%= link_to 'About', :controller => 'site', :action => 'about' %> :: 
 		<%= link_to 'News', news_url %> :: 
 		<a href="#">Articles</a> ::
-		<a href="#">Blogs</a> ::
+		<%= link_to 'Blogs', blogs_url %> ::
 		<%= link_to 'Community', :controller => 'community', :action => 'index', :id => nil %> :: 
-		<a href="#">Contact Us</a>
+		<%= link_to 'Contact Us', :controller => 'site', :action => 'contact' %>
 	</p>
 </div>
 <div id="footer">
