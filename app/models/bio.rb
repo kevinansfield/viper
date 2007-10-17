@@ -1,6 +1,10 @@
 class Bio < ActiveRecord::Base
   belongs_to :user
   
+  def after_initialize
+    clear_text_fields!
+  end
+  
   QUESTIONS = %w(about interests music films television books heroes)
   # A constant for everything except the bio
   FAVORITES = QUESTIONS - %w(about)
@@ -10,13 +14,13 @@ class Bio < ActiveRecord::Base
   
   validates_length_of QUESTIONS,
                       :maximum => 65000
-                      
-  def initialize
-    super
+                       
+  private
+  
+  def clear_text_fields!
     QUESTIONS.each do |question|
-      self[question] =  ""
+      self[question] ||=  ""
     end
   end
-  
   
 end
