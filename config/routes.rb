@@ -42,6 +42,9 @@ ActionController::Routing::Routes.draw do |map|
   
   # News resources
   map.resources :news, :singular => :news_item
+  
+  # Article resources
+  map.resources :articles
 
   # Allow downloading Web Service WSDL as a file with an extension
   # instead of a file named 'wsdl'
