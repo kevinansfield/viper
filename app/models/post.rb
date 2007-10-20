@@ -24,4 +24,11 @@ class Post < ActiveRecord::Base
   def self.find_latest(number = 5)
     find :all, :limit => number, :order => 'created_at DESC'
   end
+  
+  def self.find_latest_by_unique_authors(number = 5)
+    # Could return incorrect data if posts ever get created with lower ids than the highest id in the table - is this even possible in mysql?
+    # Possible to use MAX(created_at) in the inner join instead, but not sure what happens if two posts end up with the same created_at
+    # TODO: Test/investigate above scenarios
+    self.find_by_sql ["SELECT posts. * FROM posts INNER JOIN (SELECT MAX(id) AS id FROM posts GROUP BY blog_id) ids ON posts.id = ids.id LIMIT ?", number]
+  end
 end
