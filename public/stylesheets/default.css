@@ -99,14 +99,12 @@ img.right {
 .col-one {
 	float: left;
 }
-
 .col-two {
 	float: right;
 }
-
-.two-cols {
+.one-col .col-one {
+	width: 500px;
 }
-
 .two-cols .col-one, .two-cols .col-two {
 	width: 250px;
 }
@@ -440,6 +438,12 @@ html[xmlns] .clearfix{display:block;}
 	float: left;
 	width: 520px;
 }
+#content.one-col {
+	width: 740px;
+}
+#content.two-cols {
+	width: 520px;
+}
 
 /* Feature */
 
@@ -451,14 +455,19 @@ html[xmlns] .clearfix{display:block;}
 
 #sidebar {
 	float: right;
+}
+#sidebar.one-col {
+	width: 210px;
+}
+#sidebar.two-cols {
 	width: 420px;
 }
-
 #sidebar .col-one {
+	float: left;
 	width: 200px;
 }
-
 #sidebar .col-two {
+	float: right;
 	width: 200px;
 }
 

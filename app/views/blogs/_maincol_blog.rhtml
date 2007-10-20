@@ -1,5 +1,5 @@
 <% titled_box 'Your Blog', 'pink',
-			  :css_class => 'col-one',
+			  :css_class => css_class,
 			  :edit_link => "#{ link_to '(manage)', posts_path(@user.blog) }" do %>
 	<h3>Latest Posts:</h3>
 	<% unless @user.blog.posts.length > 0 -%>

@@ -1,4 +1,4 @@
-<div class="box-<%= color %> <%= css_class if defined? css_class %>" <%= "id=\"#{box_id}\"" if defined? box_id %>>
+<div class="box-<%= color %> <%= css_class if defined? css_class %>" <%= "id=\"#{box_id}\"" if defined? box_id and !box_id.blank? %>>
 	<h2 class="section"><b>
 		<%= title %>
 		<% if defined? edit_link %><span class="edit-link"><%= edit_link %></span><% end %>

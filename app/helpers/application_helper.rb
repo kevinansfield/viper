@@ -77,6 +77,19 @@ module ApplicationHelper
         return "#{fallback_if_blank friend.profile.first_name, friend.login} is your friend."
     end
   end
+  
+  # Same as pluralize, but doesn't output the count
+  def pluralize_without_count(count, singular, plural = nil)
+    if count == 1 || count == '1'
+      singular
+    elsif plural
+      plural
+    elsif Object.const_defined?("Inflector")
+      Inflector.pluralize(singular)
+    else
+      singular + "s"
+    end
+  end
 
   private
   

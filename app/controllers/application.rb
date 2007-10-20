@@ -21,6 +21,15 @@ class ApplicationController < ActionController::Base
   @sidebar_one = SIDEBAR_ONE
   @sidebar_two = SIDEBAR_TWO
   
+  # Count the number of sidebars specified
+  def sidebar_count
+    [self.sidebar_one, self.sidebar_two].compact.length
+  end
+  
+  def maincol_count
+    [self.maincol_one, self.maincol_two].compact.length
+  end
+  
   # Reset the partials (useful as it seems that controllers are carried over between requests)
   def reset_partials
     self.maincol_one = MAINCOL_ONE
