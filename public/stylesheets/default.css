@@ -689,3 +689,28 @@ a, a#visited {
   float: left;
   margin-right: 1em;
 }
+
+/* Blog Styles */
+.blog-post {
+	border-bottom: 1px dashed #CCCCCC;
+	margin-bottom: 20px;
+}
+.blog-post .post {
+	float: left;
+	width: 450px;
+}
+.blog-post .posts-other {
+	float: right;
+	width: 250px;
+	padding-left: 10px;
+	border-left: 1px solid #3490F8;
+}
+.blog-post .posts-other a {
+	display: block;
+}
+.blog-post .posts-other .date {
+	display: block;
+}
+.blog-post .posts-other .comments {
+	display: block;
+}

@@ -5,14 +5,16 @@
 			  :box_id => 'feature' do %>
 
 	<% for post in @posts %>
+	<div class="blog-post clearfix">
 		<h2>Blogs by <%= link_to post.blog.user.full_name, user_path(post.blog.user) %></h2>
 		<%= render :partial => 'post', :locals => { :post => post } %>
 		<div class="posts-other">
+			<h3>Other posts by <%= post.blog.user.full_name %></h3>
 			<% for blog_post in post.blog.find_posts_prior_to_last(4) -%>
 			<%= render :partial => 'other_post', :locals => { :post => blog_post } %>
 			<% end -%>
 		</div>
-		<br clear="all" />
+	</div>
 	<% end %>
 
 <% end %>
