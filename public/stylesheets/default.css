@@ -408,7 +408,7 @@ html[xmlns] .clearfix{display:block;}
 	height: 23px;
 	padding: 7px 20px 0 20px;
 	background: url(/images/img08.gif) no-repeat right top;
-	cursor: hand;	
+	cursor: pointer;	
 }
 
 #menu li.active {
