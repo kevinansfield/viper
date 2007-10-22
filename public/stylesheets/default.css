@@ -699,6 +699,19 @@ a, a#visited {
 	float: left;
 	width: 450px;
 }
+.blog-post .image {
+	float: left;
+	padding-right: 5px;
+}
+.blog-post .image img {
+	display: block;
+}
+.blog-post .byline {
+	display: block;
+}
+.blog-post .post-body {
+	padding: 10px;
+}
 .blog-post .posts-other {
 	float: right;
 	width: 250px;

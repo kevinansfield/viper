@@ -5,9 +5,10 @@ class Avatar < ActiveRecord::Base
                   :storage => :file_system,
                   :min_size => 5.kilobytes,
                   :max_size => 500.kilobytes,
-                  :thumbnails => { :large => '300x900',
-                                   :thumb => '100x300',
-                                   :small => '150x450' },
+                  :thumbnails => { :large => '300x450',
+                                   :small => '150x225',
+                                   :thumb => '100x150',
+                                   :tiny  => '60x90'},
                   :processor => 'rmagick'
   
   validates_presence_of :size, :content_type, :filename
