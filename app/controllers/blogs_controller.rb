@@ -1,5 +1,7 @@
 class BlogsController < ApplicationController
   
+  tab :blogs
+  
   def index
     self.maincol_one = nil
     self.maincol_two = nil

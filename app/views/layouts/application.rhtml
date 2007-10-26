@@ -30,20 +30,20 @@
 </div>
 <div id="menu">
 	<ul>
-		<%= nav_link 'Home', :controller => 'site' %>
-		<%= nav_link 'News', :controller => 'news' %>
-		<%= nav_link 'Articles', :controller => 'articles' %>
-		<%= nav_link 'Blogs', :controller => 'blogs' %>
-		<%= nav_link 'Community', { :controller => 'community', :action => 'index', :id => nil } %>
-		<%= nav_link 'Contact', { :controller => 'site', :action => 'contact' } %>
+		<%= nav_link 'Home', :home, :controller => 'site' %>
+		<%= nav_link 'News', :news, news_url %>
+		<%= nav_link 'Articles', :articles, articles_url %>
+		<%= nav_link 'Blogs', :blogs, blogs_url %>
+		<%= nav_link 'Community', :community, { :controller => 'community', :action => 'index', :id => nil } %>
+		<%= nav_link 'Contact', :contact, { :controller => 'site', :action => 'contact' } %>
 	</ul>
 	<ul class="right">
 	<% if logged_in? -%>
-		<%= nav_link 'Your Hub', hub_url %>
-		<%= nav_link 'Logout', logout_url %>
+		<%= nav_link 'Your Hub', :hub, hub_url %>
+		<%= nav_link 'Logout', :logout, logout_url %>
 	<% else -%>
-		<%= nav_link 'Login', login_url %>
-		<%= nav_link 'Register', signup_url %>
+		<%= nav_link 'Login', :login, login_url %>
+		<%= nav_link 'Register', :register, signup_url %>
 	<% end -%>
 	</ul>
 </div>

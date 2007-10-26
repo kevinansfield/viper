@@ -38,6 +38,13 @@ class ApplicationController < ActionController::Base
     self.sidebar_two = SIDEBAR_TWO
   end
   
+  # set current tab
+  def self.tab(name, options = {})
+    before_filter(options) do |controller|
+      controller.instance_variable_set('@current_tab', name)
+    end
+  end
+  
   # Return true if a parameter corresponding to the given symbol was posted.
   def param_posted?(symbol)
     request.post? and params[symbol]

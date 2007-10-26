@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
   before_filter :load_post
   
+  tab :blogs
+  
   def new
     @comment = Comment.new
 

@@ -1,6 +1,9 @@
 class FriendshipController < ApplicationController
   before_filter :login_required, :setup_friends
   
+  tab :hub
+  tab :community, :only => :create
+  
   # Send a friend request
   def create
     unless current_user == @friend

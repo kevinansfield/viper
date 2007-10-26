@@ -1,4 +1,7 @@
 class NewsController < ApplicationController
+  
+  tab :news
+  
   # GET /news
   # GET /news.xml
   def index

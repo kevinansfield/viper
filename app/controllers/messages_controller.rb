@@ -2,6 +2,9 @@ class MessagesController < ApplicationController
   before_filter :login_required, :find_user_and_message
   before_filter :protect_message, :except => [:new, :create]
   
+  tab :hub
+  tab :community, :only => :new
+  
   def index
     @messages = @user.received_messages.paginate :page => params[:page]
   end

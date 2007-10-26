@@ -1,6 +1,8 @@
 class CommunityController < ApplicationController
   
   before_filter :setup_maincols, :setup_sidebars
+  
+  tab :community
 
   def index
     @letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")

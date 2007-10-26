@@ -8,22 +8,9 @@ module ApplicationHelper
     end
   end
   
-  # Generates html for top nav links, including active page styling
-  def nav_link(name, options = {}, html_options = nil, *parameters_for_method_reference)
-    if html_options
-      html_options = html_options.stringify_keys
-      convert_options_to_javascript!(html_options)
-      tag_options = tag_options(html_options)
-    else
-      tag_options = nil
-    end
-    
-    if current_page?(options)
-      current = " class=\"active\""
-    end
-     
-    url = options.is_a?(String) ? options : self.url_for(options, *parameters_for_method_reference)
-    "<li#{current}><a href=\"#{url}\"#{tag_options}><b>#{name || url}</b></a></li>"
+  def nav_link(name, tab, options = {})
+    css = 'active' if tab.to_s == @current_tab.to_s
+    content_tag :li, link_to(content_tag(:b, name), options), :class => css
   end
   
   def limit_text(text, length = 18)

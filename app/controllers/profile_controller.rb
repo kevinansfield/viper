@@ -1,6 +1,8 @@
 class ProfileController < ApplicationController
   
   before_filter :login_required, :protect_profile
+  
+  tab :hub
 
   # GET /user/1/profile;edit
   def edit

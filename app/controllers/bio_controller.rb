@@ -2,6 +2,8 @@ class BioController < ApplicationController
   
   before_filter :login_required, :protect_bio
   
+  tab :hub, :only => :edit
+  
   # GET /user/1/bio;edit
   def edit
     @user = User.find(params[:user_id])

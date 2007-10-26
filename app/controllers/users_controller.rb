@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   before_filter :login_required, :only => [:hub, :edit, :change_email, :change_password]
   before_filter :protect_user, :only => [:edit, :change_email, :change_password]
   
+  tab :hub
+  tab :community, :only => :show
+  tab :register, :only => :new
+  
   # Display users list/search
   def index
     @users = User.find(:all)

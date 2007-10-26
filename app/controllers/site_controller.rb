@@ -1,5 +1,9 @@
 class SiteController < ApplicationController
   
+  tab :home, :only => :index
+  tab :contact, :only => :contact
+  tab :about, :only => :about
+  
   # Display the homepage
   def index
   end

@@ -2,6 +2,8 @@ class PostsController < ApplicationController
   before_filter :find_blog
   before_filter :login_required, :protect_blog, :except => [:index, :show]
   
+  tab :blogs
+  
   # GET /posts
   # GET /posts.xml
   def index
