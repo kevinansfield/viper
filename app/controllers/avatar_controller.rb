@@ -2,6 +2,8 @@ class AvatarController < ApplicationController
   
   before_filter :login_required, :protect_avatar
   
+  tab :hub
+  
   def edit
     @user = User.find(params[:user_id])
     @avatar = @user.avatar || Avatar.new
