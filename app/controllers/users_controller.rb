@@ -93,7 +93,7 @@ class UsersController < ApplicationController
   end
 
   def activate
-    self.current_user = User.find_by_activation_code(params[:activation_code])
+    self.current_user = params[:activation_code].blank? ? :false : User.find_by_activation_code(params[:activation_code]) 
     if logged_in? && !current_user.activated?
       current_user.activate
       flash[:notice] = "Signup complete! You may now login."
