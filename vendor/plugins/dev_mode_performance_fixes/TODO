@@ -1,0 +1,3 @@
+[x]  Add a patch for routes to only reload them if the file has changed
+[ ]  Check compatibility with Edge rails
+[ ]  why are db connections reset on every request for sqlite3 in dev mode?

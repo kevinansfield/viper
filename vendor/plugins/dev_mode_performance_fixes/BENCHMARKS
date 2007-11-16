@@ -1,0 +1,60 @@
+Benchmarks
+==========
+
+Using http://hg.koziarski.com/performance_tracker/.
+
+These were run on my Powerbook 1.67GHz... it was otherwise idle except for me chatting on IRC.
+
+Tests were run using the benchmarking.rb environment provided with the following changes:
+
+  config.cache_classes = false
+  config.action_controller.perform_caching = false
+
+Makes sense to only change these two things as caching is the only aspect of dev mode these patches take a swing at.
+
+
+
+BEFORE (dev mode, no patches)
+-----------------------------------------------------------------------
+benchmarking 3 runs with options 100 -bm=default 
+
+page request                          total  stddev%     r/s    ms/r
+html                               46.08638   4.2755    2.17  460.86
+xml                                48.53045   5.6099    2.06  485.30
+
+all requests                       94.61683   4.6590    2.11  473.08
+
+
+AFTER (dev_mode_performace_fixes v0.3 - 17.5x faster)
+-----------------------------------------------------------------------
+benchmarking 3 runs with options 100 -bm=default 
+
+page request                          total  stddev%     r/s    ms/r
+html                                2.88391   2.9670   34.68   28.84
+xml                                 2.78086   8.4500   35.96   27.81
+
+all requests                        5.66476   3.6506   35.31   28.32
+
+
+AFTER (dev_mode_performace_fixes v0.2)
+-----------------------------------------------------------------------
+benchmarking 3 runs with options 100 -bm=default 
+
+page request                          total  stddev%     r/s    ms/r
+html                               11.41378   8.2382    8.76  114.14
+xml                                11.08206   2.6687    9.02  110.82
+
+all requests                       22.49584   5.4876    8.89  112.48
+
+
+AFTER (with dev_mode_performance_fixes plugin v0.1)
+-----------------------------------------------------------------------
+benchmarking 3 runs with options 100 -bm=default 
+
+page request                          total  stddev%     r/s    ms/r
+html                               39.86086   3.2358    2.51  398.61
+xml                                39.20538   4.8425    2.55  392.05
+
+all requests                       79.06625   3.9818    2.53  395.33
+
+
