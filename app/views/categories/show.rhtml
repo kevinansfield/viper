@@ -1,0 +1,28 @@
+<% @title = @category.name + ' Articles' -%>
+
+<% titled_box @title,
+			  'orange',
+			  :edit_link => link_to_if_admin('(Add Article)', new_article_path(@category)),
+			  :box_id => 'feature' do %>
+			  
+	<h2><%= @title %></h2>
+<% unless @latest_articles.length < 1 -%>
+	<% for article in @latest_articles -%>
+	<div class="blog-post clearfix">
+		<%= render :partial => 'article', :locals => { :article => article } %>
+	</div>
+	<% end %>
+<% else -%>
+	<p>There are no articles in this category yet, why don't you check back soon?</p>
+<% end -%>
+
+<% end %>
+
+<% unless @archive_articles.nil? -%>
+<% titled_box "Other articles in our #{@category.name} category",
+			  'orange' do %>
+	<% for article in @archive_articles -%>
+		<%= render :partial => 'article_list', :locals => { :article => article } %>
+	<% end -%>
+<% end %>
+<% end -%>

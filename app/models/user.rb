@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :comments, :order => 'created_at', :dependent => :destroy
   
   has_many :news
+  has_many :articles
   
   has_many :friendships
   has_many :friends,            :through => :friendships, :conditions => "status = 'accepted'"

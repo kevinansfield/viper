@@ -32,7 +32,7 @@
 	<ul>
 		<%= nav_link 'Home', :home, :controller => 'site' %>
 		<%= nav_link 'News', :news, news_url %>
-		<%= nav_link 'Articles', :articles, articles_url %>
+		<%= nav_link 'Articles', :articles, categories_url %>
 		<%= nav_link 'Blogs', :blogs, blogs_url %>
 		<%= nav_link 'Community', :community, { :controller => 'community', :action => 'index', :id => nil } %>
 		<%= nav_link 'Contact', :contact, { :controller => 'site', :action => 'contact' } %>
@@ -87,7 +87,7 @@
 		<a href="/">Home</a> :: 
 		<%= link_to 'About', :controller => 'site', :action => 'about' %> :: 
 		<%= link_to 'News', news_url %> :: 
-		<%= link_to 'Articles', articles_url %> ::
+		<%= link_to 'Articles', categories_url %> ::
 		<%= link_to 'Blogs', blogs_url %> ::
 		<%= link_to 'Community', :controller => 'community', :action => 'index', :id => nil %> :: 
 		<%= link_to 'Contact Us', :controller => 'site', :action => 'contact' %>

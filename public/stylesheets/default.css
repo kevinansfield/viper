@@ -727,3 +727,84 @@ a, a#visited {
 .blog-post .posts-other .comments {
 	display: block;
 }
+
+/* Article */
+.article {
+	
+}
+.article-title {
+	font-size: 2.2em;
+	margin-bottom: 20px;
+}
+.article-byline {
+	font-size: 11px;
+	color: #aaaaaa;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+.article-date {
+	font-size: 11px;
+	color: #aaaaaa;
+	font-weight: bold;
+}
+.article-body {
+	border-top: 1px solid #cccccc;
+	padding-top: 30px;
+	padding-left: 20px;
+	padding-right: 10px;
+}
+
+/* Article Shorts */
+.article-short-title {
+	font-size: 16px;
+	font-weight: bold;
+	margin-top: 10px;
+	margin-bottom: 8px;
+}
+.article-short-title a {
+	text-decoration: underline;
+}
+.article-short-byline {
+	display: block;
+	font-size: 12px;
+}
+.article-short-author {
+	float: left;
+	margin: 0 10px 6px 0;
+}
+.article-short-body {
+	margin-left: 70px;
+}
+.article-short-details {
+	float: right;
+	border: 1px solid #cccccc;
+	margin: 0 0 6px 10px;
+}
+.article-short-details ul {
+	margin: 2px 20px 4px 20px;
+}
+.article-short-details ul li {
+	font-size: 10px;
+}
+
+/* Author Box */
+.author-box {
+	width: 180px;
+	float: right;
+	border: 1px solid #cccccc;
+	padding: 10px;
+	font-size: 10px;
+	background-color: #ffffff;
+	margin: 0 0 10px 10px;
+}
+.author-box p {
+	margin-bottom: 10px;
+}
+.author-box .name {
+	font-weight: bold;
+	font-size: 12px;
+}
+.author-box img {
+	float: left;
+	margin: 5px 10px 6px 0;
+}

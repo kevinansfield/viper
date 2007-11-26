@@ -2,7 +2,17 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 17) do
+ActiveRecord::Schema.define(:version => 21) do
+
+  create_table "articles", :force => true do |t|
+    t.column "user_id",     :integer
+    t.column "category_id", :integer
+    t.column "title",       :string
+    t.column "body",        :text
+    t.column "created_at",  :datetime
+    t.column "updated_at",  :datetime
+    t.column "description", :text
+  end
 
   create_table "avatars", :force => true do |t|
     t.column "user_id",      :integer
@@ -16,18 +26,24 @@ ActiveRecord::Schema.define(:version => 17) do
   end
 
   create_table "bios", :force => true do |t|
-    t.column "user_id",    :integer
-    t.column "about",      :text
-    t.column "interests",  :text
-    t.column "music",      :text
-    t.column "films",      :text
-    t.column "television", :text
-    t.column "books",      :text
-    t.column "heroes",     :text
+    t.column "user_id",      :integer
+    t.column "about",        :text
+    t.column "interests",    :text
+    t.column "music",        :text
+    t.column "films",        :text
+    t.column "television",   :text
+    t.column "books",        :text
+    t.column "heroes",       :text
+    t.column "author_about", :text
   end
 
   create_table "blogs", :force => true do |t|
     t.column "user_id", :integer
+  end
+
+  create_table "categories", :force => true do |t|
+    t.column "name",        :string
+    t.column "description", :text
   end
 
   create_table "comments", :force => true do |t|

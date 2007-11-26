@@ -30,6 +30,11 @@ class ApplicationController < ActionController::Base
     [self.maincol_one, self.maincol_two].compact.length
   end
   
+  def disable_maincols
+    self.maincol_one = nil
+    self.maincol_two = nil
+  end
+  
   # Reset the partials (useful as it seems that controllers are carried over between requests)
   def reset_partials
     self.maincol_one = MAINCOL_ONE

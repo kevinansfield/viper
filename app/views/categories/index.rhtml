@@ -1,0 +1,17 @@
+<% @title = 'Articles' -%>
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
+
+<h2>Recent Articles</h2>
+<% unless @articles.length < 1 -%>
+	<% for article in @articles -%>
+	<div class="blog-post clearfix">
+		<%= render :partial => 'article', :locals => { :article => article } %>
+	</div>
+	<% end %>
+<% else -%>
+	<p>Sorry, there are no articles at the moment, why don't you check back soon?</p>
+<% end -%>
+
+<% end %>

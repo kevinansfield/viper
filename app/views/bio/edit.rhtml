@@ -51,5 +51,21 @@
 <fieldset class="submit">
     <%= submit_tag "Update" %> | <%= link_to 'Cancel', hub_url %>
 </fieldset>
+<fieldset>
+	<legend>Edit Bio - Author Box</legend>
+	<p>If you write an article for Viper then your "author box" will contain the following. Please be aware that the Viper
+	moderators may adapt this to fit the websites style guidelines, in which case you will be notified via the internal
+	messaging system.</p>
+	<p>Maximum 1000 characters.</p>
+	<ol>
+		<li>
+			<label for="bio_about">Author Box</label>
+			<%= f.text_area :author_about, :class => 'text' %>
+		</li>
+	</ol>
+</fieldset>
+<fieldset class="submit">
+    <%= submit_tag "Update" %> | <%= link_to 'Cancel', hub_url %>
+</fieldset>
 <% end %>
 <% end %>

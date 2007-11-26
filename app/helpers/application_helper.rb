@@ -77,6 +77,16 @@ module ApplicationHelper
       singular + "s"
     end
   end
+  
+  # Basic date-only formattice, eg. "28th March 2007"
+  def basic_date(date)
+    h date.strftime("#{date.day.en.ordinal} %B, %Y")
+  end
+  
+  # Basic short date-only formatting, eg. "28th Mar, 2007"
+  def basic_short_date(date)
+    h date.strftime("#{date.day.en.ordinal} %b, %Y")
+  end
 
   private
   

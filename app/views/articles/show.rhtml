@@ -1,0 +1,18 @@
+<% @title = @article.title -%>
+
+<% titled_box @title,
+			  'orange',
+			  :edit_link => link_to_if_admin('(Edit)', edit_article_path(@article.category, @article)),
+			  :box_id => 'feature' do %>
+			  
+<div class="article">
+	<%= render :partial => 'users/author_box', :locals => { :user => @article.user } %>
+	<h2 class="article-title"><%=@article.title%></h2>
+	<p class="article-byline">By: <%=@article.user.full_name%></p>
+	<p class="article-date"><%=basic_date @article.created_at%></p>
+	<div class="article-body">
+		<%= @article.body %>
+	</div>
+</div>
+
+<% end %>
