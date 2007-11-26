@@ -1,3 +1,6 @@
+<% if @invalid %>
+<p class="error">Sorry, we couldn't handle your query, please check the format of your postcode or search query.</p>
+<% end %>
 <% if @users %>
 <p>Found <%= pluralize(@users.length, "match") %>.</p>
 <% end %>

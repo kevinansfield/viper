@@ -17,8 +17,12 @@ class CommunityController < ApplicationController
 
   def browse
     return if params[:commit].nil?
-    profiles = Profile.find_by_asl(params)
-    @users = profiles.collect { |profile| profile.user }
+    begin
+      profiles = Profile.find_by_asl(params)
+      @users = profiles.collect { |profile| profile.user }
+    rescue GeoKit::Geocoders::GeocodeError
+      @invalid = true
+    end
   end
 
   def search   
