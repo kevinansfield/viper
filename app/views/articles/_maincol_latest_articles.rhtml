@@ -1,10 +1,10 @@
 <% articles = Article.find_latest -%>
 <% unless articles.length < 1 -%>
-<% titled_box 	'Latest Articles', 'pink', :css_class => css_class do %>
+<% titled_box 	link_to('Latest Articles', categories_path), 'pink', :css_class => css_class do %>
 	<ul>
 	<% articles.each do |article| %>
-		<li><strong><%= link_to article.title, article_path(article.category, article) %></strong>
-		<em>in <%=link_to article.category.name, category_path(article.category)%></em></li>
+		<li><%= link_to article.title, article_path(article.category, article) %>
+		<em>(<%=link_to article.category.name, category_path(article.category)%>)</li>
 	<% end %>
 	</ul>
 <% end %>
