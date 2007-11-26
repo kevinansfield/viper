@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   
   before_filter :login_required, :only => [:hub, :edit, :change_email, :change_password]
   before_filter :protect_user, :only => [:edit, :change_email, :change_password]
+  before_filter :check_logged_in, :only => [:new, :create, :activate]
   
   tab :hub
   tab :community, :only => :show
@@ -86,7 +87,7 @@ class UsersController < ApplicationController
     @user.save!
     # uncomment below if user should be automatically logged in
     #self.current_user = @user
-    redirect_back_or_default('/')
+    redirect_to '/'
     flash[:notice] = "Thanks for signing up! Please check your e-mail to activate your account."
   rescue ActiveRecord::RecordInvalid
     render :action => 'new'
@@ -96,9 +97,9 @@ class UsersController < ApplicationController
     self.current_user = params[:activation_code].blank? ? :false : User.find_by_activation_code(params[:activation_code]) 
     if logged_in? && !current_user.activated?
       current_user.activate
-      flash[:notice] = "Signup complete! You may now login."
+      flash[:notice] = "Signup complete! You may now use your account"
     end
-    redirect_back_or_default('/')
+    redirect_to login_url
   end
   
   def activate_new_email
@@ -107,7 +108,7 @@ class UsersController < ApplicationController
     activator = params[:id] || params[:email_activation_code]
     @user = User.find_by_email_activation_code(activator) 
     if @user and @user.activate_new_email
-      redirect_back_or_default(hub_url)
+      redirect_to hub_url
       flash[:notice] = "The email address for your account has been updated" 
     else
       flash[:error] = "Unable to update the email address" 
@@ -155,6 +156,14 @@ class UsersController < ApplicationController
       redirect_to hub_url
       return false
     end    
+  end
+  
+  def check_logged_in
+    unless @user.nil?
+      flash[:error] = "Sorry, you already have a user account!"
+      redirect_to hub_url
+      return false
+    end
   end
 
 end
