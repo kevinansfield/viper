@@ -6,5 +6,6 @@
 	<% unless @user.requested_friends.empty? %>
 		<li><%= pluralize(@user.requested_friends.count, "New friend requests") %></li>
 	<% end %>
+		<li><%= link_to 'Invite Friends', url_for(:action => 'invite', :id => @user.id) %></li>
 	</ul>
 <% end %>

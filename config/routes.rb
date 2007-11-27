@@ -15,7 +15,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '', :controller => "site"
 
   # User resources
-  map.resources :users, :member => { :change_email => :put, :change_password => :put } do |user|
+  map.resources :users, :member => { :change_email => :put, :change_password => :put, :invite => :get, :send_invite => :put } do |user|
     user.resource :profile
     user.resource :avatar
     user.resource :bio

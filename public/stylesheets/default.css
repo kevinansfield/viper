@@ -199,6 +199,13 @@ html[xmlns] .clearfix{display:block;}
 	border: 1px solid #ABADB3;
 	padding: 2px;
 }
+.form .help {
+	text-align: left;
+	margin: 0;
+	padding: 0;
+	font-size: 10px;
+	font-style: italic;
+}
 .fieldWithErrors input {
 	background-color: #FFDDDD;
 	border: 1px solid #ABADB3;

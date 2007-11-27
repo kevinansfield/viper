@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
-  before_filter :login_required, :only => [:hub, :edit, :change_email, :change_password]
-  before_filter :protect_user, :only => [:edit, :change_email, :change_password]
+  before_filter :login_required, :only => [:hub, :edit, :change_email, :change_password, :invite, :send_invite]
+  before_filter :protect_user, :only => [:edit, :change_email, :change_password, :invite, :send_invite]
   before_filter :check_logged_in, :only => [:new, :create, :activate]
   
   tab :hub
@@ -145,6 +145,22 @@ class UsersController < ApplicationController
     logger.error "Invalid Reset Code entered" 
     flash[:error] = "Sorry - That is an invalid password reset code. Please check your code and try again. (Perhaps your email client inserted a carriage return?)" 
     redirect_back_or_default(hub_url)
+  end
+  
+  def invite
+    @invite = Invite.new
+  end
+  
+  def send_invite
+    @invite = Invite.new(params[:invite])
+    @invite.user = @user
+    if @invite.save
+      @invite.send_invites
+      flash[:notice] = "Invite's have been sent"
+      redirect_to hub_url
+    else
+      render :action => :invite
+    end
   end
   
   private

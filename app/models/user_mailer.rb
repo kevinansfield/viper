@@ -46,6 +46,15 @@ class UserMailer < ActionMailer::ARMailer
     @body[:url]    = "#{HOST}#{message_path(message.receiver, message)}"
   end
   
+  def invite(invite)
+    setup_email(invite[:user])
+    @recipients         = invite[:recipient]
+    @subject           += "- #{invite[:sender_name]} has sent you an invite!"
+    @body[:sender_name] = invite[:sender_name]
+    @body[:message]     = invite[:message]
+    @body[:url]         = signup_url(:host => HOST)
+  end
+  
   protected
     def setup_email(user)
       @recipients  = "#{user.email}"
