@@ -1,6 +1,6 @@
 <% titled_box "#{SITENAME} Beta", 'pink' do %>
 	<p class="small">
 		We are currently in beta.<br />
-		Found a bug or have a feature request? <b><a href="http://digitalblueprint.lighthouseapp.com/projects/4589-viper-community-base/overview">Then add a new ticket here!</a></b>
+		Found a bug or have a feature request? <b><%= link_to 'Then let us know!', :controller => :site, :action => :contact %></b>
 	</p>
 <% end %>

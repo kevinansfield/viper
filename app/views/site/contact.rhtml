@@ -36,6 +36,10 @@ in Ruby on Rails. To find out more, or to contact us directly please visit <a hr
 	<legend>Message</legend>
 	<ol>
 		<li>
+			<label for="contact_contact_type">Contact Type: <em><img src="/images/required_star.gif" alt="required" /></em></label>
+			<%= f.select :contact_type, @contact_types, :include_blank => true %>
+		</li>
+		<li>
 			<label for="contact_subject">Subject: <em><img src="/images/required_star.gif" alt="required" /></em></label>
 			<%= f.text_field :subject, :class => 'text' %>
 		</li>

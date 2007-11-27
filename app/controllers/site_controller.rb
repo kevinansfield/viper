@@ -11,6 +11,7 @@ class SiteController < ApplicationController
   # Display the contact page
   def contact
     @contact = Contact.new
+    @contact_types = {'General Contact' => :general, 'Bug Report' => :bug, 'Feature Request' => :feature}
   end
   
   # Send the contact submission
@@ -18,7 +19,12 @@ class SiteController < ApplicationController
     @contact = Contact.new(params[:contact])
     if @contact.save
       begin
-        ContactMailer::deliver_contact_message(@contact)
+        ContactMailer.deliver_basic(@contact)
+        if @contact.contact_type == 'bug'
+          ContactMailer.deliver_bug_report(@contact)
+        elsif @contact.contact_type == 'feature'
+          ContactMailer.deliver_ticket_creation(@contact)
+        end
         flash[:notice] = "Thank you for contacting us"
         redirect_to :action => :contact
       rescue

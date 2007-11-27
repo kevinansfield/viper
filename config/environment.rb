@@ -79,6 +79,9 @@ SIDEBAR_TWO = "layouts/sidebar_two"
 
 VIPER_EMAIL = "dev@digitalblueprint.co.uk"
 
+LIGHTHOUSE_EMAIL = "ticket+digitalblueprint.4589-ykxvnex2@lighthouseapp.com"
+LIGHTHOUSE_DEV = "dev@digitalblueprint.co.uk"
+
 ExceptionNotifier.exception_recipients = [ 'kevin.ansfield@gmail.com' ]
 ExceptionNotifier.sender_address = 'dev@digitalblueprint.co.uk'
 ExceptionNotifier.email_prefix = "[#{SITENAME.upcase} SITE ERROR] "
