@@ -26,11 +26,9 @@ class MessagesController < ApplicationController
   
   def reply
     @old_message = @message
-    @old_message.textiled = false
     @message = Message.new
     @message.receiver_id = @old_message.sender_id
     @message.subject = "RE: #{@old_message.subject}"
-    @message.textiled = false
     @message.body = ""
     @message.body += "\r\n\r\n\r\n--------------------"
     @message.body += "\r\nReceived from #{@old_message.sender.full_name} at #{@old_message.created_at}"

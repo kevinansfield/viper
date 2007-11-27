@@ -6,9 +6,7 @@ class Message < ActiveRecord::Base
   belongs_to :receiver,
              :foreign_key => 'receiver_id',
              :class_name => 'User'
-             
-  acts_as_textiled :body
-             
+  
   validates_presence_of :subject, :body
   
   cattr_reader :per_page

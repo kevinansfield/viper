@@ -3,8 +3,8 @@
 			  'blue',
 			  :box_id => 'feature' do %>
 		
-		<h3><%= @message.subject %></h3>
-		<%= @message.body %>
+		<h3><%= h(@message.subject) %></h3>
+		<%= RedCloth.new(@message.body).to_html %>
 			  
 		<p>
 			<% unless current_user == @message.sender %><%= link_to 'Reply', reply_message_path(current_user, @message) %> | <% end %>
