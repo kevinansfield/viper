@@ -585,10 +585,18 @@ html[xmlns] .clearfix{display:block;}
 	width: 100px;
 	border: 1px solid #DDDDDD;
 	padding: 2px;
+	height: 180px;
+	margin: 5px;
+}
+.friend a {
+	display: block;
+	height: 145px;
 }
 .friend-name {
 	font-weight: bold;
 	position: relative;
+	padding-right: 17px;
+	bottom:0px;
 }
 .friend-actions {
 	position: absolute;
