@@ -1,4 +1,4 @@
-class ContactMailer < ActionMailer::Base
+class ContactMailer < ActionMailer::ARMailer
   
   helper :application
    
