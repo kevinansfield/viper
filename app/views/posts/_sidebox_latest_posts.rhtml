@@ -3,7 +3,7 @@
 <% titled_box "#{@blog.user.first_name}'s Recent Blogs", 'blue' do %>
 	<ul>
 	<% posts.each do |post| %>
-		<li><%= link_to post.title, post_path(post.blog, post) %></li>
+		<li><%= link_to post.title, blog_post_path(post.blog, post) %></li>
 	<% end %>
 	</ul>
 <% end %>

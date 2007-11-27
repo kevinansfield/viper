@@ -1,34 +1,6 @@
-<div class="post">
-  <div class="post_title">
-    <h2><%= link_to_unless_current sanitize(post.title), post_path(post.blog, post) %></h2>
-	<% if post.blog.user == current_user %>
-	<div class="post_actions">
-	  <%= link_to_unless_current 'Show', post_path(post.blog, post) %> |
-	  <%= link_to_unless_current 'Edit', edit_post_path(post.blog, post) %> |
-	  <%= link_to 'Delete', post_path(post.blog, post),
-	              :confirm => 'Are you sure?', :method => :delete %>
-	</div>
-	<% end %>
-  </div>
-  <div class="post_body"><%= post.body %></div>
-  <div class="post_footer_text">
-    <p>Posted <%= time_ago_in_words post.created_at %> ago</p>
-    <% if post.updated_at != post.created_at %>
-      <p>Modified <%= time_ago_in_words post.updated_at %> ago</p>
-    <% end %>
-  </div>
-  
-  <div id="comments_for_post_<%= post.id %>">
-    <%= render :partial => "comments/comment", :collection => post.comments %>
-  </div>
-  <% if logged_in? %>
-  <div id="add_comment_link_for_post_<%= post.id %>">
-    <%= link_to_remote "Add a comment",
-                       {  :url => new_comment_path(post.blog, post),
-                          :method => :get },
-					   :href => new_comment_path(post.blog, post) %>
-  </div>
-  <div id="new_comment_form_for_post_<%= post.id %>">
-  </div>
-  <% end %>
+<div class="blog-post short">
+	<h2 class="blog-post-title"><%= link_to h(post.title), blog_post_path(post.blog, post) %></h2>
+	<p class="blog-post-byline">by <%= link_to h(post.blog.user.full_name), user_path(post.blog.user) %></p>
+	<p class="blog-post-body"><%= post.body %></p>
+	<p class="blog-post-footer"><%=basic_date post.created_at%> | <%=link_to pluralize(post.comments.length, 'comment')+" &raquo;"%></p>
 </div>

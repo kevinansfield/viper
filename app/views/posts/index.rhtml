@@ -1,11 +1,11 @@
-<% @title = 'Manage Blog Posts' -%>
+<% @title = "#{@user.full_name}'s Blog" -%>
 
 <% titled_box @title,
 			  'pink',
-			  :edit_link => link_to('(New Post)', new_post_path),
+			  :edit_link => link_to_if_owner(@user, '(New Post)', new_post_path),
 			  :box_id => 'feature' do %>
 
-<p><%= will_paginate(@posts) if @posts.length > Post.per_page %></p>
+<%= will_paginate(@posts) if @posts.length > Post.per_page %>
 
 <%= render :partial => "post", :collection => @posts %>
 

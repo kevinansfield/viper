@@ -681,14 +681,30 @@ a, a#visited {
 
 .comment  {
   clear: left;
-  min-height: 90px;
+  border-bottom: 1px dashed #cccccc;
+  margin-bottom: 20px;
+  padding-left: 10px;
+}
+.comment-avatar {
+	float: left;
+	margin: 6px 5px 5px 0;
+}
+.comment-author {
+	margin-left: 35px;
+	margin-bottom: 2px;
+}
+.comment-date {
+	margin-left: 35px;
+	font-size: 10px;
+	margin-bottom: 6px;
+}
+.comment-body {
+	margin-left: 10px;
+}
+.comment-body p {
+	margin-bottom: 0.5em;
 }
 
-.thumbnail {
-  display: block;
-  float: left;
-  margin-right: 1em;
-}
 
 /* Blog Styles */
 .blog-post {
@@ -726,6 +742,17 @@ a, a#visited {
 }
 .blog-post .posts-other .comments {
 	display: block;
+}
+.blog-post-footer {
+	font-size: 10px;
+}
+
+.short .blog-post-byline {
+	font-size: 10px;
+}
+.short .blog-post-footer {
+	font-size: 12px;
+	margin-bottom: 2px;
 }
 
 /* Article */
@@ -807,4 +834,12 @@ a, a#visited {
 .author-box img {
 	float: left;
 	margin: 5px 10px 6px 0;
+}
+
+/* Short Post List */
+.short-post-listing {
+	line-height: 0.5em;
+	padding: 8px;
+	background-color: #eeeeee;
+	margin: 0 0 4px 0;
 }

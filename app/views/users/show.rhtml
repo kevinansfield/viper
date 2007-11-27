@@ -14,8 +14,11 @@
 <%= render :partial => 'friendship/friends' %>
 
 <% unless @user.blog.posts.length < 1 %>
-	<% titled_box "Blog", 'pink' do %>
+	<% titled_box link_to("Blog",blog_posts_path(@user.blog)),
+				  'pink',
+				  :edit_link => link_to('(View Blog)', blog_posts_path(@user.blog)) do %>
+		<h3>Recent Blog Entries</h3>
 		<p><%= will_paginate(@posts) if @posts.length > Post.per_page %></p>
-		<%= render :partial => "posts/post", :collection => @posts %>
+		<%= render :partial => "posts/short_post_listing", :collection => @posts %>
 	<% end %>
 <% end %>

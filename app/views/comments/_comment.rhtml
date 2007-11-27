@@ -1,24 +1,12 @@
 <div id="comment_<%= comment.id %>" class="comment">
-  <hr noshade />
-  <% if logged_in? and comment.authorized?(current_user) %>
-  <span class="edit_link" style="float: right">
-  <%= link_to_remote "(delete)",
-          :url => comment_path(comment.post.blog, comment.post, comment),
-          :method => :delete,
-          :confirm => 'Are you sure?' %>
-  </span>
-  <% end %>
-
   <% unless comment.user.avatar.nil? -%>
-  	<span class="thumbnail">
-  	<%= link_to image_tag(comment.user.avatar.public_filename(:tiny)), user_path(comment.user) %>
-	</span>
+  	<div class="comment-avatar">
+  	<%= link_to image_tag(comment.user.avatar.public_filename(:micro)), user_path(comment.user) %>
+	</div>
   <% end -%>
-  </span>
-  <%= link_to comment.user.full_name, user_path(comment.user) %>
-  commented
-  <%= time_ago_in_words comment.created_at %> ago:
-  <p>
+  <p class="comment-author"><em><%= link_to h(comment.user.full_name), user_path(comment.user) %></em> Says:</p>
+  <p class="comment-date"><a href="#comment_<%=comment.id%>"><%= comment.created_at %></a></p>
+  <div class="comment-body">
     <%= comment.body %>
-  </p>
+  </div>
 </div>

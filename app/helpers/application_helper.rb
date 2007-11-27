@@ -8,6 +8,12 @@ module ApplicationHelper
     end
   end
   
+  def link_to_if_owner(user, text, link)
+    if logged_in? && current_user == user
+      link_to(text, link)
+    end
+  end
+  
   def nav_link(name, tab, options = {})
     css = 'active' if tab.to_s == @current_tab.to_s
     content_tag :li, link_to(content_tag(:b, name), options), :class => css

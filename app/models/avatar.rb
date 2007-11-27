@@ -8,7 +8,8 @@ class Avatar < ActiveRecord::Base
                   :thumbnails => { :large => '300x450',
                                    :small => '150x225',
                                    :thumb => '100x150',
-                                   :tiny  => '60x90'},
+                                   :tiny  => '60x90',
+                                   :micro => '25x25'},
                   :processor => 'rmagick'
   
   validates_presence_of :size, :content_type, :filename

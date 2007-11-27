@@ -3,7 +3,7 @@
 <% titled_box 	link_to('Latest Articles', categories_path), 'pink', :css_class => css_class do %>
 	<ul>
 	<% articles.each do |article| %>
-		<li><%= link_to h(article.title), article_path(article.category, article) %>
+		<li><%= link_to h(article.title), category_article_path(article.category, article) %>
 		<em>(<%=link_to h(article.category.name), category_path(article.category)%>)</em></li>
 	<% end %>
 	</ul>

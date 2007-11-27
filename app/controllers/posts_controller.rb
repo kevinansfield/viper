@@ -20,6 +20,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.xml
   def show
+    self.disable_maincols
     self.sidebar_one = 'posts/sidebar_blog'
     @post = Post.find(params[:id])
     @user = @blog.user

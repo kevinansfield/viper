@@ -3,15 +3,6 @@ class CommentsController < ApplicationController
   
   tab :blogs
   
-  def new
-    @comment = Comment.new
-
-    respond_to do |format|
-      format.html # new.rhtml
-      format.js   # new.rjs
-    end
-  end
-  
   def create
     @comment = Comment.new(params[:comment])
     @comment.user = current_user

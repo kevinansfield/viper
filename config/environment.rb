@@ -63,7 +63,7 @@ end
 require 'action_mailer/ar_mailer'
 
 # Hostname, Sitename, etc. used in mailouts and page titles
-HOST = 'http://localhost:3009'
+HOST = 'http://localhost:3000'
 SITENAME = 'Viper'
 TAGLINE = 'Your Social Community Starts Here'
 
@@ -81,10 +81,10 @@ VIPER_EMAIL = "dev@digitalblueprint.co.uk"
 
 ExceptionNotifier.exception_recipients = [ 'kevin.ansfield@gmail.com' ]
 ExceptionNotifier.sender_address = 'dev@digitalblueprint.co.uk'
-ExceptionNotifier.email_prefix = "[VIPER SITE ERROR] "
+ExceptionNotifier.email_prefix = "[#{SITENAME.upcase} SITE ERROR] "
 
 ActionMailer::Base.smtp_settings = {
-  :address => "mail.bn23hosting.com",
+  :address => "mta01.digitalblueprint.co.uk",
   :port => 25,
   :domain => "digitalblueprint.co.uk",
   :authentication => :login,
