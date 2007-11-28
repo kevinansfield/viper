@@ -6,13 +6,13 @@
 
 <%= error_messages_for :bio %>
 
-<% form_for(:bio, :url => bio_path(@user), :html => { :method => :put, :class => 'form' }) do |f| %>
+<% form_for(:bio, :url => user_bio_path(@user), :html => { :method => :put, :class => 'form' }) do |f| %>
 <fieldset>
 	<legend>Edit Bio - Basic Details</legend>
 	<ol>
 		<li>
 			<label for="bio_about">About Me:</label>
-			<%= f.text_area :about, :class => 'text' %>
+			<%= textile_editor :bio, :about -%>
 		</li>
 	</ol>
 </fieldset>
@@ -67,5 +67,6 @@
 <fieldset class="submit">
     <%= submit_tag "Update" %> | <%= link_to 'Cancel', hub_url %>
 </fieldset>
+<%= textile_editor_initialize -%>
 <% end %>
 <% end %>

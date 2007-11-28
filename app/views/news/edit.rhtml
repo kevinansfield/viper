@@ -16,13 +16,14 @@
 				</li>
 				<li>
 					<label for="news_body">Body:</label>
-					<%= f.text_area :body, :class => 'text' %>
+					<%= textile_editor :news, :body %>
 				</li>
 			</ol>
 		</fieldset>
 		<fieldset class="submit">
 			<%= submit_tag "Update" %> | <%= link_to 'Cancel', news_path %>
 		</fieldset>
+		<%= textile_editor_initialize -%>
 	<% end %>
 	
 <% end %>

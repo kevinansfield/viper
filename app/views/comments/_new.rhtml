@@ -4,12 +4,13 @@
   <legend>New Comment</legend>
   <ol>
   	<li>
-  		<%= form.text_area :body, :rows => 10, :cols => 40 %>
+		<%= textile_editor :comment, :body %>
   	</li>
 	<li>
 		<%= submit_tag "Create" %>
 	</li>
   </ol>
 </fieldset>
+<%= textile_editor_initialize -%>
 
 <% end %>

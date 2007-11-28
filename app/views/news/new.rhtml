@@ -16,7 +16,7 @@
 				</li>
 				<li>
 					<label for="news_body">Body:</label>
-					<%= f.text_area :body, :class => 'text' %>
+					<%= textile_editor :news, :body %>
 				</li>
 				<li>
 					<label for="send_as_email">Email to users?</label>
@@ -27,6 +27,7 @@
 		<fieldset class="submit">
 			<%= submit_tag "Create" %> | <%= link_to 'Cancel', news_path %>
 		</fieldset>
+		<%= textile_editor_initialize -%>
 	<% end %>
 	
 <% end %>

@@ -8,7 +8,8 @@
     	</li>
 		<li>
 			<label for="message[body]">Message</label><br/>
-        	<%= text_area_tag "message[body]", @message.body, :class => 'text' %>
+			<%= textile_editor :message, :body %>
 		</li>
     </ol>
 </fieldset>
+<%= textile_editor_initialize -%>
