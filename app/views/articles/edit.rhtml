@@ -20,7 +20,8 @@
 			</li>
 			<li>
 				<label for="article_body">Body:</label>
-				<%= f.text_area :body, :class => 'text' %>
+				<%= textile_editor :article, :body %>
+				<%=textile_helper_link%>
 			</li>
 			<li>
 				<label for="article_category">Category:</label>
@@ -33,6 +34,7 @@
 	<fieldset class="submit">
 		<%= submit_tag "Edit" %> | <%= link_to 'Cancel', categories_path %>
 	</fieldset>
+	<%= textile_editor_initialize -%>
 	<% end %>
 
 <% end %>

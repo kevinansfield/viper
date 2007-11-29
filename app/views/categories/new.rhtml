@@ -16,13 +16,15 @@
 				</li>
 				<li>
 					<label for="category_description">Description:</label>
-					<%= f.text_area :description, :class => 'text' %>
+					<%= textile_editor :category, :description %>
+					<%=textile_help_link%>
 				</li>
 			</ol>
 		</fieldset>
 		<fieldset class="submit">
 			<%= submit_tag "Create" %> | <%= link_to 'Cancel', categories_path %>
 		</fieldset>
+		<%= textile_editor_initialize -%>
 	<% end %>
 
 <% end %>

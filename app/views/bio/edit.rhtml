@@ -13,6 +13,7 @@
 		<li>
 			<label for="bio_about">About Me:</label>
 			<%= textile_editor :bio, :about -%>
+			<%=textile_help_link%>
 		</li>
 	</ol>
 </fieldset>
@@ -61,6 +62,7 @@
 		<li>
 			<label for="bio_about">Author Box</label>
 			<%= f.text_area :author_about, :class => 'text' %>
+			<%=textile_help_link%>
 		</li>
 	</ol>
 </fieldset>

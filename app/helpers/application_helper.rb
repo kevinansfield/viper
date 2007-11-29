@@ -93,6 +93,10 @@ module ApplicationHelper
   def basic_short_date(date)
     h date.strftime("#{date.day.en.ordinal} %b, %Y")
   end
+  
+  def textile_helper_link
+    '<a href="/textile.html" class="lightwindow" title="Textile Formatting">Textile Formatting enabled</a>'
+  end
 
   private
   

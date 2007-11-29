@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Textile Formatting</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<body>
+<h1>Textile Formatting</h1>
+<p>This website uses a formatting system called 'textile' to allow bold, underline, etc, in posts.  This is a short introduction to how it works.</p>
+<h2><a name="block_formatting" id="block_formatting"></a>Block Formatting</h2>
+<p>Textile processes text in units of blocks and lines. A block might also be considered a paragraph, since blocks are separated from one another by a blank line. Blocks can begin with a signature that helps identify the rest of the block content. Block signatures include:</p>
+<dl>
+  <dt><strong>p.</strong></dt>
+  <dd>A paragraph block. This is the default signature if no signature is explicitly given. Paragraphs are formatted with all the inline rules (see inline formatting) and each line receives the appropriate markup rules for the flavor of HTML in use.</dd>
+  <dt><strong>bc.</strong></dt>
+  <dd>A &quot;bc&quot; signature is short for &quot;block code&quot;, which implies a preformatted section like the 'pre' block, but it also gets a &lt;code&gt; tag.</dd>
+  <dd>
+    <p>Note that within a &quot;bc&quot; block, &lt; and &gt; are translated into HTML entities automatically.</p>
+  </dd>
+  <dt><strong>bq.</strong></dt>
+  <dd>A &quot;bq&quot; signature is short for &quot;block quote&quot;. Paragraph text formatting is applied to these blocks and they are enclosed in a &lt;blockquote&gt; tag as well as &lt;p&gt; tags within. The bq. signature is useful when quoting a block of text in your entry and/or comment.</dd>
+  <br />
+  <dt><strong>h1., h2., h3., h4., h5., h6.</strong></dt>
+  <dd>Headline signatures that produce &lt;h1&gt;, etc. tags.</dd>
+  <p>All signatures should end with a period and be followed with a space. Between the signature and the period, you may use several parameters to further customize the block. These include:</p>
+  <dt><strong><code>&gt;</code>, <code>&lt;</code>, <code>=</code>, <code>&lt;&gt;</code></strong></dt>
+  <dd>Modifier for alignment: Right-justification, left-justification, centered, and full-justification.</dd>
+  <h2><a name="extended_blocks" id="extended_blocks"></a>Extended Blocks</h2>
+  <p>Normally a block ends with the first blank line encountered. However, there are situations where you may want a block to continue for multiple paragraphs of text. To cause a given block signature to stay active, use two periods in your signature instead of one. This will tell Textile to keep processing using that signature until it hits the next signature.</p>
+  <p>For example:</p>
+  <pre>bq.. This is paragraph one of a block quote.
+
+This is paragraph two of a block quote (continued because of the double period).
+
+p. Now we're back to a regular paragraph.</pre>
+  <p>You can apply this technique to any signature. It's especially useful for &quot;bc&quot; or &quot;bq&quot; blocks where your code may have many blank lines scattered through it.</p>
+  <h2><a name="escaping" id="escaping"></a>Escaping</h2>
+  <p>Sometimes you want Textile to just get out of the way and let you put some regular HTML markup in your document. You can disable Textile formatting for a given block using the '==' escape mechanism:</p>
+  <pre>p. Regular textile paragraph
+
+==
+Escaped portion -- will not be formatted by Textile at all
+==
+
+p. Back to normal.</pre>
+  <p>You can also use this technique within a Textile block, temporarily disabling the inline formatting functions:</p>
+  <pre>p. This is ==*a test*== of escaping.</pre>
+  <h2><a name="inline_formatting" id="inline_formatting"></a>Inline Formatting</h2>
+  <p>Formatting within a block of text is covered by the &quot;inline&quot; formatting rules. These operators must be placed up against text/punctuation to be recognized. These include:</p>
+  <dl>
+    <dt><strong>*<code>strong</code>*</strong></dt>
+    <dd>Translates into &lt;strong&gt;strong&lt;/strong&gt;.</dd>
+    <dt><strong><code>_emphasis_</code></strong></dt>
+    <dd>Translates into &lt;em&gt;emphasis&lt;/em&gt;.</dd>
+    <dt><strong>**<code>bold</code>**</strong></dt>
+    <dd>Translates into &lt;b&gt;bold&lt;/b&gt;.</dd>
+    <dt><strong><code>__italics__</code></strong></dt>
+    <dd>Translates into &lt;i&gt;italics&lt;/i&gt;.</dd>
+    <dt><strong><code>++bigger++</code></strong></dt>
+    <dd>Translates into &lt;big&gt;bigger&lt;/big&gt;.</dd>
+    <dt><strong><code>--smaller--</code></strong></dt>
+    <dd>Translates into: &lt;small&gt;smaller&lt;/small&gt;.</dd>
+    <dt><strong><code>-deleted text-</code></strong></dt>
+    <dd>Translates into &lt;del&gt;deleted text&lt;/del&gt;.</dd>
+    <dt><strong><code>+inserted text+</code></strong></dt>
+    <dd>Translates into &lt;ins&gt;inserted text&lt;/ins&gt;.</dd>
+    <dt><strong><code>^superscript^</code></strong></dt>
+    <dd>Translates into &lt;sup&gt;superscript&lt;/sup&gt;.</dd>
+    <dt><strong><code>~subscript~</code></strong></dt>
+    <dd>Translates into &lt;sub&gt;subscript&lt;/sub&gt;.</dd>
+    <dt><strong><code>@code@</code></strong></dt>
+    <dd>Translates into &lt;code&gt;code&lt;/code&gt;. Note that within a '@...@' section, &lt; and &gt; are translated into HTML entities automatically.</dd>
+  </dl>
+  <h2><a name="links" id="links"></a>Links</h2>
+  <p>Textile defines a shorthand for formatting hyperlinks. The format looks like this:</p>
+  <pre>&quot;Text to display&quot;:http://example.com</pre>
+  <p>The URL portion of the link supports relative paths as well as other protocols like ftp, mailto, news, telnet, etc.</p>
+  <pre>&quot;E-mail me please&quot;:mailto:someone@example.com</pre>
+  <p>You can also use single quotes instead of double-quotes if you prefer. As with the inline formatting rules, a hyperlink must be surrounded by whitespace to be recognized (an exception to this is common punctuation which can reside at the end of the URL). If you have to place a URL next to some other text, use the bracket or brace trick to do that:</p>
+  <pre>You[&quot;gotta&quot;:http://example.com]seethis!</pre>
+  <h2><a name="images" id="images"></a>Images</h2>
+  <p>Images are identified by the following pattern:</p>
+  <pre>!/path/to/image!</pre>
+  <p>Image attributes may also be specified:</p>
+  <pre>!/path/to/image 10x20!</pre>
+  <p>Which will render an image 10 pixels wide and 20 pixels high. You may also redimension the image using a percentage.</p>
+  <pre>!/path/to/image 20%!</pre>
+  <p>Which will render the image at 20% of it's regular width and height. The path of the image may refer to a locally hosted image or can be a full URL. You can also use the following modifiers after the opening '!' character:</p>
+  <dl>
+    <dt><strong><code>&lt;</code></strong></dt>
+    <dd>Align the image to the left.</dd>
+    <dt><strong><code>&gt;</code></strong></dt>
+    <dd>Align the image to the right.</dd>
+    <dt><strong><code>-</code> (dash)</strong></dt>
+    <dd>Aligns the image to the middle.</dd>
+    <dt><strong><code>^</code></strong></dt>
+    <dd>Aligns the image to the top.</dd>
+    <dt><strong><code>~</code> (tilde)</strong></dt>
+    <dd>Aligns the image to the bottom.</dd>
+  </dl>
+  <h2><a name="character_replacements" id="character_replacements"></a>Character Replacements</h2>
+  <p>A few simple, common symbols are automatically replaced:</p>
+  <pre>(c)
+(r)
+(tm)</pre>
+  <h2><a name="lists" id="lists"></a>Lists</h2>
+  <p>Textile also supports ordered and unordered lists. You simply place an asterisk or pound sign, followed with a space at the start of your lines.</p>
+  <p>Simple lists:</p>
+  <pre>* one
+* two
+* three</pre>
+  <p>Ordered lists:</p>
+  <pre># one
+# two
+# three</pre>
+  <h2><a name="tables" id="tables"></a>Tables</h2>
+  <p>Textile supports tables. Tables must be in their own block and must have pipe characters delimiting the columns.</p>
+  <pre>|a|b|c|
+|1|2|3|</pre>
+</dl>
+</body>
+</html>
