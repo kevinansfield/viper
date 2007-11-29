@@ -13,7 +13,7 @@ class Bio < ActiveRecord::Base
   # A constant for everything except the bio
   FAVORITES = QUESTIONS - %w(about author_about)
   
-  acts_as_ferret
+  acts_as_ferret :remote => false
   acts_as_textiled :about, :interests, :music, :films, :television, :books, :heroes
   
   validates_length_of QUESTIONS, :maximum => 65000
