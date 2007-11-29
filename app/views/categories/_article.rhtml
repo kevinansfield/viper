@@ -1,11 +1,11 @@
 <div class="article-short">
   <h3 class="article-short-title">
-	<%= link_to sanitize(article.title), article_path(article.category, article) %>
+	<%= link_to sanitize(article.title), category_article_path(article.category, article) %>
 	<span class="article-short-byline">by <%= article.user.full_name %></span>
   </h3>
   <div class="article-short-main">
   	<div class="article-short-author">
-  		<%= link_to image_tag(article.user.avatar.public_filename(:tiny)), article_path(article.category, article)%>
+  		<%= link_to image_tag(article.user.avatar.public_filename(:tiny)), category_article_path(article.category, article)%>
   	</div>
 	<div class="article-short-body">
 		<div class="article-short-details">
