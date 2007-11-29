@@ -1,13 +1,13 @@
 class Comment < ActiveRecord::Base
   belongs_to :user
-  belongs_to :post
+  belongs_to :commentable, :polymorphic => true
   
   acts_as_textiled :body
   
-  validates_presence_of :body, :post, :user
+  validates_presence_of :body
   validates_length_of :body, :maximum => DB_TEXT_MAX_LENGTH
   # Prevent duplicate comments.
-  validates_uniqueness_of :body, :scope => [:post_id, :user_id]
+  validates_uniqueness_of :body, :scope => [:user_id]
 
   # Return true for a duplicate comment (same user and body).
   def duplicate?
