@@ -12,8 +12,8 @@
 	<ol>
 		<li>
 			<label for="bio_about">About Me:</label>
-			<%= textile_editor :bio, :about -%>
-			<%=textile_help_link%>
+			<%= textile_editor :bio, :about, :rows => 10 -%>
+			<%=textile_helper_link%>
 		</li>
 	</ol>
 </fieldset>
@@ -25,27 +25,27 @@
 	<ol>
 		<li>
 			<label for="bio_interests">Interests:</label>
-			<%= f.text_area :interests, :class => 'text' %>
+			<%= f.text_area :interests, :class => 'text', :rows => 5 %>
 		</li>
 		<li>
 			<label for="bio_music">Music:</label>
-			<%= f.text_area :music, :class => 'text' %>
+			<%= f.text_area :music, :class => 'text', :rows => 5 %>
 		</li>
 		<li>
 			<label for="bio_films">Films:</label>
-			<%= f.text_area :films, :class => 'text' %>
+			<%= f.text_area :films, :class => 'text', :rows => 5 %>
 		</li>
 		<li>
 			<label for="bio_television">Television:</label>
-			<%= f.text_area :television, :class => 'text' %>
+			<%= f.text_area :television, :class => 'text', :rows => 5 %>
 		</li>
 		<li>
 			<label for="bio_books">Books/Magazines:</label>
-			<%= f.text_area :books, :class => 'text' %>
+			<%= f.text_area :books, :class => 'text', :rows => 5 %>
 		</li>
 		<li>
 			<label for="bio_heroes">Heroes:</label>
-			<%= f.text_area :heroes, :class => 'text' %>
+			<%= f.text_area :heroes, :class => 'text', :rows => 5 %>
 		</li>
 	</ol>
 </fieldset>
@@ -61,8 +61,8 @@
 	<ol>
 		<li>
 			<label for="bio_about">Author Box</label>
-			<%= f.text_area :author_about, :class => 'text' %>
-			<%=textile_help_link%>
+			<%= f.text_area :author_about, :class => 'text', :rows => 10 %>
+			<%=textile_helper_link%>
 		</li>
 	</ol>
 </fieldset>

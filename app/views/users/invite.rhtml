@@ -12,14 +12,14 @@
 			<label for="invite_recipients">
 				Friends to invite: <em><img src="/images/required_star.gif" alt="required" /></em>
 			</label>
-			<%= f.text_area :recipients, :class => 'text' %>
+			<%= f.text_area :recipients, :class => 'text', :rows => 5 %>
 			<p class="help">(use commas to seperate emails)</p>
 		</li>
 		<li>
 			<label for="invite_message">
 				Message:
 			</label>
-			<%= f.text_area :message, :class => 'text' %>
+			<%= f.text_area :message, :class => 'text', :rows => 5 %>
 			<p class="help">(optional)</p>
 		</li>
 	</ol>

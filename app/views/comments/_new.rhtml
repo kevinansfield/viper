@@ -4,8 +4,8 @@
   <legend>New Comment</legend>
   <ol>
   	<li>
-		<%= textile_editor :comment, :body %>
-		<%=textile_help_link%>
+		<%= textile_editor :comment, :body: :rows => 5 %>
+		<%=textile_helper_link%>
   	</li>
 	<li>
 		<%= submit_tag "Create" %>

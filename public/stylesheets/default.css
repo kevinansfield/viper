@@ -193,7 +193,6 @@ html[xmlns] .clearfix{display:block;}
 }
 .form textarea {
 	width: 99%;
-	height: 100px;
 }
 .form .text {
 	border: 1px solid #ABADB3;
