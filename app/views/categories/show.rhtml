@@ -9,7 +9,7 @@
 <% unless @latest_articles.length < 1 -%>
 	<% for article in @latest_articles -%>
 	<div class="blog-post clearfix">
-		<%= render :partial => 'article', :locals => { :article => article } %>
+		<%= render :partial => 'articles/article_short', :locals => { :article => article } %>
 	</div>
 	<% end %>
 <% else -%>

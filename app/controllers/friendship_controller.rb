@@ -67,6 +67,6 @@ class FriendshipController < ApplicationController
   private
   
   def setup_friends
-    @friend = User.find(params[:id])
+    @friend = User.find_by_permalink(params[:id])
   end
 end

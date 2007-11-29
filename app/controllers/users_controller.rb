@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     self.sidebar_one = 'sidebar_show'
     self.maincol_one = nil
     self.maincol_two = nil
-    @user = User.find(params[:id])
+    @user = User.find_by_permalink(params[:id])
     @user.setup_for_display!
     @posts = @user.blog.posts.paginate :page => params[:page]
   rescue ActiveRecord::RecordNotFound
@@ -167,14 +167,14 @@ class UsersController < ApplicationController
   def articles
     self.disable_maincols
     self.sidebar_one = 'sidebar_show'
-    @user = User.find(params[:id])
+    @user = User.find_by_permalink(params[:id])
     @articles = @user.articles
   end
   
   private
   
   def protect_user
-    @user = User.find(params[:id])
+    @user = User.find_by_permalink(params[:id])
     unless @user == current_user
       flash[:error] = "That isn't your user!"
       redirect_to hub_url

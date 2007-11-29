@@ -6,14 +6,14 @@ class ProfileController < ApplicationController
 
   # GET /user/1/profile;edit
   def edit
-    @user = User.find(params[:user_id])
+    @user = User.find_by_permalink(params[:user_id])
     @profile = @user.profile || Profile.new
   end
 
   # PUT /user/1/profile
   # PUT /user/1/profile.xml
   def update
-    @user = User.find(params[:user_id])
+    @user = User.find_by_permalink(params[:user_id])
     @profile = @user.profile || Profile.new
     @profile.user = @user
 
@@ -32,7 +32,7 @@ class ProfileController < ApplicationController
   private
   
   def protect_profile
-    @user = User.find(params[:user_id])
+    @user = User.find_by_permalink(params[:user_id])
     unless @user == current_user
       flash[:error] = "That isn't your profile!"
       redirect_to hub_url

@@ -58,7 +58,7 @@ class MessagesController < ApplicationController
   private
   
   def find_user_and_message
-    @user = User.find(params[:user_id])
+    @user = User.find_by_permalink(params[:user_id])
     @message = params[:id].nil? ? nil : @message = Message.find(params[:id])
   end
   

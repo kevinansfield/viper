@@ -5,12 +5,10 @@ class AvatarController < ApplicationController
   tab :hub
   
   def edit
-    @user = User.find(params[:user_id])
     @avatar = @user.avatar || Avatar.new
   end
   
   def update
-    @user = User.find(params[:user_id])
     @avatar = Avatar.new(params[:avatar])
     #@user.avatar = @avatar
     if @avatar.save
@@ -26,7 +24,7 @@ class AvatarController < ApplicationController
   private
   
   def protect_avatar
-    @user = User.find(params[:user_id])
+    @user = User.find_by_permalink(params[:user_id])
     unless @user == current_user
       flash[:error] = "That isn't your avatar!"
       redirect_to hub_url

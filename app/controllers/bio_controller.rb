@@ -6,14 +6,12 @@ class BioController < ApplicationController
   
   # GET /user/1/bio;edit
   def edit
-    @user = User.find(params[:user_id])
     @bio = @user.bio || Bio.new
   end
 
   # PUT /user/1/bio
   # PUT /user/1/bio.xml
   def update
-    @user = User.find(params[:user_id])
     @bio = @user.bio || Bio.new
     @bio.user = @user
 
@@ -32,7 +30,7 @@ class BioController < ApplicationController
   private
   
   def protect_bio
-    @user = User.find(params[:user_id])
+    @user = User.find_by_permalink(params[:user_id])
     unless @user == current_user
       flash[:error] = "That isn't your bio!"
       redirect_to hub_url
