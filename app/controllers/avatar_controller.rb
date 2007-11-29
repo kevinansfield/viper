@@ -12,8 +12,10 @@ class AvatarController < ApplicationController
   def update
     @user = User.find(params[:user_id])
     @avatar = Avatar.new(params[:avatar])
-    @user.avatar = @avatar
-    if @user.avatar.save
+    #@user.avatar = @avatar
+    if @avatar.save
+      @user.avatar = @avatar
+      @user.save
       flash[:notice] = 'Avatar was successfully saved'
       redirect_to hub_url
     else
