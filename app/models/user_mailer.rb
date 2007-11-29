@@ -46,6 +46,14 @@ class UserMailer < ActionMailer::ARMailer
     @body[:url]    = "#{HOST}#{message_path(message.receiver, message)}"
   end
   
+  def blog_comment_notification(comment)
+    setup_email(comment.post.blog.user)
+    @subject       = "New comment on your post #{comment.post.title} at #{SITENAME}"
+    @body[:poster] = comment.user
+    @body[:title]  = comment.post.title
+    @body[:url]    ="#{HOST}#{blog_post_path(comment.post.blog, comment.post)}#comment_#{comment.id}"
+  end
+  
   def invite(invite)
     setup_email(invite[:user])
     @recipients         = invite[:recipient]
