@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   tab :hub
   tab :community, :only => :show
   tab :register, :only => :new
+  tab :articles, :only => :articles
   
   # Display users list/search
   def index
@@ -161,6 +162,13 @@ class UsersController < ApplicationController
     else
       render :action => :invite
     end
+  end
+  
+  def articles
+    self.disable_maincols
+    self.sidebar_one = 'sidebar_show'
+    @user = User.find(params[:id])
+    @articles = @user.articles
   end
   
   private

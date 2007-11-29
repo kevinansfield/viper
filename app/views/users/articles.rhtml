@@ -1,9 +1,9 @@
-<% @title = 'Articles' -%>
+<% @title = "#{@user.full_name}'s Articles" -%>
 <% titled_box @title,
 			  'orange',
 			  :box_id => 'feature' do %>
 
-<h2>Recent Articles</h2>
+<h2><%=@user.full_name%>'s Recent Articles</h2>
 <% unless @articles.length < 1 -%>
 	<% for article in @articles -%>
 	<div class="blog-post clearfix">
@@ -11,7 +11,7 @@
 	</div>
 	<% end %>
 <% else -%>
-	<p>Sorry, there are no articles at the moment, why don't you check back soon?</p>
+	<p>Sorry, this user hasn't written any articles yet, why don't you check back soon?</p>
 <% end -%>
 
 <% end %>

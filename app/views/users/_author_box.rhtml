@@ -8,5 +8,5 @@
 			<%= link_to 'view their profile', user_path(user) %> instead?</p>
 	<%end -%>
 	<p><%= user.full_name %> has written <%= pluralize user.articles.length, 'article' %> for Viper.</p>
-	<p><a href="#">Read all articles by <%= user.full_name %>&hellip;</a></p>
+	<p><%= link_to "Read all articles by #{user.full_name}&hellip;", :controller => 'users', :action => 'articles', :id => user %></p>
 </div>
