@@ -52,7 +52,15 @@ class UserMailer < ActionMailer::ARMailer
     @subject       = "New comment on your post #{@post.title} at #{SITENAME}"
     @body[:poster] = comment.user
     @body[:title]  = @post.title
-    @body[:url]    ="#{HOST}#{blog_post_path(@post.blog, @post)}#comment_#{comment.id}"
+    @body[:url]    = "#{HOST}#{blog_post_path(@post.blog, @post)}#comment_#{comment.id}"
+  end
+  
+  def wall_comment_notification(comment)
+    @wall          = Wall.find(comment.commentable_id)
+    setup_email(@wall.user)
+    @subject       = "#{comment.user.full_name} has posted on your wall"
+    @body[:poster] = comment.user
+    @body[:url]    = "#{HOST}#{user_path(@wall.user)}#comment_#{comment.id}"
   end
   
   def invite(invite)

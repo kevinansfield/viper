@@ -4,7 +4,7 @@ class CommentObserver < ActiveRecord::Observer
     if comment.commentable_type == 'Post'
       UserMailer.deliver_blog_comment_notification(comment)
     elsif comment.commentable_type == 'Wall'
-      # TODO: deliver wall comment notification
+      UserMailer.deliver_wall_comment_notification(comment)
     end
   end
   
