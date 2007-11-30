@@ -12,6 +12,10 @@
 <% end -%>
 </div>
 
+<% if logged_in? -%>
 <%= render :partial => 'wall/form', :locals => { :user => @user } %>
+<% else -%>
+<p>Sorry, you need to be <%= link_to 'logged in', login_url %> to write on a users wall.</p>
+<% end -%>
 
 <% end %>
