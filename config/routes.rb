@@ -20,7 +20,9 @@ ActionController::Routing::Routes.draw do |map|
     user.resource :avatar
     user.resource :bio
     user.resources :messages, :collection => { :sent => :get }, :member => { :reply => :get }
-    user.resources :comments
+    user.resource :wall do |wall|
+      wall.resources :comments
+    end
   end
   map.resource  :session
   

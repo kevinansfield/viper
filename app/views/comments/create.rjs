@@ -1,4 +1,4 @@
-page.replace_html "comments_for_post_#{@post.id}",
+page.replace_html "comments_for_#{@comment.commentable_type.downcase}_#{@parent.id}",
                   :partial => "comments/comment",
-                  :collection => @post.comments
+                  :collection => @parent.comments
 page.visual_effect :highlight, "comment_#{@comment.id}", :duration => 2

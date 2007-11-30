@@ -7,7 +7,7 @@ class Comment < ActiveRecord::Base
   validates_presence_of :body
   validates_length_of :body, :maximum => DB_TEXT_MAX_LENGTH
   # Prevent duplicate comments.
-  validates_uniqueness_of :body, :scope => [:user_id]
+  # validates_uniqueness_of :body, :scope => [:user_id] # TODO: Needs reworking for polymorphic comments
 
   # Return true for a duplicate comment (same user and body).
   def duplicate?
@@ -18,7 +18,7 @@ class Comment < ActiveRecord::Base
   end
 
   # Check authorization for destroying comments.
-  def authorized?(user)
-    post.blog.user == user
+  def authorized?(user, parent)
+    parent.user == user
   end
 end

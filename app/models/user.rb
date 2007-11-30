@@ -3,10 +3,10 @@ class User < ActiveRecord::Base
   has_one  :profile
   has_one  :avatar
   has_one  :bio
-  
   has_one  :blog
-  has_many :comments
+  has_one  :wall
   
+  has_many :comments
   has_many :news
   has_many :articles
   

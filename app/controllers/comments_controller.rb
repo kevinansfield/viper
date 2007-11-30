@@ -1,19 +1,22 @@
 class CommentsController < ApplicationController
-  before_filter :load_post
+  before_filter :load_parent
   
   tab :blogs
   
+  def new
+    @comment = Comment.new
+  end
+  
   def create
-    @comment = Comment.new(params[:comment])
+    @comment = @parent.comments.build(params[:comment])
     @comment.user = current_user
-    @comment.post = @post
   
     respond_to do |format|
-      if @comment.duplicate? or @post.comments << @comment
+      if @comment.valid? and @comment.save
         format.html { redirect_to post_path(@post) }
         format.js # create.rjs
       else
-        format.html { redirect_to new_comment_url(@post.blog, @post) }
+        format.html { redirect_to parent_url(@parent) }
         format.js { render :nothing => true }
       end
     end
@@ -23,10 +26,10 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     user = current_user
   
-    if @comment.authorized?(user)
+    if @comment.authorized?(user, @parent)
       @comment.destroy
     else
-      flash[:error] = "That's not your blog!"
+      flash[:error] = "That's not your comment!"
       redirect_to hub_url
       return
     end
@@ -38,7 +41,18 @@ class CommentsController < ApplicationController
   
   private
   
-  def load_post
-    @post = Post.find(params[:post_id])
+  def load_parent
+    case
+      when params[:post_id] then @parent = Post.find(params[:post_id])
+      when params[:wall_id] then @parent = Wall.find(params[:wall_id])
+    end
   end
+  
+  def parent_url(parent)
+    case
+      when params[:post_id] then blog_post_url(parent)
+      when params[:wall_id] then user_wall_url(parent)
+    end
+  end
+  
 end
