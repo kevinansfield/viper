@@ -1,6 +1,7 @@
 xml.instruct! :xml, :version=>"1.0", :encoding=>"UTF-8"
 
-xml.rss "version" => "2.0" do
+xml.rss "version" => "2.0",
+  'xmlns:atom' => "http://www.w3.org/2005/Atom" do
   xml.channel do
     xml.title "#{SITENAME} Blog Posts"
     xml.link blogs_url
@@ -11,10 +12,10 @@ xml.rss "version" => "2.0" do
       xml.item do
         xml.pubDate post.created_at.rfc822
         xml.title h(post.title)
-        xml.author h(post.user.full_name)
         xml.link blog_post_url(post.blog, post)
         xml.guid blog_post_url(post.blog, post)
         xml.description post.body
+        xml.tag! "atom:link", :rel => 'self', :type => 'application/rss+xml', :href => blogs_url(:format => :rss)
       end
     end
   end
