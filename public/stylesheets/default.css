@@ -177,18 +177,18 @@ html[xmlns] .clearfix{display:block;}
 	float: none;
 	width: auto;
 	border-style: none;
-	padding-left: 12em;
+	padding-left: 156px;
 	background-color: transparent;
 }
 .form label {
 	position: relative;
 	float: left;
-	width: 10em;
+	width: 130px;
 	margin-right: 1em;
 }
 .form label em {
 	position: absolute;
-	left: 10em;
+	left: 145px;
 	top: 0;
 }
 .form textarea {
@@ -199,11 +199,13 @@ html[xmlns] .clearfix{display:block;}
 	padding: 2px;
 }
 .form .help {
+display: block;
+position: relative;
+left: 145px;
 	text-align: left;
-	margin: 0;
 	padding: 0;
-	font-size: 10px;
 	font-style: italic;
+font-size: 10px;
 }
 .fieldWithErrors input {
 	background-color: #FFDDDD;
@@ -857,3 +859,9 @@ a, a#visited {
 	background-color: #eeeeee;
 	margin: 0 0 4px 0;
 }
+
+/* Tag Cloud */
+.cloud1 { font-size: 1.0em; }
+.cloud2 { font-size: 1.2em; }
+.cloud3 { font-size: 1.4em; }
+.cloud4 { font-size: 1.6em; }

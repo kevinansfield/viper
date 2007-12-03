@@ -3,9 +3,9 @@ class BlogsController < ApplicationController
   tab :blogs
   
   def index
-    self.maincol_one = nil
-    self.maincol_two = nil
+    self.disable_maincols
     self.sidebar_one = nil
+    self.sidebar_two = 'blogs/sidebar_index'
     
     respond_to do |format|
       format.html do
@@ -16,6 +16,15 @@ class BlogsController < ApplicationController
         render :action => 'index.rxml', :layout => false
       end
     end
+  end
+  
+  def tag
+    self.disable_maincols
+    self.sidebar_one = nil
+    self.sidebar_two = 'blogs/sidebar_index'
+    
+    @tag = Tag.find_by_name(params[:id])
+    @posts = Post.find_tagged_with(@tag.name)
   end
   
   def show

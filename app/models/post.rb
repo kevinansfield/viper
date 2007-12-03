@@ -11,6 +11,7 @@ class Post < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 10
   
+  acts_as_taggable
   acts_as_textiled :body
 
   # Return true for a duplicate post (same title and body).

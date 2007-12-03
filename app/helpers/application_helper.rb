@@ -1,5 +1,6 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  include TagsHelper
   
   # Only outputs the link if current_user is an admin
   def link_to_if_admin(text, link)

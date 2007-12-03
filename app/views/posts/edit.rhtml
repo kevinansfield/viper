@@ -19,6 +19,10 @@
 				<%= textile_editor :post, :body, :rows => 40 %>
 				<%=textile_helper_link%>
 			</li>
+			<li>
+				<label for="post_tag_list">Tags:</label>
+				<%= f.text_field :tag_list, :class => 'text' %>
+			</li>
 		</ol>
 	</fieldset>
 	<fieldset class="submit">
