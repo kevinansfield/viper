@@ -182,6 +182,7 @@ class User < ActiveRecord::Base
     self.avatar ||= nil
     self.bio ||= Bio.new
     self.blog ||= Blog.new
+    self.wall ||= Wall.new
   end
   
   def full_name
