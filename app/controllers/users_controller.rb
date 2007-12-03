@@ -32,6 +32,9 @@ class UsersController < ApplicationController
     @user = User.find_by_permalink(params[:id])
     @user.setup_for_display!
     @posts = @user.blog.posts.paginate :page => params[:page]
+    unless @user == current_user
+      @user.hit!
+    end
   rescue ActiveRecord::RecordNotFound
     flash[:error] = "Sorry, that user does not exist!"
     redirect_to '/'

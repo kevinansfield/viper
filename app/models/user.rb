@@ -170,6 +170,13 @@ class User < ActiveRecord::Base
     find :first, :conditions => ['email = ? and activation_code IS NULL', email]
   end
   
+  def hit!
+    self.hits += 1
+    self.save!
+  end
+  
+  def views() hits end
+  
   def setup_for_display!
     self.profile ||= Profile.new
     self.avatar ||= nil
