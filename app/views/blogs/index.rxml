@@ -7,6 +7,7 @@ xml.rss "version" => "2.0",
     xml.link blogs_url
     xml.language "en-gb"
     xml.description "#{SITENAME} Blog Posts"
+    xml.tag! "atom:link", :rel => 'self', :type => 'application/rss+xml', :href => blogs_url+".rss"
 
     for post in @posts do
       xml.item do
@@ -15,7 +16,6 @@ xml.rss "version" => "2.0",
         xml.link blog_post_url(post.blog, post)
         xml.guid blog_post_url(post.blog, post)
         xml.description post.body
-        xml.tag! "atom:link", :rel => 'self', :type => 'application/rss+xml', :href => blogs_url(:format => :rss)
       end
     end
   end
