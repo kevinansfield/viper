@@ -1,3 +1,6 @@
+<% content_for :header do -%>
+<%= auto_discovery_link_tag(:rss, :action => 'index', :format => :rss) %>
+<% end -%>
 <% @title = "#{@user.full_name}'s Blog" -%>
 
 <% titled_box @title,

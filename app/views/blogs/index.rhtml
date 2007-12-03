@@ -1,4 +1,7 @@
-<% @title = 'Blogs' %>
+<% content_for :header do -%>
+<%= auto_discovery_link_tag(:rss, :action => 'index', :format => :rss) %>
+<% end -%>
+<% @title = 'Blogs' -%>
 
 <% titled_box @title,
 			  'orange',
