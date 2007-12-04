@@ -57,6 +57,30 @@ and provide more useful help when dealing with location based questions.</p>
 		</li>
 	</ol>
 </fieldset>
+<fieldset>
+	<legend>Edit Profile - Contact Information</legend>
+	<ol>
+		<% for im_contact in @profile.im_contacts %>
+			<% fields_for "profile[im_contact_attributes][]", im_contact do |im| %>
+				<li>
+					<label for="">IM Contact:</label>
+					<%= im.text_field :contact, :index => nil, :class => 'text' %>
+					<select id="profile[im_contact_attributes]__service" name="profile[im_contact_attributes][][service]">
+						<option></option>
+						<%= options_for_select ImContact::SERVICES, im_contact.service %>
+					</select>
+					<% unless im_contact.new_record? %>
+						<%= im.hidden_field :id, :index => nil %>
+					<% end %>
+				</li>
+			<% end %>
+		<% end %>
+		<li>
+			<label for="profile_website">Website:</label>
+			<%= f.text_field :website, :class => 'text' %>
+		</li>
+	</ol>
+</fieldset>
 <fieldset class="submit">
     <%= submit_tag "Update" %> | <%= link_to 'Cancel', hub_url %>
 </fieldset>

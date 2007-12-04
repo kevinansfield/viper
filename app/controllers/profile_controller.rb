@@ -8,6 +8,8 @@ class ProfileController < ApplicationController
   def edit
     @user = User.find_by_permalink(params[:user_id])
     @profile = @user.profile || Profile.new
+    blank_im_contacts = 3 - @profile.im_contacts.length
+    blank_im_contacts.times { @profile.im_contacts.build }
   end
 
   # PUT /user/1/profile

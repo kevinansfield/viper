@@ -1,10 +1,14 @@
 class Profile < ActiveRecord::Base
   belongs_to :user
+  has_many :im_contacts
+  
   acts_as_ferret :remote => false
   
   acts_as_mappable
   before_validation_on_create :geocode_address
   before_validation_on_update :geocode_address
+  
+  after_update :save_im_contacts
   
   ALL_FIELDS = %w(first_name last_name gender birthdate occupation city county post_code)
   STRING_FIELDS = %w(first_name last_name occupation county post_code)
@@ -28,6 +32,29 @@ class Profile < ActiveRecord::Base
   validates_format_of    :post_code,
                          :with => /^$|^(GIR 0AA|[A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0-9]|[A-HK-Y][0-9]([0-9]|[ABEHMNPRV-Y]))|[0-9][A-HJKS-UW]) [0-9][ABD-HJLNP-UW-Z]{2}$|^\d{5}$|^\d{5}-\d{4}$)/i,
                          :message => "must be a valid UK post code or US zip code"
+                         
+  def im_contact_attributes=(im_contact_attributes)
+    im_contact_attributes.each do |attributes|
+      unless attributes[:name].blank? and attributes[:service].blank?
+        if attributes[:id].blank?
+          im_contacts.build(attributes)
+        else
+          im_contact = im_contacts.detect { |im| im.id == attributes[:id].to_i }
+          im_contact.attributes = attributes
+        end
+      end
+    end
+  end
+  
+  def save_im_contacts
+    im_contacts.each do |im_contact|
+      if !im_contact.contact.blank?
+        im_contact.save(false)
+      elsif im_contact.contact.blank? and !im_contact.id.nil?
+        im_contact.destroy
+      end
+    end
+  end
   
   # Return the full name (first plus last).
   def full_name

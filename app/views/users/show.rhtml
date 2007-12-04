@@ -6,8 +6,28 @@
 	<h1><%= @user.first_name %>'s Profile</h1>
 	
 	<p>
-		<b>About Me:</b>
+		<h4>About Me:</h4>
 		<%= fallback_if_blank @user.bio.about, "(This user has not yet written their short bio.)" %>
+		
+		<h4>Contact Information:</h4>
+		<% unless @user.profile.im_contacts.length < 1 and @user.profile.website.blank? %>
+		<table>
+			<% @user.profile.im_contacts.each do |im| %>
+			<tr>
+				<td><b><%= im.service %>:</b></td>
+				<td><%= im.contact %></td>
+			</tr>
+			<% end %>
+			<% unless @user.profile.website.blank? %>
+			<tr>
+				<td><b>Website:</b></td>
+				<td><a href="<%= @user.profile.website %>"><%= @user.profile.website %></a></td>
+			</tr>
+			<% end %>
+		</table>
+		<% else %>
+		<p>This user has not entered any additional contact information yet. Why not <%= link_to 'send them a message', new_message_path(@user) %>?</p>
+		<% end %>
 	</p>
 <% end %>
 
