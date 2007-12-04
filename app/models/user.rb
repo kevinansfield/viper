@@ -15,10 +15,10 @@ class User < ActiveRecord::Base
   has_many :requested_friends,  :through => :friendships, :source => :friend, :conditions => "status = 'requested'"
   has_many :pending_friends,    :through => :friendships, :source => :friend, :conditions => "status = 'pending'"
            
-  has_many :messages_as_sender,   :foreign_key => 'sender_id',    :class_name => 'Message', :order => 'created_at DESC'
-  has_many :messages_as_receiver, :foreign_key => 'receiver_id',  :class_name => 'Message', :order => 'created_at DESC'
-  has_many :unread_messages,      :foreign_key => 'receiver_id',  :class_name => 'Message', :conditions => 'read_at IS NULL', :order => 'created_at DESC'
-  has_many :read_messages,        :foreign_key => 'receiver_id',  :class_name => 'Message', :conditions => 'read_at IS NOT NULL', :order => 'created_at DESC'
+  has_many :messages_as_sender,   :foreign_key => 'sender_id',    :class_name => 'Message', :conditions => 'sender_deleted IS NULL', :order => 'created_at DESC'
+  has_many :messages_as_receiver, :foreign_key => 'receiver_id',  :class_name => 'Message', :conditions => 'receiver_deleted IS NULL', :order => 'created_at DESC'
+  has_many :unread_messages,      :foreign_key => 'receiver_id',  :class_name => 'Message', :conditions => 'read_at IS NULL AND receiver_deleted IS NULL', :order => 'created_at DESC'
+  has_many :read_messages,        :foreign_key => 'receiver_id',  :class_name => 'Message', :conditions => 'read_at IS NOT NULL and receiver_deleted IS NULL', :order => 'created_at DESC'
            
   has_permalink :login
   

@@ -15,8 +15,7 @@ class MessagesController < ApplicationController
   
   def show
     if current_user == @message.receiver
-      @message.read_at = Time.now
-      @message.save
+      @message.read!
     end
   end
   
@@ -43,7 +42,7 @@ class MessagesController < ApplicationController
     respond_to do |format|
       format.html do
         flash[:notice] = 'Message Sent'
-        redirect_to messages_path(current_user)
+        redirect_to messages_path(@user)
         false;
       end
     end
@@ -52,7 +51,9 @@ class MessagesController < ApplicationController
   end
   
   def destroy
-    
+    @message.delete(@user)
+    flash[:notice] = 'Message Deleted'
+    redirect_to messages_path(@user)
   end
   
   private

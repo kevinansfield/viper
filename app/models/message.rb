@@ -12,8 +12,29 @@ class Message < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 10
   
+  def read!
+    self.read_at = Time.now
+    self.save
+  end
+  
   def read?
     !self.read_at.nil?
+  end
+  
+  def delete(user)
+    if user == self.receiver
+      self.receiver_deleted = true
+    elsif user == self.sender
+      self.sender_deleted = true
+    end
+    self.save
+    self.destroy if purge?
+  end
+  
+  private
+  
+  def purge?
+    receiver_deleted and sender_deleted
   end
   
 end
