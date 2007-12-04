@@ -30,6 +30,9 @@ class UsersController < ApplicationController
     self.maincol_one = nil
     self.maincol_two = nil
     @user = User.find_by_permalink(params[:id])
+    if @user.nil? and @user = User.find(params[:id])
+      redirect_to user_url(@user)
+    end
     @user.setup_for_display!
     @posts = @user.blog.posts.paginate :page => params[:page]
     unless @user == current_user
