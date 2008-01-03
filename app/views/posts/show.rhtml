@@ -15,10 +15,10 @@
 	</div>
 <% end %>
 
-<% titled_box "This post has #{pluralize(@post.comments.length, 'response')} so far", 'orange', :box_id => 'comments' do %>
+<% titled_box "This post has #{pluralize(@comments.length, 'response')} so far", 'orange', :box_id => 'comments' do %>
 	<div class="blog-comments" id="comments_for_post_<%=@post.id%>">
-<% unless @post.comments.length < 1 %>
-		<%= render :partial => "comments/comment", :collection => @post.comments %>
+<% unless @comments.length < 1 %>
+		<%= render :partial => "comments/comment", :collection => @comments %>
 <% else %>
 		<p>This post doesn't have any comments yet! Why not <a href="#new_comment">be the first</a>?</p>
 <% end %>

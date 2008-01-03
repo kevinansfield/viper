@@ -2,6 +2,6 @@
 	<p>
 		<%= link_to post.title, post_path(post.blog, post) %>
 		<span class="date"><%= post.created_at %></span>
-		<span class="comments"><%= pluralize post.comments.length, 'comment' %></span>
+		<span class="comments"><%= pluralize post.comments.approved.length, 'comment' %></span>
 	</p>
 </div>

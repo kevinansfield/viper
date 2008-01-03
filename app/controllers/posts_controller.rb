@@ -27,6 +27,7 @@ class PostsController < ApplicationController
     self.disable_maincols
     self.sidebar_one = 'posts/sidebar_blog'
     @post = Post.find(params[:id])
+    @comments = @post.comments.approved
     @user = @blog.user
 
     respond_to do |format|

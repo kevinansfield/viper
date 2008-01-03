@@ -78,15 +78,22 @@ MAINCOL_TWO = "layouts/maincol_two"
 SIDEBAR_ONE = "layouts/sidebar_one"
 SIDEBAR_TWO = "layouts/sidebar_two"
 
+# Used for outgoing email
 VIPER_EMAIL = "dev@digitalblueprint.co.uk"
 
+# Automatic ticket creation
 LIGHTHOUSE_EMAIL = "ticket+digitalblueprint.4589-ykxvnex2@lighthouseapp.com"
 LIGHTHOUSE_DEV = "dev@digitalblueprint.co.uk"
 
+# Automatic error notification
 ExceptionNotifier.exception_recipients = [ 'kevin.ansfield@gmail.com' ]
 ExceptionNotifier.sender_address = 'dev@digitalblueprint.co.uk'
 ExceptionNotifier.email_prefix = "[#{SITENAME.upcase} SITE ERROR] "
 
+# Akismet spam checking
+AKISMET_KEY = "42504fa0e729"
+
+# Mail server details
 ActionMailer::Base.smtp_settings = {
   :address => "mta01.digitalblueprint.co.uk",
   :port => 25,

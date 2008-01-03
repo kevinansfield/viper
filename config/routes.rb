@@ -50,6 +50,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :categories do |category|
     category.resources :articles
   end
+  
+  # Comment resources
+  map.resources :comments, :collection => {:destroy_multiple => :delete},
+                :member => {:approve => :put, :reject => :put}
 
   # Allow downloading Web Service WSDL as a file with an extension
   # instead of a file named 'wsdl'
