@@ -6,7 +6,7 @@
 <%= render :partial => 'comment', :collection => @approved_comments %>
 <% end %>
 
-<% if current_user.admin? %>
+<% if current_user && current_user.admin? %>
 <% titled_box 'Rejected Comments',
 			  'blue',
 			  :box_id => 'feature' do %>
