@@ -13,6 +13,10 @@
 	<div class="article-body">
 		<%= @article.body %>
 	</div>
+	<div class="article-footer">
+		<h3>Bookmark this Article</h3>
+		<%= bookmarks(category_article_url(@article.category, @article), @title) %>
+	</div>
 </div>
 
 <% end %>

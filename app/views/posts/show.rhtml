@@ -13,6 +13,10 @@
 			The views and opinions expressed in this post are those of it's author.
 		</p>
 	</div>
+	<div class="blog-post-bookmarks">
+		<h3>Bookmark this Blog</h3>
+		<%= bookmarks(blog_post_url(@post.blog, @post), @title) %>
+	</div>
 <% end %>
 
 <% titled_box "This post has #{pluralize(@comments.length, 'response')} so far", 'orange', :box_id => 'comments' do %>
