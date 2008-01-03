@@ -32,6 +32,7 @@ class SiteController < ApplicationController
         redirect_to :action => :contact
       end
     else
+      @contact_types = {'General Contact' => :general, 'Bug Report' => :bug, 'Feature Request' => :feature}
       render :action => :contact
     end
   end
