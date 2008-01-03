@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   
   def index
     @approved_comments = Comment.recent(20, :approved => true)
-    @rejected_comments = Comment.recent(100, :approved => false) if current_user.admin?
+    @rejected_comments = Comment.recent(100, :approved => false) if logged_in? && current_user.admin?
   end
   
   def new
