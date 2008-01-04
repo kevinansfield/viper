@@ -54,6 +54,10 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   before_create :make_activation_code 
   
+  # prevents a user from submitting a crafted form that bypasses activation
+  # anything else you want your user to change should be added here.
+  attr_accessible :login, :email, :new_email, :password, :password_confirmation
+  
   def to_param
     permalink
   end
@@ -72,23 +76,26 @@ class User < ActiveRecord::Base
   # Activates the user in the database.
   def activate
     @activated = true
-    self.attributes = {:activated_at => Time.now.utc, :activation_code => nil}
+    self.activated_at = Time.now.utc
+    self.activation_code = nil
     save(false)
   end
 
+  #alias active? activated?
   def activated?
     # the existence of an activation code means they have not activated yet
     activation_code.nil?
   end
 
   # Returns true if the user has just been activated.
+  #alias pending? recently_activated?
   def recently_activated?
     @activated
   end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
-    u = find :first, :conditions => ['login = ?', login] # need to get the salt
+    u = find :first, :conditions => ['login = ? AND activated_at IS NOT NULL', login] # need to get the salt
     u && u.authenticated?(password) ? u : nil
   end
 

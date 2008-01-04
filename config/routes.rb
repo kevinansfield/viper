@@ -24,7 +24,7 @@ ActionController::Routing::Routes.draw do |map|
       wall.resources :comments
     end
   end
-  map.resource  :session
+  map.resource  :sessions
   
   # User named routes
   map.activate  'user/activate/:activation_code', :controller => 'users', :action => 'activate'

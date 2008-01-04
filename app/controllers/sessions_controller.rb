@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
       redirect_back_or_default('/')
-      flash[:notice] = "#{self.current_user.login} logged in successfully"
+      flash[:notice] = "#{self.current_user.first_name} logged in successfully"
     elsif logged_in? && !self.current_user.activation_code.nil?
       flash[:error] = "Sorry, you will need to activate your account before continuing, please check your email for your activation code"
       @login = params[:login]
