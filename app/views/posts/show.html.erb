@@ -1,5 +1,9 @@
 <% @title = h(@post.title) -%>
 
+<% content_for :header do %>
+<%= auto_discovery_link_tag(:atom, :action => 'index', :format => :atom) %>
+<% end %>
+
 <% titled_box link_to("#{@post.blog.user.full_name}'s Blog", blog_posts_path(@post.blog))+" >> #{h(@post.title)}",
 			  'pink',
 			  :box_id => 'feature' do %>	  

@@ -14,9 +14,8 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @posts.to_xml }
-      format.rss do
+      format.atom do
         @posts = @blog.posts.find(:all, :order => 'created_at desc', :limit => 10)
-        render :action => 'index.rxml', :layout => false
       end
     end
   end

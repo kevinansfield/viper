@@ -11,9 +11,8 @@ class BlogsController < ApplicationController
       format.html do
         @posts = Post.find_latest_by_unique_authors(10)
       end
-      format.rss do
+      format.atom do
         @posts = Post.find_latest(25)
-        render :action => 'index.rxml', :layout => false
       end
     end
   end
