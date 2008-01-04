@@ -5,7 +5,7 @@
 
 <% titled_box @title,
 			  'pink',
-			  :edit_link => link_to_if_owner(@user, '(New Post)', new_post_path),
+			  :edit_link => link_to_if_owner(@user, '(New Post)', new_blog_post_path),
 			  :box_id => 'feature' do %>
 
 <%= will_paginate(@posts) if @posts.length > Post.per_page %>

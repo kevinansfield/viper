@@ -4,7 +4,7 @@
 			  :box_id => 'feature' do %>
 <%= error_messages_for :avatar %>
 
-<% form_for(:avatar, :url => avatar_path, 
+<% form_for(:avatar, :url => user_avatar_path, 
                      :html => { :multipart => true, :method => :put, :class => 'form' }) do |f| -%>
 <fieldset>
   <legend>Edit Avatar</legend>

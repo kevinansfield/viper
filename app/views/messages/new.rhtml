@@ -3,10 +3,10 @@
 			  'blue',
 			  :box_id => 'feature' do %>
 
-	<% form_for :message, @message, :url => messages_path(@user), :html => { :class => 'form' } do |f| %>
+	<% form_for :message, @message, :url => user_messages_path(@user), :html => { :class => 'form' } do |f| %>
 		<%= render :partial => 'form', :locals => {:f => f} %>
 		<fieldset class="submit">
-			<%= submit_tag 'Send' %> | <%= link_to 'Cancel', messages_path(current_user) %>
+			<%= submit_tag 'Send' %> | <%= link_to 'Cancel', user_messages_path(current_user) %>
 		</fieldset>
 	<% end %>
 

@@ -8,8 +8,8 @@
 	
 	<p>
 		<b>My Bio:</b>
-		<%= fallback_if_blank @user.bio.about, link_to('Write a bit about yourself in your bio.', edit_bio_path(@user)) %>
-		<%= link_to('(edit)', edit_bio_path(@user)) if !@user.bio.about.blank? %>
+		<%= fallback_if_blank @user.bio.about, link_to('Write a bit about yourself in your bio.', edit_user_bio_path(@user)) %>
+		<%= link_to('(edit)', edit_user_bio_path(@user)) if !@user.bio.about.blank? %>
 	</p>
 <% end %>
 	

@@ -1,8 +1,8 @@
 <% titled_box 'Inbox', 'blue',
 			  :css_class => css_class do %>
 	<ul>
-		<li><%= link_to(pluralize(@user.new_messages.count, "New messages"), messages_path(@user)) %></li>
-		<li><%= link_to 'Sent Messages', sent_messages_path(@user) %></li>
+		<li><%= link_to(pluralize(@user.new_messages.count, "New messages"), user_messages_path(@user)) %></li>
+		<li><%= link_to 'Sent Messages', sent_user_messages_path(@user) %></li>
 	<% unless @user.requested_friends.empty? %>
 		<li><%= pluralize(@user.requested_friends.count, "New friend requests") %></li>
 	<% end %>

@@ -7,7 +7,7 @@ and provide more useful help when dealing with location based questions.</p>
 
 <%= error_messages_for :profile %>
 
-<% form_for(:profile, :url => profile_path(@user), :html => { :method => :put, :class => 'form' }) do |f| %>
+<% form_for(:profile, :url => user_profile_path(@user), :html => { :method => :put, :class => 'form' }) do |f| %>
 <fieldset>
 	<legend>Edit Profile - Basic Details</legend>
 	<ol>

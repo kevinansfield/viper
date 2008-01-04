@@ -7,7 +7,7 @@
 			<% end -%>
 		</span>
 	</div>
-	<h2><%= link_to post.title, post_path(post.blog, post) %></h2>
+	<h2><%= link_to post.title, blog_post_path(post.blog, post) %></h2>
 	<span class="byline">by <%= link_to post.blog.user.full_name, user_path(post.blog.user) %></span>
 	<span class="post-date"><%= post.created_at %></span>
 </div>

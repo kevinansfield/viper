@@ -2,7 +2,7 @@
 
 <% titled_box @title,
 			  'orange',
-			  :edit_link => link_to_if_admin('(Add Article)', new_article_path(@category)),
+			  :edit_link => link_to_if_admin('(Add Article)', new_category_article_path(@category)),
 			  :box_id => 'feature' do %>
 			  
 	<h2><%= @title %></h2>

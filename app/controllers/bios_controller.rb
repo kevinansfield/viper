@@ -1,4 +1,4 @@
-class BioController < ApplicationController
+class BiosController < ApplicationController
   
   before_filter :login_required, :protect_bio
   

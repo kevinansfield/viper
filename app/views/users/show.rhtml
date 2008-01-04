@@ -26,7 +26,7 @@
 			<% end %>
 		</table>
 		<% else %>
-		<p>This user has not entered any additional contact information yet. Why not <%= link_to 'send them a message', new_message_path(@user) %>?</p>
+		<p>This user has not entered any additional contact information yet. Why not <%= link_to 'send them a message', new_user_message_path(@user) %>?</p>
 		<% end %>
 	</p>
 <% end %>

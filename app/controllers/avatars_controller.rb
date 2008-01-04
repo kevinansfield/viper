@@ -1,4 +1,4 @@
-class AvatarController < ApplicationController
+class AvatarsController < ApplicationController
   
   before_filter :login_required, :protect_avatar
   

@@ -7,8 +7,8 @@
 		<%= RedCloth.new(@message.body).to_html %>
 			  
 		<p>
-			<% unless current_user == @message.sender %><%= link_to 'Reply', reply_message_path(current_user, @message) %> | <% end %>
+			<% unless current_user == @message.sender %><%= link_to 'Reply', reply_user_message_path(current_user, @message) %> | <% end %>
             <%= link_to 'Delete', user_message_url(@user, @message), :confirm => 'Are you sure?', :method => :delete %>
-			or <%= link_to 'Go Back', messages_path(@user) %>
+			or <%= link_to 'Go Back', user_messages_path(@user) %>
 		</p>
 <% end %>

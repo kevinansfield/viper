@@ -1,5 +1,5 @@
 # This controller handles the login/logout function of the site.  
-class SessionController < ApplicationController
+class SessionsController < ApplicationController
   
   tab :login
 

@@ -1,5 +1,5 @@
 <ul>
 	<% for post in posts %>
-	<li><%= link_to post.title, post_path(post.blog, post) %></li>
+	<li><%= link_to post.title, blog_post_path(post.blog, post) %></li>
 	<% end %>
 </ul>

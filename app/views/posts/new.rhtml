@@ -6,7 +6,7 @@
 
 	<%= error_messages_for :post %>
 	
-	<% form_for(:post, :url => posts_path, :html => { :class => 'form' }) do |f| %>
+	<% form_for(:post, :url => blog_posts_path, :html => { :class => 'form' }) do |f| %>
 	<fieldset>
 		<legend>New Blog Post</legend>
 		<ol>
@@ -27,7 +27,7 @@
 		</ol>
 	</fieldset>
 	<fieldset class="submit">
-		<%= submit_tag "Create" %> | <%= link_to 'Cancel', posts_path %>
+		<%= submit_tag "Create" %> | <%= link_to 'Cancel', blog_posts_path %>
 	</fieldset>
 	<%= textile_editor_initialize -%>
 	<% end %>
