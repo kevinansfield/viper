@@ -5,15 +5,15 @@
 	<title><%= "#{@title} - " || '' %><%= "#{SITENAME}: #{TAGLINE}" %></title>
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
-	<%= stylesheet_link_tag 'default' %>
-	<%= stylesheet_link_tag 'lightwindow' %>
+	<%= stylesheet_link_tag 'default', :cache => true %>
+	<%= stylesheet_link_tag 'lightwindow', :cache => true %>
 	<!-- [if lte IE 7]>
 		<style type="text/css" media="all">
 			@import "/stylesheets/fieldset-styling-ie.css";
 		</style>
 	<![endif]-->
-	<%= javascript_include_tag :defaults %>
-	<%= javascript_include_tag 'lightwindow' %>
+	<%= javascript_include_tag :defaults, :cache => true %>
+	<%= javascript_include_tag 'lightwindow', :cache => true %>
 	<%= yield :header %>
 </head>
 <body>
