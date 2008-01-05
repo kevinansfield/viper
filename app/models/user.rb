@@ -1,5 +1,9 @@
 require 'digest/sha1'
+
+class AuthenticationException < StandardError; end
+  
 class User < ActiveRecord::Base
+  
   has_one  :profile
   has_one  :avatar
   has_one  :bio
@@ -95,8 +99,11 @@ class User < ActiveRecord::Base
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
-    u = find :first, :conditions => ['login = ? AND activated_at IS NOT NULL', login] # need to get the salt
-    u && u.authenticated?(password) ? u : nil
+    u = find :first, :conditions => ['login = ?', login] # need to get the salt
+    raise AuthenticationException.new("We cannot find an account matching that login.") if u.nil?
+    raise AuthenticationException.new("The password you entered does not match our records.") unless u.authenticated?(password)
+    raise AuthenticationException.new("You must activate your account before you can log in.") unless u.activation_code.nil?
+    u
   end
 
   # Encrypts some data with the salt.
