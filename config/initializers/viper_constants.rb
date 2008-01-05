@@ -2,6 +2,7 @@
 HOST = 'http://localhost:3000'
 SITENAME = 'Viper'
 TAGLINE = 'Your Social Community Starts Here'
+DOMAIN = 'localhost'
 
 # Partial defaults
 MAINCOL_ONE = "layouts/maincol_one"
