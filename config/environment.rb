@@ -67,31 +67,10 @@ end
 # Include your application configuration below
 require 'action_mailer/ar_mailer'
 
-# Hostname, Sitename, etc. used in mailouts and page titles
-HOST = 'http://localhost:3000'
-SITENAME = 'Viper'
-TAGLINE = 'Your Social Community Starts Here'
-
-# Partial defaults
-MAINCOL_ONE = "layouts/maincol_one"
-MAINCOL_TWO = "layouts/maincol_two"
-SIDEBAR_ONE = "layouts/sidebar_one"
-SIDEBAR_TWO = "layouts/sidebar_two"
-
-# Used for outgoing email
-VIPER_EMAIL = "dev@digitalblueprint.co.uk"
-
-# Automatic ticket creation
-LIGHTHOUSE_EMAIL = "ticket+digitalblueprint.4589-ykxvnex2@lighthouseapp.com"
-LIGHTHOUSE_DEV = "dev@digitalblueprint.co.uk"
-
 # Automatic error notification
 ExceptionNotifier.exception_recipients = [ 'kevin.ansfield@gmail.com' ]
 ExceptionNotifier.sender_address = 'dev@digitalblueprint.co.uk'
 ExceptionNotifier.email_prefix = "[#{SITENAME.upcase} SITE ERROR] "
-
-# Akismet spam checking
-AKISMET_KEY = "42504fa0e729"
 
 # Mail server details
 ActionMailer::Base.smtp_settings = {
@@ -102,22 +81,6 @@ ActionMailer::Base.smtp_settings = {
   :user_name => "dev@digitalblueprint.co.uk",
   :password => "smegsmeg23"
 }
-
-GeoKit::default_units = :miles
-GeoKit::default_formula = :sphere
-
-GeoKit::Geocoders::timeout = 3
-
-GeoKit::Geocoders::proxy_addr = nil
-GeoKit::Geocoders::proxy_port = nil
-GeoKit::Geocoders::proxy_user = nil
-GeoKit::Geocoders::proxy_pass = nil
-
-GeoKit::Geocoders::yahoo = '4.bBZfXV34HvEo8jfXTIqaHvOinRUnxvVZ2exGz2dW_ecRLcgjcwc9NCDq1k7vSP'
-GeoKit::Geocoders::google = 'ABQIAAAAkkvTxkn9DnTASsN5secz2BREk-kYFT-DIeF0r853jGgjIAL4cxTgJhw0ONa2EURxYaINZ-CAvVGaUQ'
-GeoKit::Geocoders::geocoder_us = false 
-GeoKit::Geocoders::geocoder_ca = false
-GeoKit::Geocoders::provider_order = [:google,:yahoo]
 
 # Use linguistics to extend Array, String, and Numeric
 require 'linguistics'
