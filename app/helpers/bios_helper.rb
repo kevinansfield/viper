@@ -1,2 +1,2 @@
-module BioHelper
+module BiosHelper
 end

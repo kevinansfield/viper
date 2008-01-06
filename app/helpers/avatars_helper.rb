@@ -1,2 +1,2 @@
-module AvatarHelper
+module AvatarsHelper
 end
