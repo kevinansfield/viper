@@ -5,20 +5,37 @@ class AvatarsController < ApplicationController
   tab :hub
   
   def edit
+    self.sidebar_one = nil
+    self.disable_maincols
     @avatar = @user.avatar || Avatar.new
+    
+    unless @avatar.new_record?
+      @small_avatar = @user.avatar.versions.find_by_version_name('small_square') || Avatar.new
+      large = @avatar.versions.find_by_version_name('large')
+      ratio = large.width.to_f / @avatar.width.to_f
+      @crop_options = Avatar.calculate_crop_options(@small_avatar.crop_options, ratio)
+    end
   end
   
   def update
     @avatar = Avatar.new(params[:avatar])
-    #@user.avatar = @avatar
     if @avatar.save
       @user.avatar = @avatar
       @user.save
-      flash[:notice] = 'Avatar was successfully saved'
-      redirect_to hub_url
+      flash[:notice] = 'Avatar was successfully uploaded'
+      redirect_to edit_user_avatar_url(@user)
     else
+      self.sidebar_one = nil
+      self.disable_maincols
       render :action => :edit
     end
+  end
+  
+  def crop
+    avatar = @user.avatar.versions.find_by_version_name('small_square')
+    Avatar.crop_all(avatar, params[:cropper])
+    flash[:notice] = "Avatar successfully cropped"
+    redirect_to edit_user_avatar_url(@user)
   end
   
   private

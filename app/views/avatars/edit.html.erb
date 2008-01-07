@@ -1,22 +1,65 @@
 <% @title = 'Edit Avatar' -%>
+<% content_for :header do -%>
+	<%= javascript_include_tag 'builder', 'cropper', :cache => 'avatar' %>
+	<%= stylesheet_link_tag 'cropper' %>
+<% end -%>
 <% titled_box @title,
 			  'orange',
 			  :box_id => 'feature' do %>
-<%= error_messages_for :avatar %>
+			  
+	<%= error_messages_for :avatar %>
+	
+	<% form_for(:avatar, :url => user_avatar_path, 
+	                     :html => { :multipart => true, :method => :put, :class => 'form' }) do |f| -%>
+		<fieldset>
+		  <legend>Upload a new Avatar</legend>
+		  <ol>
+		  	<li>
+		  		<label for="avatar">Avatar File:</label>
+		    	<%= f.is_attachment_file_field %>
+		  	</li>
+		  </ol>
+		</fieldset>
+		<fieldset class="submit">
+			<%= f.hidden_field :user_id, :value => @user.id %>
+		    <%= submit_tag 'Upload Avatar' %> | <%= link_to 'Cancel', hub_url %>
+		</fieldset>
+	<% end %>
+	
+	<% unless @avatar.new_record? %>
+	<% form_tag(crop_user_avatar_url(@user), :method => :put, :class => 'form') do %>
+		<fieldset>
+			<legend>Re-Crop Square Avatars</legend>
+			<table class="crop_table">
+				<tr>
+					<th>Current Version</th>
+					<th>Preview of Crop</th>
+				</tr>
+				<tr>
+					<td><%= image_tag(@small_avatar.public_path, :size => @small_avatar.image_size) -%></td>
+					<td><div id="previewWrap"></div></td>
+				</tr>
+			</table>
+			<table class="crop_table">
+				<tr>
+					<th>Create New Crop</h3>
+				</tr>
+				<tr>
+					<td>
+						<div><%= image_tag(@avatar.public_path(:large), :size => @avatar.versions.find_by_version_name('large').image_size, :id => 'cropMe') -%></div>
+						<%= cropper_javascript_tag('cropMe',
+						   @small_avatar.cropper_restrictions.merge({:preview_wrap => 'previewWrap', :on_load_coords => @crop_options}), 
+                           {:include_default_on_end_crop_javascript => true }) %>
+					</td>
+				</tr>
+			</table>
+		</fieldset>
+		
+		<fieldset class="submit">
+			<%= cropper_form_fields(@small_avatar.crop_options) %>
+			<%= submit_tag 'Crop Avatar' %> | <%= link_to 'Cancel', hub_url %>
+		</fieldset>
+	<% end %>
+	<% end %>
 
-<% form_for(:avatar, :url => user_avatar_path, 
-                     :html => { :multipart => true, :method => :put, :class => 'form' }) do |f| -%>
-<fieldset>
-  <legend>Edit Avatar</legend>
-  <ol>
-  	<li>
-  		<label for="avatar">Avatar File:</label>
-    	<%= f.file_field :uploaded_data %>
-  	</li>
-  </ol>
-</fieldset>
-<fieldset class="submit">
-    <%= submit_tag 'Edit Avatar' %> | <%= link_to 'Cancel', hub_url %>
-</fieldset>
-<% end -%>
 <% end %>

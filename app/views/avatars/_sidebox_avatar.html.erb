@@ -4,7 +4,7 @@
 
 	<% unless @user.avatar.nil? -%>
 		<div style="text-align: center">
-			<%= link_to image_tag(@user.avatar.public_filename(:small), :alt => @user.full_name), @user.avatar.public_filename(:large), :title => @user.full_name, :class => 'lightwindow' %>
+			<%= link_to image_tag(@user.avatar.public_path(:small), :alt => @user.full_name), @user.avatar.public_path(:large), :title => @user.full_name, :class => 'lightwindow' %>
 		</div>
 	<% else -%>
 		<div style="text-align: center">No Avatar</div>

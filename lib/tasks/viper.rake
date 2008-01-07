@@ -20,14 +20,20 @@ namespace :viper do
   desc "Uses attachment_fu backup file to create new is_attachment models"
   task :convert_to_is_attachment => :environment do
     backup_file = File.join(File.dirname(__FILE__), '../../db/attachment_fu_backup.xml')
+    attachment_fu_xml = ''
     File.open(backup_file, 'r') do |f1|
       attachment_fu_xml = f1.read
     end
     
+    attachment_fu_dir = File.join(File.dirname(__FILE__), '../../public/avatars/0000')
+    
     user_avatars = Hash.from_xml(attachment_fu_xml)
     user_avatars["records"].each do |record|
-      # record["user_id"] record["avatar_id"]
-      
+      user = User.find(record["user_id"].to_i)
+      avatar = Avatar.find(record["avatar_id"].to_i)
+      attachment_fu_file = File.join(attachment_fu_dir, record["avatar_id"].to_s.rjust(4, '0'), avatar.filename)
+      avatar.uploaded_data = LocalFile.new(attachment_fu_file)
+      avatar.save
     end
   end
 end

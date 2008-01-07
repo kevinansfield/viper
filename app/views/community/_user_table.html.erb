@@ -3,7 +3,7 @@
 <div class="result clearfix">
 	<div class="image">
 		<span>
-			<% unless user.avatar.nil? %><%= link_to image_tag(user.avatar.public_filename(:thumb)), user_path(user) %><% end %>
+			<% unless user.avatar.nil? %><%= link_to image_tag(user.avatar.public_path(:thumb)), user_path(user) %><% end %>
 		</span>
 	</div>
 	<div class="info">

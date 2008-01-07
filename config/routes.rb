@@ -17,7 +17,7 @@ ActionController::Routing::Routes.draw do |map|
   # User resources
   map.resources :users, :member => { :change_email => :put, :change_password => :put, :invite => :get, :send_invite => :put, :articles => :get } do |user|
     user.resource :profile
-    user.resource :avatar
+    user.resource :avatar, :member => { :crop => :put }
     user.resource :bio
     user.resources :messages, :collection => { :sent => :get }, :member => { :reply => :get }
     user.resource :wall do |wall|
@@ -54,6 +54,11 @@ ActionController::Routing::Routes.draw do |map|
   # Comment resources
   map.resources :comments, :collection => {:destroy_multiple => :delete},
                 :member => {:approve => :put, :reject => :put}
+                
+  # Admin namespace
+#  map.namespace :admin do |admin|
+#    admin.connect '', :controller => :dashboard
+#  end
 
   # Allow downloading Web Service WSDL as a file with an extension
   # instead of a file named 'wsdl'

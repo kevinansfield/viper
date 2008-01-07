@@ -5,7 +5,7 @@
   </h3>
   <div class="article-short-main">
   	<div class="article-short-author">
-  		<%= link_to image_tag(article.user.avatar.public_filename(:tiny)), category_article_path(article.category, article)%>
+  		<%= link_to image_tag(article.user.avatar.public_path(:tiny)), category_article_path(article.category, article)%>
   	</div>
 	<div class="article-short-body">
 		<div class="article-short-details">

@@ -6,7 +6,7 @@
 		<div class="friends-listing">
 		<% @user.friends.each do |friend| -%>
 			<div class="friend">
-				<% unless friend.avatar.nil? %><%= link_to image_tag(friend.avatar.public_filename(:thumb)), user_path(friend) %><% end %>
+				<% unless friend.avatar.nil? %><%= link_to image_tag(friend.avatar.public_path(:thumb_square)), user_path(friend) %><% end %>
 				<div class="friend-name"><%= link_to "#{friend.full_name}", user_path(friend) %>
 				<% if @user == current_user -%>
 					<span class="friend-actions">
@@ -30,7 +30,7 @@
 		<div class="friends-listing">
 		<% @user.requested_friends.each do |requester| -%>
 			<div class="friend">
-				<% unless requester.avatar.nil? %><%= link_to image_tag(requester.avatar.public_filename(:thumb)), user_path(requester) %><% end %>
+				<% unless requester.avatar.nil? %><%= link_to image_tag(requester.avatar.public_path(:thumb_square)), user_path(requester) %><% end %>
 				<div class="friend-name"><%= link_to "#{requester.full_name}", user_path(requester) %>
 					<% if @user == current_user -%>
 					<span class="friend-actions">
@@ -57,7 +57,7 @@
 		<div class="friends-listing">
 		<% @user.pending_friends.each do |friend| -%>
 			<div class="friend">
-				<% unless friend.avatar.nil? %><%= link_to image_tag(friend.avatar.public_filename(:thumb)), user_path(friend) %><% end %>
+				<% unless friend.avatar.nil? %><%= link_to image_tag(friend.avatar.public_path(:thumb_square)), user_path(friend) %><% end %>
 				<div class="friend-name"><%= link_to "#{friend.full_name}", user_path(friend) %>
 					<% if @user == current_user -%>
 					<span class="friend-actions">

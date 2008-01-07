@@ -3,7 +3,7 @@
 	<div class="image">
 		<span>
 			<% unless post.blog.user.avatar.nil? -%>
-			<%= link_to image_tag(post.blog.user.avatar.public_filename(:tiny)), user_path(post.blog.user) %>
+			<%= link_to image_tag(post.blog.user.avatar.public_path(:tiny)), user_path(post.blog.user) %>
 			<% end -%>
 		</span>
 	</div>
