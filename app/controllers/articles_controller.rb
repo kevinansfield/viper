@@ -3,8 +3,7 @@ class ArticlesController < ApplicationController
   tab :articles
   
   def index
-    self.disable_maincols
-    self.sidebar_one = nil
+    redirect_to categories_path
   end
   
   def show
