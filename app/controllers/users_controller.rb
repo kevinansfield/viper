@@ -1,3 +1,5 @@
+class IncorrectResetCodeException < StandardError; end
+
 class UsersController < ApplicationController
   
   before_filter :login_required, :only => [:hub, :edit, :change_email, :change_password, :invite, :send_invite]
@@ -141,7 +143,7 @@ class UsersController < ApplicationController
    
   def reset_password
     @user = User.find_by_password_reset_code(params[:id])
-    raise if @user.nil?
+    raise IncorrectResetCodeException if @user.nil?
     return if @user unless params[:password]
       if (params[:password] == params[:password_confirmation])
         self.current_user = @user #for the next two lines to work
@@ -153,10 +155,10 @@ class UsersController < ApplicationController
         flash[:error] = "Password mismatch" 
       end  
       redirect_back_or_default(hub_url) 
-  rescue
+  rescue IncorrectResetCodeException
     logger.error "Invalid Reset Code entered" 
     flash[:error] = "Sorry - That is an invalid password reset code. Please check your code and try again. (Perhaps your email client inserted a carriage return?)" 
-    redirect_back_or_default(hub_url)
+    redirect_to(login_path)
   end
   
   def invite
