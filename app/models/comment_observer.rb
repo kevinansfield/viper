@@ -1,4 +1,5 @@
 class CommentObserver < ActiveRecord::Observer
+  observe Comment
   
   def after_create(comment)
     if comment.commentable_type == 'Post'

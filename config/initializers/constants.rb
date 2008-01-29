@@ -1,3 +1,7 @@
+# Database max limits
+DB_STRING_MAX_LENGTH = 255
+DB_TEXT_MAX_LENGTH = 65000
+
 # Hostname, Sitename, etc. used in mailouts and page titles
 HOST = 'http://localhost:3000'
 SITENAME = 'Viper'

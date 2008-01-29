@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<records type="array">
+  <record>
+    <user-id type="integer">2</user-id>
+    <avatar-id type="integer">95</avatar-id>
+  </record>
+</records>

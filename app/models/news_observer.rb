@@ -1,4 +1,5 @@
 class NewsObserver < ActiveRecord::Observer
+  observe News
   
   def after_create(news)
     if news.send_as_email?
