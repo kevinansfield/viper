@@ -1,0 +1,9 @@
+<% titled_box 'Quick Stats',
+			  'pink' do %>
+	<ul>
+		<li><b>Users:</b> <%= User.count_by_sql "SELECT COUNT(id) FROM users" %></li>
+		<li><b>Articles:</b> <%= Article.count_by_sql "SELECT COUNT(id) FROM articles" %></li>
+		<li><b>Posts:</b> <%= Post.count_by_sql "SELECT COUNT(id) FROM posts" %></li>
+		<li><b>Comments:</b> <%= Comment.count_by_sql "SELECT COUNT(id) FROM comments" %></li>
+	</ul>
+<% end %>

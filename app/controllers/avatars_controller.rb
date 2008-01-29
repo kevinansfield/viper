@@ -33,7 +33,7 @@ class AvatarsController < ApplicationController
   
   def crop
     avatar = @user.avatar.versions.find_by_version_name('small_square')
-    Avatar.crop_all(avatar, params[:cropper])
+    Avatar.crop_all_versions!(avatar, params[:cropper])
     flash[:notice] = "Avatar successfully cropped"
     redirect_to edit_user_avatar_url(@user)
   end

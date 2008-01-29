@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title><%= "#{@title} - " || '' %><%= "#{SITENAME}: #{TAGLINE}" %></title>
-	<meta name="keywords" content="" />
-	<meta name="description" content="" />
+	<title><%= "#{@title} - " || '' %><%= "#{SITENAME} Admin" %></title>
 	<%= stylesheet_link_tag 'default', 'lightwindow', :cache => 'site' %>
 	<!-- [if lte IE 7]>
 		<style type="text/css" media="all">
@@ -18,38 +16,20 @@
 <div id="header">
 	<div id="logo">
 		<h1><a href="/"><%= SITENAME %></a></h1>
-		<h2><a href="/"><%= TAGLINE %></a></h2>
+		<h2><a href="/">Admin Area</a></h2>
 	</div>
-	<!-- hidden until implementation is ready
-	<div id="search">
-		<form method="get" action="">
-			<fieldset>
-			<input id="searchinput" type="text" name="searchinput" value="" />
-			<input id="searchsubmit" type="submit" value="Search" />
-			</fieldset>
-		</form>
-	</div>
-	-->
 </div>
 <div id="menu">
 	<ul>
-		<%= nav_link 'Home', :home, :controller => 'site' %>
-		<%= nav_link 'News', :news, news_url %>
-		<%= nav_link 'Articles', :articles, categories_url %>
-		<%= nav_link 'Blogs', :blogs, blogs_url %>
-		<%= nav_link 'Members', :community, { :controller => 'community', :action => 'index', :id => nil } %>
-		<%= nav_link 'Contact', :contact, { :controller => 'site', :action => 'contact' } %>
+		<%= nav_link 'Dashboard', :dashboard, :controller => 'dashboard' %>
+		<%= nav_link 'News', :news, :controller => 'news' %>
 	</ul>
 	<ul class="right">
-	<% if logged_in? -%>
-		<%= nav_link 'Your Hub', :hub, hub_url %>
+		<%= nav_link 'Back to Site', :hub, hub_url %>
 		<%= nav_link 'Logout', :logout, logout_url %>
-	<% else -%>
-		<%= nav_link 'Login', :login, login_url %>
-		<%= nav_link 'Register', :register, signup_url %>
-	<% end -%>
 	</ul>
 </div>
+
 <div id="page">
 	<% if flash[:notice] -%>
     <div id="flash" class="notice"><%= flash[:notice] %></div>
@@ -85,26 +65,11 @@
 	
 	<div style="clear: both;">&nbsp;</div>
 </div>
-<div id="sub-nav">
-	<p>
-		<a href="/">Home</a> :: 
-		<%= link_to 'About', :controller => 'site', :action => 'about' %> :: 
-		<%= link_to 'News', news_url %> :: 
-		<%= link_to 'Articles', categories_url %> ::
-		<%= link_to 'Blogs', blogs_url %> ::
-		<%= link_to 'Members', :controller => 'community', :action => 'index', :id => nil %> :: 
-		<%= link_to 'Contact Us', :controller => 'site', :action => 'contact' %>
-	</p>
-</div>
+
 <div id="footer">
 	<p id="legal">Copyright &copy; 2007 DigitalBlueprint Ltd. All Rights Reserved | Designed &amp; Developed by <a href="http://www.digitalblueprint.co.uk/">DigitalBlueprint Ltd</a></p>
 	<p id="links"><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a> | <a href="http://validator.w3.org/check/referer" title="This page validates as XHTML 1.0 Transitional"><abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a> | <a href="http://jigsaw.w3.org/css-validator/check/referer" title="This page validates as CSS"><abbr title="Cascading Style Sheets">CSS</abbr></a></p>
 </div>
-<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
-</script>
-<script type="text/javascript">
-_uacct = "UA-152842-6";
-urchinTracker();
-</script>
+
 </body>
 </html>

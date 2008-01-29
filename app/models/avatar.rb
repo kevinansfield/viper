@@ -39,7 +39,7 @@ class Avatar < ActiveRecord::Base
     end
   end
   
-  def self.crop_all(avatar, cropper_options, scale_version = 'large')
+  def self.crop_all_versions!(avatar, cropper_options, scale_version = 'large')
     base = avatar.is_base_version? ? avatar : avatar.base_version
     scale = base.versions.find_by_version_name(scale_version)
     
@@ -53,4 +53,24 @@ class Avatar < ActiveRecord::Base
     
     avatar.reprocess_base_version
   end
+  
+#  def self.max_crop_all_versions!(avatar)
+#    base = avatar.base_version || avatar
+#    max = base.width < base.height ? base.width : base.height
+#    
+#    crop_calcs = Hash.new
+#    crop_calcs["x1"] = 0
+#    crop_calcs["y1"] = 0
+#    crop_calcs["x2"] = max
+#    crop_calcs["y2"] = max
+#    crop_calcs["width"] = max
+#    crop_calcs["height"] = max
+#    
+#    CROP_VERSIONS.each do |version|
+#      cropped_avatar = base.versions.find_by_version_name(version)
+#      cropped_avatar.update_attribute(:crop_options, crop_calcs)
+#    end
+#    
+#    avatar.reprocess_base_version
+#  end
 end

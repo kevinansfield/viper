@@ -165,10 +165,10 @@ class User < ActiveRecord::Base
     self.make_password_reset_code
   end
   
-  def reset_password
+  def reset_password!
     # First update the password_reset_code before setting the 
     # reset_password flag to avoid duplicate email notifications.
-    update_attributes(:password_reset_code => nil)
+    update_attribute(:password_reset_code, nil)
     @reset_password = true
   end
   
@@ -185,8 +185,8 @@ class User < ActiveRecord::Base
   end
   
   def hit!
-    self.hits += 1
-    self.save!
+      self.hits += 1
+      self.save!
   end
   
   def views() hits end

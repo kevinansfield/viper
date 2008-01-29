@@ -10,12 +10,7 @@ class UsersController < ApplicationController
   tab :community, :only => :show
   tab :register, :only => :new
   tab :articles, :only => :articles
-  
-  # Display users list/search
-  def index
-    @users = User.find(:all)
-  end
-  
+   
   # Display the user's hub
   def hub
     self.sidebar_one = 'sidebar_hub'
@@ -31,15 +26,12 @@ class UsersController < ApplicationController
     self.sidebar_one = 'sidebar_show'
     self.maincol_one = nil
     self.maincol_two = nil
+    
     @user = User.find_by_permalink(params[:id])
-    if @user.nil? and @user = User.find(params[:id])
-      redirect_to user_url(@user)
-    end
+    raise ActiveRecord::RecordNotFound if @user.nil?
     @user.setup_for_display!
     @posts = @user.blog.posts.paginate :page => params[:page]
-    unless @user == current_user
-      @user.hit!
-    end
+    @user.hit! unless @user == current_user
   rescue ActiveRecord::RecordNotFound
     flash[:error] = "Sorry, that user does not exist!"
     redirect_to '/'
@@ -145,16 +137,16 @@ class UsersController < ApplicationController
     @user = User.find_by_password_reset_code(params[:id])
     raise IncorrectResetCodeException if @user.nil?
     return if @user unless params[:password]
-      if (params[:password] == params[:password_confirmation])
-        self.current_user = @user #for the next two lines to work
-        current_user.password_confirmation = params[:password_confirmation]
-        current_user.password = params[:password]
-        @user.reset_password
-        flash[:notice] = current_user.save ? "Password reset" : "Password not reset" 
-      else
-        flash[:error] = "Password mismatch" 
-      end  
-      redirect_back_or_default(hub_url) 
+    
+    if (params[:password] == params[:password_confirmation])
+      @user.password = params[:password]
+      @user.password_confirmation = params[:password_confirmation]
+      flash[:notice] = @user.save ? "Password reset, you may now login" : "Password reset failed"
+      @user.reset_password!
+      redirect_to(login_path) 
+    else
+      flash[:error] = "Password mismatch"
+    end 
   rescue IncorrectResetCodeException
     logger.error "Invalid Reset Code entered" 
     flash[:error] = "Sorry - That is an invalid password reset code. Please check your code and try again. (Perhaps your email client inserted a carriage return?)" 
