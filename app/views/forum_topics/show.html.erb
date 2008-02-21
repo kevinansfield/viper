@@ -1,0 +1,48 @@
+<p>
+  <b>Title:</b>
+  <%=h @topic.title %>
+</p>
+
+<p>
+  <b>Hits:</b>
+  <%=h @topic.hits %>
+</p>
+
+<p>
+  <b>Sticky:</b>
+  <%=h @topic.sticky %>
+</p>
+
+<p>
+  <b>Posts count:</b>
+  <%=h @topic.posts_count %>
+</p>
+
+<p>
+  <b>Locked:</b>
+  <%=h @topic.locked %>
+</p>
+
+<p>
+  <b>Last post:</b>
+  <%=h @topic.last_post_id %>
+</p>
+
+<p>
+  <b>Last updated at:</b>
+  <%=h @topic.last_updated_at %>
+</p>
+
+<p>
+  <b>Last user:</b>
+  <%=h @topic.last_user_id %>
+</p>
+
+<p>
+  <b>Permalink:</b>
+  <%=h @topic.permalink %>
+</p>
+
+
+<%= link_to 'Edit', edit_forum_topic_path(@forum, @topic) %> |
+<%= link_to 'Back', forum_topics_path %>

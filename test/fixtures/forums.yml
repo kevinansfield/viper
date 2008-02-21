@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  description: MyString
+  topics_count: 1
+  posts_count: 1
+  position: 1
+  description_html: MyText
+  state: MyString
+  permalink: MyString
+
+two:
+  name: MyString
+  description: MyString
+  topics_count: 1
+  posts_count: 1
+  position: 1
+  description_html: MyText
+  state: MyString
+  permalink: MyString

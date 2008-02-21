@@ -1,6 +1,7 @@
 db/database.yml
 log/*.log
 tmp/**/*
+index/*
 
 public/stylesheets/site.css
 public/javascripts/site.js

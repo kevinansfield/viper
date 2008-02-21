@@ -1,0 +1,26 @@
+<h1>Listing forum_posts</h1>
+
+<table>
+  <tr>
+    <th>Belongs to</th>
+    <th>Belongs to</th>
+    <th>Belongs to</th>
+    <th>Body</th>
+  </tr>
+
+<% for forum_post in @forum_posts %>
+  <tr>
+    <td><%=h forum_post.belongs_to %></td>
+    <td><%=h forum_post.belongs_to %></td>
+    <td><%=h forum_post.belongs_to %></td>
+    <td><%=h forum_post.body %></td>
+    <td><%= link_to 'Show', forum_post %></td>
+    <td><%= link_to 'Edit', edit_forum_post_path(forum_post) %></td>
+    <td><%= link_to 'Destroy', forum_post, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New forum_post', new_forum_post_path %>

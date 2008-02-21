@@ -2,6 +2,7 @@ class IncorrectResetCodeException < StandardError; end
 
 class UsersController < ApplicationController
   
+  before_filter :admin_required, :only => [:suspend, :unsuspend]
   before_filter :login_required, :only => [:hub, :edit, :change_email, :change_password, :invite, :send_invite]
   before_filter :protect_user, :only => [:edit, :change_email, :change_password, :invite, :send_invite]
   before_filter :check_logged_in, :only => [:new, :create, :activate]

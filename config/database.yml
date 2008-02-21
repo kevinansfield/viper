@@ -1,0 +1,23 @@
+development:
+  adapter: mysql
+  encoding: UTF8
+  database: jobs_development
+  username: root
+  password: MHC-NX3av
+  host: localhost
+
+test:
+  adapter: mysql
+  encoding: UTF8
+  database: jobs_test
+  username: root
+  password: MHC-NX3av
+  host: localhost
+
+production:
+  adapter: mysql
+  encoding: UTF8
+  database: jobs_development
+  username: root
+  password: MHC-NX3av
+  host: localhost

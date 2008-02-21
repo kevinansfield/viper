@@ -1,0 +1,67 @@
+<h1>Editing forum_topic</h1>
+
+<%= error_messages_for :forum_topic %>
+
+<% form_for(@forum_topic) do |f| %>
+  <p>
+    <b>Belongs to</b><br />
+    <%= f.text_field :belongs_to %>
+  </p>
+
+  <p>
+    <b>Belongs to</b><br />
+    <%= f.text_field :belongs_to %>
+  </p>
+
+  <p>
+    <b>Title</b><br />
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <b>Hits</b><br />
+    <%= f.text_field :hits %>
+  </p>
+
+  <p>
+    <b>Sticky</b><br />
+    <%= f.text_field :sticky %>
+  </p>
+
+  <p>
+    <b>Posts count</b><br />
+    <%= f.text_field :posts_count %>
+  </p>
+
+  <p>
+    <b>Locked</b><br />
+    <%= f.check_box :locked %>
+  </p>
+
+  <p>
+    <b>Last post</b><br />
+    <%= f.text_field :last_post_id %>
+  </p>
+
+  <p>
+    <b>Last updated at</b><br />
+    <%= f.datetime_select :last_updated_at %>
+  </p>
+
+  <p>
+    <b>Last user</b><br />
+    <%= f.text_field :last_user_id %>
+  </p>
+
+  <p>
+    <b>Permalink</b><br />
+    <%= f.text_field :permalink %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @forum_topic %> |
+<%= link_to 'Back', forum_topics_path %>

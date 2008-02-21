@@ -876,3 +876,22 @@ a, a#visited {
 .social_bookmark_item {
 	padding: 12px 2px 2px 2px;
 }
+
+p.subtitle
+{
+	font-size: 0.95em;
+	color:#888;
+	font-weight:bold;
+	margin-top:-0.8em;
+}
+p.subtitle img { vertical-align: middle; }
+
+/* breadcrumbs */
+
+.crumbs
+{
+	font-size:0.75em;
+	font-family: 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif;
+}
+.crumbs a { color:#468; }
+.crumbs a:hover { color:#00c; text-decoration:underline; }

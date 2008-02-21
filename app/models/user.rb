@@ -1,7 +1,9 @@
 class AuthenticationException < StandardError; end
   
 class User < ActiveRecord::Base
-  concerned_with :validation
+  concerned_with :validation, :activation, :authentication, :messages, :forum_posting
+  
+  acts_as_ferret :fields => ['login', 'email'], :remote => false
   
   has_one  :profile
   has_one  :avatar
@@ -22,110 +24,23 @@ class User < ActiveRecord::Base
   has_many :messages_as_receiver, :foreign_key => 'receiver_id',  :class_name => 'Message', :conditions => 'receiver_deleted IS NULL', :order => 'created_at DESC'
   has_many :unread_messages,      :foreign_key => 'receiver_id',  :class_name => 'Message', :conditions => 'read_at IS NULL AND receiver_deleted IS NULL', :order => 'created_at DESC'
   has_many :read_messages,        :foreign_key => 'receiver_id',  :class_name => 'Message', :conditions => 'read_at IS NOT NULL and receiver_deleted IS NULL', :order => 'created_at DESC'
+  
+  has_many :posts, :order => "#{ForumPost.table_name}.created_at desc", :class_name => 'ForumPost'
+  has_many :topics, :order => "#{ForumTopic.table_name}.created_at desc", :class_name => 'ForumTopic'
+  
+  has_many :moderatorships, :dependent => :delete_all
+  has_many :forums, :through => :moderatorships, :source => :forum
            
   has_permalink :login
   
-  acts_as_ferret :fields => ['login', 'email'], :remote => false
+  attr_readonly :posts_count, :last_seen_at
   
-  def to_param
-    permalink
-  end
-  
-  def admin?
-    self.activated? && self.admin
-  end
-  
-  # Activates the user in the database.
-  def activate
-    @activated = true
-    self.activated_at = Time.now.utc
-    self.activation_code = nil
-    save(false)
+  def available_forums
+    @available_forums ||= site.ordered_forums - forums
   end
 
-  #alias active? activated?
-  def activated?
-    # the existence of an activation code means they have not activated yet
-    activation_code.nil?
-  end
-
-  # Returns true if the user has just been activated.
-  #alias pending? recently_activated?
-  def recently_activated?
-    @activated
-  end
-
-  # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
-  def self.authenticate(login, password)
-    u = find :first, :conditions => ['login = ?', login] # need to get the salt
-    raise AuthenticationException.new("We cannot find an account matching that login.") if u.nil?
-    raise AuthenticationException.new("The password you entered does not match our records.") unless u.authenticated?(password)
-    raise AuthenticationException.new("You must activate your account before you can log in.") unless u.activation_code.nil?
-    u
-  end
-
-  def remember_token?
-    remember_token_expires_at && Time.now.utc < remember_token_expires_at 
-  end
-
-  # These create and unset the fields required for remembering users between browser closes
-  def remember_me
-    remember_me_for 2.weeks
-  end
-
-  def remember_me_for(time)
-    remember_me_until time.from_now.utc
-  end
-
-  def remember_me_until(time)
-    self.remember_token_expires_at = time
-    self.remember_token            = encrypt("#{email}--#{remember_token_expires_at}")
-    save(false)
-  end
-
-  def forget_me
-    self.remember_token_expires_at = nil
-    self.remember_token            = nil
-    save(false)
-  end
-  
-  def change_email_address(new_email_address)
-    @change_email  = true
-    self.new_email = new_email_address
-    self.make_email_activation_code
-  end
-  
-  def activate_new_email
-    @activated_email = true
-    update_attributes(:email=> self.new_email, :new_email => nil, :email_activation_code => nil)
-  end
-  
-  def recently_changed_email?
-    @change_email
-  end
-  
-  def forgot_password
-    @forgotten_password = true
-    self.make_password_reset_code
-  end
-  
-  def reset_password!
-    # First update the password_reset_code before setting the 
-    # reset_password flag to avoid duplicate email notifications.
-    update_attribute(:password_reset_code, nil)
-    @reset_password = true
-  end
-  
-  def recently_reset_password?
-    @reset_password
-  end
-  
-  def recently_forgot_password?
-    @forgotten_password
-  end
-  
-  def self.find_for_forgot(email)
-    find :first, :conditions => ['email = ? and activation_code IS NULL', email]
+  def moderator_of?(forum)
+    admin? || Moderatorship.exists?(:user_id => id, :forum_id => forum.id)
   end
   
   def hit!
@@ -166,67 +81,22 @@ class User < ActiveRecord::Base
     find :all
   end
   
-  # Alias for all received messages
-  def received_messages
-    self.messages_as_receiver
+  # this is used to keep track of the last time a user has been seen (reading a topic)
+  # it is used to know when topics are new or old and which should have the green
+  # activity light next to them
+  #
+  # we cheat by not calling it all the time, but rather only when a user views a topic
+  # which means it isn't truly "last seen at" but it does serve it's intended purpose
+  #
+  # This is now also used to show which users are online... not at accurate as the
+  # session based approach, but less code and less overhead.
+  def seen!
+    now = Time.now.utc
+    self.class.update_all ['last_seen_at = ?', now], ['id = ?', id]
+    write_attribute :last_seen_at, now
   end
   
-  # Alias for all sent messages
-  def sent_messages
-    self.messages_as_sender
+  def to_param
+    permalink
   end
-  
-  # Alias for unread messages
-  def new_messages
-    self.unread_messages
-  end
-
-  # Alias for read messages
-  def old_messages
-    self.read_messages
-  end
-
-  # Accepts a message object and flags the message as deleted by sender
-  def delete_from_sent(message)
-    if message.sender_id == self.id
-      message.update_attribute :sender_deleted, true
-      return true
-    else
-      return false
-    end
-  end
-
-  # Accepts a message object and flags the message as deleted by the sender
-  def delete_from_received(message)
-    if message.receiver_id == self.id
-      message.update_attribute :receiver_deleted, true
-      return true
-    else
-      return false
-    end
-  end
-
-  # Accepts a user object as the receiver, and a message
-  # and creates a message relationship joining the two users
-  def send_message(receiver, message)
-    Message.create!(:sender => self, :receiver => receiver, :subject => message.subject, :body => message.body)
-  end
-
-  protected
-    
-    def make_activation_code
-      self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
-    end
-    
-    def make_email_activation_code
-      self.email_activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
-    end
-    
-    def new_email_entered?
-      !self.new_email.blank?
-    end
-    
-    def make_password_reset_code
-      self.password_reset_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
-    end
 end
