@@ -1,0 +1,8 @@
+Description:
+    Generates migration to create db_files table used with DB attachment store.
+
+Example:
+    ./script/generate is_attachment_db_files_table
+
+    This will create an Tail worker:
+        Migration:      db/migrate/{NEXT_MIGRATION_NUM}_add_is_attachment_db_files_table.rb

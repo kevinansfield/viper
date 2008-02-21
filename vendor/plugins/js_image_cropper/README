@@ -1,0 +1,49 @@
+== js_image_cropper
+
+The JsImageCropper Plugin provides helper methods to simplify working with the excellent Image Cropper library by David Spurr
+available at http://www.defusion.org.uk/code/javascript-image-cropper-ui-using-prototype-scriptaculous/
+
+=== Install
+
+The plugin is ready to use as is. However you must have the cropper javascript and css available.
+
+For convenience a copy is redistributed with this plugin - and can be installed (copied to public/javascripts directory)
+using the following rake command:
+
+  rake js_image_cropper:install
+
+=== Configuration
+
+Image Cropper Library requires prototype, scriptaculous builder and scriptaculous dragdrop.
+
+The following will cover it:
+
+  <%= javascript_include_tag :defaults, 'builder', 'cropper' %>
+
+=== Usage
+
+In your view do something like
+
+  <%= image_tag @image.public_path, :id => 'cropMe' %>
+
+  <%= cropper_javascript_tag('cropMe'), {:include_default_on_end_crop_javascript => true }) %>
+
+  <% form_tag(crop_image_url(@image)) do %>
+    <%= cropper_form_fields(@project_image.crop_options) %>
+    <%= submit_tag("Crop") %>
+  <% end %>
+
+This will initialise a simple Image Cropper and a form to submit the crop co-ordinates. More complicated configurations
+are possible.
+
+The tests are a good place to look for further examples.
+
+The actual processing of the image must be done elsewhere - like in your model or controller.
+
+is_attachment plugin integrates well - and can be configured to perform the cropping for you.
+https://please.peelmeagrape.net/svn/public/plugins/is_attachment/trunk/
+
+
+
+
+Copyright (c) 2007 Peelmeagrape, released under the MIT license

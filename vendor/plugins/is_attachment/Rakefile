@@ -1,0 +1,41 @@
+require 'rake'
+require 'rake/testtask'
+require 'rake/rdoctask'
+require 'code_statistics'
+
+desc 'Default: run unit tests.'
+task :default => :test
+
+desc 'Test the is_attachment plugin.'
+Rake::TestTask.new(:test) do |t|
+  t.libs << 'lib'
+  t.pattern = 'test/**/*_test.rb'
+  t.verbose = true
+end
+
+STATS_DIRECTORIES = [
+  %w(Library            lib/),
+  %w(Library(Storage)   lib/peel_me_a_grape/is_attachment/storage),
+  %w(Library(Processor) lib/peel_me_a_grape/is_attachment/image),
+  %w(Library(Transformer) lib/peel_me_a_grape/is_attachment/transformer),
+  %w(Unit\ tests        test/)
+]
+
+desc "Report code statistics (KLOCs, etc) from the application"
+task :stats do
+  CodeStatistics.new(*STATS_DIRECTORIES).to_s
+end
+
+$LOAD_PATH.unshift('../../../config/rdoc') if File.directory?('../../../config/rdoc')
+desc 'Generate documentation for the is_attachment plugin.'
+Rake::RDocTask.new(:rdoc) do |rdoc|
+  rdoc.rdoc_dir = ENV['output'] || 'rdoc'
+  rdoc.title    = 'IsAttachment'
+  rdoc.options << '--line-numbers' << '--inline-source'
+  rdoc.template = 'rdoc_template' if File.file?('../../../config/rdoc/rdoc/generators/template/html/rdoc_template.rb')
+  rdoc.rdoc_files.include('README')
+  rdoc.rdoc_files.include('RELEASE')
+  rdoc.rdoc_files.include('COPYING')
+  rdoc.rdoc_files.include('MIT-LICENSE')
+  rdoc.rdoc_files.include('lib/**/*.rb')
+end

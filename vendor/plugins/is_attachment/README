@@ -1,0 +1,131 @@
+== is_attachment
+
+The IsAttachment plugin extends ActiveRecord models to make uploading files and processing images easy.
+
+Features include:
+* Upload one image - have multiple versions of image automatically created
+* arbirary processing using RMagick/MiniMagick
+* processing in a bakcgroundRb process
+* integration with js_image_cropper to manually crop image versions.
+* Extensible - Implement your own image engine/ storage engines or transformers (See PeelMeAGrape::IsAttachment rdoc)
+
+is_attachment is very specific - you can a attach a single file to a record, and it can create multiple versions of that uploaded file (base_version), that will in turn each have their own record (associated to the base_version).
+
+=== Install
+
+  ruby script/plugin install https://please.peelmeagrape.net/svn/public/plugins/is_attachment/trunk
+
+=== Configuration
+
+is_attachment will work as is - but also provides a configuration mechanism.
+
+config/is_attachment should be created when you install the plugin.
+config/is_attachment/default.rb and config/is_attachment/#{RAILS_ENV}.rb will be loaded in that order.
+
+This is the intended place for any extra configuration you want to make.
+
+===== Simple path configuration:
+
+configuring the tempfile directory is_attachment will use. Defaults to "#{RAILS_ROOT}/tmp/is_attachment"
+  PeelMeAGrape::IsAttachment.tempfile_path = '/tmp/is_attachment'
+
+configure the base path where uploaded files will be stored. Defaults to "#{RAILS_ROOT}/public"
+  PeelMeAGrape::IsAttachment.file_storage_base_path = File.join(RAILS_ROOT,'public','i','development')
+
+===== Configuring extensions to is_attachment:
+
+registering new storage engines. PeelMeAGrape::IsAttachment::Storage::FileSystem and PeelMeAGrape::IsAttachment::Storage::Db are registered by default.
+  PeelMeAGrape::IsAttachment.register_storage_engine(:my_storage_engine, MyStorageEngine)
+
+registering new image processing engines. PeelMeAGrape::IsAttachment::Image::Rmagick and PeelMeAGrape::IsAttachment::Image::MiniMagick are registered by default.
+  PeelMeAGrape::IsAttachment.register_image_engine(:my_image_engine, MyImageEngine)
+
+=== Usage
+
+This section explains how depending on your use of is_attachment - you will have different required columns on your model. And how there are optional columns that will be used if present by is_attachment.
+
+See PeelMeAGrape::IsAttachment::ActMethods.is_attachment() for specific details on configuration.
+
+===== Required Columns
+is_attachment requires that certain columns are present on your model. At it's minimum configuration the only required column is <tt>filename</tt>
+    class Mugshots < ActiveRecord::Base
+      is_attachment
+    end
+
+if you use multiple <tt>image_versions</tt> then there are two more required columns <tt>version_name</tt> and <tt>base_version_id</tt>
+
+certain Storage engines or Transformers require other columns.
+
+In all cases this plugin is implemented to fail as early as possilbe if your model doesn't have all the required columns.
+
+===== Optional Columns
+
+<tt>width</tt>, <tt>height</tt>, <tt>content_type</tt>, <tt>aspect_ratio</tt>, <tt>file_size</tt> - will be set by is_attachment when applicable/present.
+
+=== Examples
+
+Currently the best source of examples is our Plugin Demo Rails App - http://peelmeagrape.net/projects/plugin_demo.
+
+  is_attachment :validate => { :required => true },
+                :image_versions => { :thumb => { :cropper => 80 },
+                                     :portfolio => { :cropper => { :width => 200, :height => 60, :overlay => 'public/images/overlay.png' } },
+                                     :snap => { :cropper => [480,350] } }
+
+=== Usage Recomendations
+
+If you want something straight forward like a thumbnail of your uploaded image consider the following
+
+  is_attachment :image_versions => { :thumb => 50 }
+  is_attachment :image_versions => { :thumb => [50,50] }
+
+  is_attachment :image_versions => { :thumb => "50x50" }
+  is_attachment :image_versions => { :thumb => {:fixed_width => 50}}
+  is_attachment :image_versions => { :thumb => {:fixed_height => 50}}
+
+The example are very similar - our recomendation is that you use one of the latter 3. Use fixed_width/fixed_height.
+
+Learn how to use RMagick geometry strings (http://www.simplesystems.org/RMagick/doc/imusage.html#geometry).
+The Fixnum or Array option will both map to a geometry string of "50x50!" - you're resulting image will be exactly
+50 x 50 - and you'll probably have your aspect ratio distorted. If you use the String version you have much more control.
+
+If you need to do something other that just changing the size of the image - the best place to start is using a custom processing method
+  is_attachment :image_versions => { :custom_version => :my_custom_method }
+
+If you start having lots of similar custom methods - you should think about extracting it out into a PeelMeAGrape::IsAttachment::Transformer::Base for DRYness.
+
+=== Alternatives
+
+There are other plugins that do a similar job to <tt>is_attachment</tt> -
+
+* acts_as_attachment - http://svn.techno-weenie.net/projects/plugins/acts_as_attachment/ - original attachment plugin by Rick Olson (http://techno-weenie.net/)
+* attachment_fu - http://svn.techno-weenie.net/projects/plugins/attachment_fu/ - rewrite of acts_as_attachment (also by Rick Olson)
+* file_column - http://www.kanthak.net/opensource/file_column/ - (Sebastian Kanthak)
+* flex_image - http://beautifulpixel.com/flex_image/index.html - (Alex Wayne)
+
+=== Why is_attachment may be better for you?
+==== Integration with backgroundrb
+This was a biggie - we wanted to be able to handle processing uploaded files in a backgroundrb job - this was all possible with existing plugins - but not to the level of simplicity we want.
+
+To has image_versions handled by a backgroundrb job all you have to do is
+    is_attachment :image_versions => {......}, :backgroundrb => true
+
+==== Better support for custom processing
+With all the existing plugins it is possible to do pretty much what you want to an uploaded file/image - but again - (in my opinion) - not encouraging the kinda of simplicity/resusability/DRYness we want.
+
+PeelMeAGrape::IsAttachment::Transformer::Cropper is a good example of how we want things to be. It plugs in to is_attachment - and makes it easy to have image_versions that are user controllable crops of the original uploaded image. Configuring it is simple.
+
+    is_attachment :image_versions => { :cropped => { :cropper => 80 } }
+
+For once off custom processings you can just configure your image version to call a method on your model.
+
+    is_attachment :image_versions => { :custom => :do_something_crazy }
+    def do_something_crazy(img)
+       img.something_crazy!
+    end
+
+==== Hopefully a little 'softer to touch'
+My experience using some other rails plugins - is that so often if you don't do exactly what you are told, things don't work and you get cryptic Errors, and end up walking through the code to figure out your mistake.
+
+The biggest example of this that springs to mind is when your model doesn't define a column that is required.
+
+We've tried to mitigate against this by failing as early as possible and with sensible Errors if say, you forget to add a required column. This has bloated the code a little - but hopefully should help people get started and comfortable a little bit quicker.

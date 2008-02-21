@@ -1,0 +1,10 @@
+test:
+  bucket_name: test_bucket_name
+  access_key_id: ABC123456
+  secret_access_key: ABC654321
+  use_ssl: true
+development:
+  bucket_name: development_bucket_name
+  access_key_id: ABC67890
+  secret_access_key: ABC09876
+  use_ssl: false

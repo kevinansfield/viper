@@ -1,0 +1,12 @@
+== is_attachment
+
+The IsAttachment plugin extends ActiveRecord models to make uploading files and processing images easy.
+
+Features include:
+* Upload one image - have multiple versions of image automatically created
+* arbirary processing using RMagick/MiniMagick
+* processing in a bakcgroundRb process
+* integration with js_image_cropper to manually crop image versions.
+* Extensible - Implement your own image engine/ storage engines or transformers (See PeelMeAGrape::IsAttachment rdoc)
+
+See rdoc for more details - http://peelmeagrape.net/rdoc/is_attachment/

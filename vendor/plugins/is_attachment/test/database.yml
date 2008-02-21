@@ -1,0 +1,6 @@
+mysql:
+  :adapter: mysql
+  :host: localhost
+  :username: is_attachment
+  :password:
+  :database: is_attachment_plugin_test

@@ -1,0 +1,66 @@
+* 
+* made mini_magick the default image engine - seems to cause most people less hassle than rmagick
+* slightly improved error message when you can't load a builtin image engine (mini_magick, rmagick) - suggesting to gem install appropriate gem.
+* don't revalidate attachment validations (against content type etc - if using already_uploaded_data) - since to remain assigned must already be valid.
+* force lowercase on filenames.
+* record.has_attachment? - true if a file has been successfully attached to the record.
+* allow validating on filename extension. eg :validate => {:file_extension => 'flv'}
+* with_base_version_validations moved to ActMethods so that can be before is_attachment line in model class.
+* is_attachment_file_field form helper shows the current uploaded file during form resubmits (in span beside it)
+* Table Definition Helpers - (ala Sexy Migrations)
+      t.attachment_columns(:versions => true, :metadata => true)
+  replaces all of
+      t.column :base_version_id, :integer
+      t.column :version_name,    :string
+      t.column :filename,        :string, :limit => 255
+      t.column :content_type,    :string, :limit => 255
+      t.column :file_size,       :integer
+      t.column :width,           :integer
+      t.column :height,          :integer
+
+* Fixed bug  - content_type validation was skipped.
+* Fixed bug  - already_uploaded_data raised when temp_path was nil
+* PeelMeAGrape::IsAttachment::Storage::RemoteBase - base class for remote storage engines - eg Amazon S3
+* PeelMeAGrape::IsAttachment::Storage::S3 - persist uploaded files to Amazon S3 service.
+* Changes to allow persisting to storage happen in backgroundrb worker.
+
+= 0.2.1
+
+* Changes so that width/height/aspect_ratio columns are only set before saving if they are needed for validation - other wise they are set after_save.
+  This means that if using backgorundrb - there should be no image engine usage except from the backgroundrb process.
+  RECOMENDATION: If you are concerned about long running requests and are using backgroundrb - then don't validate width/height (or find some otehr mechanism for dealing with invalid records - eg. delete after)
+* Added FixedWidth and FixedHeight Transformers - to simplify case where you want an image version fixing one dimension - and adjusting the other to maintain aspect ratio.
+      is_attachment :image_versions => {:banner => {:fixed_height => 100}, :side_column => {:fixed_width => 180 }
+* Raise TypeError if uploaded_data passed a string - advising to check your form is multipart encoded.
+* Added PeelMeAGrape::IsAttachment::ActionView::FormHelper and PeelMeAGrape::IsAttachment::ActionView::FormBuilderHelper to allow things like
+    <% form_for :my_attachment, @my_attachment, :url => my_attachments_url, :html => {:multipart => true } do |f| %>
+      ...
+      <%= f.is_attachment_file_field %>
+      ...
+    <% end %>
+  or
+      <% form_tag my_attachments_url, {:multipart => true } do -%>
+        ...
+        <%= is_attachment_file_field 'my_attachment' %>
+        ...
+      <% end -%>
+  Adds a file_field for :uploaded_data and a hidden_field for :already_uploaded_data to keep uploaded files across form redisplays
+* Mechanism to keep uploaded files across form_rerenders - requires extra (hidded field on form)
+* Uploaded files are copied to files in tmp folder (configurable base path - PeelMeAGrape::IsAttachment.tempfile_path)
+* Check that version_name column is text? - versions don't create properly without this.
+* Tests will run without MiniMagick installed - still require backgroundrb plugin and Rmagick to be installed.
+* Made exntension points much more explicit - extracted out base classes
+  * PeelMeAGrape::IsAttachment::Image::Base - image engines (eg Rmagick)
+  * PeelMeAGrape::IsAttachment::Storage::Base - storage engines (eg file system)
+  * Renamed PeelMeAGrape::IsAttachment::Transformer::CustomTransformer to PeelMeAGrape::IsAttachment::Transformer::Base
+* Extracted out FailEarlyOptionsChecker class
+* Validations against width/height/content_type and file_size are only performed when upload_to_process
+
+= 0.1.2
+
+* Validations against width/height/content_type and file_size can be performed - even if those columns aren't present.
+* Can set default validations against ALL is_attachment models. eg. PeelMeAGrape::IsAttachment.default_validations[:max_file_size] = 50.kilobytes
+
+= 0.1.1
+
+* Initial release.

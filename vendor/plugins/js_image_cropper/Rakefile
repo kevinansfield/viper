@@ -1,0 +1,27 @@
+require 'rake'
+require 'rake/testtask'
+require 'rake/rdoctask'
+
+desc 'Default: run unit tests.'
+task :default => :test
+
+desc 'Test the js_image_cropper plugin.'
+Rake::TestTask.new(:test) do |t|
+  t.libs << 'lib'
+  t.pattern = 'test/**/*_test.rb'
+  t.verbose = true
+end
+
+$LOAD_PATH.unshift('../../../config/rdoc') if File.directory?('../../../config/rdoc')
+desc 'Generate documentation for the js_image_cropper plugin.'
+Rake::RDocTask.new(:rdoc) do |rdoc|
+  rdoc.rdoc_dir = ENV['output'] || 'rdoc'
+  rdoc.title    = 'JsImageCropper'
+  rdoc.options << '--line-numbers' << '--inline-source'
+  rdoc.template = 'rdoc_template' if File.file?('../../../config/rdoc/rdoc/generators/template/html/rdoc_template.rb')
+  rdoc.rdoc_files.include('README')
+  rdoc.rdoc_files.include('RELEASE')
+  rdoc.rdoc_files.include('COPYING')
+  rdoc.rdoc_files.include('MIT-LICENSE')
+  rdoc.rdoc_files.include('lib/**/*.rb')
+end
