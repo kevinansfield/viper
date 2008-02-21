@@ -1,0 +1,10 @@
+db/database.yml
+log/*.log
+tmp/**/*
+
+public/stylesheets/site.css
+public/javascripts/site.js
+public/avatars/*
+
+.DS_Store
+thumbs.db
