@@ -54,11 +54,6 @@ ActionController::Routing::Routes.draw do |map|
   # Comment resources
   map.resources :comments, :collection => {:destroy_multiple => :delete},
                 :member => {:approve => :put, :reject => :put}
-                
-  # Admin namespace
-#  map.namespace :admin do |admin|
-#    admin.connect '', :controller => :dashboard
-#  end
 
   # Allow downloading Web Service WSDL as a file with an extension
   # instead of a file named 'wsdl'
