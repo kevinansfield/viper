@@ -1,6 +1,5 @@
 require 'action_mailer/ar_mailer'
 
-ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.default_charset = "utf-8"
 
 # Mail server details
