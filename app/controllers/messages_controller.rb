@@ -42,7 +42,7 @@ class MessagesController < ApplicationController
     respond_to do |format|
       format.html do
         flash[:notice] = 'Message Sent'
-        redirect_to messages_path(@user)
+        redirect_to user_messages_path(current_user)
         false;
       end
     end
@@ -53,7 +53,7 @@ class MessagesController < ApplicationController
   def destroy
     @message.delete(@user)
     flash[:notice] = 'Message Deleted'
-    redirect_to messages_path(@user)
+    redirect_to user_messages_path(current_user)
   end
   
   private
