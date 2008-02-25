@@ -1,5 +1,5 @@
 class ForumTopicsController < ApplicationController
-  before_filter :login_required, :only => [:new, :edit]
+  #before_filter :login_required, :only => [:new, :edit]
   before_filter :find_forum
   before_filter :find_topic, :only => [:show, :edit, :update, :destroy]
   before_filter :setup_display
