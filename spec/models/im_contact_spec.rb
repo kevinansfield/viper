@@ -1,11 +1,11 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe User do
+describe ImContact do
   before(:each) do
-    @user = User.new
+    @im_contact = ImContact.new
   end
 
   it "should be valid" do
-    @user.should be_valid
+    @im_contact.should be_valid
   end
 end

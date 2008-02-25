@@ -1,11 +1,11 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe User do
+describe Profile do
   before(:each) do
-    @user = User.new
+    @profile = Profile.new
   end
 
   it "should be valid" do
-    @user.should be_valid
+    @profile.should be_valid
   end
 end
