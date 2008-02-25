@@ -9,8 +9,8 @@ ModelStubbing.define_models do
   end
   
   model Forum do
-    stub :name => "Default", :forum_topics_count => 2, :forum_posts_count => 2, :position => 1, :state => 'public', :permalink => 'default'
-    stub :other, :name => "Other", :forum_topics_count => 1, :forum_posts_count => 1, :position => 0, :permalink => 'other'
+    stub :name => "Default", :topics_count => 2, :posts_count => 2, :position => 1, :state => 'public', :permalink => 'default'
+    stub :other, :name => "Other", :topics_count => 1, :posts_count => 1, :position => 0, :permalink => 'other'
   end
   
   model ForumTopic do

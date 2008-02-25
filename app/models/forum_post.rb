@@ -10,7 +10,7 @@ class ForumPost < ActiveRecord::Base
              :counter_cache => :posts_count
   
   # topic's forum (set by callback)
-  belongs_to :forum, :counter_cache => true
+  belongs_to :forum, :counter_cache => :posts_count
   
   validates_presence_of :user_id, :topic_id, :forum_id, :body
   validate :topic_is_not_locked

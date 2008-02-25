@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 39) do
+ActiveRecord::Schema.define(:version => 40) do
 
   create_table "articles", :force => true do |t|
     t.integer  "user_id"
@@ -115,10 +115,10 @@ ActiveRecord::Schema.define(:version => 39) do
   create_table "forums", :force => true do |t|
     t.string  "name"
     t.string  "description"
-    t.integer "forum_topics_count"
-    t.integer "forum_posts_count"
-    t.integer "position",           :default => 0
-    t.string  "state",              :default => "public"
+    t.integer "topics_count"
+    t.integer "posts_count"
+    t.integer "position",     :default => 0
+    t.string  "state",        :default => "public"
     t.string  "permalink"
   end
 
