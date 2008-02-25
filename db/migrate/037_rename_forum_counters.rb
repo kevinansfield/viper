@@ -5,5 +5,7 @@ class RenameForumCounters < ActiveRecord::Migration
   end
 
   def self.down
+    rename_column :forums, :forum_topics_count, :topics_count
+    rename_column :forums, :forum_posts_count, :posts_count
   end
 end

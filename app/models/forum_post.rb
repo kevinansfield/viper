@@ -4,7 +4,10 @@ class ForumPost < ActiveRecord::Base
   # author of post
   belongs_to :user, :counter_cache => true
   
-  belongs_to :topic, :counter_cache => true, :class_name => 'ForumTopic'
+  belongs_to :topic,
+             :foreign_key => 'topic_id',
+             :class_name => 'ForumTopic',
+             :counter_cache => :posts_count
   
   # topic's forum (set by callback)
   belongs_to :forum, :counter_cache => true

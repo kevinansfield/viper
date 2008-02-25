@@ -16,8 +16,15 @@ class ForumTopic < ActiveRecord::Base
   
   belongs_to :forum, :counter_cache => true
 
-  has_many :posts,       :order => "#{ForumPost.table_name}.created_at", :dependent => :delete_all, :class_name => "ForumPost"
-  has_one  :recent_post, :order => "#{ForumPost.table_name}.created_at DESC", :class_name => "ForumPost"
+  has_many :posts,
+           :order => "#{ForumPost.table_name}.created_at",
+           :dependent => :delete_all,
+           :foreign_key => 'topic_id',
+           :class_name => "ForumPost"
+  has_one  :recent_post,
+           :order => "#{ForumPost.table_name}.created_at DESC",
+           :foreign_key => 'topic_id',
+           :class_name => "ForumPost"
   
   has_many :voices, :through => :posts, :source => :user, :uniq => true
    

@@ -6,6 +6,6 @@ describe Friendship do
   end
 
   it "should be valid" do
-    @friendhsip.should be_valid
+    @friendship.should be_valid
   end
 end
