@@ -7,7 +7,7 @@ class CreateForumTopics < ActiveRecord::Migration
       t.integer :hits, :default => 0
       t.integer :sticky
       t.integer :posts_count, :default => 0
-      t.boolean :locked
+      t.boolean :locked, :default => false
       t.integer :last_post_id
       t.datetime :last_updated_at
       t.integer :last_user_id

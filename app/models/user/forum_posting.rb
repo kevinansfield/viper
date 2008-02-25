@@ -6,10 +6,10 @@ class User
   #
   def post_to_forum(forum, attributes)
     attributes.symbolize_keys!
-    Topic.new(attributes) do |topic|
+    ForumTopic.new(attributes) do |topic|
       topic.forum = forum
       topic.user  = self
-      revise topic, attributes
+      revise_topic topic, attributes
     end
   end
 
@@ -21,10 +21,10 @@ class User
     end
   end
   
-  def revise(topic, attributes)
+  def revise(record, attributes)
     case record
-      when Topic then revise_topic(record, attributes)
-      when Post  then post.save
+      when ForumTopic then revise_topic(record, attributes)
+      when ForumPost  then post.save
       else raise "Invalid record to revise: #{record.class.name.inspect}"
     end
     record

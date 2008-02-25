@@ -63,7 +63,7 @@ class ForumTopic < ActiveRecord::Base
 
 protected
   def create_initial_post
-    post! @body, user unless locked?
+    user.reply_to_forum_topic self, @body unless locked?
     @body = nil
   end
   
