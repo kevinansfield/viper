@@ -68,6 +68,10 @@ module ApplicationHelper
     user == current_user ? link : nil
   end
   
+  def ajax_spinner_for(id, spinner="spinner.gif")
+    "<img src='/images/#{spinner}' style='display:none; vertical-align:middle;' id='#{id.to_s}_spinner'> "
+  end
+  
   # Return an appropriate friendship status message
   def friendship_status(user, friend)
     friendship = Friendship.find_by_user_id_and_friend_id(user, friend)
@@ -106,7 +110,7 @@ module ApplicationHelper
   end
   
   def textile_helper_link
-    '<a href="/textile.html" class="lightwindow" title="Textile Formatting">Textile Formatting enabled</a>'
+    '<a href="/textile.html" class="lightwindow" title="Textile Formatting">Formatting Help</a>'
   end
   
   def feed_icon_tag(title, url)

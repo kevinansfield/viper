@@ -4,6 +4,8 @@ class ForumTopicsController < ApplicationController
   before_filter :find_topic, :only => [:show, :edit, :update, :destroy]
   before_filter :setup_display
   
+  tab :forums
+  
   def index
     respond_to do |format|
       format.html { redirect_to forum_path(@forum) }
