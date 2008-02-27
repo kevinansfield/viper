@@ -1,6 +1,7 @@
 db/database.yml
 log/*.log
 tmp/**/*
+index/*
 
 index/*
 

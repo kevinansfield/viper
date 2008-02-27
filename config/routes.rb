@@ -1,19 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  
-  # Sample of regular route:
-  # map.connect 'products/:id', :controller => 'catalog', :action => 'view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  # map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # You can have the root of your site routed by hooking up '' 
-  # -- just remember to delete public/index.html.
-  map.connect '', :controller => "site"
-
   # User resources
   map.resources :users, :member => { :change_email => :put, :change_password => :put, :invite => :get, :send_invite => :put, :articles => :get } do |user|
     user.resource :profile
@@ -54,10 +40,19 @@ ActionController::Routing::Routes.draw do |map|
   # Comment resources
   map.resources :comments, :collection => {:destroy_multiple => :delete},
                 :member => {:approve => :put, :reject => :put}
+                
+  # Forum resoutces
+  map.resources :moderatorships
+  map.resources :forums, :has_many => :posts do |forum|
+    forum.resources :topics, :controller => 'forum_topics' do |topic|
+      topic.resources :posts, :controller => 'forum_posts'
+    end
+    forum.resources :posts, :controller => 'forum_posts'
+  end
+  
+  map.resources :forum_posts, :collection => {:search => :get}
 
-  # Allow downloading Web Service WSDL as a file with an extension
-  # instead of a file named 'wsdl'
-  #map.connect ':controller/service.wsdl', :action => 'wsdl'
+  map.root :controller => 'site', :action => 'index'
 
   # Install the default route as the lowest priority.
   map.connect ':controller/:action/:id.:format'

@@ -13,7 +13,7 @@ test:
   username: root
   password: MHC-NX3av
   host: localhost
- 
+
 production:
   adapter: mysql
   encoding: UTF8

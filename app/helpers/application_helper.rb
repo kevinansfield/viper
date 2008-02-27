@@ -2,6 +2,10 @@
 module ApplicationHelper
   include TagsHelper
   
+  def for_moderators_of(record, &block)
+    moderator_of?(record) && concat(capture(&block), block.binding)
+  end
+  
   # Only outputs the link if current_user is an admin
   def link_to_if_admin(text, link)
     if logged_in?
@@ -64,6 +68,10 @@ module ApplicationHelper
     user == current_user ? link : nil
   end
   
+  def ajax_spinner_for(id, spinner="spinner.gif")
+    "<img src='/images/#{spinner}' style='display:none; vertical-align:middle;' id='#{id.to_s}_spinner'> "
+  end
+  
   # Return an appropriate friendship status message
   def friendship_status(user, friend)
     friendship = Friendship.find_by_user_id_and_friend_id(user, friend)
@@ -91,7 +99,7 @@ module ApplicationHelper
     end
   end
   
-  # Basic date-only formattice, eg. "28th March 2007"
+  # Basic date-only formatting, eg. "28th March 2007"
   def basic_date(date)
     h date.strftime("#{date.day.en.ordinal} %B, %Y")
   end
@@ -102,7 +110,35 @@ module ApplicationHelper
   end
   
   def textile_helper_link
-    '<a href="/textile.html" class="lightwindow" title="Textile Formatting">Textile Formatting enabled</a>'
+    '<a href="/textile.html" class="lightwindow" title="Textile Formatting">Formatting Help</a>'
+  end
+  
+  def feed_icon_tag(title, url)
+    (@feed_icons ||= []) << { :url => url, :title => title }
+    link_to image_tag('feed-icon.png', :size => '14x14', :alt => "Subscribe to #{title}"), url
+  end
+  
+  def pagination(collection)
+    if collection.page_count > 1
+      "<p class='pages'>" + 'Pages' + ": <strong>" + 
+      will_paginate(collection, :inner_window => 10, :next_label => "next", :prev_label => "previous") +
+      "</strong></p>"
+    end
+  end
+  
+  def next_page(collection)
+    unless collection.current_page == collection.page_count or collection.page_count == 0
+      "<p style='float:right;'>" + link_to("Next page", { :page => collection.current_page.next }.merge(params.reject{|k,v| k=="page"})) + "</p>"
+    end
+  end
+  
+  def topic_title_link(topic, options)
+    if topic.title =~ /^\[([^\]]{1,15})\]((\s+)\w+.*)/
+      "<span class='flag'>#{$1}</span>" + 
+      link_to(h($2.strip), forum_topic_path(@forum, topic), options)
+    else
+      link_to(h(topic.title), forum_topic_path(@forum, topic), options)
+    end
   end
 
   private

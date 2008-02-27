@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 31) do
+ActiveRecord::Schema.define(:version => 40) do
 
   create_table "articles", :force => true do |t|
     t.integer  "user_id"
@@ -79,6 +79,49 @@ ActiveRecord::Schema.define(:version => 31) do
     t.datetime "created_on"
   end
 
+  create_table "forum_posts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "topic_id"
+    t.integer  "forum_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "forum_posts", ["created_at", "forum_id"], :name => "index_forum_posts_on_forum_id"
+  add_index "forum_posts", ["created_at", "user_id"], :name => "index_forum_posts_on_user_id"
+  add_index "forum_posts", ["created_at", "topic_id"], :name => "index_forum_posts_on_forum_topic_id"
+
+  create_table "forum_topics", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "forum_id"
+    t.string   "title"
+    t.integer  "hits",            :default => 0
+    t.integer  "sticky"
+    t.integer  "posts_count",     :default => 0
+    t.boolean  "locked",          :default => false
+    t.integer  "last_post_id"
+    t.datetime "last_updated_at"
+    t.integer  "last_user_id"
+    t.string   "permalink"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "forum_topics", ["sticky", "last_updated_at", "forum_id"], :name => "index_forum_topics_on_sticky_and_last_updated_at"
+  add_index "forum_topics", ["last_updated_at", "forum_id"], :name => "index_forum_topics_on_forum_id_and_last_updated_at"
+  add_index "forum_topics", ["forum_id", "permalink"], :name => "index_forum_topics_on_forum_id_and_permalink"
+
+  create_table "forums", :force => true do |t|
+    t.string  "name"
+    t.string  "description"
+    t.integer "topics_count"
+    t.integer "posts_count"
+    t.integer "position",     :default => 0
+    t.string  "state",        :default => "public"
+    t.string  "permalink"
+  end
+
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
@@ -108,6 +151,13 @@ ActiveRecord::Schema.define(:version => 31) do
 
   add_index "messages", ["sender_id"], :name => "index_messages_on_sender_id"
   add_index "messages", ["receiver_id"], :name => "index_messages_on_receiver_id"
+
+  create_table "moderatorships", :force => true do |t|
+    t.integer  "forum_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "news", :force => true do |t|
     t.integer  "user_id"
@@ -180,6 +230,8 @@ ActiveRecord::Schema.define(:version => 31) do
     t.boolean  "admin",                                   :default => false
     t.string   "permalink"
     t.integer  "hits",                                    :default => 0
+    t.datetime "last_seen_at"
+    t.integer  "forum_posts_count",                       :default => 0
   end
 
   create_table "walls", :force => true do |t|

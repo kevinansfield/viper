@@ -1,0 +1,21 @@
+<% @title = 'New Forum' -%>
+
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
+			  
+	<div class="crumbs">
+	  <%= link_to 'Forums', forums_path %> <span class="arrow">&rarr;</span>
+	</div>
+	
+	<% form_for :forum, :url => forums_path, :html => { :class => 'form' } do |f| -%>
+	<fieldset>
+		<legend>New Forum</legend>
+		<%= render :partial => "form", :object => f %>
+	</fieldset>
+	<fieldset class="submit">
+		<%= submit_tag 'Create' %> | <%= link_to('Cancel', forums_path) %>
+	</fieldset>
+	<% end -%>
+
+<% end %>

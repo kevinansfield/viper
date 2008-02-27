@@ -54,4 +54,8 @@ class ApplicationController < ActionController::Base
   def param_posted?(symbol)
     request.post? and params[symbol]
   end
+  
+  def current_page
+    @page ||= params[:page].blank? ? 1 : params[:page].to_i
+  end
 end
