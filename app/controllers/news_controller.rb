@@ -1,4 +1,5 @@
 class NewsController < ApplicationController
+  before_filter :find_news_item, :except => [:new, :create]
   
   tab :news
   
@@ -16,8 +17,6 @@ class NewsController < ApplicationController
   # GET /news/1
   # GET /news/1.xml
   def show
-    @news_item = News.find(params[:id])
-
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @news.to_xml }
@@ -31,7 +30,6 @@ class NewsController < ApplicationController
 
   # GET /news/1;edit
   def edit
-    @news = News.find(params[:id])
   end
 
   # POST /news
@@ -56,8 +54,6 @@ class NewsController < ApplicationController
   # PUT /news/1
   # PUT /news/1.xml
   def update
-    @news = News.find(params[:id])
-
     respond_to do |format|
       if @news.update_attributes(params[:news])
         flash[:notice] = 'News was successfully updated.'
@@ -73,12 +69,18 @@ class NewsController < ApplicationController
   # DELETE /news/1
   # DELETE /news/1.xml
   def destroy
-    @news = News.find(params[:id])
     @news.destroy
 
     respond_to do |format|
       format.html { redirect_to news_url }
       format.xml  { head :ok }
     end
+  end
+  
+protected
+
+  def find_news_item
+    @news = News.find_by_permalink(params[:id])
+    @news_item = @news
   end
 end

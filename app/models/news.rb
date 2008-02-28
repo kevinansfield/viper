@@ -3,6 +3,8 @@ class News < ActiveRecord::Base
   
   acts_as_textiled :body
   
+  has_permalink :title
+  
   validates_presence_of :title, :body, :user
   validates_length_of :title, :maximum => 255
   validates_length_of :body,  :maximum => 65000
@@ -30,5 +32,9 @@ class News < ActiveRecord::Base
   
   def self.find_latest(number = 5)
     find :all, :limit => number, :order => 'created_at DESC'
+  end
+  
+  def to_param
+    permalink
   end
 end
