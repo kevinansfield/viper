@@ -81,7 +81,7 @@
 	    <p>
 	      <span class="edit">
 	        <%= ajax_spinner_for "edit-post-#{post.id}", "spinner_bounce.gif" %>
-			<%= link_to 'Edit post', edit_forum_topic_post_path(@forum, @topic, post, :page => page), :class => 'utility' %>
+			<%= link_to 'Edit post', edit_forum_topic_post_path(@forum, @topic, post, :page => current_page), :class => 'utility' %>
 	      </span>
 	    </p>
 	    <% end -%>

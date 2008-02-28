@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   include ExceptionNotifiable
   include AuthenticatedSystem
   
+  helper_method :current_page
+  
   before_filter :reset_partials
   
   # Pick a unique cookie name to distinguish our session data from others'

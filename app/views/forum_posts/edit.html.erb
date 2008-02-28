@@ -1,32 +1,36 @@
-<h1>Editing forum_post</h1>
+<% @title = 'Edit Forum Post' -%>
+<% content_for :header do -%>
+	<%= stylesheet_link_tag('forums') %>
+<% end -%>
 
-<%= error_messages_for :forum_post %>
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
 
-<% form_for(@forum_post) do |f| %>
-  <p>
-    <b>Belongs to</b><br />
-    <%= f.text_field :belongs_to %>
-  </p>
+<h2><%= link_to h(@post.topic.title), forum_topic_path(@post.forum, @post.topic) %></h2>
 
-  <p>
-    <b>Belongs to</b><br />
-    <%= f.text_field :belongs_to %>
-  </p>
+<%= error_messages_for :post %>
+<% form_for :post,
+     :url  => forum_topic_post_path(@post.forum, @post.topic, @post, :page => current_page),
+	 :html => { :method => :put, :class => 'form' }  do |f| -%>
 
-  <p>
-    <b>Belongs to</b><br />
-    <%= f.text_field :belongs_to %>
-  </p>
+	<fieldset>
+		<legend>Edit Post</legend>
+		<p style="text-align: left"><%= link_to('Delete post', forum_topic_post_path(@post.forum, @post.topic, @post, :page => current_page), 
+      		:class => "utility", :method => :delete, :confirm => 'Delete this post forever?') %></p>
+		<ol>
+			<li>
+				<label for="post_body">Body text:</label>
+				<%= textile_editor :post, :body, :rows => 5 %>
+				<%=textile_helper_link%>
+			</li>
+		</ol>
+	</fieldset>	 
+	<fieldset class="submit">
+		<%= submit_tag 'Save' %> | <%= link_to('Cancel', forum_topic_path(@post.forum, @post.topic, :page => current_page)) %>
+	</fieldset>
+<% end -%>
 
-  <p>
-    <b>Body</b><br />
-    <%= f.text_area :body %>
-  </p>
-
-  <p>
-    <%= f.submit "Update" %>
-  </p>
 <% end %>
 
-<%= link_to 'Show', @forum_post %> |
-<%= link_to 'Back', forum_posts_path %>
+<%= textile_editor_initialize -%>
