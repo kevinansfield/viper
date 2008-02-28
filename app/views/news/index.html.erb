@@ -1,3 +1,7 @@
+<% content_for :header do -%>
+<%= auto_discovery_link_tag(:atom, :action => 'index', :format => :atom) %>
+<% end -%>
+
 <% @title = 'News' -%>
 
 <% titled_box @title,

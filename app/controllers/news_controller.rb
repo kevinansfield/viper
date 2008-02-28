@@ -6,11 +6,12 @@ class NewsController < ApplicationController
   # GET /news
   # GET /news.xml
   def index
-    @news = News.find(:all, :order => "created_at DESC")
+    @news = News.find_latest(10)
 
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @news.to_xml }
+      format.atom { @news = News.find_latest(25) }
     end
   end
 
@@ -80,7 +81,7 @@ class NewsController < ApplicationController
 protected
 
   def find_news_item
-    @news = News.find_by_permalink(params[:id])
+    @news = News.find_by_permalink(params[:id]) unless params[:id].nil?
     @news_item = @news
   end
 end
