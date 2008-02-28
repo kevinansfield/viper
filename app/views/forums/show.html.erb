@@ -53,7 +53,7 @@
 	    <% end %>
 	  </td>
 	  <td class="c2">
-	    <%= "Sticky"[:sticky_title]+": <strong>" if topic.sticky? %>
+	    <%= "Sticky: <strong>" if topic.sticky? %>
 	    <%= topic_title_link (topic), :class => "entry-title", :rel => "bookmark" %>
 	    <%= "</strong>" if topic.sticky? %>
 	    <% if topic.paged? -%>

@@ -3,6 +3,8 @@ class ForumPostsController < ApplicationController
   before_filter :find_post, :only => [:edit, :update, :destroy]
   before_filter :setup_display
   
+  tab :forums
+  
   # /posts
   # /users/1/posts
   # /forums/1/posts
