@@ -16,12 +16,12 @@
 			</li>
 			<li>
 				<label for="article_description">Description:</label>
-				<%= f.text_area :description, :class => 'text', :rows => 5 %>
+				<%= f.text_area :description, :class => 'text', :rows => 4 %>
 			</li>
 			<li>
 				<label for="article_body">Body:</label>
-				<%= textile_editor :article, :body, :rows => 30 %>
-				<%=textile_helper_link%>
+				<%= viper_textile_editor :article, :body, :rows => 20, :height => 200 %>
+				<%= textile_helper_link %>
 			</li>
 			<li>
 				<label for="article_category">Category:</label>

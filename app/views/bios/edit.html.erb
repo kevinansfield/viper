@@ -12,7 +12,7 @@
 	<ol>
 		<li>
 			<label for="bio_about">About Me:</label>
-			<%= textile_editor :bio, :about, :rows => 10 -%>
+			<%= viper_textile_editor :bio, :about, :rows => 10, :height => 180 -%>
 			<%=textile_helper_link%>
 		</li>
 	</ol>
@@ -61,7 +61,7 @@
 	<ol>
 		<li>
 			<label for="bio_about">Author Box</label>
-			<%= f.text_area :author_about, :class => 'text', :rows => 10 %>
+			<%= viper_textile_editor :bio, :author_about, :rows => 10, :height => 180 %>
 			<%=textile_helper_link%>
 		</li>
 	</ol>

@@ -21,7 +21,7 @@
 		<ol>
 			<li>
 				<label for="post_body">Body text:</label>
-				<%= textile_editor :post, :body, :rows => 5 %>
+				<%= viper_textile_editor :post, :body, :rows => 5, :height => 100 %>
 				<%=textile_helper_link%>
 			</li>
 		</ol>

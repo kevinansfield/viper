@@ -16,7 +16,7 @@
 	<% if @topic.new_record? -%>
 	<li>
 		<label for="topic_body">Body</label>
-		<%= textile_editor :topic, :body, :rows => 10 %>
+		<%= viper_textile_editor :topic, :body, :rows => 10, :height => 200 %>
 		<%=textile_helper_link%>
 	</li>
 	<% end -%>
