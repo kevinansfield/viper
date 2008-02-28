@@ -163,7 +163,7 @@ module ApplicationHelper
   def viper_textile_editor(object, field, options={})
     if height = options.delete(:height)
       js = "viper.resizeTextArea(this, #{height})"
-      options.merge!(:style => 'height: 210px')
+      options.merge!(:style => "height: #{height}px")
       options.merge!(:onbeforepaste => js)
       options.merge!(:oninput => js)
       options.merge!(:onkeypress => js)
