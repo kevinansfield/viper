@@ -1,5 +1,5 @@
 config/database.yml
-db/schema.db
+db/schema.rb
 log/*.log
 tmp/**/*
 index/*
