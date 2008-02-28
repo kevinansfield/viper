@@ -35,8 +35,12 @@ class User < ActiveRecord::Base
   
   attr_readonly :posts_count, :last_seen_at
   
-  def available_forums
-    @available_forums ||= site.ordered_forums - forums
+  def self.prefetch_from(records)
+    find(:all, :select => 'distinct *', :conditions => ['id in (?)', records.collect(&:user_id).uniq])
+  end
+  
+  def self.index_from(records)
+    prefetch_from(records).index_by(&:id)
   end
 
   def moderator_of?(forum)

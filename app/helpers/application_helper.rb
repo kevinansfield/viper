@@ -140,6 +140,24 @@ module ApplicationHelper
       link_to(h(topic.title), forum_topic_path(@forum, topic), options)
     end
   end
+  
+  def forum_search_path(atom = false)
+    options = params[:q].blank? ? {} : {:q => params[:q]}
+    prefix = 
+      if @topic
+        options.update :topic_id => @topic, :forum_id => @forum
+        :forum_topic
+      elsif @forum
+        options.update :forum_id => @forum
+        :forum
+      elsif @user
+        options.update :user_id => @user
+        :user
+      else
+        :search
+      end
+    atom ? send("formatted_#{prefix}_forum_posts_path", options.update(:format => :atom)) : send("#{prefix}_forum_posts_path", options)
+  end
 
   private
   

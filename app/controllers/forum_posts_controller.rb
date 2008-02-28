@@ -1,6 +1,7 @@
 class ForumPostsController < ApplicationController
   before_filter :find_parents
   before_filter :find_post, :only => [:edit, :update, :destroy]
+  before_filter :setup_display
   
   # /posts
   # /users/1/posts
@@ -90,5 +91,10 @@ protected
   
   def find_post
     @post = @topic.posts.find(params[:id])
+  end
+  
+  def setup_display
+    self.sidebar_one = nil
+    self.disable_maincols
   end
 end

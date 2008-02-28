@@ -1,7 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
 
   # User resources
-  map.resources :users, :member => { :change_email => :put, :change_password => :put, :invite => :get, :send_invite => :put, :articles => :get } do |user|
+  map.resources :users, :member => { :change_email => :put,
+                                     :change_password => :put,
+                                     :invite => :get,
+                                     :send_invite => :put,
+                                     :articles => :get },
+                        :has_many => [:forum_posts] do |user|
     user.resource :profile
     user.resource :avatar, :member => { :crop => :put }
     user.resource :bio
@@ -41,7 +46,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :comments, :collection => {:destroy_multiple => :delete},
                 :member => {:approve => :put, :reject => :put}
                 
-  # Forum resoutces
+  # Forum resources
   map.resources :moderatorships
   map.resources :forums, :has_many => :posts do |forum|
     forum.resources :topics, :controller => 'forum_topics' do |topic|
@@ -49,7 +54,6 @@ ActionController::Routing::Routes.draw do |map|
     end
     forum.resources :posts, :controller => 'forum_posts'
   end
-  
   map.resources :forum_posts, :collection => {:search => :get}
 
   map.root :controller => 'site', :action => 'index'
