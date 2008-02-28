@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 43) do
+ActiveRecord::Schema.define(:version => 45) do
 
   create_table "articles", :force => true do |t|
     t.integer  "user_id"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(:version => 43) do
 
   create_table "blogs", :force => true do |t|
     t.integer "user_id"
+    t.string  "permalink"
   end
 
   create_table "categories", :force => true do |t|
@@ -176,6 +177,7 @@ ActiveRecord::Schema.define(:version => 43) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "permalink"
   end
 
   create_table "profiles", :force => true do |t|

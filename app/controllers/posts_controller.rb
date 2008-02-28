@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_filter :find_blog
+  before_filter :find_post_and_blog
   before_filter :login_required, :protect_blog, :except => [:index, :show]
   
   tab :blogs
@@ -9,7 +9,6 @@ class PostsController < ApplicationController
   def index
     self.sidebar_one = 'posts/sidebar_blog'
     @posts = @blog.posts.paginate :page => params[:page]
-    @user = @blog.user
 
     respond_to do |format|
       format.html # index.rhtml
@@ -25,9 +24,7 @@ class PostsController < ApplicationController
   def show
     self.disable_maincols
     self.sidebar_one = 'posts/sidebar_blog'
-    @post = Post.find(params[:id])
     @comments = @post.comments.approved
-    @user = @blog.user
 
     respond_to do |format|
       format.html # show.rhtml
@@ -46,7 +43,6 @@ class PostsController < ApplicationController
   def edit
     self.disable_maincols
     self.sidebar_one = nil
-    @post = Post.find(params[:id])
   end
 
   # POST /posts
@@ -70,8 +66,6 @@ class PostsController < ApplicationController
   # PUT /posts/1
   # PUT /posts/1.xml
   def update
-    @post = Post.find(params[:id])
-
     respond_to do |format|
       if @post.update_attributes(params[:post])
         flash[:notice] = 'Post was successfully updated.'
@@ -87,7 +81,6 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.xml
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
 
     respond_to do |format|
@@ -96,14 +89,15 @@ class PostsController < ApplicationController
     end
   end
   
-  private
+private
   
-  def find_blog
-    @blog = Blog.find(params[:blog_id])
+  def find_post_and_blog
+    @post = Post.find_by_permalink(params[:id]) unless params[:id].nil?
+    @blog = Blog.find_by_permalink(params[:blog_id])
+    @user = @blog.user
   end
   
   def protect_blog
-    @user == current_user
     unless @blog.user == current_user
       flash[:error] = "That isn't your blog!"
       redirect_to hub_url
