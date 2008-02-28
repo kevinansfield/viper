@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
   end
   
   def self.find_all_for_news_delivery
-    find :all
+    find :all, :conditions => ['activation_code IS NULL']
   end
   
   # this is used to keep track of the last time a user has been seen (reading a topic)
