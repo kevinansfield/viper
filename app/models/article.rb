@@ -2,6 +2,8 @@ class Article < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
   
+  has_permalink :title
+  
   validates_presence_of :title, :description, :body
   validates_length_of :title, :maximum => DB_STRING_MAX_LENGTH
   validates_length_of :body,  :maximum => DB_TEXT_MAX_LENGTH
@@ -40,5 +42,9 @@ class Article < ActiveRecord::Base
     # Possible to use MAX(created_at) in the inner join instead, but not sure what happens if two posts end up with the same created_at
     # TODO: Test/investigate above scenarios
     self.find_by_sql ["SELECT articles. * FROM articles INNER JOIN (SELECT MAX(id) AS id FROM articles GROUP BY user_id) ids ON articles.id = ids.id ORDER BY created_at DESC LIMIT ?", number]
+  end
+  
+  def to_param
+    permalink
   end
 end

@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  before_filter :find_article, :except => [:new, :create]
   
   tab :articles
   
@@ -9,7 +10,6 @@ class ArticlesController < ApplicationController
   def show
     self.disable_maincols
     self.sidebar_one = nil
-    @article = Article.find(params[:id])
   end
   
   def new
@@ -23,7 +23,6 @@ class ArticlesController < ApplicationController
   def edit
     self.disable_maincols
     self.sidebar_one = nil
-    @article = Article.find(params[:id])
     @categories = Category.find(:all)
   end
   
@@ -47,8 +46,6 @@ class ArticlesController < ApplicationController
   end
   
   def update
-    @article = Article.find(params[:id])
-
     respond_to do |format|
       if @article.update_attributes(params[:article])
         flash[:notice] = 'Article was successfully updated.'
@@ -62,6 +59,12 @@ class ArticlesController < ApplicationController
         format.xml  { render :xml => @article.errors.to_xml }
       end
     end
+  end
+  
+protected
+
+  def find_article
+    @article = Article.find_by_permalink(params[:id])
   end
   
 end
