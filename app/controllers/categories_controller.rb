@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_filter :find_category, :except => [:new, :create]
   
   tab :articles
   
@@ -16,7 +17,6 @@ class CategoriesController < ApplicationController
   def show
     self.disable_maincols
     self.sidebar_one = nil
-    @category = Category.find(params[:id])
     @latest_articles = @category.articles.find_latest
     @archive_articles = @category.articles.find_archive
 
@@ -39,6 +39,12 @@ class CategoriesController < ApplicationController
         format.xml  { render :xml => @category.errors.to_xml }
       end
     end
+  end
+  
+protected
+
+  def find_category
+    @category = Category.find_by_permalink(params[:id])
   end
   
 end
