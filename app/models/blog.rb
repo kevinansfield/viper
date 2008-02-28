@@ -11,13 +11,14 @@ class Blog < ActiveRecord::Base
     return posts
   end
   
+  def to_param
+    permalink
+  end
+  
 private
 
   def username
     user.login
   end
   
-  def to_param
-    permalink
-  end
 end
