@@ -66,6 +66,6 @@ var ReplyForm = {
 }
  
 document.observe('dom:loaded', function() {
-  $('search').hide();
+//  $('search').hide();
 //  $('monitor_submit').hide()
 });

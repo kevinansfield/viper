@@ -1,4 +1,4 @@
-var forms = {
+var viper = {
 	resizeTextArea: function(textarea, collapsed) {
 		var lines = textarea.value.split("\n");
 	    var count = lines.length;

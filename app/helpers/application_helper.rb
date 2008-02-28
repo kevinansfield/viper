@@ -161,8 +161,9 @@ module ApplicationHelper
   
   # Custom function to add extra options to the textile editor textareas
   def viper_textile_editor(object, field, options={})
-    if height = options.delete[:height]
-      js = "forms.resizeTextArea(this, #{height})"
+    if height = options.delete(:height)
+      js = "viper.resizeTextArea(this, #{height})"
+      options.merge!(:style => 'height: 210px')
       options.merge!(:onbeforepaste => js)
       options.merge!(:oninput => js)
       options.merge!(:onkeypress => js)
