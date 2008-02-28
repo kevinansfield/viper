@@ -158,6 +158,17 @@ module ApplicationHelper
       end
     atom ? send("formatted_#{prefix}_forum_posts_path", options.update(:format => :atom)) : send("#{prefix}_forum_posts_path", options)
   end
+  
+  # Custom function to add extra options to the textile editor textareas
+  def viper_textile_editor(object, field, options={})
+    if height = options.delete[:height]
+      js = "forms.resizeTextArea(this, #{height})"
+      options.merge!(:onbeforepaste => js)
+      options.merge!(:oninput => js)
+      options.merge!(:onkeypress => js)
+    end
+    textile_editor(object, field, options)
+  end
 
   private
   
