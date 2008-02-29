@@ -55,6 +55,9 @@ ActionController::Routing::Routes.draw do |map|
     forum.resources :posts, :controller => 'forum_posts'
   end
   map.resources :forum_posts, :collection => {:search => :get}
+  
+  # Search routes
+  map.search 'community/search', :controller => 'community', :action => 'search'
 
   map.root :controller => 'site', :action => 'index'
 
