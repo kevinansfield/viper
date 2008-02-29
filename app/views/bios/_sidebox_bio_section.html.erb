@@ -3,6 +3,17 @@
 					'orange',
 					:edit_link => display_edit_link(@user, link_to('(edit)', edit_user_bio_path(@user))),
 					:content_css_class => 'small' do %>
-		<%= textilize @user.bio[sidebox_bio_section] %>
+					
+		<% output = @user.bio.eval(sidebox_bio_section) %>
+		<% unless output.is_a?(TagList) -%>
+			<%= output %>
+		<% else -%>
+		<ul>
+			<% output.each do |tag| -%>
+			<li><%= tag %></li>
+			<% end -%>
+		</ul>
+		<% end -%>
+		
 	<% end %>
 <% end -%>
