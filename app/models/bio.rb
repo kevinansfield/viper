@@ -1,13 +1,7 @@
 class Bio < ActiveRecord::Base
   belongs_to :user
   
-  def after_initialize
-    # TODO: Work out why just calling the method returns a method not defined error
-    # clear_text_fields!
-    QUESTIONS.each do |question|
-      self[question] ||=  ""
-    end
-  end
+  after_initialize :clear_text_fields
   
   QUESTIONS = %w(about interests music films television books heroes)
   # A constant for everything except the bio
@@ -21,7 +15,7 @@ class Bio < ActiveRecord::Base
                        
   private
   
-  def clear_text_fields!
+  def clear_text_fields
     QUESTIONS.each do |question|
       self[question] ||=  ""
     end
