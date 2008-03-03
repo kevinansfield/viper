@@ -1,4 +1,6 @@
 class Blog < ActiveRecord::Base
+  include User::Editable
+  
   belongs_to :user
   
   has_permalink :username
