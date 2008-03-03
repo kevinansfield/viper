@@ -74,9 +74,10 @@ class ForumPostsController < ApplicationController
 
   def destroy
     @post.destroy
-
+    path = @post.topic.reload.nil? ? forum_path(@post.forum) : forum_topic_path(@forum, @topic)
+    flash[:notice] = "Forum post/topic deleted successfully"
     respond_to do |format|
-      format.html { redirect_to(forum_topic_path(@forum, @topic)) }
+      format.html { redirect_to(path) }
       format.xml  { head :ok }
     end
   end
