@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-  has_many :articles
+  has_many :articles, :dependent => :nullify
   
   has_permalink :name
   
