@@ -5,9 +5,7 @@
   </h3>
   <div class="article-short-main">
   	<div class="article-short-author">
-  		<% unless article.user.avatar.nil? -%>
-  		<%= link_to image_tag(article.user.avatar.public_path(:tiny)), category_article_path(article.category, article)%>
-		<% end -%>
+  	  <%= link_to avatar_for(article.user, :tiny), category_article_path(article.category, article)%>
   	</div>
 	<div class="article-short-body">
 		<div class="article-short-details">

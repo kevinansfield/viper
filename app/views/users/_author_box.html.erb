@@ -1,6 +1,6 @@
 <div class="author-box">
 	<p class="name"><%= user.full_name %></p>
-	<%= image_tag user.avatar.public_path(:tiny) unless user.avatar.nil? %>
+	<%= avatar_for user, :tiny %>
 	<%unless user.bio.author_about.blank? -%>
 		<p><%= user.bio.author_about %></p>
 	<%else -%>

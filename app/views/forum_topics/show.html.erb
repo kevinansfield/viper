@@ -64,7 +64,7 @@
 	      </a>
 	    </div>
 	
-	    <%= link_to(image_tag(post.user.avatar.public_path(:tiny), :class => 'photo', :alt => post.user.full_name + "'s Avatar"), user_path(post.user)) unless post.user.avatar.nil? %>
+	    <%= link_to(avatar_for(post.user, :tiny, :class => 'photo', :alt => post.user.full_name + "'s Avatar"), user_path(post.user)) %>
 	    <span class="fn"><%= link_to truncate(h(post.user.full_name), 15), user_path(post.user), :class => (post.user.admin? ? "postadmin" : nil) %></span>
 	    <% if post.user.admin? || post.forum.moderators.include?(post.user) || !post.user.active? %>
 	    <span class="admin">

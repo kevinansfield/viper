@@ -54,6 +54,10 @@ class Avatar < ActiveRecord::Base
     avatar.reprocess_base_version
   end
   
+  def self.default
+    self.find(:first, :conditions => ["filename = 'viper_default.png' AND base_version_id IS NULL"])
+  end
+  
 #  def self.max_crop_all_versions!(avatar)
 #    base = avatar.base_version || avatar
 #    max = base.width < base.height ? base.width : base.height

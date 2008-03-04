@@ -36,4 +36,12 @@ namespace :viper do
       avatar.save
     end
   end
+  
+  desc "Adds or updates default avatar, make sure an image named 'viper_default.png' is in the public/images dir"
+  task :add_default_avatar => :environment do
+    default_file = File.join(File.dirname(__FILE__), '../../public/images/viper_default.png')
+    avatar = Avatar.default || Avatar.new
+    avatar.uploaded_data = LocalFile.new(default_file)
+    avatar.save
+  end
 end

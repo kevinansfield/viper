@@ -2,9 +2,7 @@
 <div class="post-header clearfix">
 	<div class="image">
 		<span>
-			<% unless post.blog.user.avatar.nil? -%>
-			<%= link_to image_tag(post.blog.user.avatar.public_path(:tiny)), user_path(post.blog.user) %>
-			<% end -%>
+			<%= link_to avatar_for(post.blog.user, :tiny), user_path(post.blog.user) %>
 		</span>
 	</div>
 	<h2><%= link_to post.title, blog_post_path(post.blog, post) %></h2>

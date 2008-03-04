@@ -170,6 +170,14 @@ module ApplicationHelper
     end
     textile_editor(object, field, options)
   end
+  
+  def avatar_for(user, size, options={})
+    unless user.avatar.nil?
+      image_tag(user.avatar.public_path(size), options)
+    else
+      image_tag(Avatar.default.public_path(size), options)
+    end
+  end
 
   private
   
