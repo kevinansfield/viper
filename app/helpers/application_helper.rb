@@ -152,11 +152,11 @@ module ApplicationHelper
         :forum
       elsif @user
         options.update :user_id => @user
-        :user
+        :user_forum
       else
-        :search
+        :search_forum
       end
-    atom ? send("formatted_#{prefix}_forum_posts_path", options.update(:format => :atom)) : send("#{prefix}_forum_posts_path", options)
+    atom ? send("formatted_#{prefix}_posts_path", options.update(:format => :atom)) : send("#{prefix}_posts_path", options)
   end
   
   # Custom function to add extra options to the textile editor textareas
