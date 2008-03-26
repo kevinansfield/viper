@@ -1,8 +1,13 @@
 <% @title = "Profile for #{@user.full_name}" -%>
 
+<% if @user == current_user %>
+	<div class="general-notice">You are viewing your own profile. <%= link_to 'Click here to edit it', edit_user_bio_path(@user) %></div>
+<% end -%>
+
 <% titled_box @title,
 			  'orange',
 			  :box_id => 'feature' do %>
+	
 	<h1><%= @user.first_name %>'s Profile</h1>
 	
 	<p>
