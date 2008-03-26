@@ -20,16 +20,14 @@
 		<h1><a href="/"><%= SITENAME %></a></h1>
 		<h2><a href="/"><%= TAGLINE %></a></h2>
 	</div>
-	<!-- hidden until implementation is ready
 	<div id="search">
-		<form method="get" action="">
+		<form method="get" action="/community/search">
 			<fieldset>
-			<input id="searchinput" type="text" name="searchinput" value="" />
+			<input id="searchinput" type="text" name="q" value="" />
 			<input id="searchsubmit" type="submit" value="Search" />
 			</fieldset>
 		</form>
 	</div>
-	-->
 </div>
 <div id="menu">
 	<ul>
@@ -52,6 +50,9 @@
 	</ul>
 </div>
 <div id="page">
+	
+	<div class="general-notice">This is a test installation, feel free to play around and try things out</div>
+	
 	<% if flash[:notice] -%>
     <div id="flash" class="notice"><%= flash[:notice] %></div>
     <% end -%>
