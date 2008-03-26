@@ -132,6 +132,21 @@ html[xmlns] .clearfix{display:block;}
 	color: #FFF;
 }
 
+/* General Notices */
+.general-notice {
+	border:2px solid #DDDDDD;
+	margin-bottom:1em;
+	padding:0.8em;
+}
+.general-notice {
+	background:#FFF6BF none repeat scroll 0%;
+	border-color:#FFD324;
+	color:#514721;
+}
+.general-notice a {
+	color: #444488;
+}
+
 /* Error Explanations */
 
 .errorExplanation {
