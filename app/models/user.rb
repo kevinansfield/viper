@@ -33,6 +33,9 @@ class User < ActiveRecord::Base
            
   has_permalink :login
   
+  # protect admin and validation fields from being set in mass assignments
+  attr_protected :admin, :activation_code, :email_activation_code, :password_reset_code
+  
   attr_readonly :posts_count, :last_seen_at
   
   def self.prefetch_from(records)
