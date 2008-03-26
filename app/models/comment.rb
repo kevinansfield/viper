@@ -1,3 +1,21 @@
+# == Schema Information
+# Schema version: 45
+#
+# Table name: comments
+#
+#  id               :integer(11)     not null, primary key
+#  user_id          :integer(11)     
+#  post_id          :integer(11)     
+#  body             :text            
+#  created_at       :datetime        
+#  commentable_id   :integer(11)     
+#  commentable_type :string(255)     
+#  user_ip          :string(255)     
+#  user_agent       :string(255)     
+#  referrer         :string(255)     
+#  approved         :boolean(1)      not null
+#
+
 class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :commentable, :polymorphic => true

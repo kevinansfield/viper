@@ -1,3 +1,21 @@
+# == Schema Information
+# Schema version: 45
+#
+# Table name: messages
+#
+#  id               :integer(11)     not null, primary key
+#  sender_id        :integer(11)     not null
+#  receiver_id      :integer(11)     not null
+#  subject          :string(255)     default(""), not null
+#  body             :text            
+#  created_at       :datetime        
+#  read_at          :datetime        
+#  sender_deleted   :boolean(1)      
+#  receiver_deleted :boolean(1)      
+#  sender_purged    :boolean(1)      
+#  receiver_purged  :boolean(1)      
+#
+
 class Message < ActiveRecord::Base
   belongs_to :sender,
              :foreign_key => 'sender_id',

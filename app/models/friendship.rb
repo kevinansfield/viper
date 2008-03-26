@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 45
+#
+# Table name: friendships
+#
+#  id          :integer(11)     not null, primary key
+#  user_id     :integer(11)     
+#  friend_id   :integer(11)     
+#  status      :string(255)     
+#  created_at  :datetime        
+#  accepted_at :datetime        
+#
+
 class Friendship < ActiveRecord::Base
   belongs_to :user
   belongs_to :friend, :class_name => "User", :foreign_key => "friend_id"

@@ -1,3 +1,24 @@
+# == Schema Information
+# Schema version: 45
+#
+# Table name: avatars
+#
+#  id              :integer(11)     not null, primary key
+#  user_id         :integer(11)     
+#  parent_id       :integer(11)     
+#  content_type    :string(255)     
+#  filename        :string(255)     
+#  thumbnail       :string(255)     
+#  size            :integer(11)     
+#  width           :integer(11)     
+#  height          :integer(11)     
+#  crop_options    :string(255)     
+#  version_name    :string(255)     
+#  base_version_id :integer(11)     
+#  file_size       :integer(11)     
+#  aspect_ratio    :float           
+#
+
 class Avatar < ActiveRecord::Base
   belongs_to :user
   

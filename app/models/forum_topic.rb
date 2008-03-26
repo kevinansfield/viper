@@ -1,3 +1,24 @@
+# == Schema Information
+# Schema version: 45
+#
+# Table name: forum_topics
+#
+#  id              :integer(11)     not null, primary key
+#  user_id         :integer(11)     
+#  forum_id        :integer(11)     
+#  title           :string(255)     
+#  hits            :integer(11)     default(0)
+#  sticky          :integer(11)     
+#  posts_count     :integer(11)     default(0)
+#  locked          :boolean(1)      
+#  last_post_id    :integer(11)     
+#  last_updated_at :datetime        
+#  last_user_id    :integer(11)     
+#  permalink       :string(255)     
+#  created_at      :datetime        
+#  updated_at      :datetime        
+#
+
 class ForumTopic < ActiveRecord::Base
   include User::Editable
 

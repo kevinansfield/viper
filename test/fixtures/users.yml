@@ -1,3 +1,29 @@
+# == Schema Information
+# Schema version: 45
+#
+# Table name: users
+#
+#  id                        :integer(11)     not null, primary key
+#  login                     :string(255)     
+#  email                     :string(255)     
+#  crypted_password          :string(40)      
+#  salt                      :string(40)      
+#  created_at                :datetime        
+#  updated_at                :datetime        
+#  remember_token            :string(255)     
+#  remember_token_expires_at :datetime        
+#  activation_code           :string(40)      
+#  activated_at              :datetime        
+#  new_email                 :string(255)     
+#  email_activation_code     :string(40)      
+#  password_reset_code       :string(40)      
+#  admin                     :boolean(1)      
+#  permalink                 :string(255)     
+#  hits                      :integer(11)     default(0)
+#  last_seen_at              :datetime        
+#  forum_posts_count         :integer(11)     default(0)
+#
+
 quentin:
   id: 1
   login: quentin

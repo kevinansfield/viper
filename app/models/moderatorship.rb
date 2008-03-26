@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 45
+#
+# Table name: moderatorships
+#
+#  id         :integer(11)     not null, primary key
+#  forum_id   :integer(11)     
+#  user_id    :integer(11)     
+#  created_at :datetime        
+#  updated_at :datetime        
+#
+
 class Moderatorship < ActiveRecord::Base
   belongs_to :user
   belongs_to :forum

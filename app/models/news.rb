@@ -1,3 +1,17 @@
+# == Schema Information
+# Schema version: 45
+#
+# Table name: news
+#
+#  id         :integer(11)     not null, primary key
+#  user_id    :integer(11)     
+#  title      :string(255)     
+#  body       :text            
+#  created_at :datetime        
+#  updated_at :datetime        
+#  permalink  :string(255)     
+#
+
 class News < ActiveRecord::Base
   belongs_to :user
   

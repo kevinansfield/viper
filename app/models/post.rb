@@ -1,3 +1,17 @@
+# == Schema Information
+# Schema version: 45
+#
+# Table name: posts
+#
+#  id         :integer(11)     not null, primary key
+#  blog_id    :integer(11)     
+#  title      :string(255)     
+#  body       :text            
+#  created_at :datetime        
+#  updated_at :datetime        
+#  permalink  :string(255)     
+#
+
 class Post < ActiveRecord::Base
   belongs_to :blog
   has_many :comments, :as => :commentable, :order => 'created_at', :dependent => :destroy

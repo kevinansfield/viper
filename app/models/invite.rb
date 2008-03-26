@@ -1,3 +1,13 @@
+# == Schema Information
+# Schema version: 45
+#
+# Table name: tablelesses
+#
+#  user_id    :integer         
+#  recipients :text            
+#  message    :text            
+#
+
 class Invite < Tableless
   column :user_id,        :integer
   column :recipients,     :text

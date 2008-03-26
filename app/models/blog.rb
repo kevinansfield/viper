@@ -1,3 +1,13 @@
+# == Schema Information
+# Schema version: 45
+#
+# Table name: blogs
+#
+#  id        :integer(11)     not null, primary key
+#  user_id   :integer(11)     
+#  permalink :string(255)     
+#
+
 class Blog < ActiveRecord::Base
   include User::Editable
   

@@ -1,3 +1,19 @@
+# == Schema Information
+# Schema version: 45
+#
+# Table name: articles
+#
+#  id          :integer(11)     not null, primary key
+#  user_id     :integer(11)     
+#  category_id :integer(11)     
+#  title       :string(255)     
+#  body        :text            
+#  created_at  :datetime        
+#  updated_at  :datetime        
+#  description :text            
+#  permalink   :string(255)     
+#
+
 class Article < ActiveRecord::Base
   belongs_to :category
   belongs_to :user

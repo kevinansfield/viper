@@ -1,3 +1,17 @@
+# == Schema Information
+# Schema version: 45
+#
+# Table name: tablelesses
+#
+#  name          :string          
+#  company       :string          
+#  phone         :string          
+#  email_address :string          
+#  contact_type  :string          
+#  subject       :string          
+#  message       :text            
+#
+
 class Contact < Tableless
   column :name,           :string
   column :company,        :string
