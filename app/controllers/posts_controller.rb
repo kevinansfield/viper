@@ -54,8 +54,8 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.duplicate? or @blog.posts << @post
         flash[:notice] = 'Post was successfully created.'
-        format.html { redirect_to post_url(@post.blog, @post) }
-        format.xml  { head :created, :location => post_url(:id => @post) }
+        format.html { redirect_to blog_post_url(@post.blog, @post) }
+        format.xml  { head :created, :location => blog_post_url(:id => @post) }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @post.errors.to_xml }
