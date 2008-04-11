@@ -94,6 +94,10 @@ private
   def find_post_and_blog
     @post = Post.find_by_permalink(params[:id]) unless params[:id].nil?
     @blog = Blog.find_by_permalink(params[:blog_id])
+    # Revert to finding by ID if permalink fails (stops annoying error emails from feedfetcher)
+    unless @blog
+      @blog = Blog.find params[:blog_id]
+    end
     @user = @blog.user
   end
   
