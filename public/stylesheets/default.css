@@ -1275,9 +1275,7 @@ a, a#visited {
 /*-----------------------------------------------------------------------------------------------
 	Activity Styling
 -----------------------------------------------------------------------------------------------*/
-.activity-feed {
-	
-}
+.activity-feed { }
 .activity-item {
 	margin-bottom: 0.8em;
 }
@@ -1288,10 +1286,17 @@ a, a#visited {
 .activity-message {
 	margin-left: 29px;
 }
-.activity-body {
-	
-}
+.activity-body { }
 .activity-time {
 	color: #888888;
 	font-size: 0.8em;
 }
+
+.minifeed-item {
+	margin-bottom: 0.5em;
+}
+.minifeed-body {
+	margin-left: 29px;
+	font-size: 0.8em;
+}
+.minifeed-icon { float: left; }

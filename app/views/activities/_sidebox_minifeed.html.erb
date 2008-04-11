@@ -1,0 +1,8 @@
+<%- if logged_in? && current_user.feed.size > 0 -%>
+<% titled_box 'Latest Activity',
+			  'blue' do %>
+			  
+	<%= render :partial => 'activities/minifeed' %>
+			  
+<% end %>
+<%- end -%>
