@@ -20,6 +20,7 @@ class UsersController < ApplicationController
     @user = current_user
     @user.setup_for_display!
     @posts = @user.blog.posts.paginate :page => params[:page]
+    @feed = @user.feed
   end
   
   # Display the user's public profile

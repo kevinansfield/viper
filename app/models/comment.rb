@@ -1,11 +1,10 @@
 # == Schema Information
-# Schema version: 45
+# Schema version: 47
 #
 # Table name: comments
 #
 #  id               :integer(11)     not null, primary key
 #  user_id          :integer(11)     
-#  post_id          :integer(11)     
 #  body             :text            
 #  created_at       :datetime        
 #  commentable_id   :integer(11)     
@@ -17,15 +16,21 @@
 #
 
 class Comment < ActiveRecord::Base
+  include ActivityLogger
+  
   belongs_to :user
   belongs_to :commentable, :polymorphic => true
+  has_many :activities, :foreign_key => "item_id", :dependent => :destroy
   
-  validates_presence_of :body
+  validates_presence_of :body, :user
   validates_length_of :body, :maximum => DB_TEXT_MAX_LENGTH
   
   before_create :check_for_spam
+  after_create :log_activity
   
   acts_as_textiled :body
+  
+  alias commenter user
   
   def self.approved
     find(:all, :conditions => 'approved=1', :order => 'created_at DESC')
@@ -83,5 +88,13 @@ class Comment < ActiveRecord::Base
   # Check authorization for destroying comments.
   def authorized?(user, parent)
     parent.user == user
+  end
+  
+private
+
+  def log_activity
+    activity = Activity.create!(:item => self, :user => user)
+    add_activities(:activity => activity, :user => commentable.user)
+    add_activities(:activity => activity, :user => user)
   end
 end

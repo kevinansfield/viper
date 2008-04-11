@@ -1271,3 +1271,27 @@ a, a#visited {
 #lightwindow dd {
 	margin-left: 20px;
 }
+
+/*-----------------------------------------------------------------------------------------------
+	Activity Styling
+-----------------------------------------------------------------------------------------------*/
+.activity-feed {
+	
+}
+.activity-item {
+	margin-bottom: 0.8em;
+}
+.activity-icon {
+	float: left;
+	margin: 2px;
+}
+.activity-message {
+	margin-left: 29px;
+}
+.activity-body {
+	
+}
+.activity-time {
+	color: #888888;
+	font-size: 0.8em;
+}

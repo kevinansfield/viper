@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 45
+# Schema version: 47
 #
 # Table name: profiles
 #
@@ -19,8 +19,11 @@
 #
 
 class Profile < ActiveRecord::Base
+  include ActivityLogger
+  
   belongs_to :user
   has_many :im_contacts
+  has_many :activities, :foreign_key => "item_id", :dependent => :destroy
   
   acts_as_ferret :remote => false
   
@@ -29,6 +32,7 @@ class Profile < ActiveRecord::Base
   before_validation_on_update :geocode_address
   
   after_update :save_im_contacts
+  after_save :log_activity
   
   ALL_FIELDS = %w(first_name last_name gender birthdate occupation city county post_code)
   STRING_FIELDS = %w(first_name last_name occupation county post_code)
@@ -133,18 +137,23 @@ class Profile < ActiveRecord::Base
     end
   end
   
-  private
-  
-    def geocode_address
-      unless location.blank?
-        geo = GeoKit::Geocoders::MultiGeocoder.geocode(location)
-        errors.add(:address, "could not geocode address") if !geo.success
-        if geo.success
-          self.lat, self.lng = geo.lat, geo.lng
-          self.city = geo.city unless !self.city.blank?
-          self.county = geo.state unless !self.county.blank?
-          self.post_code = geo.zip unless !self.post_code.blank?
-        end
+private
+
+  def geocode_address
+    unless location.blank?
+      geo = GeoKit::Geocoders::MultiGeocoder.geocode(location)
+      errors.add(:address, "could not geocode address") if !geo.success
+      if geo.success
+        self.lat, self.lng = geo.lat, geo.lng
+        self.city = geo.city unless !self.city.blank?
+        self.county = geo.state unless !self.county.blank?
+        self.post_code = geo.zip unless !self.post_code.blank?
       end
     end
+  end
+
+  def log_activity
+    add_activities(:item => self, :user => user)
+  end
+  
 end

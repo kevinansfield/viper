@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 45
+# Schema version: 47
 #
 # Table name: forum_posts
 #
@@ -14,6 +14,7 @@
 
 class ForumPost < ActiveRecord::Base
   include User::Editable
+  include ActivityLogger
 
   # author of post
   belongs_to :user, :counter_cache => true
@@ -22,9 +23,11 @@ class ForumPost < ActiveRecord::Base
              :foreign_key => 'topic_id',
              :class_name => 'ForumTopic',
              :counter_cache => :posts_count
-  
+             
   # topic's forum (set by callback)
   belongs_to :forum, :counter_cache => :posts_count
+  
+  has_many :activities, :foreign_key => "item_id", :dependent => :destroy
   
   acts_as_textiled :body
   
@@ -32,6 +35,7 @@ class ForumPost < ActiveRecord::Base
   validate :topic_is_not_locked
 
   after_create  :update_cached_fields
+  after_create  :log_activity
   after_destroy :update_cached_fields
 
   attr_accessible :body
@@ -52,5 +56,10 @@ protected
   
   def topic_is_not_locked
     errors.add_to_base("Topic is locked") if topic && topic.locked?
+  end
+  
+private
+  def log_activity
+    add_activities(:item => self, :user => user)
   end
 end

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 45
+# Schema version: 47
 #
 # Table name: users
 #
@@ -56,6 +56,11 @@ class User < ActiveRecord::Base
   
   has_many :moderatorships, :dependent => :delete_all
   has_many :forums, :through => :moderatorships, :source => :forum
+  
+  FEED_SIZE = 10
+  has_many :feeds
+  has_many :activities, :through => :feeds,
+                        :order => 'created_at DESC', :limit => FEED_SIZE
            
   has_permalink :login
   
@@ -96,6 +101,8 @@ class User < ActiveRecord::Base
     self.profile.full_name || self.login
   end
   
+  alias name full_name
+  
   def first_name
     self.profile ||= Profile.new
     self.profile.first_name.blank? ? self.login : self.profile.first_name
@@ -131,5 +138,16 @@ class User < ActiveRecord::Base
   
   def to_param
     permalink
+  end
+  
+  ## Feeds
+  
+  def feed
+    activities
+  end
+  
+  def recent_activity
+    Activity.find_all_by_user_id(self, :order => 'created_at DESC',
+                                       :limit => FEED_SIZE)
   end
 end

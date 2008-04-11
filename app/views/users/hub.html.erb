@@ -6,11 +6,10 @@
 			  :box_id => 'feature' do %>
 	<h1>Welcome back <%= @user.first_name %></h1>
 	
-	<p>
-		<b>My Bio:</b>
-		<%= fallback_if_blank @user.bio.about, link_to('Write a bit about yourself in your bio.', edit_user_bio_path(@user)) %>
-		<%= link_to('(edit)', edit_user_bio_path(@user)) if !@user.bio.about.blank? %>
-	</p>
+	<h2>News Feed</h2>
+	<div class="activity-feed">
+	  	<%= render :partial => 'shared/activity', :collection => @feed %>
+	</div>
 <% end %>
 	
 <%= render :partial => 'friendship/friends' %>

@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   include ExceptionNotifiable
   include AuthenticatedSystem
   
+  helper :all # include all helpers, all the time
+  
   helper_method :current_page
   
   before_filter :reset_partials

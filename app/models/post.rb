@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 45
+# Schema version: 47
 #
 # Table name: posts
 #
@@ -13,8 +13,13 @@
 #
 
 class Post < ActiveRecord::Base
+  include ActivityLogger
+  
   belongs_to :blog
   has_many :comments, :as => :commentable, :order => 'created_at', :dependent => :destroy
+  has_many :activities, :foreign_key => "item_id", :dependent => :destroy
+  
+  after_create :log_activity
   
   has_permalink :title
   
@@ -56,4 +61,11 @@ class Post < ActiveRecord::Base
   def to_param
     permalink
   end
+  
+private
+
+  def log_activity
+    add_activities(:item => self, :user => user)
+  end
+  
 end

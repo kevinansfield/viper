@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 45
+# Schema version: 47
 #
 # Table name: bios
 #
@@ -16,9 +16,13 @@
 #
 
 class Bio < ActiveRecord::Base
+  include ActivityLogger
+  
   belongs_to :user
+  has_many :activities, :foreign_key => "item_id", :dependent => :destroy
   
   after_initialize :clear_text_fields
+  after_save :log_activity
   
   QUESTIONS = %w(about interests music films television books heroes)
   # A constant for everything except the bio
@@ -54,12 +58,16 @@ class Bio < ActiveRecord::Base
     TagList.new(self[:heroes], :parse => true)
   end
                        
-  private
+private
   
   def clear_text_fields
     QUESTIONS.each do |question|
       self[question] ||=  ""
     end
+  end
+  
+  def log_activity
+    add_activities(:item => self, :user => user)
   end
   
 end

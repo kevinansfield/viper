@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 45
+# Schema version: 47
 #
 # Table name: articles
 #
@@ -15,8 +15,13 @@
 #
 
 class Article < ActiveRecord::Base
+  include ActivityLogger
+  
   belongs_to :category
   belongs_to :user
+  has_many :activities, :foreign_key => "item_id", :dependent => :destroy
+  
+  after_create :log_activity
   
   has_permalink :title
   
@@ -62,5 +67,11 @@ class Article < ActiveRecord::Base
   
   def to_param
     permalink
+  end
+  
+private
+
+  def log_activity
+    add_activities(:item => self, :user => user)
   end
 end
