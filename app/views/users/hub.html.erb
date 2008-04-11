@@ -7,9 +7,13 @@
 	<h1>Welcome back <%= @user.first_name %></h1>
 	
 	<h2>News Feed</h2>
+	<%- unless @feed.size <= 0 -%>
 	<div class="activity-feed">
 	  	<%= render :partial => 'activities/activity', :collection => @feed %>
 	</div>
+	<%- else -%>
+	<p>Sorry, there is no activity available yet. Please check back soon.</p>
+	<%- end -%>
 <% end %>
 	
 <%= render :partial => 'friendship/friends' %>
