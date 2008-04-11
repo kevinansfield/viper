@@ -95,9 +95,9 @@ module ActivitiesHelper
 
   def someones(user, link = true)
     if link
-      current_user == user ? "their own" : "#{user_link(user)}'s"
+      current_user == user ? "your" : "#{user_link(user)}'s"
     else
-      current_user == user ? "their own" : "#{user.name}'s"
+      current_user == user ? "your" : "#{user.name}'s"
     end
   end
 
