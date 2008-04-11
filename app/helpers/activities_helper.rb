@@ -62,7 +62,7 @@ module ActivitiesHelper
       comment_type = activity.item.commentable.class.to_s
       case comment_type
         when "Post"
-          post = activity.item.post
+          post = activity.item.commentable
           %(#{user_link(user)} made a comment on #{someones(post.blog.user)} 
             #{post_link("blog post", post.blog, post)})
         when "Wall"
@@ -82,6 +82,12 @@ module ActivitiesHelper
     when "ForumTopic"
       %(#{user_link(user)} created a 
         #{forum_topic_link("new discussion topic", activity.item)}.)
+    when "Avatar"
+      %(#{user_link(user)} updated their profile picture.)
+    when "Profile"
+      %(#{user_link(user)} updated their profile information.)
+    when "Article"
+      %(#{user_link(user)} posted a #{article_link("new article", activity.item)}.)
     else
       raise "Invalid activity type #{activity_type.inspect}"
     end
