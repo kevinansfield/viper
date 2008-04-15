@@ -1,5 +1,5 @@
 class NewsController < ApplicationController
-  before_filter :find_news_item, :except => [:new, :create]
+  before_filter :find_news_item, :except => [:index, :new, :create]
   
   tab :news
   
@@ -82,6 +82,9 @@ protected
 
   def find_news_item
     @news = News.find_by_permalink(params[:id]) unless params[:id].nil?
+    unless @news
+      @news = News.find(params[:id])
+    end
     @news_item = @news
   end
 end
