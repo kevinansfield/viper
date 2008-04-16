@@ -1,0 +1,51 @@
+<% @title = "Profile for #{@user.full_name}" -%>
+
+<% if @user == current_user %>
+	<div class="general-notice">You are viewing your own profile. <%= link_to 'Click here to edit it', edit_user_bio_path(@user) %></div>
+<% end -%>
+
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
+	
+	<h1><%= @user.first_name %>'s Profile</h1>
+	
+	<p>
+		<h4>About Me:</h4>
+		<%= fallback_if_blank @user.bio.about, "(This user has not yet written their short bio.)" %>
+		
+		<h4>Contact Information:</h4>
+		<% unless @user.profile.im_contacts.length < 1 and @user.profile.website.blank? %>
+		<table>
+			<% @user.profile.im_contacts.each do |im| %>
+			<tr>
+				<td><b><%= im.service %>:</b></td>
+				<td><%= im.contact %></td>
+			</tr>
+			<% end %>
+			<% unless @user.profile.website.blank? %>
+			<tr>
+				<td><b>Website:</b></td>
+				<td><a href="<%= @user.profile.website %>"><%= @user.profile.website %></a></td>
+			</tr>
+			<% end %>
+		</table>
+		<% else %>
+		<p>This user has not entered any additional contact information yet. Why not <%= link_to 'send them a message', new_user_message_path(@user) %>?</p>
+		<% end %>
+	</p>
+<% end %>
+
+<%= render :partial => 'friendship/friends' %>
+
+<% unless @user.blog.posts.length < 1 %>
+	<% titled_box link_to("Blog",blog_posts_path(@user.blog)),
+				  'pink',
+				  :edit_link => link_to('(View Blog)', blog_posts_path(@user.blog)) do %>
+		<h3>Recent Blog Entries</h3>
+		<p><%= will_paginate(@posts) if @posts.length > Post.per_page %></p>
+		<%= render :partial => "posts/short_post_listing", :collection => @posts %>
+	<% end %>
+<% end %>
+
+<%= render :partial => 'wall/wall' %>

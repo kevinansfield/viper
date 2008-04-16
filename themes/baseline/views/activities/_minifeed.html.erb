@@ -1,0 +1,4 @@
+<%- if logged_in? -%>
+<%= render :partial => 'activities/minifeed_item',
+           :collection => current_user.feed %>
+<%- end -%>

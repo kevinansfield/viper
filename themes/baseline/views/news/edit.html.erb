@@ -1,0 +1,30 @@
+<% @title = "Edit News Entry" -%>
+
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
+			  
+	<%= error_messages_for :news %>
+
+	<% form_for(:news, :url => news_item_path(@news), :html => { :method => :put, :class => 'form' }) do |f| %>
+		<fieldset>
+			<legend><%= @title %></legend>
+			<ol>
+				<li>
+					<label for="news_title">Title:</label>
+				    <%= f.text_field :title, :class => 'text' %>
+				</li>
+				<li>
+					<label for="news_body">Body:</label>
+					<%= viper_textile_editor :news, :body, :rows => 30, :height => 200 %>
+					<%=textile_helper_link%>
+				</li>
+			</ol>
+		</fieldset>
+		<fieldset class="submit">
+			<%= submit_tag "Update" %> | <%= link_to 'Cancel', news_path %>
+		</fieldset>
+		<%= textile_editor_initialize -%>
+	<% end %>
+	
+<% end %>

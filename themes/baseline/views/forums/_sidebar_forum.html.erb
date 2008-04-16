@@ -1,0 +1,25 @@
+<% titled_box @forum.name,
+			  'orange',
+			  :box_id => 'feature' do %>
+			  
+	<% unless @forum.description.blank? %>
+		<%= @forum.description %>
+		<hr />
+	<% end %>
+	
+	<h5 style="margin-bottom:1.0em;"><%= 'Moderators' %></h5>
+	
+	<% unless @forum.moderators.empty? -%>
+		<ul class="flat" style="margin-top:1em;">
+		<% @forum.moderators.each do |user| -%>
+		  <li><%= link_to h(user.display_name || user.login), user %></li>
+		<% end -%>
+		</ul>
+	<% else -%>
+		<p><%= 'This forum is currently unmoderated.' %></p>
+		<p><%= 'Please always be courteous.' %></p>
+	<% end -%>
+
+<% end %>
+
+<%= render :partial => 'shared/sidebox_sponsors' %>

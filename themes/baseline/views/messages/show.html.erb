@@ -1,0 +1,14 @@
+<% @title = "Message from #{@message.sender.full_name}" -%>
+<% titled_box @title,
+			  'blue',
+			  :box_id => 'feature' do %>
+		
+		<h3><%= h(@message.subject) %></h3>
+		<%= RedCloth.new(@message.body).to_html %>
+			  
+		<p>
+			<% unless current_user == @message.sender %><%= link_to 'Reply', reply_user_message_path(current_user, @message) %> | <% end %>
+            <%= link_to 'Delete', user_message_url(@user, @message), :confirm => 'Are you sure?', :method => :delete %>
+			or <%= link_to 'Go Back', user_messages_path(@user) %>
+		</p>
+<% end %>

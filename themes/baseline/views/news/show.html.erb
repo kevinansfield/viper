@@ -1,0 +1,9 @@
+<% @title = @news_item.title -%>
+
+<% titled_box link_to('News', news_path)+" >> #{@news_item.title}",
+			  'orange',
+			  :box_id => 'feature' do %>
+			  
+<%= render :partial => 'news_item' %>
+
+<% end -%>

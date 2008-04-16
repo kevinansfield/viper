@@ -1,0 +1,15 @@
+<% content_for :header do -%>
+<%= auto_discovery_link_tag(:atom, :action => 'index', :format => :atom) %>
+<% end -%>
+<% @title = "#{@user.full_name}'s Blog" -%>
+
+<% titled_box @title,
+			  'pink',
+			  :edit_link => link_to_if_owner(@user, '(New Post)', new_blog_post_path),
+			  :box_id => 'feature' do %>
+
+<%= will_paginate(@posts) if @posts.length > Post.per_page %>
+
+<%= render :partial => "post", :collection => @posts %>
+
+<% end %>

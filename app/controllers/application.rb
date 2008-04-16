@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   include ExceptionNotifiable
   include AuthenticatedSystem
   
+  theme 'baseline'
+  
   helper :all # include all helpers, all the time
   
   helper_method :current_page

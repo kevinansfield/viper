@@ -1,0 +1,20 @@
+<div class="post">
+  <div class="post_title">
+    <h2><%= link_to_unless_current sanitize(news_item.title), news_item_url(news_item) %></h2>
+	<% if logged_in? && current_user.admin? %>
+	<div class="post_actions">
+	  <%= link_to_unless_current 'Show', news_item_url(news_item) %> |
+	  <%= link_to_unless_current 'Edit', edit_news_item_path(news_item) %> |
+	  <%= link_to 'Delete', news_item_url(news_item),
+	              :confirm => 'Are you sure?', :method => :delete %>
+	</div>
+	<% end %>
+  </div>
+  <div class="post_body"><%= news_item.body %></div>
+  <div class="post_footer_text">
+    <p>Posted <%= time_ago_in_words news_item.created_at %> ago</p>
+    <% if news_item.updated_at != news_item.created_at %>
+      <p>Modified <%= time_ago_in_words news_item.updated_at %> ago</p>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<% @title = "Browse Community" -%>
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
+
+<%= render :partial => "browse_form" %>
+<%= render :partial => "result_summary" %>
+<%= render :partial => "user_table" %>
+
+<% end %>

@@ -1,0 +1,11 @@
+Hello <%= @friend.first_name %>,
+
+You have a new <%= SITENAME %> friend request from <%= @user.full_name %>.
+
+View <%= @user.first_name %>'s profile:
+<%= "#{HOST}#{@user_url}" %>
+
+Accept:  <%= @accept_url %>
+Decline: <%= @decline_url %>
+
+-- The <%= SITENAME %> team
