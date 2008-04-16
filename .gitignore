@@ -7,6 +7,7 @@ index/*
 public/stylesheets/site.css
 public/javascripts/site.js
 public/avatars/*
+public/themes/*
 
 .DS_Store
 thumbs.db
