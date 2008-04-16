@@ -10,7 +10,7 @@
 				<div class="friend-name"><%= link_to "#{friend.full_name}", user_path(friend) %>
 				<% if @user == current_user -%>
 					<span class="friend-actions">
-						<%= link_to image_tag("icons/delete.png", :alt => 'Delete', :title => 'Delete'),
+						<%= link_to theme_image_tag("icon_delete.png", :alt => 'Delete', :title => 'Delete'),
 									{ :controller => "friendship", :action => "delete", :id => friend },
 									:confirm => "Really delete friendship with #{friend.full_name}?" %>
 					</span>
@@ -34,10 +34,10 @@
 				<div class="friend-name"><%= link_to "#{requester.full_name}", user_path(requester) %>
 					<% if @user == current_user -%>
 					<span class="friend-actions">
-						<%= link_to image_tag("icons/accept.png", :alt => 'Accept', :title => 'Accept'),
+						<%= link_to theme_image_tag("icon_accept.png", :alt => 'Accept', :title => 'Accept'),
 									{ :controller => "friendship", :action => "accept", :id => requester } %>
 						/
-						<%= link_to image_tag("icons/delete.png", :alt => 'Decline', :title => 'Decline'),
+						<%= link_to theme_image_tag("icon_delete.png", :alt => 'Decline', :title => 'Decline'),
 									{ :controller => "friendship", :action => "decline", :id => requester },
 									:confirm => "Really decline friendship with #{requester.full_name}?" %>
 					</span>
@@ -61,7 +61,7 @@
 				<div class="friend-name"><%= link_to "#{friend.full_name}", user_path(friend) %>
 					<% if @user == current_user -%>
 					<span class="friend-actions">
-						<%= link_to image_tag("icons/delete.png", :alt => 'Cancel Request', :title => 'Cancel Request'),
+						<%= link_to theme_image_tag("icon_delete.png", :alt => 'Cancel Request', :title => 'Cancel Request'),
 									{ :controller => "friendship", :action => "cancel", :id => friend },
 									:confirm => "Really cancel friendship request with #{friend.full_name}?" %>
 					</span>
