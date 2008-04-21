@@ -61,11 +61,12 @@ class User < ActiveRecord::Base
   has_many :feeds
   has_many :activities, :through => :feeds,
                         :order => 'created_at DESC', :limit => FEED_SIZE
+                        
+  # prevents a user from submitting a crafted form that bypasses activation
+  # anything else you want your user to change should be added here.
+  attr_accessible :login, :email, :new_email, :password, :password_confirmation
            
   has_permalink :login
-  
-  # protect admin and validation fields from being set in mass assignments
-  attr_protected :admin, :activation_code, :email_activation_code, :password_reset_code
   
   attr_readonly :posts_count, :last_seen_at
   

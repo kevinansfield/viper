@@ -32,10 +32,6 @@ class User
   before_create :make_activation_code
   before_create :set_first_user_as_admin
   
-  # prevents a user from submitting a crafted form that bypasses activation
-  # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :new_email, :password, :password_confirmation
-  
   # Assures that updated email addresses do not conflict with existing emails
   def validate
     if User.find_by_email(new_email)
