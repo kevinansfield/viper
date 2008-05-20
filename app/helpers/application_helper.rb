@@ -45,23 +45,9 @@ module ApplicationHelper
     chosen.blank? ? fallback : chosen    
   end
   
-  # Create as many of these as you like, each should call a different partial 
-  # 1. Render 'shared/sidebar_box' partial with the given options and block content
+  # Render a block with titled box surround
   def titled_box(title, color, options = {}, &block)
     block_to_partial('shared/titled_box', options.merge(:title => title, :color => color), &block)
-  end
-   
-  # Sample helper #2
-  #def un_rounded_box(title, options = {}, &block)
-  #  block_to_partial('shared/un_rounded_box', options.merge(:title => title), &block)
-  #end
-  
-  def sidebar_one_helper
-    "#{controller.sidebar_one}"
-  end
-  
-  def sidebar_two_helper
-    "#{controller.sidebar_two}"
   end
   
   def display_edit_link(user, link)
