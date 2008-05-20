@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   include ExceptionNotifiable
   include AuthenticatedSystem
   
-  theme 'baseline'
+  # Set the theme here
+  # theme 'default'
   
   helper :all # include all helpers, all the time
   
