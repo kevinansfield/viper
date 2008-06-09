@@ -4,8 +4,6 @@ log/*.log
 tmp/**/*
 index/*
 
-index/*
-
 public/stylesheets/site.css
 public/javascripts/site.js
 public/avatars/*
