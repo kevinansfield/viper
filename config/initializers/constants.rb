@@ -3,10 +3,10 @@ DB_STRING_MAX_LENGTH = 255
 DB_TEXT_MAX_LENGTH = 65000
 
 # Hostname, Sitename, etc. used in mailouts and page titles
-HOST = 'http://localhost:3000'
-SITENAME = 'Viper'
-TAGLINE = 'Your Social Community Starts Here'
-DOMAIN = 'localhost'
+HOST = 'http://all4-viper.digitalblueprint.co.uk'
+SITENAME = 'All Four Seasons'
+TAGLINE = 'Air Conditioning and Heat Pumps'
+DOMAIN = 'all4-viper.digitalblueprint.co.uk'
 
 # Partial defaults
 MAINCOL_ONE = "layouts/maincol_one"
