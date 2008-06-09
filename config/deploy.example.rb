@@ -45,9 +45,20 @@ end
 #  sudo "/usr/local/lsws/bin/lswsctrl restart"
 #end
 
+
 task :after_setup, :roles => :app do
   # Create app specific shared dirs
   run "cd #{deploy_to}/#{shared_dir}/; mkdir avatars index"
+end
+
+task :before_symlink do
+  #link in shared
+  sudo "ln -s #{deploy_to}/#{shared_dir}/avatars #{current_release}/public/avatars"
+  #link in config
+  sudo "cp #{deploy_to}/#{shared_dir}/system/database.yml #{current_release}/config/database.yml"
+  sudo "cp #{deploy_to}/#{shared_dir}/system/environment.rb #{current_release}/config/environment.rb"
+  sudo "cp #{deploy_to}/#{shared_dir}/system/production.rb #{current_release}/config/environments/production.rb"
+  sudo "cp #{deploy_to}/#{shared_dir}/system/constants.rb #{current_release}/config/initializers/constants.rb"
 end
 
  
