@@ -9,7 +9,8 @@ class ArticlesController < ApplicationController
   
   def show
     self.disable_maincols
-    self.sidebar_one = nil
+    self.sidebar_one = 'categories/sidebar'
+    @categories = Category.find(:all)
   end
   
   def new

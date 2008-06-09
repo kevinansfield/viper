@@ -25,9 +25,9 @@ module ApplicationHelper
     end
   end
   
-  def nav_link(name, tab, options = {})
+  def nav_link(name, tab, options = {}, html_options = {})
     css = 'active' if tab.to_s == @current_tab.to_s
-    content_tag :li, link_to(content_tag(:b, name), options), :class => css
+    content_tag :li, link_to(content_tag(:b, name), options, html_options), :class => css
   end
   
   def limit_text(text, length = 18)

@@ -19,9 +19,10 @@ class CategoriesController < ApplicationController
   
   def show
     self.disable_maincols
-    self.sidebar_one = nil
+    self.sidebar_one = 'categories/sidebar'
     @latest_articles = @category.articles.find_latest
     @archive_articles = @category.articles.find_archive
+    @categories = Category.find(:all)
 
     respond_to do |format|
       format.html # show.rhtml

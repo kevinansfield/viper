@@ -1,10 +1,9 @@
 <% posts = @blog.posts.find_latest -%>
 <% unless posts.length < 1 -%>
-<% titled_box "#{@blog.user.first_name}'s Recent Blogs", 'blue' do %>
+	<%= content_tag :h3, "#{@blog.user.first_name}'s Recent Blogs" %>
 	<ul>
 	<% posts.each do |post| %>
-		<li><%= link_to post.title, blog_post_path(post.blog, post) %></li>
+		<li><%= link_to post.title, blog_post_path(post.blog, post) %> <span class="alt">(<%= time_ago_in_words post.created_at %> ago)</span></li>
 	<% end %>
 	</ul>
 <% end %>
-<% end -%>

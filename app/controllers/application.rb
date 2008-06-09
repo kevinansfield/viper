@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   
   # Set the theme here
-  # theme 'default'
+  # theme 'baseline'
   
   helper :all # include all helpers, all the time
   

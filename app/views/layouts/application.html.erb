@@ -1,108 +1,97 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title><%= "#{@title} - " || '' %><%= "#{SITENAME}: #{TAGLINE}" %></title>
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
-	<%= stylesheet_link_tag 'default', 'lightwindow', :cache => 'site' %>
+	<link rel="stylesheet" href="/stylesheets/blueprint/screen.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="/stylesheets/blueprint/print.css" type="text/css" media="print" /> 
+	<!--[if IE]><link rel="stylesheet" href="/stylesheets/blueprint/ie.css" type="text/css" media="screen, projection" /><![endif]-->
+	<%= stylesheet_link_tag 'viper', 'lightwindow', :cache => 'site' %>
 	<%= javascript_include_tag :defaults, 'lightwindow', 'viper', :cache => 'site' %>
 	<%= yield :header %>
 </head>
 <body>
-
-<div id="header">
-	<div id="logo">
-		<h1><a href="/"><%= SITENAME %></a></h1>
-		<h2><a href="/"><%= TAGLINE %></a></h2>
-	</div>
-	<div id="search">
-		<form method="get" action="/community/search">
-			<fieldset>
-				<input id="searchinput" type="text" name="q" value="" />
-				<input id="searchsubmit" type="submit" value="Search" />
-			</fieldset>
-		</form>
-	</div>
-</div>
-
-<div id="menu">
-	<ul>
-		<%= nav_link 'Home', :home, :controller => 'site' %>
-		<%= nav_link 'News', :news, news_url %>
-		<%= nav_link 'Articles', :articles, categories_url %>
-		<%= nav_link 'Blogs', :blogs, blogs_url %>
-		<%= nav_link 'Members', :community, { :controller => 'community', :action => 'index', :id => nil } %>
-		<%= nav_link 'Forums', :forums, forums_url %>
-		<%= nav_link 'Contact', :contact, { :controller => 'site', :action => 'contact' } %>
-	</ul>
-	<ul class="right">
-	<% if logged_in? -%>
-		<%= nav_link 'Your Hub', :hub, hub_url %>
-		<%= nav_link 'Logout', :logout, logout_url %>
-	<% else -%>
-		<%= nav_link 'Login', :login, login_url %>
-		<%= nav_link 'Register', :register, signup_url %>
-	<% end -%>
-	</ul>
-</div>
-
-<div id="page">
 	
-	<div class="general-notice">This is a test installation, feel free to play around and try things out</div>
-	
-	<% if flash[:notice] -%>
-    <div id="flash" class="notice"><%= flash[:notice] %></div>
-    <% end -%>
-	<% if flash[:error] -%>
-    <div id="flash" class="error"><%= flash[:error] %></div>
-    <% end -%>
-	
-	<div id="content" class="<%= "#{controller.sidebar_count.to_english}-#{pluralize_without_count(controller.sidebar_count, 'col')}" %>">
-		<%= yield %>
-		<% unless controller.maincol_count < 1 -%>
-		<div class="<%= "#{controller.maincol_count.to_english}-#{pluralize_without_count(controller.maincol_count, 'col')}" %>">
-			<%= render( :partial => "#{controller.maincol_one}", :locals => { :css_class => 'col-one' } ) unless controller.maincol_one.nil? %>
-			<%= render( :partial => "#{controller.maincol_two}", :locals => { :css_class => 'col-two' } ) unless controller.maincol_two.nil? %>
+	<div class="container">
+		<div id="header">
+			<div class="span-16">
+				<h1><a href="/"><%= SITENAME %></a></h1>
+			</div>
+			<div id="search" class="span-8 last">
+				<form method="get" action="/community/search">
+					<input id="searchinput" type="text" name="q" value="" />
+					<input id="searchsubmit" type="submit" value="Search" />
+				</form>
+			</div>
+			<hr />
+			<h2 class="alt"><%= TAGLINE %></h2>
+			<hr />
 		</div>
-		<% end %>
-	</div>
-	
-	<% unless controller.sidebar_count < 1 -%>
-	<div id="sidebar" class="<%= "#{controller.sidebar_count.to_english}-#{pluralize_without_count(controller.sidebar_count, 'col')}" %>">
-		<% unless controller.sidebar_one.nil? -%>
-		<div class="col-one">
+		
+		<div id="navigation">
+			<div class="span-16">
+				<ul>
+					<%= nav_link 'Home', :home, :controller => 'site' %>
+					<%= nav_link 'News', :news, news_url %>
+					<%= nav_link 'Articles', :articles, categories_url %>
+					<%= nav_link 'Blogs', :blogs, blogs_url %>
+					<%= nav_link 'Members', :community, { :controller => 'community', :action => 'index', :id => nil } %>
+					<%= nav_link 'Forums', :forums, forums_url %>
+					<%= nav_link 'Contact', :contact, { :controller => 'site', :action => 'contact' }, :class => 'last' %>
+				</ul>
+			</div>
+			<div class="span-8 last">
+				<ul>
+				<% if logged_in? -%>
+					<%= nav_link 'Your Hub', :hub, hub_url %>
+					<%= nav_link 'Logout', :logout, logout_url %>
+				<% else -%>
+					<%= nav_link 'Login', :login, login_url %>
+					<%= nav_link 'Register', :register, signup_url, :class => 'last' %>
+				<% end -%>
+				</ul>
+			</div>
+		</div>
+		
+		<% if flash[:success] -%>
+		<div class="flash success"><p><%= flash[:success] %></p></div>
+		<% end -%>
+		<% if flash[:notice] -%>
+	    <div class="flash notice"><p><%= flash[:notice] %></p></div>
+	    <% end -%>
+		<% if flash[:error] -%>
+	    <div class="flash error"><p><%= flash[:error] %></p></div>
+	    <% end -%>
+		
+		<div id="content">
+			<%= yield %>
+			<% unless controller.maincol_count < 1 -%>
+				<hr />
+				<%= render( :partial => "#{controller.maincol_one}", :locals => { :css_class => 'span-7 colborder' } ) unless controller.maincol_one.nil? %>
+				<%= render( :partial => "#{controller.maincol_two}", :locals => { :css_class => 'span-7 last' } ) unless controller.maincol_two.nil? %>
+			<% end -%>
+		</div>
+		
+		<div id="sidebar">
+			<hr />
 			<%= render :partial => "#{controller.sidebar_one}" %>
 		</div>
-		<% end -%>
-		<% unless controller.sidebar_two.nil? -%>
-		<div class="col-two">
-			<%= render :partial => "#{controller.sidebar_two}" unless controller.sidebar_two.nil? %>
+		
+		<div id="footer">
+			<hr />
+			<h2 class="alt">
+				Viper can be fully customised to your needs,
+				<%= link_to 'contact us', :controller => :site, :action=> :contact %> for details.
+			</h2>
+			<hr />
+			<div class="copyright">
+				<p>Copyright &copy; 2008 DigitalBlueprint Ltd. All Rights Reserved |
+				Designed &amp; Developed by <a href="http://www.digitalblueprint.co.uk/">DigitalBlueprint Ltd</a></p>
+			</div>
 		</div>
-		<% end -%>
 	</div>
-	<% end %>
-	
-	<div style="clear: both;">&nbsp;</div>
-</div>
-
-<div id="sub-nav">
-	<p>
-		<a href="/">Home</a> :: 
-		<%= link_to 'About', :controller => 'site', :action => 'about' %> :: 
-		<%= link_to 'News', news_url %> :: 
-		<%= link_to 'Articles', categories_url %> ::
-		<%= link_to 'Blogs', blogs_url %> ::
-		<%= link_to 'Members', :controller => 'community', :action => 'index', :id => nil %> :: 
-		<%= link_to 'Forums', forums_url %> :: 
-		<%= link_to 'Contact Us', :controller => 'site', :action => 'contact' %>
-	</p>
-</div>
-
-<div id="footer">
-	<p id="legal">Copyright &copy; 2007 DigitalBlueprint Ltd. All Rights Reserved | Designed &amp; Developed by <a href="http://www.digitalblueprint.co.uk/">DigitalBlueprint Ltd</a></p>
-	<p id="links"><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a> | <a href="http://validator.w3.org/check/referer" title="This page validates as XHTML 1.0 Transitional"><abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a> | <a href="http://jigsaw.w3.org/css-validator/check/referer" title="This page validates as CSS"><abbr title="Cascading Style Sheets">CSS</abbr></a></p>
-</div>
 
 </body>
 </html>

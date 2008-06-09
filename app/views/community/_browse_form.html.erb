@@ -1,31 +1,31 @@
 <% form_tag({ :action => "browse" }, :method => "get", :class => "form") do %>
-<fieldset>
-  <legend>Browse</legend>
-  <ol>
-  	<li>
-      <label for="age">Age:</label>
-      <%= text_field_tag "min_age", params[:min_age], :size => 2 %> &ndash; <%= text_field_tag "max_age", params[:max_age], :size => 2 %>
-  	</li>
-	<li>
+	<fieldset>
+		<legend>Browse</legend>
+	  
+		<label for="min_age">Age:</label>
+		<%= text_field_tag "min_age", params[:min_age], :size => 2, :class => 'text span-1' %>
+		&ndash;
+		<%= text_field_tag "max_age", params[:max_age], :size => 2, :class => 'text span-1' %>
+		
 		<label for="gender">Gender:</label>
+		<span class="radio">
 		<%= radio_button_tag :gender, "Male",
-                         	 params[:gender] == 'Male',
-                         	 :id => "Male" %> Male
-    	<%= radio_button_tag :gender, "Female",
-                         	 params[:gender] == 'Female',
-                         	 :id => "Female" %> Female
-	</li>
-	<li>
-		<label for="location">Location:</label>
+		                 	 params[:gender] == 'Male',
+		                 	 :id => "Male" %> Male
+		<%= radio_button_tag :gender, "Female",
+		                 	 params[:gender] == 'Female',
+		                 	 :id => "Female" %> Female
+		</span>
+		
+		<label for="miles">Location:</label>
 		Within
-		<%= text_field_tag "miles", params[:miles], :size => 3 %>
-    	miles from post code:
-    	<%= text_field_tag "post_code", params[:post_code], :size => 6 %>
-	</li>
-	<li>
-		<label for="">&nbsp</label>
-		<%= submit_tag "Browse" %>
-	</li>
-  </ol>
-</fieldset>
+		<%= text_field_tag "miles", params[:miles], :size => 3, :class => 'text span-1' %>
+		miles from post code:
+		<%= text_field_tag "post_code", params[:post_code], :size => 6, :class => 'text span-2' %>
+		
+		<p class="buttons">
+			<button type="submit" name="commit" class="button positive">Browse</button>
+		</p>
+	
+	</fieldset>
 <% end %>

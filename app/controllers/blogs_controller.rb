@@ -4,8 +4,8 @@ class BlogsController < ApplicationController
   
   def index
     self.disable_maincols
-    self.sidebar_one = nil
-    self.sidebar_two = 'blogs/sidebar_index'
+    self.sidebar_one = 'blogs/sidebar_index'
+    self.sidebar_two = nil
     
     respond_to do |format|
       format.html do
