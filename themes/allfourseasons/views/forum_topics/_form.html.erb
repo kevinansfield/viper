@@ -1,0 +1,34 @@
+<ol>
+	<li>
+		<label for="topic_title">Title</label>
+		<%= form.text_field :title, :onchange => "/*TopicForm.editNewTitle(this);*/", :class => "primary", :tabindex => 10 %>
+	</li>
+	
+	<% for_moderators_of @topic do -%>
+	<li>
+		<label><%= form.check_box :sticky %> Sticky</label>
+	</li>
+	<li>
+		<label><%= form.check_box :locked %> Locked</label>
+	</li>
+	<% end -%>
+	
+	<% if @topic.new_record? -%>
+	<li>
+		<label for="topic_body">Body</label>
+		<%= viper_textile_editor :topic, :body, :rows => 10, :height => 200 %>
+		<%=textile_helper_link%>
+	</li>
+	<% end -%>
+	
+	<% if admin? && !@topic.new_record? && forums = Forum.ordered -%>
+		<% if forums.size > 1 -%>
+	<li id="topic_forum_id">
+	  <label for="topic_forum_id">Forum</label>
+	  <%= form.select :forum_id, forums.map {|x| [x.name, x.id] } %>
+	</li>
+		<% end -%>
+	<% end -%>
+</ol>
+
+<%= textile_editor_initialize -%>

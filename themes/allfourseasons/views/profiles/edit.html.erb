@@ -1,0 +1,88 @@
+<% @title = "Edit Profile" -%>
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
+<p>Use the following form to update the basic details on your public profile. These can help both you and your friends find each other
+and provide more useful help when dealing with location based questions.</p>
+
+<%= error_messages_for :profile %>
+
+<% form_for(:profile, :url => user_profile_path(@user), :html => { :method => :put, :class => 'form' }) do |f| %>
+<fieldset>
+	<legend>Edit Profile - Basic Details</legend>
+	<ol>
+		<li>
+			<label for="profile_first_name">First Name:</label>
+			<%= f.text_field :first_name, :class => 'text' %>
+		</li>
+		<li>
+			<label for="profile_last_name">Last Name:</label>
+			<%= f.text_field :last_name, :class => 'text' %>
+		</li>
+		<li>
+			<label for="profile_birthdate">Date of Birth:</label>
+			<%= f.date_select :birthdate,
+							  :start_year => Profile::START_YEAR,
+							  :end_year => Time.now.year,
+							  :include_blank => true,
+							  :order => [:day, :month, :year] %>
+		</li>
+		<li>
+			<label for="profile_last_name">Gender:</label>
+			<%= f.radio_button :gender, "Male"   %> Male
+			<%= f.radio_button  :gender, "Female" %> Female
+		</li>
+		<li>
+			<label for="profile_occupation">Occupation:</label>
+			<%= f.text_field :occupation, :class => 'text' %>
+		</li>
+	</ol>
+</fieldset>
+<fieldset>
+	<legend>Edit Profile - Location</legend>
+	<p>If you know your UK Post Code or US Zip Code simply enter that and your city and county/state will be automatically found
+	when you submit the form.</p>
+	<ol>
+		<li>
+			<label for="profile_city">City:</label>
+			<%= f.text_field :city, :class => 'text' %>
+		</li>
+		<li>
+			<label for="profile_county">County/State:</label>
+			<%= f.text_field :county, :class => 'text' %>
+		</li>
+		<li>
+			<label for="profile_post_code">Post/Zip Code:</label>
+			<%= f.text_field :post_code, :class => 'text' %>
+		</li>
+	</ol>
+</fieldset>
+<fieldset>
+	<legend>Edit Profile - Contact Information</legend>
+	<ol>
+		<% for im_contact in @profile.im_contacts %>
+			<% fields_for "profile[im_contact_attributes][]", im_contact do |im| %>
+				<li>
+					<label for="">IM Contact:</label>
+					<%= im.text_field :contact, :index => nil, :class => 'text' %>
+					<select id="profile[im_contact_attributes]__service" name="profile[im_contact_attributes][][service]">
+						<option></option>
+						<%= options_for_select ImContact::SERVICES, im_contact.service %>
+					</select>
+					<% unless im_contact.new_record? %>
+						<%= im.hidden_field :id, :index => nil %>
+					<% end %>
+				</li>
+			<% end %>
+		<% end %>
+		<li>
+			<label for="profile_website">Website:</label>
+			<%= f.text_field :website, :class => 'text' %>
+		</li>
+	</ol>
+</fieldset>
+<fieldset class="submit">
+    <%= submit_tag "Update" %> | <%= link_to 'Cancel', hub_url %>
+</fieldset>
+<% end %>
+<% end %>

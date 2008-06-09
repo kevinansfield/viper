@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   
   # Set the theme here
-  # theme 'baseline'
+  theme 'allfourseasons'
   
   helper :all # include all helpers, all the time
   

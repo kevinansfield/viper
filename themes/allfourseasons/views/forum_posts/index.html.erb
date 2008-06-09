@@ -1,0 +1,59 @@
+<% @title = 'Recent Forum Posts' -%>
+<% content_for :header do -%>
+	<%= theme_stylesheet_link_tag('forums') %>
+<% end -%>
+
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
+		
+	<h1>
+	<% if params[:q].blank? -%>
+	  <%= @page_title %>
+	<% else -%>
+	  Searching For '<%= h params[:q] %>'
+	<% end -%>
+	</h1>
+	<p class="subtitle">
+	  <%= feed_icon_tag @page_title, forum_search_path(true) %>
+	  <%= number_with_delimiter(@posts.total_entries) + pluralize_without_count(@posts.total_entries, ' post') %>
+	</p>
+	
+	<%= pagination @posts %>
+	
+	<table border="0" cellspacing="0" cellpadding="0" class="posts wide">
+	<% for post in @posts do %>
+	<% unless post == @posts.first %>
+	<tr class="spacer">
+	  <td colspan="2">&nbsp;</td>
+	</tr>
+	<% end %>
+	<tr class="post hentry" id="<%= dom_id post %>">
+	  <td class="author vcard">
+	    <div class="date">
+	      <abbr class="updated" title="<%= post.created_at.xmlschema %>">
+	      <%= post.created_at.strftime('%b %d, %Y %I:%M%p') %>
+	      </abbr>
+	    </div>
+	
+	    <%= link_to(avatar_for(post.user, :tiny, :class => 'photo', :alt => post.user.full_name + "'s Avatar"), user_path(post.user)) %>
+	    <span class="fn"><%= link_to truncate(h(@users[post.user_id].full_name), 15), user_path(post.user) %></span>
+	    <span class="posts"><%= number_with_delimiter(post.user.posts.size) + pluralize_without_count(post.user.posts.size, ' post') %></span>
+	  </td>
+	  <td class="body entry-content">
+	    <p class="topic">
+	      Topic: <%= link_to h(post.forum_name), forum_path(post.forum) %> / 
+	      <%= link_to h(post.topic_title), forum_topic_path(post.forum, post.topic) %>
+	    </p>
+	    
+	    <%= post.body %>
+	  </td>
+	</tr>
+	
+	<% end %>
+	</table>
+	
+	<%= next_page @posts %>
+	<%= pagination @posts %>
+			  
+<% end %>

@@ -1,0 +1,17 @@
+<% remote_form_for(:comment, :url => user_wall_comments_path(:user_id => user.permalink, :wall_id => user.wall.id), :html => { :class => 'form', :id => 'wall-comment' }) do |form| %>
+
+<fieldset>
+  <legend>New Wall Comment</legend>
+  <ol>
+  	<li>
+		<%= textile_editor :comment, :body, :rows => 5 %>
+		<%=textile_helper_link%>
+  	</li>
+	<li>
+		<%= submit_tag "Post Comment" %>
+	</li>
+  </ol>
+</fieldset>
+<%= textile_editor_initialize -%>
+
+<% end %>

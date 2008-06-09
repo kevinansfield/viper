@@ -1,0 +1,17 @@
+<%# The activity shouldn't be nil, but we're wearing a belt and suspenders. %>
+<%- unless activity.item.nil? -%>
+  <div class="activity-item">
+    <div class="activity-icon">
+      <%# This will probably be a feed icon instead of a user icon %>
+      <%= avatar_for(activity.user, :micro) %>
+    </div>
+    <div class="activity-message">
+      <div class="activity-body">
+        <%= feed_message activity %>
+      <div class="activity-time">
+          <%= time_ago_in_words(activity.created_at).capitalize %> ago
+      </div>
+      </div>
+    </div>
+  </div>
+<%- end -%>

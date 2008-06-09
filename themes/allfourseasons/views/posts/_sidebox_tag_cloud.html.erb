@@ -1,0 +1,10 @@
+<% tags = Post.tag_counts -%>
+<% unless tags.empty? -%>
+<% titled_box "Tag Cloud", 'blue' do %>
+	<p class="tag-cloud">
+	<% tag_cloud tags, %w(cloud1 cloud2 cloud3 cloud4) do |tag, css_class| %>
+    	<%= link_to tag.name, { :action => :tag, :id => tag.name }, :class => css_class %>
+	<% end %>
+	</p>
+<% end %>
+<% end -%>

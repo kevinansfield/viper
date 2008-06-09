@@ -1,0 +1,80 @@
+<% @title = "Edit Bio" -%>
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
+<p>Use the following form to update your bio information that is displayed on your public profile.</p>
+
+<%= error_messages_for :bio %>
+
+<% form_for(:bio, :url => user_bio_path(@user), :html => { :method => :put, :class => 'form' }) do |f| %>
+<fieldset>
+	<legend>Edit Bio - Basic Details</legend>
+	<ol>
+		<li>
+			<label for="bio_about">About Me:</label>
+			<%= viper_textile_editor :bio, :about, :rows => 10, :height => 180 -%>
+			<%=textile_helper_link%>
+		</li>
+	</ol>
+</fieldset>
+<fieldset class="submit">
+    <%= submit_tag "Update" %> | <%= link_to 'Cancel', hub_url %>
+</fieldset>
+<fieldset>
+	<legend>Edit Bio - Other Information</legend>
+	<ol>
+		<li>
+			<label for="bio_interests">Interests:</label>
+			<%= f.text_area :interests, :class => 'text', :rows => 5 %>
+			<span class="help">List interests, seperated by commas.</span>
+		</li>
+		<li>
+			<label for="bio_music">Music:</label>
+			<%= f.text_area :music, :class => 'text', :rows => 5 %>
+			<span class="help">List favourite artists, seperated by commas.</span>
+		</li>
+		<li>
+			<label for="bio_films">Films:</label>
+			<%= f.text_area :films, :class => 'text', :rows => 5 %>
+			<span class="help">List favourite films, seperated by commas.</span>
+		</li>
+		<li>
+			<label for="bio_television">Television:</label>
+			<%= f.text_area :television, :class => 'text', :rows => 5 %>
+			<span class="help">List television interests, seperated by commas.</span>
+		</li>
+		<li>
+			<label for="bio_books">Books/Magazines:</label>
+			<%= f.text_area :books, :class => 'text', :rows => 5 %>
+			<span class="help">List literary interests, seperated by commas.</span>
+		</li>
+		<li>
+			<label for="bio_heroes">Heroes:</label>
+			<%= f.text_area :heroes, :class => 'text', :rows => 5 %>
+			<span class="help">List heroes, seperated by commas.</span>
+		</li>
+	</ol>
+</fieldset>
+<fieldset class="submit">
+    <%= submit_tag "Update" %> | <%= link_to 'Cancel', hub_url %>
+</fieldset>
+<fieldset>
+	<legend>Edit Bio - Author Box</legend>
+	<p>If you write an article for Viper then your "author box" will contain the following. Please be aware that the Viper
+	moderators may adapt this to fit the websites style guidelines, in which case you will be notified via the internal
+	messaging system.</p>
+	<p>Maximum 1000 characters.</p>
+	<ol>
+		<li>
+			<label for="bio_about">Author Box</label>
+			<%= viper_textile_editor :bio, :author_about, :rows => 10, :height => 180 %>
+			<%=textile_helper_link%>
+		</li>
+	</ol>
+</fieldset>
+<fieldset class="submit">
+    <%= submit_tag "Update" %> | <%= link_to 'Cancel', hub_url %>
+</fieldset>
+<%= textile_editor_initialize -%>
+<% end %>
+<% end %>

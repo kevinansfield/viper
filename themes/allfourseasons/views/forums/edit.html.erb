@@ -1,0 +1,23 @@
+<% @title = "Edit Forum #{@forum.name}" -%>
+
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
+			  
+	<div class="crumbs">
+	  <%= link_to 'Forums', forums_path %> <span class="arrow">&rarr;</span>
+	</div>
+	
+	<% form_for :forum,
+		 :url => forum_path(@forum),
+		 :html => { :method => :put, :class => 'form' } do |f| -%>
+	<fieldset>
+		<legend>New Forum</legend>
+		<%= render :partial => "form", :object => f %>
+	</fieldset>
+	<fieldset class="submit">
+		<%= submit_tag 'Save Forum' %> | <%= link_to('Cancel', forums_path) %>
+	</fieldset>
+	<% end -%>
+
+<% end %>

@@ -1,0 +1,17 @@
+<% remote_form_for(:comment, :url => blog_post_comments_path(:post_id => @post.id), :html => { :class => 'form' }) do |form| %>
+
+<fieldset>
+  <legend>New Comment</legend>
+  <ol>
+  	<li>
+		<%= viper_textile_editor :comment, :body, :rows => 5, :height => 100 %>
+		<%=textile_helper_link%>
+  	</li>
+	<li>
+		<%= submit_tag "Create" %>
+	</li>
+  </ol>
+</fieldset>
+<%= textile_editor_initialize -%>
+
+<% end %>

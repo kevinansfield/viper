@@ -1,0 +1,16 @@
+		<ol>
+			<li>
+				<label for="forum_name">Title:</label>
+				<%= form.text_field :name, :class => 'text' %>
+			</li>
+			<li>
+				<label for="forum_position">Position:</label>
+				<%= form.text_field :position, :size => 5 %>
+			</li>
+			<li>
+				<label for="forum_description">Description:</label>
+				<%= viper_textile_editor :forum, :description, :rows => 5, :height => 100 %>
+				<%=textile_helper_link%>
+			</li>
+		</ol>
+		<%= textile_editor_initialize -%>

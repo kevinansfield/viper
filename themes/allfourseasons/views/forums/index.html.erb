@@ -1,0 +1,60 @@
+<% @title = 'Forums' -%>
+<% content_for :header do -%>
+	<%= theme_stylesheet_link_tag('forums') %>
+<% end -%>
+
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
+			  
+<% if Forum.count > 0 %>
+<h1>Forums</h1>
+<p class="subtitle">
+<%= feed_icon_tag "Recent Posts", formatted_forum_posts_path(:format => 'rss') %>
+<%= topic_count %>, <%= post_count %> <%# OPTIMIZE ME voice_count %>
+</p>
+
+<table border="0" cellspacing="0" cellpadding="0" class="forums">
+<% for forum in @forums do %>  
+  <tr>
+    <td class="vat c1">
+      <% if recent_forum_activity(forum) %>
+      <%= image_tag "clearbits/comment.gif", :class => "icon green", :title => 'Recent activity' %>
+      <% else %>
+      <%= image_tag "clearbits/comment.gif", :class => "icon grey", :title => 'No recent activity' %>
+      <% end %>
+    </td>
+	
+    <td class="c2 vat">
+      <%= link_to h(forum.name), forum_path(forum), :class => "title" %>
+      <div class="posts">
+		<%= pluralize(forum.topics.size, 'topic') %>,
+		<%= pluralize(forum.posts.size, 'post') %>
+      </div>
+      <p class="desc"><%= forum.description %></p>
+    </td>
+	
+	<% if admin? -%>
+    <td class="c3">
+      <%= link_to 'Edit', edit_forum_path(forum), :class => "tiny", :rel => "directory", :style => "float:right" %>
+    </td>
+	<% end -%>
+
+    <td class="inv lp">
+      <% if forum.recent_post -%>
+        Latest post <%= link_to "#{time_ago_in_words(forum.recent_post.created_at)} ago", forum_topic_path(forum, forum.recent_post.topic, :page => forum.recent_post.topic.last_page, :anchor => dom_id(forum.recent_post)) %><br />
+        by <%= link_to h(forum.recent_post.user.full_name), user_path(forum.recent_post.user) %>
+      <% end -%>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<p>
+  <%= link_to 'Recent posts', forum_posts_path %>
+</p>
+<% else %>
+	<p>Sorry, no forums have been created yet. Please check back soon.</p>
+<% end %>
+
+<% end %>

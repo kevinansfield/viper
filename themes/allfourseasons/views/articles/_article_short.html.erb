@@ -1,0 +1,22 @@
+<div class="article-short">
+  <h3 class="article-short-title">
+	<%= link_to sanitize(article.title), category_article_path(article.category, article) %>
+	<span class="article-short-byline">by <%= article.user.full_name %></span>
+  </h3>
+  <div class="article-short-main">
+  	<div class="article-short-author">
+  	  <%= link_to avatar_for(article.user, :tiny), category_article_path(article.category, article)%>
+  	</div>
+	<div class="article-short-body">
+		<div class="article-short-details">
+			<ul>
+				<% unless article.category == @category -%>
+				<li><%= link_to article.category.name, category_path(article.category) %></li>
+				<% end -%>
+				<li><%=basic_short_date article.created_at %></li>
+			</ul>
+		</div>
+  		<p><%= article.description %></p>
+	</div>
+  </div>
+</div>

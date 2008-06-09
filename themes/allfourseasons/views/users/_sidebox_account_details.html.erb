@@ -1,0 +1,26 @@
+<% titled_box 	'Account Details',
+				'blue',
+				:edit_link => link_to('(edit)', :controller => 'users', :action => 'edit', :id => current_user),
+				:content_css_class => 'small' do %>
+<table>
+	<tr>
+		<td><b>Login:</b></td>
+		<td><%= limit_text current_user.login %></td>
+	</tr>
+	<tr>
+		<td><b>Email:</b></td>
+		<td><%= limit_text current_user.email %></td>
+	</tr>
+	<tr>
+		<td><b>Password:</b></td>
+		<td>*****</td>
+	</tr>
+</table>
+<br />
+<table>
+	<tr>
+		<td><b>Profile Views:</b></td>
+		<td><%= current_user.hits.to_s  %></td>
+	</tr>
+</table>
+<% end %>

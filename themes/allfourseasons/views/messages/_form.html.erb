@@ -1,0 +1,16 @@
+<fieldset>
+    <legend>Send Message</legend>
+    <%= f.hidden_field :receiver_id %>
+    <ol>
+    	<li>
+        	<label for="message_subject">Subject</label><br/>
+        	<%= f.text_field :subject, :class => 'text' %>
+    	</li>
+		<li>
+			<label for="message[body]">Message</label><br/>
+			<%= viper_textile_editor :message, :body, :rows => 10, :height => 200 %>
+			<%=textile_helper_link%>
+		</li>
+    </ol>
+</fieldset>
+<%= textile_editor_initialize -%>

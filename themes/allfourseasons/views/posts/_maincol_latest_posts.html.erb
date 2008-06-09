@@ -1,0 +1,10 @@
+<% posts = Post.find_latest -%>
+<% unless posts.length < 1 -%>
+<% titled_box 	'Latest Blogs', 'blue', :css_class => css_class do %>
+	<ul>
+	<% posts.each do |post| %>
+		<li><%= link_to post.title, blog_post_path(post.blog, post) %></li>
+	<% end %>
+	</ul>
+<% end %>
+<% end -%>

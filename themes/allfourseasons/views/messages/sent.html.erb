@@ -1,0 +1,15 @@
+<% @title = 'Sent Items' %>
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
+
+	<h3>Sent Messages</h3>
+	<% unless @messages.length < 1 -%>
+		<%= render :partial => 'message_table' %>
+	<% else -%>
+	<p>No have not sent any messages yet!</p>
+	<% end -%>
+	
+	<p><%= link_to 'Back to Hub', hub_path %></p>
+
+<% end %>

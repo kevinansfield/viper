@@ -1,0 +1,30 @@
+<% @title = 'Recent Comments' -%>
+
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
+<%= render :partial => 'comment', :collection => @approved_comments %>
+<% end %>
+
+<% if logged_in? && current_user.admin? %>
+<% titled_box 'Rejected Comments',
+			  'blue',
+			  :box_id => 'feature' do %>
+	<div id="rejected_comments">
+		<% form_tag destroy_multiple_comments_path, :method => :delete do %>
+			<h3>Rejected Comments</h3>
+			<table>
+				<% for comment in @rejected_comments %>
+				<tr>
+					<td><%= check_box_tag "comment_ids[]", comment.id, true %></td>
+					<td><%= link_to h(comment.user.full_name), user_path(comment.user) %></td>
+					<td><%=h truncate(comment.body, 30) %></td>
+					<td><%= link_to 'not spam', approve_comment_path(comment), :confirm => 'Are you sure?', :method => :put %></td>
+				</tr>
+				<% end %>
+			</table>
+			<p><%= submit_tag "Destroy Checked" %></p>
+		<% end %>
+	</div>
+<% end %>
+<% end %>

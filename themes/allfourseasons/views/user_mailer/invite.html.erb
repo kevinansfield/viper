@@ -1,0 +1,13 @@
+<%=@sender_name%> has invited you to join the <%=SITENAME%> social network.
+
+Sign up is quick and simple, just visit <%=@url%> and answer a couple of questions and you are ready to go!
+
+<% unless @message.blank? %>
+<%=@sender_name%> has also sent the following message:
+------------------------
+<%=@message%>
+------------------------
+<% end %>
+
+- The <%= SITENAME %> Team
+<%= HOST %>

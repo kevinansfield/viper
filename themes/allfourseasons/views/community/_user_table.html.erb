@@ -1,0 +1,25 @@
+<% if @users and not @users.empty? -%>
+<% @users.each do |user| -%>
+<div class="result clearfix">
+	<div class="image">
+		<span>
+			<%= link_to avatar_for(user, :thumb), user_path(user) %>
+		</span>
+	</div>
+	<div class="info">
+		<dl class="clearfix">
+			<dt>Name:</dt> <dd class="result_name"><%= link_to user.full_name, user_path(user) %></dd>
+			<dt>Gender:</dt> <dd class="result_gender"><%= fallback_if_blank user.profile.gender, 'Unknown' %>, <%= user.profile.age || 'unknown' %></dd>
+			<dt>Location:</dt> <dd class="result_location"><%= user.profile.location %></dd>
+		</dl>
+	</div>
+	<ul class="actions">
+		<% if logged_in? && current_user != user %><li><%= link_to 'Send Message', new_user_message_path(user) %></li><% end %>
+		<li><%= link_to 'View Profile', user_path(user) %></li>
+		<% if logged_in? && current_user != user %><li><%= link_to "Add to friends",
+						{ :controller => "friendship", :action => "create", :id => user },
+						:confirm => "Send friend request to #{user.full_name}" %></li><% end %>
+	</ul>
+</div>
+<% end -%>
+<% end -%>
