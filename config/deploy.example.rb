@@ -77,5 +77,5 @@ end
  
 task :after_update_code, :roles => :app do
   sudo "chmod a+x #{release_path}/script/process/*"
-  run  "cd #{releast_path}; rake theme_create_cache"
+  run  "cd #{release_path}; rake theme_create_cache"
 end
