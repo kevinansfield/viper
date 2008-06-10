@@ -4,7 +4,7 @@
 }
 
 body {
-	background: #FFFFFF url(/themes/baseline/images/img01.gif) repeat-x;
+	background: #FFFFFF url(/themes/allfourseasons/images/img01.gif) repeat-x;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 13px;
 	color: #666666;
@@ -44,11 +44,11 @@ ul {
 
 ul li {
 	padding-left: 10px;
-	background: url(/themes/baseline/images/img16.gif) no-repeat 0px 10px;
+	background: url(/themes/allfourseasons/images/img16.gif) no-repeat 0px 10px;
 }
 .small ul li {
 	padding-left: 10px;
-	background: url(/themes/baseline/images/img16.gif) no-repeat 0px 7px;
+	background: url(/themes/allfourseasons/images/img16.gif) no-repeat 0px 7px;
 }
 
 a:link, a:visited {
@@ -165,7 +165,7 @@ html[xmlns] .clearfix{display:block;}
 	padding: 0;
 	border: 1px solid #BFBAB0;
 	background-color: #F2EFE9;
-	background-image: url(/themes/baseline/images/fieldset_gradient.jpg);
+	background-image: url(/themes/allfourseasons/images/fieldset_gradient.jpg);
 	background-repeat: repeat-x;
 }
 .form legend {
@@ -246,11 +246,11 @@ font-size: 10px;
 }
 
 .box-orange {
-	background: url(/themes/baseline/images/img09.gif) repeat-x;
+	background: url(/themes/allfourseasons/images/img09.gif) repeat-x;
 }
 
 .box-orange .section {
-	background: url(/themes/baseline/images/img11.gif) no-repeat right top;
+	background: url(/themes/allfourseasons/images/img11.gif) no-repeat right top;
 	font-size: 100%;
 	color: #FFFFFF;
 }
@@ -262,7 +262,7 @@ font-size: 10px;
 	display: block;
 	height: 23px;
 	padding: 7px 0 0 10px;
-	background: url(/themes/baseline/images/img10.gif) no-repeat;
+	background: url(/themes/allfourseasons/images/img10.gif) no-repeat;
 }
 
 .box-orange .content {
@@ -270,11 +270,11 @@ font-size: 10px;
 }
 
 .box-blue {
-	background: url(/themes/baseline/images/img13.gif) repeat-x;
+	background: url(/themes/allfourseasons/images/img13.gif) repeat-x;
 }
 
 .box-blue .section {
-	background: url(/themes/baseline/images/img15.gif) no-repeat right top;
+	background: url(/themes/allfourseasons/images/img15.gif) no-repeat right top;
 	font-size: 100%;
 	color: #FFFFFF;
 }
@@ -286,7 +286,7 @@ font-size: 10px;
 	display: block;
 	height: 23px;
 	padding: 7px 0 0 10px;
-	background: url(/themes/baseline/images/img14.gif) no-repeat;
+	background: url(/themes/allfourseasons/images/img14.gif) no-repeat;
 }
 
 .box-blue .content {
@@ -294,11 +294,11 @@ font-size: 10px;
 }
 
 .box-pink {
-	background: url(/themes/baseline/images/img17.gif) repeat-x;
+	background: url(/themes/allfourseasons/images/img17.gif) repeat-x;
 }
 
 .box-pink .section {
-	background: url(/themes/baseline/images/img19.gif) no-repeat right top;
+	background: url(/themes/allfourseasons/images/img19.gif) no-repeat right top;
 	font-size: 100%;
 	color: #FFFFFF;
 }
@@ -310,7 +310,7 @@ font-size: 10px;
 	display: block;
 	height: 23px;
 	padding: 7px 0 0 10px;
-	background: url(/themes/baseline/images/img18.gif) no-repeat;
+	background: url(/themes/allfourseasons/images/img18.gif) no-repeat;
 }
 
 .box-pink .content {
@@ -383,13 +383,13 @@ font-size: 10px;
 #searchinput {
 	padding: 2px 5px;
 	width: 198px;
-	background: #FFFFFF url(/themes/baseline/images/img02.gif) repeat-x;
+	background: #FFFFFF url(/themes/allfourseasons/images/img02.gif) repeat-x;
 	border: 1px solid #FFFFFF;
 }
 
 #searchsubmit {
 	padding: 0 2px;
-	background: #F4A652 url(/themes/baseline/images/img03.gif) repeat-x;
+	background: #F4A652 url(/themes/allfourseasons/images/img03.gif) repeat-x;
 	border: 1px solid #000000;
 	text-transform: lowercase;
 }
@@ -422,7 +422,7 @@ font-size: 10px;
 #menu a {
 	display: block;
 	float: left;
-	background: url(/themes/baseline/images/img07.gif) no-repeat;
+	background: url(/themes/allfourseasons/images/img07.gif) no-repeat;
 	text-decoration: none;
 	color: #666666;
 }
@@ -436,21 +436,21 @@ font-size: 10px;
 	float: left;
 	height: 23px;
 	padding: 7px 20px 0 20px;
-	background: url(/themes/baseline/images/img08.gif) no-repeat right top;
+	background: url(/themes/allfourseasons/images/img08.gif) no-repeat right top;
 	cursor: pointer;	
 }
 
 #menu li.active {
-	background: #CFCECE url(/themes/baseline/images/img04.gif) repeat-x;
+	background: #CFCECE url(/themes/allfourseasons/images/img04.gif) repeat-x;
 }
 
 #menu li.active a {
-	background: url(/themes/baseline/images/img06.gif) no-repeat right top;
+	background: url(/themes/allfourseasons/images/img06.gif) no-repeat right top;
 	color: #C90404;
 }
 
 #menu li.active b {
-	background: url(/themes/baseline/images/img05.gif) no-repeat;
+	background: url(/themes/allfourseasons/images/img05.gif) no-repeat;
 }
 
 /* Page */
@@ -508,7 +508,7 @@ padding: 2px;
 
 /* Sub Navigation */
 #sub-nav {
-	background: #FFFFFF url(/themes/baseline/images/img01.gif) repeat-x;
+	background: #FFFFFF url(/themes/allfourseasons/images/img01.gif) repeat-x;
 	height: 30px;
 	margin: 0;
 	padding: 8px 0 0 0;
@@ -684,7 +684,7 @@ a, a#visited {
 }
 .result .actions li {
 	padding-left: 10px;
-	background: url(/themes/baseline/images/img16.gif) no-repeat 0px 6px;
+	background: url(/themes/allfourseasons/images/img16.gif) no-repeat 0px 6px;
 }
 .result .info {
   float: left;
