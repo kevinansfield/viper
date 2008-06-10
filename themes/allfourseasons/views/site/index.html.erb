@@ -2,8 +2,42 @@
 <% titled_box 'Welcome',
 			  'orange',
 			  :box_id => 'feature' do %>
-<h1>Welcome to <%= SITENAME %></h1>
-<p><%= SITENAME %> is a new social network project under development by <a href="http://www.digitalblueprint.co.uk">DigitalBlueprint Ltd</a> to be
-used as a foundation for numerous industry and niche specific applications.</p>
-<p>Sign up, create a profile and explore some of the functionality that is on offer.</p>
+			  
+	<p> </p>
+	
+	<%= theme_image_tag 'logo-120', :class => 'left' %>
+	
+	<h2 style="text-align: center; margin-bottom: 0.5em; color: black;">
+		All Four Seasons Ltd<br />
+		Air Conditioning & Heat Pumps
+	</h2>
+	
+	<h3 style="text-align: center; margin-bottom: 0.5em;">
+		Design, Installation, Service & Maintenance
+	</h3>
+	
+	<h3 style="text-align: center; margin-bottom: 1em;">
+		Freephone Showroom: 0800 234 3724
+	</h3>
+	
+	<p>All Four Seasons Ltd are a family run company established 30 Years offering Design, Installation,
+	Service and Maintenance on all Air Conditioning and Heat Pump systems.</p>
+	
+	<p>As independent specialists we are able to offer all types, makes and models of Air Conditioners,
+	Heat Pumps, Fresh Air Kits and Ventilation Systems.</p>
+	
+	<p>Please feel free to browse through our website at your leisure, If you have any queries, require
+	further information or a Site Survey please do not hesitate to contact us on 0800 234 3724.</p>
+	
+	<h3>All Four Seasons Ltd are associated with the following bodies:</h3>
+	
+	<table border="0" align="center" style="width: 90%">
+	<tr>
+	<td><%= theme_image_tag 'homepage-the-confederation-of-trades-and-commerce.jpg', :alt => 'The Confederation of Trades and Commerce' %></td>
+	<td style="text-align: center;"><%= theme_image_tag 'homepage-118trades.com.jpg', :alt => '118Trades.com' %></td>
+	<td style="text-align: right;"><%= theme_image_tag 'homepage-the-verification-association-limited.jpg', :alt => 'The Verification Association Limited' %></td>
+	
+	</tr>
+	</table>
+
 <% end %>
