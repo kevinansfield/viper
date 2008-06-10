@@ -93,7 +93,7 @@ class Avatar < ActiveRecord::Base
 private
 
   def log_activity
-    add_activities(:item => self, :user => user)
+    add_activities(:item => self, :user => user) unless user.nil?
   end
   
 end
