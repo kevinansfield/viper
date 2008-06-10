@@ -31,6 +31,7 @@ end
 task :before_symlink do
   #link in shared
   sudo "ln -s #{deploy_to}/#{shared_dir}/avatars #{current_release}/public/avatars"
+  sudo "ln -s #{deploy_to}/#{shared_dir}/index #{current_release}/public/index"
   #link in config
   sudo "cp #{deploy_to}/#{shared_dir}/system/database.yml #{current_release}/config/database.yml"
   sudo "cp #{deploy_to}/#{shared_dir}/system/environment.rb #{current_release}/config/environment.rb"
