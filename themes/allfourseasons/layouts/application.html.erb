@@ -18,7 +18,7 @@
 <body>
 <div id="header">
 	<div id="logo">
-		<h1><a href="/"><%= SITENAME %></a></h1>
+		<h1><a href="/"><%= theme_image_tag 'logo-textonly' %><%= SITENAME %></a></h1>
 		<h2><a href="/"><%= TAGLINE %></a></h2>
 	</div>
 	<div id="search">
@@ -51,8 +51,6 @@
 	</ul>
 </div>
 <div id="page">
-	
-	<div class="general-notice">This is a test installation, feel free to play around and try things out</div>
 	
 	<% if flash[:notice] -%>
     <div id="flash" class="notice"><%= flash[:notice] %></div>
