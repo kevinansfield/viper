@@ -43,6 +43,8 @@ module ActivitiesHelper
       %(#{user_link(user)} updated their profile information.)
     when "Article"
       %(#{user_link(user)} posted an article titled #{article_link(activity.item)}.)
+    when "Bio"
+      %(#{user_link(user)} updated their bio information.)
     else
       raise "Invalid activity type #{activity_type.inspect}"
     end
@@ -88,6 +90,8 @@ module ActivitiesHelper
       %(#{user_link(user)} updated their profile information.)
     when "Article"
       %(#{user_link(user)} posted a #{article_link("new article", activity.item)}.)
+    when "Bio"
+      %(#{user_link(user)} updated their bio information.)
     else
       raise "Invalid activity type #{activity_type.inspect}"
     end
