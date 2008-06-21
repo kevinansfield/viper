@@ -1,0 +1,19 @@
+<% titled_box "All Four Seasons", 'orange' do %>
+	<ul>
+		<li><%= link_to 'About All Four Seasons', :controller => 'site', :action => 'about' %></li>
+		<li><%= link_to 'Enquiries', :controller => 'site', :action => 'enquiries' %></li>
+		<li><%= link_to 'Domestic Installations', :controller => 'site', :action => 'domestic_installations' %></li>
+		<li><%= link_to 'Commercial Installations', :controller => 'site', :action => 'commercial_installations' %></li>
+		<li><%= link_to 'Specialist Installations', :controller => 'site', :action => 'specialist_installations' %>
+			<ul>
+				<li><%= link_to 'Window Box Units', :controller => 'site', :action => 'window_box_units' %></li>
+				<li><%= link_to 'Floor Standing Tower Type', :controller => 'site', :action => 'floor_standing_tower_type' %></li>
+				<li><%= link_to 'Free Hot Water Waste Heat', :controller => 'site', :action => 'free_hot_water_waste_heat' %></li>
+			</ul>
+		</li>
+		<li><%= link_to 'Maintenance Contracts', :controller => 'site', :action => 'maintenance_contracts' %></li>
+		<li><%= link_to 'Services and Breakdown', :controller => 'site', :action => 'services_and_breakdown' %></li>
+		<li><%= link_to 'Hire Contracts', :controller => 'site', :action => 'hire_contracts' %></li>
+		<li><%= link_to 'Unit Specifications', :controller => 'site', :action => 'unit_specifications' %></li>
+	</ul>
+<% end %>
