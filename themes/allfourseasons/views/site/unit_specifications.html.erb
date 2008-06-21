@@ -4,5 +4,10 @@
 			  :box_id => 'feature' do %>
 		
 		<h1><%= @title %></h1>
-		<p><a href="images/stories/unit-specifications-large.jpg" rel="lightbox"><img src="images/stories/unit-specifications-small.jpg" border="0" /></a></p>
+		<p>Click image for a larger diagram.</p>
+		<p>
+			<a href="<%= theme_image_path 'unit-specifications-large.jpg' %>" class="lightwindow">
+				<%= theme_image_tag 'unit-specifications-small.jpg' %>
+			</a>
+		</p>
 <% end %>

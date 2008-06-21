@@ -1306,3 +1306,11 @@ a, a#visited {
 	font-size: 0.8em;
 }
 .minifeed-icon { float: left; }
+
+
+/*-----------------------------------------------------------------------------------------------
+	All 4 Seasons Custom Styles
+-----------------------------------------------------------------------------------------------*/
+img.caption { margin: 0 10px 10px 10px }
+img.caption .left { margin-left: 0; }
+img.caption .right { margin-right: 0; }
