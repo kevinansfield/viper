@@ -40,5 +40,49 @@ class SiteController < ApplicationController
   # Display the about page
   def about
   end
+
+  def enquiries
+    
+  end
+  
+  def domestic_installations
+    
+  end
+  
+  def commercial_installations
+    
+  end
+  
+  def specialist_installations
+    
+  end
+  
+  def window_box_units
+    
+  end
+  
+  def floor_standing_tower_type
+    
+  end
+  
+  def free_hot_water_waste_heat
+    
+  end
+  
+  def maintenance_contracts
+    
+  end
+  
+  def services_and_breakdown
+    
+  end
+  
+  def hire_contracts
+    
+  end
+  
+  def unit_specifications
+    
+  end
   
 end
