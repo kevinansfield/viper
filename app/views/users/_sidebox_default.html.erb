@@ -2,10 +2,10 @@
 	<% titled_box "Welcome, #{current_user.first_name}", 'blue' do %>
 		<ul>
 			<li><%= link_to 'Your Hub', hub_path %></li>
-			<li><%= link_to 'Public Profile', user_path(current_user) %></li>
+			<li><%= link_to 'Public Profile', user_path(current_user) %> (<%= link_to 'edit', edit_user_bio_path(current_user)  %>)</li>
 			<li><%= link_to 'Contacts', hub_path %></li>
 			<li><%= link_to 'Messages', user_messages_path(current_user) %></li>
-			<li><%= link_to 'Blog', blog_path(current_user.blog) %></li>
+			<li><%= link_to 'Blog', blog_path(current_user.blog) %> (<%= link_to 'new blog', new_blog_post_path(current_user.blog) %>)</li>
 		</ul>
 		<ul>
 			<li><%= link_to 'Logout', logout_path %></li>
