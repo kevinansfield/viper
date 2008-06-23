@@ -98,8 +98,8 @@ class ForumsController < ApplicationController
   
 protected
   def setup_display
-    self.sidebar_one = nil
-    self.sidebar_two = 'forums/sidebar_index'
+    self.sidebar_one = 'forums/sidebar_index'
+    self.sidebar_two = nil
     self.disable_maincols
   end
 end
