@@ -61,6 +61,15 @@ class ArticlesController < ApplicationController
     end
   end
   
+  def destroy
+    @article.destroy
+    flash[:notice] = "Article '#{@article.title}' deleted"
+    respond_to do |format|
+      format.html { redirect_to category_url(@article.category) }
+      format.xml  { head :ok }
+    end
+  end
+  
 protected
 
   def find_article
