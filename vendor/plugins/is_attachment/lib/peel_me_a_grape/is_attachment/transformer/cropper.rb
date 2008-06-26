@@ -41,9 +41,9 @@ module PeelMeAGrape::IsAttachment
       # performs the cropping when using rmagick image processing engine.
       # if crop_options is nil? then the image is resized to fit the dimensions.
       # if crop options is set then they are used to first crop the image then resize it.
-      def transform_with_rmagick(engine, img, attacment_object)
-        crop_options = attacment_object.crop_options
-        unless attacment_object.crop_options.blank?
+      def transform_with_rmagick(engine, img, attachment_object)
+        crop_options = attachment_object.crop_options
+        unless attachment_object.crop_options.blank?
           img.crop!(crop_options[:x1].to_i, crop_options[:y1].to_i, crop_options[:width].to_i, crop_options[:height].to_i, true)
           img.resize!(self.width, self.height)
         else
@@ -57,9 +57,9 @@ module PeelMeAGrape::IsAttachment
       end
 
       # same behaviour as #transform_with_rmagick - using mini_magick
-      def transform_with_mini_magick(engine, img, attacment_object)
-        crop_options = attacment_object.crop_options
-        unless attacment_object.crop_options.blank?
+      def transform_with_mini_magick(engine, img, attachment_object)
+        crop_options = attachment_object.crop_options
+        unless attachment_object.crop_options.blank?
           img.crop("#{crop_options[:width].to_i}x#{crop_options[:height].to_i}+#{crop_options[:x1].to_i}+#{crop_options[:y1].to_i}")
           img.resize("#{self.width}x#{self.height}!")
         else

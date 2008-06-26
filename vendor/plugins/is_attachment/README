@@ -34,7 +34,7 @@ configure the base path where uploaded files will be stored. Defaults to "#{RAIL
 
 ===== Configuring extensions to is_attachment:
 
-registering new storage engines. PeelMeAGrape::IsAttachment::Storage::FileSystem and PeelMeAGrape::IsAttachment::Storage::Db are registered by default.
+registering new storage engines. PeelMeAGrape::IsAttachment::Storage::FileSystem, PeelMeAGrape::IsAttachment::Storage::S3 and PeelMeAGrape::IsAttachment::Storage::Db are registered by default.
   PeelMeAGrape::IsAttachment.register_storage_engine(:my_storage_engine, MyStorageEngine)
 
 registering new image processing engines. PeelMeAGrape::IsAttachment::Image::Rmagick and PeelMeAGrape::IsAttachment::Image::MiniMagick are registered by default.
@@ -48,7 +48,7 @@ See PeelMeAGrape::IsAttachment::ActMethods.is_attachment() for specific details 
 
 ===== Required Columns
 is_attachment requires that certain columns are present on your model. At it's minimum configuration the only required column is <tt>filename</tt>
-    class Mugshots < ActiveRecord::Base
+    class Mugshot < ActiveRecord::Base
       is_attachment
     end
 
@@ -97,8 +97,9 @@ If you start having lots of similar custom methods - you should think about extr
 
 There are other plugins that do a similar job to <tt>is_attachment</tt> -
 
-* acts_as_attachment - http://svn.techno-weenie.net/projects/plugins/acts_as_attachment/ - original attachment plugin by Rick Olson (http://techno-weenie.net/)
+* paperclip - http://www.thoughtbot.com/projects/paperclip  
 * attachment_fu - http://svn.techno-weenie.net/projects/plugins/attachment_fu/ - rewrite of acts_as_attachment (also by Rick Olson)
+* acts_as_attachment - http://svn.techno-weenie.net/projects/plugins/acts_as_attachment/ - original attachment plugin by Rick Olson (http://techno-weenie.net/)
 * file_column - http://www.kanthak.net/opensource/file_column/ - (Sebastian Kanthak)
 * flex_image - http://beautifulpixel.com/flex_image/index.html - (Alex Wayne)
 

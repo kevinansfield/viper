@@ -1,3 +1,23 @@
+require 'dir_empty'
+require 'peel_me_a_grape/is_attachment/file_helper'
+require 'peel_me_a_grape/is_attachment/errors'
+require 'peel_me_a_grape/is_attachment/table_definition_extensions'
+require 'peel_me_a_grape/is_attachment/fail_early_options_checker'
+require 'peel_me_a_grape/is_attachment/validation'
+#require 'peel_me_a_grape/is_attachment/backgroundrb'
+require 'peel_me_a_grape/is_attachment/image/base'
+require 'peel_me_a_grape/is_attachment/transformer/base'
+require 'peel_me_a_grape/is_attachment/transformer/cropper'
+require 'peel_me_a_grape/is_attachment/transformer/fixed_height'
+require 'peel_me_a_grape/is_attachment/transformer/fixed_width'
+require 'peel_me_a_grape/is_attachment/storage/base'
+require 'peel_me_a_grape/is_attachment/storage/remote_base'
+require 'peel_me_a_grape/is_attachment/storage/db'
+require 'peel_me_a_grape/is_attachment/storage/file_system'
+require 'peel_me_a_grape/is_attachment/storage/s3'
+require 'peel_me_a_grape/is_attachment/action_view/form_helper'
+require 'peel_me_a_grape/is_attachment/action_view/form_builder_helper'
+
 module PeelMeAGrape # :nodoc:
   # == Example Usage
   # app/models/my_attachment.rb
@@ -48,8 +68,10 @@ module PeelMeAGrape # :nodoc:
 
     @@builtin_image_engines.each do |engine|
       begin
+        require "peel_me_a_grape/is_attachment/image/#{engine}"
         @@image_engines[engine] = eval("PeelMeAGrape::IsAttachment::Image::#{engine.to_s.classify}")
-      rescue LoadError
+      rescue LoadError => e
+        RAILS_DEFAULT_LOGGER.info(e.inspect)
         RAILS_DEFAULT_LOGGER.info("is_attachment: Unable to load #{engine} image engine. Check you have #{engine} gem installed.")
       end
     end
@@ -636,3 +658,16 @@ begin
   PeelMeAGrape::IsAttachment.register_storage_engine(:s3, PeelMeAGrape::IsAttachment::Storage::S3)
 rescue LoadError
 end
+
+ActiveRecord::Base.send(:extend, PeelMeAGrape::IsAttachment::ActMethods)
+ActionView::Base.send(:include, PeelMeAGrape::IsAttachment::ActionView::FormHelper)
+ActionView::Helpers::FormBuilder.send(:include, PeelMeAGrape::IsAttachment::ActionView::FormBuilderHelper)
+ActiveRecord::ConnectionAdapters::TableDefinition.send(:include, PeelMeAGrape::IsAttachment::TableDefinitionExtensions)
+
+all_environments_config = File.join(RAILS_ROOT, 'config', 'is_attachment' , 'default')
+environment_specific_config = File.join(RAILS_ROOT, 'config', 'is_attachment' , RAILS_ENV)
+
+require all_environments_config if File.file?(all_environments_config + '.rb')
+require environment_specific_config if File.file?(environment_specific_config + '.rb')
+
+FileUtils.mkdir_p PeelMeAGrape::IsAttachment.tempfile_path

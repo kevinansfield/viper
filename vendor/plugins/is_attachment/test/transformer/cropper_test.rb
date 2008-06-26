@@ -52,6 +52,27 @@ module PeelMeAGrape::IsAttachment::Transformer
       @cropper.transform_with_rmagick(@mock_engine, img, model)
     end
 
+#  lots of cases to test..... bigger, exact same size, longer, wider, etc...
+
+    # if model widt/height ratio > cropper then resize the image to the cropper height height
+=begin
+          if (width.to_f/height.to_f) > (target_width.to_f / target_height.to_f)
+            img.resize("x#{target_height}")
+          else
+            img.resize("#{target_width}x")
+          end
+          img.crop("#{target_width}x#{target_height}+0+0")
+todo - test with mini magick and rmagick ....
+=end
+
+    def test_cropper_will_default_to_cropping_biggest_and_most_centered_portion_of_image
+      model = stub(:crop_options => nil, :width => 3000, :height => 1000)
+      img = mock()
+      img.expects(:resize).with("x600")
+      img.expects(:crop).with("500x600+0+0")
+      @cropper.transform_with_rmagick(@mock_engine, img, model)
+    end
+
     def test_transform_with_rmagick_with_crop_options
       model = stub(:crop_options => {:x1 => 10, :y1 => 20, :width => 1000, :height => 1200})
       img = mock()
