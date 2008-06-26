@@ -9,7 +9,7 @@ set :deploy_to, "/home/digitalb/public_html/#{application}"
 # If you aren't using Subversion to manage your source code, specify
 # your SCM below:
 set :scm, :git
-#set :scm_verbose, :true # uncomment for servers with old git installs
+set :scm_verbose, true
 #set :branch, "website_branch"
 set :repository_cache, "git_cache"
  
@@ -27,26 +27,29 @@ set :runner, "digitalb"
 set :admin_runner, "digitalb"
 
 # mod_rails restart
-deploy.task :start, :roles => :app do
-  run "touch #{current_path}/tmp/restart.txt"
-end
- 
-deploy.task :restart, :roles => :app do
-  run "touch #{current_path}/tmp/restart.txt"
-end
-
-# litespeed restart
 #deploy.task :start, :roles => :app do
-#  sudo "/usr/local/lsws/bin/lswsctrl restart"
+#  run "touch #{current_path}/tmp/restart.txt"
 #end
 # 
 #deploy.task :restart, :roles => :app do
-#  sudo "/usr/local/lsws/bin/lswsctrl restart"
+#  run "touch #{current_path}/tmp/restart.txt"
 #end
+
+# litespeed restart
+deploy.task :start, :roles => :app do
+  sudo "/usr/local/lsws/bin/lswsctrl restart"
+end
+ 
+deploy.task :restart, :roles => :app do
+  sudo "/usr/local/lsws/bin/lswsctrl restart"
+end
 
 task :after_setup, :roles => :app do
   # Create app specific shared dirs
   run "cd #{deploy_to}/#{shared_dir}/; mkdir avatars index"
+  
+  #create blank config files so symlink tasks don't fail
+  run "cd #{deploy_to}/#{shared_dir}/system/; touch database.yml environment.rb production.rb constants.rb"
 end
 
  
@@ -60,7 +63,7 @@ task :before_symlink, :roles => :app do
   run "cp #{deploy_to}/#{shared_dir}/system/production.rb #{current_release}/config/environments/production.rb"
   run "cp #{deploy_to}/#{shared_dir}/system/constants.rb #{current_release}/config/initializers/constants.rb"
   #process theme cache
-  run "cd #{current_release}; rake theme_create_cache"
+  #run "cd #{current_release}; rake theme_create_cache"
 end
  
 task :after_update_code, :roles => :app do
