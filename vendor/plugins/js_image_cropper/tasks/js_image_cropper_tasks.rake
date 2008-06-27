@@ -2,9 +2,10 @@ namespace :js_image_cropper do
   require 'fileutils'
   desc 'Copy Cropper js/css to javascripts directory'
   task :install do
-    javascripts_dir = File.join(File.dirname(__FILE__), '../../../../public/javascripts')
-    ['cropper.js', 'cropper.uncompressed.js', 'cropper.css'].each do |file|
-      FileUtils.cp File.join(File.dirname(__FILE__),'../install', file), File.join(javascripts_dir, file)
+    cur_dir = File.dirname(__FILE__)
+    public_dir = File.join(cur_dir, '../../../../public')
+    ['cropper.js', 'cropper.uncompressed.js', 'cropper.css', 'marqueeHoriz.gif', 'marqueeVert.gif'].each do |file|
+      FileUtils.cp File.join(cur_dir,'../install', file), File.join(public_dir, 'javascripts', file)
     end
   end
 end
