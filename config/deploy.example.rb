@@ -12,6 +12,7 @@ set :scm, :git
 #set :scm_verbose, :true # uncomment for servers with old git installs
 #set :branch, "website_branch"
 set :repository_cache, "git_cache"
+set :git_enable_submodules, true
  
 role :app, "viper.digitalblueprint.co.uk"
 role :web, "viper.digitalblueprint.co.uk"
