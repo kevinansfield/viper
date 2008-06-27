@@ -1,0 +1,12 @@
+<h3>Avatar</h3>
+<%= content_tag(:p, display_edit_link(@user, link_to('(edit)', edit_user_avatar_path(@user))), :class => 'edit-link')%>
+<% unless @user.avatar.nil? -%>
+	<div style="text-align: center">
+		<%= link_to avatar_for(@user, :small, :alt => @user.full_name), @user.avatar.public_path(:large), :title => @user.full_name, :class => 'lightwindow' %>
+	</div>
+<% else -%>
+	<div style="text-align: center">
+		<%= avatar_for @user, :small, :alt => 'No Avatar' %><br />
+		No Avatar
+	</div>
+<% end -%>

@@ -1,0 +1,9 @@
+<% news = News.find_latest -%>
+<% unless news.length < 1 -%>
+<h3><%= link_to "Latest News", news_path %></h3>
+<ul>
+<% news.each do |news_item| %>
+	<li><%= link_to news_item.title, news_item_path(news_item) %></li>
+<% end %>
+</ul>
+<% end -%>

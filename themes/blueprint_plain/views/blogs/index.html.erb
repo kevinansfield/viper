@@ -1,0 +1,17 @@
+<% content_for :header do -%>
+<%= auto_discovery_link_tag(:atom, :action => 'index', :format => :atom) %>
+<% end -%>
+<% @title = 'Blogs' -%>
+
+<h1><%= @title %></h1>
+
+<% for post in @posts %>
+	<div class="span-9 colborder"><%= render :partial => 'post', :locals => { :post => post } %></div>
+	<div class="span-5 last">
+		<h3>Other posts by <%= post.blog.user.full_name %></h3>
+		<% for blog_post in post.blog.find_posts_prior_to_last(4) -%>
+		<%= render :partial => 'other_post', :locals => { :post => blog_post } %>
+		<% end -%>
+	</div>
+	<hr />
+<% end %>

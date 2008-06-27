@@ -1,0 +1,12 @@
+<% articles = Article.find_latest -%>
+<% unless articles.length < 1 -%>
+<div class="<%= css_class %>">
+	<h3><%= link_to('Latest Articles', categories_path) %></h3>
+	<ul>
+	<% articles.each do |article| %>
+		<li><%= link_to h(article.title), category_article_path(article.category, article) %>
+		<em>(<%=link_to h(article.category.name), category_path(article.category)%>)</em></li>
+	<% end %>
+	</ul>
+</div>
+<% end -%>

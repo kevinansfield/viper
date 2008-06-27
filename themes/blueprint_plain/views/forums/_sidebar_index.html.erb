@@ -1,0 +1,8 @@
+<% if admin? %>
+	<% titled_box 'Admin', 'blue' do %>
+		<p><%= link_to 'Create New Forum', new_forum_path %></p>
+	<% end %>
+<% end %>
+
+<%= render :partial => 'forums/sidebox_welcome' %>
+<%= render :partial => 'shared/sidebox_sponsors' %>

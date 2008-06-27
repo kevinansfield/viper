@@ -1,0 +1,21 @@
+<% @title = "Community Index" -%>
+<h1><%= @title %></h1>
+
+<form>
+<fieldset>
+  <legend>Alphabetical Index</legend>
+  <p class="letters">
+  <% @letters.each do |letter| %>
+    <% letter_class = (letter == @initial) ? "letter_current" : "letter" %>
+    <%= link_to letter, { :action => "index", :id => letter }, :class => letter_class %>
+  <% end %>
+  </p>
+</fieldset>
+</form>
+
+<% if @initial.nil? -%>
+	<%= render :partial => "search_form" %>
+	<%= render :partial => "browse_form" %>
+<% end -%>
+<%= render :partial => "result_summary" %>
+<%= render :partial => "user_table" %>

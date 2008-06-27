@@ -1,0 +1,22 @@
+<% content_for :header do -%>
+<%= auto_discovery_link_tag(:rss, :action => 'index', :format => :rss) %>
+<% end -%>
+<% @title = "Blogs tagged with '#{@tag.name}'" -%>
+
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
+
+	<% for post in @posts %>
+	<div class="blog-post clearfix">
+		<%= render :partial => 'post', :locals => { :post => post } %>
+		<div class="posts-other">
+			<h3>Other posts by <%= post.blog.user.full_name %></h3>
+			<% for blog_post in post.blog.find_posts_prior_to_last(4) -%>
+			<%= render :partial => 'other_post', :locals => { :post => blog_post } %>
+			<% end -%>
+		</div>
+	</div>
+	<% end %>
+
+<% end %>

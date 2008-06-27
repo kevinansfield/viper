@@ -1,0 +1,35 @@
+<% @title = "Edit Blog Post" -%>
+
+<% titled_box @title,
+			  'pink',
+			  :box_id => 'feature' do %>
+
+	<%= error_messages_for :post %>
+	
+	<% form_for(:post, :url => blog_post_path(@post.blog, @post), :html => { :method => :put, :class => 'form' }) do |f| %>
+	<fieldset>
+		<legend>Edit Blog Post</legend>
+		<ol>
+			<li>
+				<label for="post_title">Title:</label>
+				<%= f.text_field :title, :class => 'text' %>
+			</li>
+			<li>
+				<label for="post_body">Body:</label>
+				<%= viper_textile_editor :post, :body, :rows => 30, :height => 200 %>
+				<%=textile_helper_link%>
+			</li>
+			<li>
+				<label for="post_tag_list">Tags:</label>
+				<%= f.text_field :tag_list, :class => 'text' %>
+				<span class="help">List tags, seperated by commas.</span>
+			</li>
+		</ol>
+	</fieldset>
+	<fieldset class="submit">
+		<%= submit_tag "Update" %> | <%= link_to 'Cancel', blog_posts_path(@post.blog) %> | <%= link_to 'Show', blog_post_path(@post.blog, @post) %>
+	</fieldset>
+	<%= textile_editor_initialize -%>
+	<% end %>
+
+<% end %>

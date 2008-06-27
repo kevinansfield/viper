@@ -1,0 +1,16 @@
+<h2><%= link_to sanitize(article.title), category_article_path(article.category, article) %><br />
+<span class="alt small">by <%= article.user.full_name %></span>
+</h2>
+<div class="box details-box">
+	<p class="bottom">
+		<% unless article.category == @category -%>
+		<%= link_to article.category.name, category_path(article.category) %><br />
+		<% end -%>
+		<%=basic_short_date article.created_at %>
+	</p>
+</div>
+<p>
+	<%= link_to avatar_for(article.user, :tiny, :class => 'top'), category_article_path(article.category, article)%>
+	<%= article.description %>
+</p>
+<hr />

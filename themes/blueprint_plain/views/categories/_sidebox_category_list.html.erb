@@ -1,0 +1,11 @@
+<h3>Article Categories</h3>
+<%= content_tag(:span, link_to('(Add Category)', new_category_path), :class => 'edit-link') if admin? %>
+<ul>
+<% if @categories.length > 0 %>
+	<% for category in @categories %>
+	<li><%= link_to category.name, category_url(category) %></li>
+	<% end %>
+<% else %>
+	<li>No categories have been defined.</li>
+<% end %>
+</ul>

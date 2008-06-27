@@ -1,0 +1,105 @@
+#search { padding-top: 0.75em }
+
+#navigation { margin-top: -1em; margin-bottom: 1em;}
+#navigation ul { margin: 0 0 0 -10px; }
+#navigation ul.right { float: right }
+#navigation ul li { list-style: none; display: inline; }
+#navigation ul li a {
+	display: block;
+	float: left;
+	padding: 5px 10px;
+}
+
+.edit-link {}
+.edit-actions {}
+
+.details-box {
+	float: right;
+	width:150px;
+	margin-left: 1.5em;
+	border: 1px solid #ddd;
+}
+
+.social_bookmark_item img {
+	margin: 2px 2px 1.75em 0;
+	padding: 0;
+	float: none;
+}
+
+.copyright { text-align: center; color: #666; }
+
+/* Alphabetical Index Navigation */
+.letters {
+	text-align: center;
+	padding-top: 0.5em;
+	margin-bottom: 4px;
+}
+.letters a, .letters a#visited { text-decoration: none; }
+.letter, .letter_current {
+  width: 1em;
+  text-align: center;
+  background: #fff;
+  padding: 2px 2px 1px 2px;
+}
+.letter:hover { background: #fe4; }
+.letter_current { font-weight: bold; } 
+
+/* Search Results Styles */
+.result {
+	clear: both;
+	position: relative;
+	border: 1px solid #DDDDDD;
+	margin-bottom: 5px;
+}
+.result .image {
+	float: left;
+	padding: 5px;
+}
+.result .image img {
+	display: block;
+}
+.result .actions {
+	position: absolute;
+	top: 0;
+	right: 5px;
+}
+.result .info {
+  float: left;
+  padding: 5px 0 0 0;
+}
+.result .info dl,
+.result .info dt,
+.result .info dd {
+  margin: 0px;
+  padding: 0px;
+}
+.result .info dl { line-height: 15px }
+.result .info dt {
+    color: gray;
+    clear: both;
+    float: left;
+    padding: 0px;
+    width: 70px;
+}
+.result .info dd {
+    float: left;
+    display: inline;
+    padding: 0px;
+    color: #333;
+    width: 210px;
+}
+.result .info dd.result_name {
+      font-size: 13px;
+      line-height: 13px;
+      font-weight: bold;
+}
+
+/* Form input widths */
+input.span-1 { width: 30px; }
+input.span-2 { width: 60px; }
+input.span-3 { width: 90px; }
+
+/* Blueprint overrides */
+p + p { text-indent:0em; margin-top:1.5em; }
+label { display: block; }
+span.radio { display: block; margin:0.5em 0; }

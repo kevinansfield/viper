@@ -1,0 +1,16 @@
+<h2><%= link_to_unless_current sanitize(news_item.title), news_item_url(news_item) %></h2>
+<% if logged_in? && current_user.admin? %>
+	<div class="edit-actions">
+	  <%= link_to_unless_current 'Show', news_item_url(news_item) %> |
+	  <%= link_to_unless_current 'Edit', edit_news_item_path(news_item) %> |
+	  <%= link_to 'Delete', news_item_url(news_item),
+	              :confirm => 'Are you sure?', :method => :delete %>
+	</div>
+<% end %>
+<%= news_item.body %>
+<p class="alt quiet">
+	Posted <%= time_ago_in_words news_item.created_at %> ago
+    <% if news_item.updated_at != news_item.created_at %>
+      <br />Modified <%= time_ago_in_words news_item.updated_at %> ago
+    <% end %>
+</p>

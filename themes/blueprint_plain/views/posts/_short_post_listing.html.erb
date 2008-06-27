@@ -1,0 +1,7 @@
+<p class="short-post-listing">
+	<span class="short-post-title"><%= short_post_listing.title %></span>
+	<span class="short-post-link"><%= link_to '(read more)', blog_post_path(:blog_id => short_post_listing.blog.id, :id => short_post_listing.id) %></span>
+	<% unless short_post_listing.comments.length < 1 -%>
+	<span class="short-post-comments"><%= link_to "(#{pluralize(short_post_listing.comments.length, 'comment')})", blog_post_path(:blog_id => short_post_listing.blog.id, :id => short_post_listing.id, :anchor => 'comments') %></span>
+	<% end -%>
+</p>

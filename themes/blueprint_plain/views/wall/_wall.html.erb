@@ -1,0 +1,22 @@
+<a name="wall" />
+<% title = "#{@user.full_name}'s Wall" -%>
+
+<% titled_box title,
+			  'pink',
+			  :edit_link => link_to_unless_owner(@user, "(Write on #{@user.first_name}'s wall)", "#wall-comment") do %>
+
+<div class="blog-comments" id="comments_for_wall_<%=@user.wall.id%>">
+<% unless @user.wall.comments.length < 1 -%>
+<%= render :partial => "comments/comment", :collection => @user.wall.comments %>
+<% else -%>
+<p><%= @user.first_name %> hasn't had any comments on their wall yet, why not <a href="#wall-comment">be the first?</a></p>
+<% end -%>
+</div>
+
+<% if logged_in? -%>
+<%= render :partial => 'wall/form', :locals => { :user => @user } %>
+<% else -%>
+<p>Sorry, you need to be <%= link_to 'logged in', login_url %> to write on a users wall.</p>
+<% end -%>
+
+<% end %>

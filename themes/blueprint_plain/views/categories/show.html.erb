@@ -1,0 +1,25 @@
+<% @title = @category.name + ' Articles' -%>
+
+<h1><%= @title %></h1>
+<% if admin? -%>
+	<div class="edit-actions">
+		<%= link_to('(Add Article)', new_category_article_path(@category)) %> |
+		<%= link_to('Edit Category', edit_category_path(@category)) %> |
+	    <%= link_to('Delete Category', category_path(@category), :method => :delete, :confirm => 'WARNING: ALL articles in this category will be deleted too! Are you sure you want to delete this category?') %>
+	</div>
+<% end -%>
+			  
+<% unless @latest_articles.length < 1 -%>
+	<% for article in @latest_articles -%>
+		<%= render :partial => 'articles/article_short', :locals => { :article => article } %>
+	<% end %>
+<% else -%>
+	<p>There are no articles in this category yet, why don't you check back soon?</p>
+<% end -%>
+
+<% unless @archive_articles.nil? -%>
+	<% content_tag :h1, "Other articles in our #{@category.name} category" %>
+	<% for article in @archive_articles -%>
+		<%= render :partial => 'article_list', :locals => { :article => article } %>
+	<% end -%>
+<% end -%>

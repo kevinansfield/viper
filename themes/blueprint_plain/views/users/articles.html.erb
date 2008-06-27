@@ -1,0 +1,9 @@
+<% @title = "#{@user.full_name}'s Articles" -%>
+<h1><%=@user.full_name%>'s Recent Articles</h1>
+<% unless @articles.length < 1 -%>
+	<% for article in @articles -%>
+		<%= render :partial => 'articles/article_short', :locals => { :article => article } %>
+	<% end %>
+<% else -%>
+	<p>Sorry, this user hasn't written any articles yet, why don't you check back soon?</p>
+<% end -%>
