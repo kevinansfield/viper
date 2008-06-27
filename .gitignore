@@ -5,6 +5,9 @@ log/*.log
 tmp/**/*
 index/*
 
+config/database.yml
+config/deploy.rb
+
 public/stylesheets/site.css
 public/javascripts/site.js
 public/avatars/*
