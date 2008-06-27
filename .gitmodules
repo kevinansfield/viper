@@ -22,3 +22,12 @@
 [submodule "vendor/plugins/permalink_fu"]
 	path = vendor/plugins/permalink_fu
 	url = git://github.com/technoweenie/permalink_fu.git
+[submodule "vendor/plugins/rspec"]
+	path = vendor/plugins/rspec
+	url = git://github.com/dchelimsky/rspec.git
+[submodule "vendor/plugins/rspec_on_rails"]
+	path = vendor/plugins/rspec_on_rails
+	url = git://github.com/dchelimsky/rspec-rails.git
+[submodule "vendor/plugins/rspec_on_rails_on_crack"]
+	path = vendor/plugins/rspec_on_rails_on_crack
+	url = git://github.com/technoweenie/rspec_on_rails_on_crack.git
