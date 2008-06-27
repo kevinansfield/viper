@@ -19,3 +19,6 @@
 [submodule "vendor/plugins/liquid"]
 	path = vendor/plugins/liquid
 	url = git://github.com/tobi/liquid.git
+[submodule "vendor/plugins/permalink_fu"]
+	path = vendor/plugins/permalink_fu
+	url = git://github.com/technoweenie/permalink_fu.git
