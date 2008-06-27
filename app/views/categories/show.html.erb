@@ -1,25 +1,36 @@
 <% @title = @category.name + ' Articles' -%>
 
-<h1><%= @title %></h1>
-<% if admin? -%>
-	<div class="edit-actions">
-		<%= link_to('(Add Article)', new_category_article_path(@category)) %> |
-		<%= link_to('Edit Category', edit_category_path(@category)) %> |
-	    <%= link_to('Delete Category', category_path(@category), :method => :delete, :confirm => 'WARNING: ALL articles in this category will be deleted too! Are you sure you want to delete this category?') %>
-	</div>
-<% end -%>
+<% titled_box @title,
+			  'orange',
+			  :edit_link => link_to_if_admin('(Add Article)', new_category_article_path(@category)),
+			  :box_id => 'feature' do %>
 			  
+	<h2<%= %( onmouseover="$('category_mod').show();" onmouseout="$('category_mod').hide();") if admin? %>>
+		<%= @title %>
+		<% if admin? %>
+	    <span style="display:none;" id="category_mod">
+	        <%= link_to('edit', edit_category_path(@category), :class => "utility") %> |
+	        <%= link_to('delete', category_path(@category), :class => "utility", :method => :delete, :confirm => 'Are you sure you want to delete this category?') %>
+	    </span>
+	  <% end %>
+	</h2>
 <% unless @latest_articles.length < 1 -%>
 	<% for article in @latest_articles -%>
+	<div class="blog-post clearfix">
 		<%= render :partial => 'articles/article_short', :locals => { :article => article } %>
+	</div>
 	<% end %>
 <% else -%>
 	<p>There are no articles in this category yet, why don't you check back soon?</p>
 <% end -%>
 
+<% end %>
+
 <% unless @archive_articles.nil? -%>
-	<% content_tag :h1, "Other articles in our #{@category.name} category" %>
+<% titled_box "Other articles in our #{@category.name} category",
+			  'orange' do %>
 	<% for article in @archive_articles -%>
 		<%= render :partial => 'article_list', :locals => { :article => article } %>
 	<% end -%>
+<% end %>
 <% end -%>

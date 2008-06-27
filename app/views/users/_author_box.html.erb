@@ -1,13 +1,12 @@
-
-<div class="box details-box">
-	<p><strong><%= user.full_name %></strong></p>
-	<%unless user.bio.nil? || user.bio.author_about.blank? -%>
-		<p><%= avatar_for user, :tiny, :class => 'top bottom' %><%= user.bio.author_about %></p>
+<div class="author-box">
+	<p class="name"><%= user.full_name %></p>
+	<%= avatar_for user, :tiny %>
+	%unless user.bio.nil? || user.bio.author_about.blank? -%>
+		<p><%= user.bio.author_about %></p>
 	<%else -%>
-		<p><%= avatar_for user, :tiny, :class => 'top bottom' %>
-			<%=user.full_name%> does not have an author description yet, maybe you would like to
+		<p><%=user.full_name%> does not have an author description yet, maybe you would like to
 			<%= link_to 'view their profile', user_path(user) %> instead?</p>
 	<%end -%>
-	<p><%= user.full_name %> has written <%= pluralize user.articles.length, 'article' %> for <%= SITENAME %></p>
+	<p><%= user.full_name %> has written <%= pluralize user.articles.length, 'article' %> for Viper.</p>
 	<p><%= link_to "Read all articles by #{user.full_name}&hellip;", :controller => 'users', :action => 'articles', :id => user %></p>
 </div>

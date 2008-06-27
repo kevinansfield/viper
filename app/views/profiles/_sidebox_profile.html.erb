@@ -1,5 +1,7 @@
-<h3>Profile</h3>
-<%= content_tag(:p, display_edit_link(@user, link_to('(edit)', edit_user_profile_path(@user))), :class => 'edit-link')%>
+<% titled_box 	'Profile',
+				'orange',
+				:edit_link => display_edit_link(@user, link_to('(edit)', edit_user_profile_path(@user))),
+				:content_css_class => 'small' do %>
 <table>
 	<tr>
 		<td><b>Name:</b></td>
@@ -30,3 +32,4 @@
 		<td><%= limit_text @user.profile.post_code %></td>
 	</tr>
 </table>
+<% end %>

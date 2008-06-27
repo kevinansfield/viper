@@ -1,7 +1,9 @@
 <% @title = "Community Index" -%>
-<h1><%= @title %></h1>
+<% titled_box @title,
+			  'orange',
+			  :box_id => 'feature' do %>
 
-<form>
+<form class="form">
 <fieldset>
   <legend>Alphabetical Index</legend>
   <p class="letters">
@@ -19,3 +21,5 @@
 <% end -%>
 <%= render :partial => "result_summary" %>
 <%= render :partial => "user_table" %>
+
+<% end %>

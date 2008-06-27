@@ -1,3 +1,7 @@
-<h4 class="bottom"><%= link_to post.title, blog_post_path(post.blog, post) %></h4>
-<p class="quiet small"><%= post.created_at %><br />
-	<%= pluralize post.comments.approved.length, 'comment' %></p>
+<div class="other-post">
+	<p>
+		<%= link_to post.title, blog_post_path(post.blog, post) %>
+		<span class="date"><%= post.created_at %></span>
+		<span class="comments"><%= pluralize post.comments.approved.length, 'comment' %></span>
+	</p>
+</div>

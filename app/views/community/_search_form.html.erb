@@ -1,11 +1,12 @@
-<% form_tag({ :action => "search" }, :method => "get") do %>
+<% form_tag({ :action => "search" }, :method => "get", :class => "form") do %>
 <fieldset>
   <legend>Search</legend>
-  
-  <label for="q">Search for:</label>
-  <%= text_field_tag "q", params[:q], :class => 'text' %>
-  
-  <p class="buttons"><button type="submit" class="button positive">Search</button></p>
-
+  <ol>
+  	<li>
+      <label for="q">Search for:</label>
+      <%= text_field_tag "q", params[:q] %>
+      <input type="submit" value="Search" />
+  	</li>
+  </ol>
 </fieldset>
 <% end %>

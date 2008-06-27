@@ -1,7 +1,7 @@
 <div class="author-box">
 	<p class="name"><%= user.full_name %></p>
 	<%= avatar_for user, :tiny %>
-	<%unless user.bio.author_about.blank? -%>
+	%unless user.bio.nil? || user.bio.author_about.blank? -%>
 		<p><%= user.bio.author_about %></p>
 	<%else -%>
 		<p><%=user.full_name%> does not have an author description yet, maybe you would like to

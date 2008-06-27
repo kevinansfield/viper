@@ -1,5 +1,13 @@
-<p class="bottom"><%= link_to avatar_for(post.blog.user, :tiny, :class => 'top bottom'), user_path(post.blog.user) %></p>
-<h2 class="bottom"><%= link_to post.title, blog_post_path(post.blog, post) %></h2>
-<h3 class="alt">by <%= link_to post.blog.user.full_name, user_path(post.blog.user) %></h3>
-<p class="quiet small"><%= post.created_at %></p>
-<p><%= limit_text post.body_plain, 350 %></p>
+<div class="post">
+<div class="post-header clearfix">
+	<div class="image">
+		<span>
+			<%= link_to avatar_for(post.blog.user, :tiny), user_path(post.blog.user) %>
+		</span>
+	</div>
+	<h2><%= link_to post.title, blog_post_path(post.blog, post) %></h2>
+	<span class="byline">by <%= link_to post.blog.user.full_name, user_path(post.blog.user) %></span>
+	<span class="post-date"><%= post.created_at %></span>
+</div>
+<div class="post-body"><p><%= limit_text post.body_plain, 350 %></p></div>
+</div>
