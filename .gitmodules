@@ -7,3 +7,6 @@
 [submodule "vendor/plugins/acts_as_textiled"]
 	path = vendor/plugins/acts_as_textiled
 	url = git://github.com/defunkt/acts_as_textiled.git
+[submodule "vendor/plugins/acts-as-taggable-on"]
+	path = vendor/plugins/acts-as-taggable-on
+	url = git://github.com/mbleigh/acts-as-taggable-on.git
