@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 47
+# Schema version: 49
 #
 # Table name: users
 #
@@ -22,11 +22,18 @@
 #  hits                      :integer(11)     default(0)
 #  last_seen_at              :datetime        
 #  forum_posts_count         :integer(11)     default(0)
+#  state                     :string(255)     default("passive")
+#  deleted_at                :datetime        
 #
 
 class AuthenticationException < StandardError; end
   
 class User < ActiveRecord::Base
+  include Authentication
+  include Authentication::ByPassword
+  include Authentication::ByCookieToken
+  include Authorization::StatefulRoles
+  
   concerned_with :validation, :activation, :authentication, :messages, :forum_posting
   
   acts_as_ferret :fields => ['login', 'email'], :remote => false

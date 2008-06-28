@@ -2,10 +2,11 @@ class IncorrectResetCodeException < StandardError; end
 
 class UsersController < ApplicationController
   
-  before_filter :admin_required, :only => [:suspend, :unsuspend]
+  before_filter :admin_required, :only => [:suspend, :unsuspend, :destroy, :purge]
   before_filter :login_required, :only => [:hub, :edit, :change_email, :change_password, :invite, :send_invite]
   before_filter :protect_user, :only => [:edit, :change_email, :change_password, :invite, :send_invite]
   before_filter :check_logged_in, :only => [:new, :create, :activate]
+  before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge]
   
   tab :hub
   tab :community, :only => :show
@@ -41,6 +42,7 @@ class UsersController < ApplicationController
 
   # render new.rhtml
   def new
+    @user = User.new
   end
   
   def edit
@@ -86,28 +88,54 @@ class UsersController < ApplicationController
   end
 
   def create
-    cookies.delete :auth_token
-    # protects against session fixation attacks, wreaks havoc with 
-    # request forgery protection.
-    # uncomment at your own risk
-    # reset_session
+    logout_keeping_session!
     @user = User.new(params[:user])
-    @user.save!
-    # uncomment below if user should be automatically logged in
-    #self.current_user = @user
-    redirect_to '/'
-    flash[:notice] = "Thanks for signing up! Please check your e-mail to activate your account."
-  rescue ActiveRecord::RecordInvalid
-    render :action => 'new'
+    @user.register! if @user && @user.valid?
+    success = @user && @user.valid?
+    if success && @user.errors.empty?
+      redirect_back_or_default('/')
+      flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
+    else
+      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
+      render :action => 'new'
+    end
   end
 
   def activate
-    self.current_user = params[:activation_code].blank? ? :false : User.find_by_activation_code(params[:activation_code]) 
-    if logged_in? && !current_user.activated?
-      current_user.activate
-      flash[:notice] = "Signup complete! You may now use your account"
+    logout_keeping_session!
+    user = User.find_by_activation_code(params[:activation_code]) unless params[:activation_code].blank?
+    case
+    when (!params[:activation_code].blank?) && user && !user.active?
+      user.activate!
+      flash[:notice] = "Signup complete! You may now log in to your account"
+      redirect_to login_url
+    when params[:activation_code].blank?
+      flash[:error] = "The activation code was missing.  Please follow the URL from your email."
+      redirect_back_or_default('/')
+    else 
+      flash[:error]  = "We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in."
+      redirect_back_or_default('/')
     end
-    redirect_to login_url
+  end
+  
+  def suspend
+    @user.suspend! 
+    redirect_to users_path
+  end
+
+  def unsuspend
+    @user.unsuspend! 
+    redirect_to users_path
+  end
+
+  def destroy
+    @user.delete!
+    redirect_to users_path
+  end
+
+  def purge
+    @user.destroy
+    redirect_to users_path
   end
   
   def activate_new_email
@@ -178,7 +206,7 @@ class UsersController < ApplicationController
     @articles = @user.articles
   end
   
-  private
+protected
   
   def protect_user
     @user = User.find_by_permalink(params[:id])
@@ -195,6 +223,10 @@ class UsersController < ApplicationController
       redirect_to hub_url
       return false
     end
+  end
+  
+  def find_user
+    @user = User.find_by_permalink(params[:id])
   end
 
 end

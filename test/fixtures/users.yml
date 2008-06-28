@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 47
+# Schema version: 49
 #
 # Table name: users
 #
@@ -22,6 +22,8 @@
 #  hits                      :integer(11)     default(0)
 #  last_seen_at              :datetime        
 #  forum_posts_count         :integer(11)     default(0)
+#  state                     :string(255)     default("passive")
+#  deleted_at                :datetime        
 #
 
 quentin:

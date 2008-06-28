@@ -1,24 +1,15 @@
 require 'digest/sha1'
-class User
-  # Virtual attribute for the unencrypted password
-  attr_accessor :password
 
-  validates_presence_of     :login, :email
-  validates_presence_of     :password,                   :if => :password_required?
-  validates_presence_of     :password_confirmation,      :if => :password_required?
-  validates_length_of       :password, :within => 4..40, :if => :password_required?
-  validates_confirmation_of :password,                   :if => :password_required?
-  validates_length_of       :login,    :within => 3..40
-  validates_length_of       :email,    :within => 6..100
-  validates_uniqueness_of   :login, :email, :case_sensitive => false
+class User
+  validates_presence_of     :login
+  validates_length_of       :login, :within => 3..40
+  validates_uniqueness_of   :login, :case_sensitive => false
+  validates_format_of       :login, :with => RE_LOGIN_OK, :message => MSG_LOGIN_BAD 
   
-  validates_format_of       :login,
-                            :with => /^[A-Z0-9_]*$/i,
-                            :message => "must contain only letters, numbers, and underscores"
-                            
-  validates_format_of       :email,
-                            :with => /^[A-Z0-9._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i,
-                            :message => "must be a valid email address"
+  validates_presence_of     :email
+  validates_length_of       :email, :within => 6..100
+  validates_uniqueness_of   :email, :case_sensitive => false
+  validates_format_of       :email, :with => RE_EMAIL_OK, :message => MSG_EMAIL_BAD
                             
   validates_length_of       :new_email, 
                             :within => 6..100, 
@@ -28,7 +19,6 @@ class User
                             :if => :new_email_entered?
   
   before_save :downcase_email_and_login
-  before_save :encrypt_password
   before_create :make_activation_code
   before_create :set_first_user_as_admin
   
@@ -39,32 +29,7 @@ class User
     end
   end
   
-  # Encrypts some data with the salt.
-  def self.encrypt(password, salt)
-    Digest::SHA1.hexdigest("--#{salt}--#{password}--")
-  end
-
-  # Encrypts the password with the user salt
-  def encrypt(password)
-    self.class.encrypt(password, salt)
-  end
-
-  def authenticated?(password)
-    crypted_password == encrypt(password)
-  end
-  
-protected
-  # before filter 
-  def encrypt_password
-    return if password.blank?
-    self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--") if new_record?
-    self.crypted_password = encrypt(password)
-  end
-  
-  def password_required?
-    crypted_password.blank? || !password.blank?
-  end
-  
+protected  
   def set_first_user_as_admin
     self.admin = true if User.count.zero?
   end

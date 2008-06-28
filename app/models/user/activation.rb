@@ -1,22 +1,9 @@
 class User
-  # Activates the user in the database.
-  def activate
-    @activated = true
-    self.activated_at = Time.now.utc
-    self.activation_code = nil
-    save(false)
-  end
 
   #alias active? activated?
   def activated?
     # the existence of an activation code means they have not activated yet
-    activation_code.nil?
-  end
-
-  # Returns true if the user has just been activated.
-  #alias pending? recently_activated?
-  def recently_activated?
-    @activated
+    state == :active
   end
   
   def change_email_address(new_email_address)
@@ -61,11 +48,12 @@ class User
 protected
     
     def make_activation_code
-      self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+      self.deleted_at = nil
+      self.activation_code = self.class.make_token
     end
     
     def make_email_activation_code
-      self.email_activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+      self.email_activation_code = self.class.make_token
     end
     
     def new_email_entered?
@@ -73,6 +61,6 @@ protected
     end
     
     def make_password_reset_code
-      self.password_reset_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+      self.password_reset_code = self.class.make_token
     end
 end
