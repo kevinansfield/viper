@@ -62,6 +62,6 @@ Rails::Initializer.run do |config|
   config.gem 'RedCloth'
   config.gem 'ferret'
   #config.gem 'rmagick'
-  config.gem 'linguistics'
+  config.gem 'Linguistics'
   config.gem 'markaby'
 end
