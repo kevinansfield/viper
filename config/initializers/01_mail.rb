@@ -1,5 +1,3 @@
-require 'action_mailer/ar_mailer'
-
 ActionMailer::Base.default_charset = "utf-8"
 
 # Mail server details

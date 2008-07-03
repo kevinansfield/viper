@@ -58,7 +58,7 @@ Rails::Initializer.run do |config|
   config.active_record.default_timezone = :utc
   
   # Custom gem requirements
-  config.gem 'ar_mailer'
+  config.gem 'ar_mailer', :lib => 'action_mailer/ar_mailer'
   config.gem 'RedCloth'
   config.gem 'ferret'
   config.gem 'rmagick'
