@@ -59,7 +59,7 @@ Rails::Initializer.run do |config|
   
   # Custom gem requirements
   config.gem 'ar_mailer', :lib => 'action_mailer/ar_mailer'
-  config.gem 'RedCloth'
+  #config.gem 'RedCloth'
   config.gem 'ferret'
   #config.gem 'rmagick'
   config.gem 'Linguistics', :lib => 'linguistics'
