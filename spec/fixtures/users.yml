@@ -5,7 +5,7 @@ quentin:
   salt:                      356a192b7913b04c54574d18c28d46e6395428ab # SHA1('0')
   crypted_password:          6480dd200db2719d431c7a25b133887ad8b46551 # 'monkey'
   created_at:                <%= 5.days.ago.to_s :db  %>
-  remember_token_expires_at: <%= 1.days.from_now.to_s %>
+  remember_token_expires_at: <%= 1.days.from_now.to_s :db %>
   remember_token:            77de68daecd823babbb58edb1c8e14d7106e83bb
   activation_code:           
   activated_at:              <%= 5.days.ago.to_s :db %>

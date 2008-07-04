@@ -1,11 +1,26 @@
 ActionController::Routing::Routes.draw do |map|
+  
+  # Named routes
+  map.activate  'user/activate/:activation_code', :controller => 'users', :action => 'activate'
+  map.signup    'user/signup',    :controller => 'users',    :action => 'new'
+  map.register  'user/register',  :controller => 'users',    :action => 'create'
+  map.login     'user/login',     :controller => 'sessions', :action => 'new'
+  map.new_login 'user/login',     :controller => 'sessions', :action => 'new'
+  map.hub       'user/hub',       :controller => 'users',    :action => 'hub'
+  map.logout    'user/logout',    :controller => 'sessions', :action => 'destroy'
+  map.activate_new_email  'user/activate_new_email/:email_activation_code', :controller => 'users', :action => 'activate_new_email'
+  map.forgot_password     'user/forgot_password', :controller => 'users', :action => 'forgot_password'
+  map.reset_password      'user/reset_password/:id', :controller => 'users', :action => 'reset_password'
 
   # User resources
   map.resources :users, :member => { :change_email => :put,
                                      :change_password => :put,
                                      :invite => :get,
                                      :send_invite => :put,
-                                     :articles => :get },
+                                     :articles => :get,
+                                     :suspend => :put,
+                                     :unsuspend => :put,
+                                     :purge => :delete },
                         :has_many => [:forum_posts] do |user|
     user.resource :profile
     user.resource :avatar, :member => { :crop => :put }
@@ -16,16 +31,6 @@ ActionController::Routing::Routes.draw do |map|
     end
   end
   map.resource  :sessions
-  
-  # User named routes
-  map.activate  'user/activate/:activation_code', :controller => 'users', :action => 'activate'
-  map.signup    'user/signup',    :controller => 'users',    :action => 'new'
-  map.login     'user/login',     :controller => 'sessions', :action => 'new'
-  map.hub       'user/hub',       :controller => 'users',    :action => 'hub'
-  map.logout    'user/logout',    :controller => 'sessions', :action => 'destroy'
-  map.activate_new_email  'user/activate_new_email/:email_activation_code', :controller => 'users', :action => 'activate_new_email'
-  map.forgot_password     'user/forgot_password', :controller => 'users', :action => 'forgot_password'
-  map.reset_password      'user/reset_password/:id', :controller => 'users', :action => 'reset_password'
   
   # Blog resources
   map.resources :blogs do |blog|

@@ -102,25 +102,25 @@ end
 describe SessionsController do
   describe "route generation" do
     it "should route the new sessions action correctly" do
-      route_for(:controller => 'sessions', :action => 'new').should == "/login"
+      route_for(:controller => 'sessions', :action => 'new').should == "/user/login"
     end
     it "should route the create sessions correctly" do
-      route_for(:controller => 'sessions', :action => 'create').should == "/login"
+      route_for(:controller => 'sessions', :action => 'create').should == "/user/login"
     end
     it "should route the destroy sessions action correctly" do
-      route_for(:controller => 'sessions', :action => 'destroy').should == "/logout"
+      route_for(:controller => 'sessions', :action => 'destroy').should == "/user/logout"
     end
   end
   
   describe "route recognition" do
     it "should generate params from GET /login correctly" do
-      params_from(:get, '/login').should == {:controller => 'sessions', :action => 'new'}
+      params_from(:get, '/user/login').should == {:controller => 'sessions', :action => 'new'}
     end
     it "should generate params from POST /login correctly" do
-      params_from(:post, '/login').should == {:controller => 'sessions', :action => 'create'}
+      params_from(:post, '/user/login').should == {:controller => 'sessions', :action => 'create'}
     end
     it "should generate params from DELETE /login correctly" do
-      params_from(:delete, '/logout').should == {:controller => 'sessions', :action => 'destroy'}
+      params_from(:delete, '/user/logout').should == {:controller => 'sessions', :action => 'destroy'}
     end
   end
   
@@ -129,10 +129,10 @@ describe SessionsController do
       get :new
     end
     it "should route login_path() correctly" do
-      login_path().should == "/login"
+      login_path().should == "/user/login"
     end
     it "should route new_login_path() correctly" do
-      new_login_path().should == "/login/new"
+      new_login_path().should == "/user/login"
     end
   end
   

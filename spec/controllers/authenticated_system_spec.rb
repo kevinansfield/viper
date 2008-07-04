@@ -5,7 +5,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 include AuthenticatedTestHelper
 include AuthenticatedSystem
 
-describe LoginsController do
+describe SessionsController do
   fixtures :users
   
   before do
