@@ -2,13 +2,95 @@
 <% titled_box 'Contact Us',
 			  'orange',
 			  :box_id => 'feature' do %>
-<h1>Contact Us</h1>
-<p><%= SITENAME %> is a new social network project under development by <a href="http://www.digitalblueprint.co.uk">DigitalBlueprint Ltd</a> to be
-used as a foundation for numerous industry and niche specific applications.</p>
-<p><a href="http://www.digitalblueprint.co.uk">DigitalBlueprint Ltd</a> is a small web design company located in East Sussex that specialises
-in Ruby on Rails. To find out more, or to contact us directly please visit <a href="http://www.digitalblueprint.co.uk">our website.</a> or use the contact form below.</p>
+<p>
+	<strong>Address:</strong>
+	<blockquote>
+		6 Stoneleigh Park Road<br />
+		Epsom<br />
+		Surrey<br />
+		KT19 0QT<br />
+		United Kingdom 
+	</blockquote>
+</p>
+<p>
+	<strong>Contact Details:</strong>
+	<blockquote>
+		<em>Tel:</em> 0208 224 6597 
+		<em>Fax:</em> 0208 224 6156 
+	</blockquote>
+<p>
+	<strong>Quotations:</strong> We base our cost on location of your premises and number of
+	systems, if you have this information available please include it in your message so we can
+	offer you a budget quotation for a service maintenance contract.
+</p>
+<div>
+	<!-- fail nicely if the browser has no Javascript -->
 
-
+						<noscript><b>JavaScript must be enabled in order for you to use Google Maps.</b> <br/>
+							  However, it seems JavaScript is either disabled or not supported by your browser. <br/>
+							  To view Google Maps, enable JavaScript by changing your browser options, and then try again. 
+						</noscript><div align="center"><div id="googlemap2_txcxu_0"  style="width:470px; height:300px;"></div></div><script type='text/javascript'>//<![CDATA[
+var tst2_txcxu_0=document.getElementById('googlemap2_txcxu_0');
+				var tstint2_txcxu_0;
+				var map2_txcxu_0;
+				var mySlidemap2_txcxu_0;
+				var overviewmap2_txcxu_0;
+				var ovmap2_txcxu_0;
+				var xml22_txcxu_0;
+				var imageovl2_txcxu_0;
+				
+DirectionMarkersubmit2_txcxu_0 = function( formObj ){
+								if(formObj.dir[1].checked ){
+									tmp = formObj.daddr.value;
+									formObj.daddr.value = formObj.saddr.value;
+									formObj.saddr.value = tmp;
+								}
+								formObj.submit();
+								if(formObj.dir[1].checked ){
+									tmp = formObj.daddr.value;
+									formObj.daddr.value = formObj.saddr.value;
+									formObj.saddr.value = tmp;
+								}
+							}
+function checkMap2_txcxu_0()
+				{
+					if (tst2_txcxu_0)
+						if (tst2_txcxu_0.offsetWidth != tst2_txcxu_0.getAttribute("oldValue"))
+						{
+							tst2_txcxu_0.setAttribute("oldValue",tst2_txcxu_0.offsetWidth);
+	
+							if (tst2_txcxu_0.getAttribute("refreshMap")==0)
+								if (tst2_txcxu_0.offsetWidth > 0) {
+									clearInterval(tstint2_txcxu_0);
+					getMap2_txcxu_0();
+									tst2_txcxu_0.setAttribute("refreshMap", 1);
+								} 
+						}
+				}
+					function getMap2_txcxu_0(){
+					if (tst2_txcxu_0.offsetWidth > 0) {
+						map2_txcxu_0 = new GMap2(document.getElementById('googlemap2_txcxu_0'));
+						map2_txcxu_0.getContainer().style.overflow='hidden';
+						map2_txcxu_0.addControl(new GLargeMapControl());var point = new GLatLng( 51.360803, -0.252278);var centerpoint = point;map2_txcxu_0.setCenter(centerpoint, 15);
+							map2_txcxu_0.setMapType(G_NORMAL_MAP);
+							map2_txcxu_0.disableContinuousZoom();
+							map2_txcxu_0.disableDoubleClickZoom();
+							var marker2_txcxu_0 = new GMarker(point);map2_txcxu_0.addOverlay(marker2_txcxu_0);
+							marker2_txcxu_0.openInfoWindowHtml("<div style='text-align:left;'><b>Address:</b><br />6 Stoneleigh Park Road<br />Epsom, UK, KT19 0QT</div><form action='http://maps.google.com/maps' method='get' target='_blank' onsubmit='DirectionMarkersubmit2_txcxu_0(this);return false;' class='mapdirform'><br />Directions:<input type='radio' checked name='dir' value='to'> <b>To here</b> <input type='radio' name='dir' value='from'><b>From here</b><br />Address:<input type='text' class='inputbox' size='20' name='saddr' id='saddr' value='' /><br /><input value='Get Directions' class='button' type='submit' style='margin-top: 2px;'><input type='hidden' name='daddr' value='6 stoneleigh park road, epsom, surrey, kt19 0qt (51.360803, -0.252278)'/></form>");GEvent.addListener(marker2_txcxu_0, 'click', function() {
+										marker2_txcxu_0.openInfoWindowHtml("<div style='text-align:left;'><b>Address:</b><br />6 Stoneleigh Park Road<br />Epsom, UK, KT19 0QT</div><form action='http://maps.google.com/maps' method='get' target='_blank' onsubmit='DirectionMarkersubmit2_txcxu_0(this);return false;' class='mapdirform'><br />Directions:<input type='radio' checked name='dir' value='to'> <b>To here</b> <input type='radio' name='dir' value='from'><b>From here</b><br />Address:<input type='text' class='inputbox' size='20' name='saddr' id='saddr' value='' /><br /><input value='Get Directions' class='button' type='submit' style='margin-top: 2px;'><input type='hidden' name='daddr' value='6 stoneleigh park road, epsom, surrey, kt19 0qt (51.360803, -0.252278)'/></form>");
+										});
+								}
+			}
+			//]]></script>
+			<script type="text/javascript">//<![CDATA[
+					if (GBrowserIsCompatible()) {
+						tst2_txcxu_0.setAttribute("oldValue",0);
+						tst2_txcxu_0.setAttribute("refreshMap",0);
+						tstint2_txcxu_0=setInterval("checkMap2_txcxu_0()",500);
+					}
+			//]]></script>
+</div>
+<p>Use the form below to send us an email.</p>
 <%= error_messages_for :contact %>
 <% form_for(:contact, :url => {:controller => :site, :action => :send_contact_submission}, :html => {:class => 'form'}) do |f| %>
 <fieldset>
