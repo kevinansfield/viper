@@ -60,8 +60,10 @@ Rails::Initializer.run do |config|
   # Custom gem requirements
   config.gem 'ar_mailer', :lib => 'action_mailer/ar_mailer'
   #config.gem 'RedCloth'
-  config.gem 'ferret'
+  config.gem 'ferret', :version => '0.11.6'
+  config.gem 'acts_as_ferret', :version => '0.4.3'
   #config.gem 'rmagick'
   config.gem 'Linguistics', :lib => 'linguistics'
   config.gem 'markaby'
+  config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com', :version => '2.3.2'
 end
