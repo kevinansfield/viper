@@ -2,7 +2,18 @@
 <% titled_box 'Latest Activity',
 			  'blue' do %>
 			  
-	<%= render :partial => 'activities/minifeed' %>
+	<% current_user.each do |feed_item| %>
+		<%- unless feed_item.item.nil? -%>
+			<div class="minifeed-item clearfix">
+	  			<div class="minifeed-icon">
+	    			<%= avatar_for feed_item.user, :micro %>
+	  			</div>
+	  			<div class="minifeed-body">
+	    			<%= minifeed_message feed_item %>
+	  			</div>
+			</div>
+		<%- end -%>
+	<% end %>
 			  
 <% end %>
 <%- end -%>
