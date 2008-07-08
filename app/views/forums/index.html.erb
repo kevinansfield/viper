@@ -34,7 +34,7 @@
       <p class="desc"><%= forum.description %></p>
     </td>
 	
-	<% if admin? -%>
+	<% if current_user.admin? -%>
     <td class="c3">
       <%= link_to 'Edit', edit_forum_path(forum), :class => "tiny", :rel => "directory", :style => "float:right" %>
     </td>

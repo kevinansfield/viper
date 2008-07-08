@@ -1,4 +1,4 @@
-<% if admin? %>
+<% if current_user.admin? %>
 	<% titled_box 'Admin', 'blue' do %>
 		<p><%= link_to 'Create New Forum', new_forum_path %></p>
 	<% end %>

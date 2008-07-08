@@ -1,8 +1,8 @@
 <% @title = @article.title -%>
 <%= render :partial => 'users/author_box', :locals => { :user => @article.user } %>
-<h1 <%= %( onmouseover="$('article_mod').show();" onmouseout="$('article_mod').hide();") if admin? %>>
+<h1 <%= %( onmouseover="$('article_mod').show();" onmouseout="$('article_mod').hide();") if current_user.admin? %>>
 		<%=@article.title%>
-		<% if admin? %>
+		<% if current_user.admin? %>
 	    <span style="display:none;" id="article_mod">
 	        <%= link_to('edit', edit_category_article_path(@article.category, @article), :class => "utility") %> |
 	        <%= link_to('delete', category_article_path(@article.category, @article), :class => "utility", :method => :delete, :confirm => 'Are you sure you want to delete this article?') %>

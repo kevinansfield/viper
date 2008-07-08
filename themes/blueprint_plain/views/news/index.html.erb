@@ -5,7 +5,7 @@
 <% @title = 'News' -%>
 		  
 <h1><%= @title %></h1>
-<%= content_tag(:p, link_to('(Add News Story)', new_news_item_path), :class => 'edit-link') if admin? %>
+<%= content_tag(:p, link_to('(Add News Story)', new_news_item_path), :class => 'edit-link') if current_user.admin? %>
 
 <% unless @news.length < 1 -%>
 <%= render :partial => "news_item", :collection => @news %>

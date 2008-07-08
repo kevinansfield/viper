@@ -5,9 +5,9 @@
 			  :edit_link => link_to_if_admin('(Add Article)', new_category_article_path(@category)),
 			  :box_id => 'feature' do %>
 			  
-	<h2<%= %( onmouseover="$('category_mod').show();" onmouseout="$('category_mod').hide();") if admin? %>>
+	<h2<%= %( onmouseover="$('category_mod').show();" onmouseout="$('category_mod').hide();") if current_user.admin? %>>
 		<%= @title %>
-		<% if admin? %>
+		<% if current_user.admin? %>
 	    <span style="display:none;" id="category_mod">
 	        <%= link_to('edit', edit_category_path(@category), :class => "utility") %> |
 	        <%= link_to('delete', category_path(@category), :class => "utility", :method => :delete, :confirm => 'Are you sure you want to delete this category?') %>

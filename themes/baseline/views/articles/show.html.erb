@@ -8,7 +8,7 @@
 <div class="article">
 	<%= render :partial => 'users/author_box', :locals => { :user => @article.user } %>
 	<h2 class="article-title"
-	  <%= %( onmouseover="$('article_mod').show();" onmouseout="$('article_mod').hide();") if admin? %>>
+	  <%= %( onmouseover="$('article_mod').show();" onmouseout="$('article_mod').hide();") if current_user.admin? %>>
 		<%=@article.title%>
 		<% if admin? %>
 		    <span style="display:none;" id="article_mod">
