@@ -1,29 +1,28 @@
 <% @title = "Contact Us" -%>
-<% titled_box 'Contact Us',
-			  'orange',
-			  :box_id => 'feature' do %>
-<p>
+<% content_for :header do -%>
+	<script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;hl=en&amp;key=ABQIAAAAkkvTxkn9DnTASsN5secz2BTXYJsEb91OfIBjBrPdPQ6-bNncCxSlNVm0yE1HGVpHmzLKQxo2K7fOhQ" type="text/javascript"></script>
+<% end -%>
+<% titled_box 'Contact Us', 'orange', :box_id => 'feature' do %>
+<div style="margin-bottom: 20px">
 	<strong>Address:</strong>
-	<blockquote>
+	<div style="margin-left: 20px">
 		6 Stoneleigh Park Road<br />
 		Epsom<br />
 		Surrey<br />
 		KT19 0QT<br />
 		United Kingdom 
-	</blockquote>
-</p>
-<p>
-	<strong>Contact Details:</strong>
-	<blockquote>
-		<em>Tel:</em> 0208 224 6597 
-		<em>Fax:</em> 0208 224 6156 
-	</blockquote>
-<p>
-	<strong>Quotations:</strong> We base our cost on location of your premises and number of
-	systems, if you have this information available please include it in your message so we can
-	offer you a budget quotation for a service maintenance contract.
-</p>
+	</div>
+</div>
+
 <div>
+	<strong>Contact Details:</strong>
+	<div style="margin-left: 20px">
+		<em>Tel:</em> 0208 224 6597<br />
+		<em>Fax:</em> 0208 224 6156 
+	</div>
+</div>
+
+<div style="margin: 20px 0">
 	<!-- fail nicely if the browser has no Javascript -->
 
 						<noscript><b>JavaScript must be enabled in order for you to use Google Maps.</b> <br/>
@@ -90,7 +89,15 @@ function checkMap2_txcxu_0()
 					}
 			//]]></script>
 </div>
-<p>Use the form below to send us an email.</p>
+
+<p>
+	<strong>Quotations:</strong> We base our cost on location of your premises and number of
+	systems, if you have this information available please include it in your message so we can
+	offer you a budget quotation for a service maintenance contract.
+</p>
+
+<p>Use the form below to send us an email:</p>
+
 <%= error_messages_for :contact %>
 <% form_for(:contact, :url => {:controller => :site, :action => :send_contact_submission}, :html => {:class => 'form'}) do |f| %>
 <fieldset>
