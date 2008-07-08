@@ -1,6 +1,3 @@
-This theme_support version has been updated by Damien Le Berrigaud for Rails 2.0
-http://www.webdrivenblog.com/
-
 = Theme Support for Rails Applications
 
 This plugin provides support for themes to the rails application environment. 
