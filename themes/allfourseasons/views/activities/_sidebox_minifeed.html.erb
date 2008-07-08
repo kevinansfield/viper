@@ -2,7 +2,7 @@
 <% titled_box 'Latest Activity',
 			  'blue' do %>
 			  
-	<% current_user.each do |feed_item| %>
+	<% current_user.feed.each do |feed_item| %>
 		<%- unless feed_item.item.nil? -%>
 			<div class="minifeed-item clearfix">
 	  			<div class="minifeed-icon">
