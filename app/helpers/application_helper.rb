@@ -79,7 +79,7 @@ module ApplicationHelper
     elsif plural
       plural
     elsif Object.const_defined?("Inflector")
-      ActiveSupport::Inflector.pluralize(singular)
+      singular.pluralize
     else
       singular + "s"
     end
@@ -173,6 +173,6 @@ module ApplicationHelper
   # 3. Render the partial with the given options hash. Just like calling the partial directly.
   def block_to_partial(partial_name, options = {}, &block)
     options.merge!(:body => capture(&block))
-    concat(render(:partial => partial_name, :locals => options))
+    concat(render(:partial => partial_name, :locals => options), block.binding)
   end
 end
