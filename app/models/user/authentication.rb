@@ -1,6 +1,6 @@
 class User  
   def admin?
-    self.current_state == :active && self.admin
+    current_state == :active && admin
   end
  
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
