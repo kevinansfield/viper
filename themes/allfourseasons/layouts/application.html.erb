@@ -63,24 +63,13 @@
 	
 	<div id="content" class="<%= "#{controller.sidebar_count.to_english}-#{pluralize_without_count(controller.sidebar_count, 'col')}" %>">
 		<%= yield %>
-		<% unless controller.maincol_count < 1 -%>
-		<div class="<%= "#{controller.maincol_count.to_english}-#{pluralize_without_count(controller.maincol_count, 'col')}" %>">
-			<%= render( :partial => "#{controller.maincol_one}", :locals => { :css_class => 'col-one' } ) unless controller.maincol_one.nil? %>
-			<%= render( :partial => "#{controller.maincol_two}", :locals => { :css_class => 'col-two' } ) unless controller.maincol_two.nil? %>
-		</div>
-		<% end %>
 	</div>
 	
 	<% unless controller.sidebar_count < 1 -%>
 	<div id="sidebar" class="<%= "#{controller.sidebar_count.to_english}-#{pluralize_without_count(controller.sidebar_count, 'col')}" %>">
-		<% unless controller.sidebar_one.nil? -%>
-		<div class="col-one">
-			<%= render :partial => "#{controller.sidebar_one}" %>
-		</div>
-		<% end -%>
 		<% unless controller.sidebar_two.nil? -%>
 		<div class="col-two">
-			<%= render :partial => "#{controller.sidebar_two}" unless controller.sidebar_two.nil? %>
+			<%= render :partial => "#{controller.sidebar_two}" %>
 		</div>
 		<% end -%>
 	</div>
