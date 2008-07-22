@@ -40,6 +40,7 @@
 		<%= nav_link 'Free Hot Water', :free_hot_water, { :controller => 'site', :action => 'free_hot_water_waste_heat' } %>
 		<%= nav_link 'Contact', :contact, { :controller => 'site', :action => 'contact' } %>
 	</ul>
+	<!--
 	<ul class="right">
 	<% if logged_in? -%>
 		<%= nav_link 'Your Hub', :hub, hub_url %>
@@ -49,6 +50,7 @@
 		<%= nav_link 'Register', :register, signup_url %>
 	<% end -%>
 	</ul>
+	-->
 </div>
 <div id="page">
 	
@@ -89,12 +91,14 @@
 <div id="sub-nav">
 	<p>
 		<a href="/">Home</a> :: 
-		<%= link_to 'About', :controller => 'site', :action => 'about' %> :: 
+		<%= link_to 'About', :controller => 'site', :action => 'about' %> ::
+		<!-- 
 		<%= link_to 'News', news_url %> :: 
 		<%= link_to 'Articles', categories_url %> ::
 		<%= link_to 'Blogs', blogs_url %> ::
 		<%= link_to 'Members', :controller => 'community', :action => 'index', :id => nil %> :: 
 		<%= link_to 'Forums', forums_url %> :: 
+		-->
 		<%= link_to 'Contact Us', :controller => 'site', :action => 'contact' %>
 	</p>
 </div>
