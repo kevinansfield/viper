@@ -21,6 +21,7 @@
 		<h1><a href="/"><%= theme_image_tag 'logo-textonly' %><%= SITENAME %></a></h1>
 		<h2><a href="/"><%= TAGLINE %></a></h2>
 	</div>
+	<!--
 	<div id="search">
 		<form method="get" action="/community/search">
 			<fieldset>
@@ -29,6 +30,7 @@
 			</fieldset>
 		</form>
 	</div>
+	-->
 </div>
 <div id="menu">
 	<ul>
@@ -61,12 +63,12 @@
     <div id="flash" class="error"><%= flash[:error] %></div>
     <% end -%>
 	
-	<div id="content" class="<%= "#{controller.sidebar_count.to_english}-#{pluralize_without_count(controller.sidebar_count, 'col')}" %>">
+	<div id="content" class="one-col" ">
 		<%= yield %>
 	</div>
 	
 	<% unless controller.sidebar_count < 1 -%>
-	<div id="sidebar" class="<%= "#{controller.sidebar_count.to_english}-#{pluralize_without_count(controller.sidebar_count, 'col')}" %>">
+	<div id="sidebar" class="one-col">
 		<% unless controller.sidebar_two.nil? -%>
 		<div class="col-two">
 			<%= render :partial => "#{controller.sidebar_two}" %>
