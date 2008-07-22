@@ -4,7 +4,7 @@ class SiteController < ApplicationController
   tab :domestic, :only => :domestic_installations
   tab :commercial, :only => :commercial_installations
   tab :maintenance, :only => :maintenance_contracts
-  tab :installations, :only => [:specialist_installations, :domestic_installations, :commercial_installations]
+  tab :installations, :only => [:specialist_installations, :window_box_units, :floor_standing_tower_type]
   tab :free_hot_water, :only => :free_hot_water_waste_heat
   tab :contact, :only => [:contact, :send_contact_submission]
   tab :about, :only => :about
