@@ -1,6 +1,11 @@
 class SiteController < ApplicationController
   
   tab :home, :only => :index
+  tab :domestic, :only => :domestic_installations
+  tab :commercial, :only => :commercial_installations
+  tab :maintenance, :only => :maintenance_contracts
+  tab :installations, :only => [:specialist_installations, :domestic_installations, :commercial_installations]
+  tab :free_hot_water, :only => :free_hot_water_waste_heat
   tab :contact, :only => [:contact, :send_contact_submission]
   tab :about, :only => :about
   
@@ -50,7 +55,6 @@ class SiteController < ApplicationController
   end
   
   def commercial_installations
-    
   end
   
   def specialist_installations
@@ -70,7 +74,6 @@ class SiteController < ApplicationController
   end
   
   def maintenance_contracts
-    
   end
   
   def services_and_breakdown
