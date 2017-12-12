@@ -4,7 +4,7 @@ The IsAttachment plugin extends ActiveRecord models to make uploading files and 
 
 Features include:
 * Upload one image - have multiple versions of image automatically created
-* arbirary processing using RMagick/MiniMagick
+* arbitrary processing using RMagick/MiniMagick
 * processing in a bakcgroundRb process
 * integration with js_image_cropper to manually crop image versions.
 * Extensible - Implement your own image engine/ storage engines or transformers (See PeelMeAGrape::IsAttachment rdoc)
@@ -56,7 +56,7 @@ if you use multiple <tt>image_versions</tt> then there are two more required col
 
 certain Storage engines or Transformers require other columns.
 
-In all cases this plugin is implemented to fail as early as possilbe if your model doesn't have all the required columns.
+In all cases this plugin is implemented to fail as early as possible if your model doesn't have all the required columns.
 
 ===== Optional Columns
 
@@ -107,7 +107,7 @@ There are other plugins that do a similar job to <tt>is_attachment</tt> -
 ==== Integration with backgroundrb
 This was a biggie - we wanted to be able to handle processing uploaded files in a backgroundrb job - this was all possible with existing plugins - but not to the level of simplicity we want.
 
-To has image_versions handled by a backgroundrb job all you have to do is
+To have image_versions handled by a backgroundrb job all you have to do is
     is_attachment :image_versions => {......}, :backgroundrb => true
 
 ==== Better support for custom processing
